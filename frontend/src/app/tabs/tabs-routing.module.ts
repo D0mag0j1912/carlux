@@ -10,7 +10,7 @@ const routes: Routes = [
             {
                 path: 'registration',
                 loadChildren: () =>
-                    import('../modules/auth/auth.module').then((module) => module.AuthModule),
+                    import('./auth/auth.module').then((module) => module.AuthModule),
             },
             {
                 path: 'tab2',
