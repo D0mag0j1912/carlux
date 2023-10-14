@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RegistrationComponent } from './registration/registration.component';
+import { AuthComponent } from './auth/auth.component';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 @NgModule({
-    declarations: [RegistrationComponent],
+    declarations: [AuthComponent],
     imports: [CommonModule, IonicModule],
     exports: [],
 })

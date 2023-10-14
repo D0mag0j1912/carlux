@@ -8,7 +8,7 @@ const routes: Routes = [
         component: TabsComponent,
         children: [
             {
-                path: 'registration',
+                path: 'auth',
                 loadChildren: () =>
                     import('./auth/auth.module').then((module) => module.AuthModule),
             },
@@ -22,14 +22,14 @@ const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: '/tabs/registration',
+                redirectTo: '/tabs/auth',
                 pathMatch: 'full',
             },
         ],
     },
     {
         path: '',
-        redirectTo: '/tabs/registration',
+        redirectTo: '/tabs/auth',
         pathMatch: 'full',
     },
 ];
@@ -37,4 +37,4 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsRoutingModule {}
