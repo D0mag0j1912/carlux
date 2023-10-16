@@ -1,8 +1,10 @@
 <ion-tabs>
     <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="auth" href="/tabs/auth">
-            <ion-icon aria-hidden="true" name="triangle"></ion-icon>
-            <ion-label>Sign up</ion-label>
-        </ion-tab-button>
+        <ng-container *transloco="let t; read: 'auth'">
+            <ion-tab-button tab="auth" href="/tabs/auth">
+                <ion-icon aria-hidden="true" name="triangle"></ion-icon>
+                <ion-label>{{ t('sign_up') }}</ion-label>
+            </ion-tab-button>
+        </ng-container>
     </ion-tab-bar>
 </ion-tabs>
