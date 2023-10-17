@@ -5,12 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { AuthRoutingModule } from './auth-routing.module';
 import { StoreModule } from '@ngrx/store';
 import * as fromAuth from './reducers/index';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
     declarations: [AuthComponent],
     imports: [
         CommonModule,
         IonicModule,
+        TranslocoModule,
         AuthRoutingModule,
         StoreModule.forFeature('auth', fromAuth.reducers),
     ],
