@@ -1,15 +1,33 @@
 
+.google-btn,
+.apple-btn {
+    width: 100%;
+
+    .google-icon,
+    .apple-icon {
+        margin-right: 15px;
+    }
+
+    .google-text,
+    .apple-text {
+        font-size: var(--ion-font-m);
+        line-height: 20px;
+    }
+}
+
 .or-wrapper {
     display: flex;
+    position: relative;
+    margin-top: 20px;
 
     .horizontal-line {
-        border: 1px solid #000000;
         height: 1px;
+        width: calc(50% - 30px);
+        background-color: var(--ion-color-dark);
     }
 
     .text {
-        font-size: 20px;
-        font-family: 'Rubik', sans-serif;
+        font-size: var(--ion-font-l);
         line-height: 24px;
     }
 }
