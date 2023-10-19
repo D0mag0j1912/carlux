@@ -1,8 +1,12 @@
 {
     "common": {
-        "cancel": "Odustani"
+        "cancel": "Odustani",
+        "or": "ILI",
+        "continue": "Nastavi"
     },
     "auth": {
-        "sign_up": "Registracija"
+        "sign_up": "Registracija",
+        "continue_with_google": "Nastavi s Google",
+        "continue_with_apple": "Nastavi s Apple"
     }
 }

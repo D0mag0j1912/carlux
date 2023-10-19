@@ -11,5 +11,35 @@
                 <ion-title size="large">{{ t('auth.sign_up') }}</ion-title>
             </ion-toolbar>
         </ion-header>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-button fill="outline">
+                        {{ t('auth.continue_with_google') }}
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-button fill="outline">
+                        {{ t('auth.continue_with_apple') }}
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <div class="or-wrapper">
+                        <hr class="horizontal-line" />
+                        <ion-text class="text">
+                            {{ t('common.or') }}
+                        </ion-text>
+                        <hr class="horizontal-line" />
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </ion-content>
 </ng-container>
