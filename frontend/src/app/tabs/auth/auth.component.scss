@@ -17,6 +17,7 @@
 
 .or-wrapper {
     display: flex;
+    align-items: center;
     position: relative;
     margin-top: 20px;
 
@@ -29,6 +30,7 @@
     .text {
         font-size: var(--ion-font-l);
         line-height: 24px;
+        margin: 0 14px;
     }
 }
 
