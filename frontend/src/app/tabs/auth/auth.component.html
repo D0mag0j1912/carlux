@@ -46,6 +46,24 @@
                     </div>
                 </ion-col>
             </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-input type="text" labelPlacement="floating" [label]="'Enter dial code'"></ion-input>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-input type="text" [label]="'Enter phone number'"></ion-input>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-button color="primary" class="sign-up-btn">{{ t('common.continue') }}</ion-button>
+                </ion-col>
+            </ion-row>
         </ion-grid>
     </ion-content>
 </ng-container>
