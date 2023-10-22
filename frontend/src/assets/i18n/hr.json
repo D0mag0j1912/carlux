@@ -8,6 +8,6 @@
         "sign_up": "Registracija",
         "continue_with_google": "Nastavi s Google",
         "continue_with_apple": "Nastavi s Apple",
-        "sign_up_redirect": "Nemate račun? <b>Registrirajte se!</b>"
+        "sign_up_redirect": "Nemate račun? <b class='sign-up-label'>Registrirajte se!</b>"
     }
 }
