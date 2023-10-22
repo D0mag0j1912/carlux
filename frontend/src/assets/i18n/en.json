@@ -5,9 +5,8 @@
         "continue": "Continue"
     },
     "auth": {
-        "sign_up": "Sign up",
+        "sign_in": "Sign in",
         "continue_with_google": "Continue with Google",
-        "continue_with_apple": "Continue with Apple",
-        "sign_up_redirect": "Dont' have an account? <b class='sign-up-label'>Sign up!</b>"
+        "continue_with_apple": "Continue with Apple"
     }
 }
