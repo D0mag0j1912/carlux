@@ -7,6 +7,7 @@
     "auth": {
         "sign_up": "Sign up",
         "continue_with_google": "Continue with Google",
-        "continue_with_apple": "Continue with Apple"
+        "continue_with_apple": "Continue with Apple",
+        "sign_up_redirect": "Dont' have an account? <b>Sign up!</b>"
     }
 }

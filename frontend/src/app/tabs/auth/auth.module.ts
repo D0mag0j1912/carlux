@@ -6,6 +6,9 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { StoreModule } from '@ngrx/store';
 import * as fromAuth from './reducers/index';
 import { TranslocoModule } from '@ngneat/transloco';
+import { DomSanitizerModule } from '../../pipes/dom-sanitizer/dom-sanitizer.module';
+
+const PIPES = [DomSanitizerModule];
 
 @NgModule({
     declarations: [AuthComponent],
@@ -15,6 +18,7 @@ import { TranslocoModule } from '@ngneat/transloco';
         TranslocoModule,
         AuthRoutingModule,
         StoreModule.forFeature('auth', fromAuth.reducers),
+        ...PIPES,
     ],
     exports: [],
 })

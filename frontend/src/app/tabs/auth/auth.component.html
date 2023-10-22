@@ -64,6 +64,12 @@
                     <ion-button color="primary" class="sign-up-btn">{{ t('common.continue') }}</ion-button>
                 </ion-col>
             </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-text [innerHTML]="t('auth.sign_up_redirect') | yacDomSanitizer : 'html'"></ion-text>
+                </ion-col>
+            </ion-row>
         </ion-grid>
     </ion-content>
 </ng-container>
