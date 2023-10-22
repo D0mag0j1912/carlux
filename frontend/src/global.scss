@@ -26,3 +26,17 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 @import './theme/font-family.scss';
+
+ion-icon {
+    width: 24px;
+    height: 24px;
+}
+
+ion-button {
+    min-height: unset;
+
+    &::part(native) {
+        --padding-top: 12px;
+        --padding-bottom: 12px;
+    }
+}

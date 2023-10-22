@@ -1,0 +1,40 @@
+
+.google-btn,
+.apple-btn {
+    width: 100%;
+    height: 40px;
+
+    .google-icon,
+    .apple-icon {
+        margin-right: 15px;
+    }
+
+    .google-text,
+    .apple-text {
+        font-size: var(--ion-font-m);
+        line-height: 20px;
+    }
+}
+
+.or-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+
+    .horizontal-line {
+        height: 1px;
+        width: calc(50% - 30px);
+        background-color: var(--ion-color-dark);
+    }
+
+    .text {
+        font-size: var(--ion-font-l);
+        line-height: 24px;
+        margin: 0 14px;
+    }
+}
+
+.sign-up-btn {
+    width: 100%;
+}
