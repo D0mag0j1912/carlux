@@ -13,7 +13,7 @@
 
     <form [formGroup]="form">
         <ion-grid>
-            <ion-row>
+            <ion-row class="row">
                 <ion-col size-sm="4" offset-sm="4">
                     <ion-button fill="outline" class="google-btn">
                         <ion-icon name="logo-google" slot="start" class="google-icon"></ion-icon>
@@ -24,7 +24,7 @@
                 </ion-col>
             </ion-row>
 
-            <ion-row>
+            <ion-row class="row">
                 <ion-col size-sm="4" offset-sm="4">
                     <ion-button fill="outline" class="apple-btn">
                         <ion-icon name="logo-apple" slot="start" class="apple-icon"></ion-icon>
@@ -35,7 +35,7 @@
                 </ion-col>
             </ion-row>
 
-            <ion-row>
+            <ion-row class="row">
                 <ion-col size-sm="4" offset-sm="4">
                     <div class="or-wrapper">
                         <hr class="horizontal-line" />
@@ -47,13 +47,13 @@
                 </ion-col>
             </ion-row>
 
-            <ion-row>
+            <ion-row class="row">
                 <ion-col size-sm="4" offset-sm="4">
                     <input #phoneEl type="tel" class="phone-input" formControlName="phoneNumber" />
                 </ion-col>
             </ion-row>
 
-            <ion-row>
+            <ion-row class="row">
                 <ion-col size-sm="4" offset-sm="4">
                     <ion-button color="primary" class="sign-up-btn">{{ 'common.continue' | transloco }}</ion-button>
                 </ion-col>
