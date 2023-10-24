@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromAuth from './reducers/index';
 import { TranslocoModule } from '@ngneat/transloco';
 import { DomSanitizerModule } from '../../pipes/dom-sanitizer/dom-sanitizer.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const PIPES = [DomSanitizerModule];
 
@@ -14,6 +15,7 @@ const PIPES = [DomSanitizerModule];
     declarations: [AuthComponent],
     imports: [
         CommonModule,
+        ReactiveFormsModule,
         IonicModule,
         TranslocoModule,
         AuthRoutingModule,

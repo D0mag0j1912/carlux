@@ -1,24 +1,24 @@
-<ng-container *transloco="let t">
-    <ion-header [translucent]="true">
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>{{ 'auth.sign_in' | transloco }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
         <ion-toolbar>
-            <ion-title>{{ t('auth.sign_in') }}</ion-title>
+            <ion-title size="large">{{ 'auth.sign_in' | transloco }}</ion-title>
         </ion-toolbar>
     </ion-header>
 
-    <ion-content [fullscreen]="true">
-        <ion-header collapse="condense">
-            <ion-toolbar>
-                <ion-title size="large">{{ t('auth.sign_in') }}</ion-title>
-            </ion-toolbar>
-        </ion-header>
-
+    <form [formGroup]="form">
         <ion-grid>
             <ion-row>
                 <ion-col size-sm="4" offset-sm="4">
                     <ion-button fill="outline" class="google-btn">
                         <ion-icon name="logo-google" slot="start" class="google-icon"></ion-icon>
                         <ion-text class="google-text">
-                            {{ t('auth.continue_with_google') }}
+                            {{ 'auth.continue_with_google' | transloco }}
                         </ion-text>
                     </ion-button>
                 </ion-col>
@@ -29,7 +29,7 @@
                     <ion-button fill="outline" class="apple-btn">
                         <ion-icon name="logo-apple" slot="start" class="apple-icon"></ion-icon>
                         <ion-text class="apple-text">
-                            {{ t('auth.continue_with_apple') }}
+                            {{ 'auth.continue_with_apple' | transloco }}
                         </ion-text>
                     </ion-button>
                 </ion-col>
@@ -40,7 +40,7 @@
                     <div class="or-wrapper">
                         <hr class="horizontal-line" />
                         <ion-text class="text">
-                            {{ t('common.or') }}
+                            {{ 'common.or' | transloco }}
                         </ion-text>
                         <hr class="horizontal-line" />
                     </div>
@@ -49,21 +49,15 @@
 
             <ion-row>
                 <ion-col size-sm="4" offset-sm="4">
-                    <ion-input type="text" labelPlacement="floating" [label]="'Enter dial code'"></ion-input>
+                    <input #phoneEl type="tel" class="phone-input" formControlName="phoneNumber" />
                 </ion-col>
             </ion-row>
 
             <ion-row>
                 <ion-col size-sm="4" offset-sm="4">
-                    <ion-input type="text" [label]="'Enter phone number'"></ion-input>
-                </ion-col>
-            </ion-row>
-
-            <ion-row>
-                <ion-col size-sm="4" offset-sm="4">
-                    <ion-button color="primary" class="sign-up-btn">{{ t('common.continue') }}</ion-button>
+                    <ion-button color="primary" class="sign-up-btn">{{ 'common.continue' | transloco }}</ion-button>
                 </ion-col>
             </ion-row>
         </ion-grid>
-    </ion-content>
-</ng-container>
+    </form>
+</ion-content>
