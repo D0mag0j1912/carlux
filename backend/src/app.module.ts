@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './modules/auth/user.entity';
 
 @Module({
     imports: [
@@ -12,7 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             username: 'Domagoj',
             password: 'D0mag0j&Dev',
             database: 'sailLux',
-            entities: [],
+            entities: [User],
             synchronize: true,
         }),
     ],
