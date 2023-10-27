@@ -15,13 +15,15 @@ export class AuthComponent implements AfterViewInit {
     readonly UTILS_SCRIPT = environment.utilsScript;
 
     @ViewChild('phoneEl')
-    phoneEl: ElementRef;
+    phoneEl: ElementRef | undefined;
 
     ngAfterViewInit(): void {
-        intlTelInput(this.phoneEl.nativeElement, {
-            initialCountry: 'hr',
-            separateDialCode: true,
-            utilsScript: this.UTILS_SCRIPT,
-        });
+        if (this.phoneEl) {
+            intlTelInput(this.phoneEl.nativeElement, {
+                initialCountry: 'hr',
+                separateDialCode: true,
+                utilsScript: this.UTILS_SCRIPT,
+            });
+        }
     }
 }
