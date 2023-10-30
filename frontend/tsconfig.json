@@ -6,6 +6,8 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
@@ -20,9 +22,12 @@
       "es2018",
       "dom"
     ],
-    "strictPropertyInitialization": false,
-    "strictNullChecks": false,
-    "useDefineForClassFields": false
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true,
+    "useDefineForClassFields": false,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitAny": true,
   },
   "angularCompilerOptions": {
       "enableI18nLegacyMessageIdFormat": false,

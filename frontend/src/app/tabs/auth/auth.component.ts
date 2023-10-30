@@ -1,7 +1,11 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Platforms } from '@ionic/core';
 import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
+import { PlatformService } from '../../services/platform.service';
+import { map } from 'rxjs';
+import { DESKTOP_MODE } from '../../helpers/platform-mode';
 
 @Component({
     selector: 'yac-auth',
@@ -9,19 +13,27 @@ import { environment } from '../../../environments/environment';
     styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements AfterViewInit {
+    isDesktop$ = this._platformService.platform$.pipe(
+        map((currentPlatforms: Platforms[]) => currentPlatforms.includes(DESKTOP_MODE)),
+    );
+
     form = new FormGroup({
         phoneNumber: new FormControl('', Validators.required),
     });
     readonly UTILS_SCRIPT = environment.utilsScript;
 
     @ViewChild('phoneEl')
-    phoneEl: ElementRef;
+    phoneEl: ElementRef | undefined;
+
+    constructor(private _platformService: PlatformService) {}
 
     ngAfterViewInit(): void {
-        intlTelInput(this.phoneEl.nativeElement, {
-            initialCountry: 'hr',
-            separateDialCode: true,
-            utilsScript: this.UTILS_SCRIPT,
-        });
+        if (this.phoneEl) {
+            intlTelInput(this.phoneEl.nativeElement, {
+                initialCountry: 'hr',
+                separateDialCode: true,
+                utilsScript: this.UTILS_SCRIPT,
+            });
+        }
     }
 }
