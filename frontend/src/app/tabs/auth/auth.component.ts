@@ -1,11 +1,8 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Platforms } from '@ionic/core';
 import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
-import { PlatformService } from '../../services/platform.service';
-import { map } from 'rxjs';
-import { DESKTOP_MODE } from '../../helpers/platform-mode';
+import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
 
 @Component({
     selector: 'yac-auth',
@@ -13,9 +10,7 @@ import { DESKTOP_MODE } from '../../helpers/platform-mode';
     styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements AfterViewInit {
-    isDesktop$ = this._platformService.platform$.pipe(
-        map((currentPlatforms: Platforms[]) => currentPlatforms.includes(DESKTOP_MODE)),
-    );
+    isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
 
     form = new FormGroup({
         phoneNumber: new FormControl('', Validators.required),
@@ -25,7 +20,7 @@ export class AuthComponent implements AfterViewInit {
     @ViewChild('phoneEl')
     phoneEl: ElementRef | undefined;
 
-    constructor(private _platformService: PlatformService) {}
+    constructor(private _platformFacadeService: PlatformFacadeService) {}
 
     ngAfterViewInit(): void {
         if (this.phoneEl) {

@@ -12,7 +12,7 @@
     </ion-header>
 
     <form [formGroup]="form">
-        <ion-grid [class.desktop-mode]="isDesktop$ | async">
+        <ion-grid [class.desktop-mode]="isDesktopMode$ | async">
             <ion-row class="row">
                 <ion-col size-sm="4" offset-sm="4">
                     <ion-button fill="outline" class="google-btn">

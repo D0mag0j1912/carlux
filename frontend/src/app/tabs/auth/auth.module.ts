@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { AuthRoutingModule } from './auth-routing.module';
 import { StoreModule } from '@ngrx/store';
-import * as fromAuth from './reducers/index';
+import * as fromAuth from './auth-reducers/auth.reducers';
 import { TranslocoModule } from '@ngneat/transloco';
 import { DomSanitizerModule } from '../../pipes/dom-sanitizer/dom-sanitizer.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FeatureKeys } from '../../constants/feature-keys';
 
 const PIPES = [DomSanitizerModule];
 
@@ -19,7 +20,7 @@ const PIPES = [DomSanitizerModule];
         IonicModule,
         TranslocoModule,
         AuthRoutingModule,
-        StoreModule.forFeature('auth', fromAuth.reducers),
+        StoreModule.forFeature(FeatureKeys.AUTH, fromAuth.authReducers),
         ...PIPES,
     ],
     exports: [],
