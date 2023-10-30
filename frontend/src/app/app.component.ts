@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Platforms } from '@ionic/core';
-import { PlatformService } from './services/platform.service';
+import { PlatformFacadeService } from './tabs/platform/platform-facade/platform-facade.service';
 
 @Component({
     selector: 'yac-root',
@@ -9,10 +9,13 @@ import { PlatformService } from './services/platform.service';
     styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-    constructor(private _platform: Platform, private _platformService: PlatformService) {}
+    constructor(
+        private _platform: Platform,
+        private _platformFacadeService: PlatformFacadeService,
+    ) {}
 
     ngOnInit(): void {
         const currentPlatforms = this._platform.platforms() as Platforms[];
-        this._platformService.emitPlatform(currentPlatforms);
+        this._platformFacadeService.setPlatform(currentPlatforms);
     }
 }

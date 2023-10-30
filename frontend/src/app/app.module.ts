@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
 import { appReducers } from '.';
+import { PlatformModule } from './tabs/platform/platform.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { appReducers } from '.';
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
+        PlatformModule,
         StoreModule.forRoot(appReducers, {
             runtimeChecks: {
                 strictStateImmutability: true,
