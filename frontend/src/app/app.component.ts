@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
     constructor(private _platform: Platform, private _platformService: PlatformService) {}
 
     ngOnInit(): void {
-        const currentPlatforms = this._platform.platforms();
-        this._platformService.emitPlatform(currentPlatforms as Platforms[]);
+        const currentPlatforms = this._platform.platforms() as Platforms[];
+        this._platformService.emitPlatform(currentPlatforms);
     }
 }
