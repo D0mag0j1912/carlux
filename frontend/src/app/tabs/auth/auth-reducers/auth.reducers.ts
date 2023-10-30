@@ -4,4 +4,4 @@ export interface AuthState {}
 
 export const initialAuthState: AuthState = {};
 
-export const authReducer = createReducer(initialAuthState);
+export const authReducers = createReducer(initialAuthState);

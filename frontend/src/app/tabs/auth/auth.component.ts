@@ -5,7 +5,7 @@ import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
 import { PlatformService } from '../../services/platform.service';
 import { map } from 'rxjs';
-import { DESKTOP_MODE } from '../../helpers/platform-mode';
+import { DESKTOP_MODE } from '../../constants/platform-mode';
 
 @Component({
     selector: 'yac-auth',

@@ -19,7 +19,7 @@ const PIPES = [DomSanitizerModule];
         IonicModule,
         TranslocoModule,
         AuthRoutingModule,
-        StoreModule.forFeature('auth', fromAuth.authReducer),
+        StoreModule.forFeature('auth', fromAuth.authReducers),
         ...PIPES,
     ],
     exports: [],

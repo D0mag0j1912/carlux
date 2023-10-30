@@ -1,10 +1,14 @@
 import { Platforms } from '@ionic/core';
 import { combineReducers } from '@ngrx/store';
-
-export const platformStoreKey = 'platform';
+import { FeatureKeys } from './constants/feature-keys';
+import { AuthState } from './tabs/auth/auth-reducers/auth.reducers';
+import * as fromAuth from './tabs/auth/auth-reducers/auth.reducers';
 
 export interface AppState {
-    [platformStoreKey]: Platforms[];
+    [FeatureKeys.PLATFORM]: Platforms[];
+    [FeatureKeys.AUTH]: AuthState;
 }
 
-export const appReducers = combineReducers({});
+export const appReducers = combineReducers({
+    ...fromAuth.authReducers,
+});
