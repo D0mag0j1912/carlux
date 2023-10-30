@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
+import { appReducers } from '.';
 
 @NgModule({
     declarations: [AppComponent],
@@ -18,7 +19,14 @@ import { TranslocoRootModule } from './transloco-root.module';
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        StoreModule.forRoot(),
+        StoreModule.forRoot(appReducers, {
+            runtimeChecks: {
+                strictStateImmutability: true,
+                strictActionImmutability: true,
+                strictActionSerializability: true,
+                strictStateSerializability: true,
+            },
+        }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         HttpClientModule,
         TranslocoRootModule,
