@@ -5,6 +5,7 @@ import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
 import { PlatformService } from '../../services/platform.service';
 import { map } from 'rxjs';
+import { DESKTOP_MODE } from '../../helpers/platform-mode';
 
 @Component({
     selector: 'yac-auth',
@@ -13,7 +14,7 @@ import { map } from 'rxjs';
 })
 export class AuthComponent implements AfterViewInit {
     isDesktop$ = this._platformService.platform$.pipe(
-        map((currentPlatforms: Platforms[]) => currentPlatforms.includes('desktop')),
+        map((currentPlatforms: Platforms[]) => currentPlatforms.includes(DESKTOP_MODE)),
     );
 
     form = new FormGroup({
