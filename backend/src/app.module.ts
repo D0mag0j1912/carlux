@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './modules/auth/user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TwilioModule } from 'nestjs-twilio';
 
 @Module({
     imports: [
@@ -20,6 +21,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
                 password: configService.get('DATABASE_PASSWORD'),
                 database: configService.get('DATABASE_NAME'),
                 entities: [User],
+            }),
+            inject: [ConfigService],
+        }),
+        TwilioModule.forRootAsync({
+            imports: [ConfigModule],
+            useFactory: (configService: ConfigService) => ({
+                accountSid: configService.get('TWILIO_ACCOUNT_SID'),
+                authToken: configService.get('TWILIO_AUTH_TOKEN'),
             }),
             inject: [ConfigService],
         }),
