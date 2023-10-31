@@ -8,7 +8,7 @@ import { PlatformFacadeService } from './tabs/platform/platform-facade/platform-
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class RootComponent implements OnInit {
     constructor(
         private _platform: Platform,
         private _platformFacadeService: PlatformFacadeService,
