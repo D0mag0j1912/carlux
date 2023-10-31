@@ -5,7 +5,7 @@ import { TwilioService } from 'nestjs-twilio';
 export class AuthService {
     constructor(private _twilioService: TwilioService) {}
 
-    async sendSMS() {
+    async sendSMS(phoneNumber: string) {
         await this._twilioService.client.messages.create({
             body: '',
             from: '',
