@@ -9,7 +9,8 @@
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
-        "lint": "eslint -c .eslintrc.js --ext .ts ./src"
+        "lint": "eslint -c .eslintrc.js --ext .ts ./src",
+        "ng-openapi-gen": "ng-openapi-gen"
     },
     "private": true,
     "dependencies": {

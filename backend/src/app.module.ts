@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './modules/auth/user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TwilioModule } from 'nestjs-twilio';
+import { AuthModule } from './modules/auth/auth.module';
+
+const IMPORTS = [AuthModule];
 
 @Module({
     imports: [
@@ -22,14 +24,7 @@ import { TwilioModule } from 'nestjs-twilio';
             }),
             inject: [ConfigService],
         }),
-        TwilioModule.forRootAsync({
-            imports: [ConfigModule],
-            useFactory: (configService: ConfigService) => ({
-                accountSid: configService.get('TWILIO_ACCOUNT_SID'),
-                authToken: configService.get('TWILIO_AUTH_TOKEN'),
-            }),
-            inject: [ConfigService],
-        }),
+        ...IMPORTS,
     ],
 })
 export class AppModule {}
