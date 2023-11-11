@@ -68,12 +68,10 @@
             <ion-header>
                 <ion-toolbar>
                     <ion-title>{{ 'auth.phone_verification' | transloco }}</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button (click)="closeVerificationModal()">{{ 'common.cancel' | transloco }}</ion-button>
+                    </ion-buttons>
                 </ion-toolbar>
-                <ion-buttons slot="end">
-                    <ion-button (click)="closeVerificationModal()">
-                        {{ 'common.cancel' | transloco }}
-                    </ion-button>
-                </ion-buttons>
             </ion-header>
             <ion-content> </ion-content>
         </ng-template>

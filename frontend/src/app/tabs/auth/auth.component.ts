@@ -58,7 +58,7 @@ export class AuthComponent implements AfterViewInit {
                     return EMPTY;
                 }),
             )
-            .subscribe((_) => {});
+            .subscribe((_) => this.isVerificationOpened.set(true));
     }
 
     closeVerificationModal(): void {
