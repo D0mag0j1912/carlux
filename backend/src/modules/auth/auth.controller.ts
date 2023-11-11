@@ -6,6 +6,7 @@ import {
     ApiTags,
 } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
+import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 
 @ApiTags('Authentication')
 @Controller('api/auth')
@@ -14,15 +15,15 @@ export class AuthController {
 
     @ApiCreatedResponse({
         status: 201,
-        description: 'Server returns successful response',
+        description: RESPONSE_MESSAGE.CREATED,
     })
     @ApiInternalServerErrorResponse({
         status: 500,
-        description: 'Internal server error',
+        description: RESPONSE_MESSAGE.INTERNAL_SERVER_ERROR,
     })
     @ApiBadRequestResponse({
         status: 404,
-        description: 'Bad request from the client',
+        description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Post('phone-verification')
     sendSMS(@Body('phoneNumber') phoneNumber: string): HttpStatus {
