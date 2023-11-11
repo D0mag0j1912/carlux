@@ -55,3 +55,17 @@ ion-button {
         --padding-bottom: 12px;
     }
 }
+
+.toast {
+    &--error {
+        --background: var(--ion-color-danger);
+        --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+        --color: white;
+    }
+
+    &--success {
+        --background: var(--ion-color-success);
+        --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+        --color: white;
+    }
+}

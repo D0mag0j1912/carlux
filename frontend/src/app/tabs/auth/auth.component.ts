@@ -51,6 +51,8 @@ export class AuthComponent implements AfterViewInit {
                     const toast = await this._toastController.create({
                         message: this._translocoService.translate('auth.errors.sms_error'),
                         duration: TOAST_DURATION.ERROR,
+                        icon: 'warning',
+                        cssClass: 'toast--error',
                     });
                     await toast.present();
                     return EMPTY;
