@@ -1,6 +1,7 @@
 import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
+    ApiBody,
     ApiCreatedResponse,
     ApiInternalServerErrorResponse,
     ApiTags,
@@ -24,6 +25,10 @@ export class AuthController {
     @ApiBadRequestResponse({
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
+    })
+    @ApiBody({
+        type: String,
+        isArray: false,
     })
     @Post('phone-verification')
     sendSMS(@Body('phoneNumber') phoneNumber: string): HttpStatus {
