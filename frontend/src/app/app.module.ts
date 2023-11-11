@@ -5,7 +5,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { RootComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
@@ -15,7 +15,7 @@ import { appReducers } from '.';
 import { PlatformModule } from './tabs/platform/platform.module';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [RootComponent],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
@@ -34,6 +34,6 @@ import { PlatformModule } from './tabs/platform/platform.module';
         TranslocoRootModule,
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-    bootstrap: [AppComponent],
+    bootstrap: [RootComponent],
 })
 export class AppModule {}

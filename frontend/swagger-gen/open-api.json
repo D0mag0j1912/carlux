@@ -1,0 +1,26 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/api/auth/phone-verification": {
+            "post": {
+                "operationId": "AuthController_sendSMS",
+                "parameters": [],
+                "responses": {
+                    "201": { "description": "" },
+                    "400": { "description": "Bad request from the client" },
+                    "500": { "description": "Internal server error" }
+                },
+                "tags": ["Authentication"]
+            }
+        }
+    },
+    "info": {
+        "title": "NestJS API",
+        "description": "API of the yacht application",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [],
+    "servers": [],
+    "components": { "schemas": {} }
+}
