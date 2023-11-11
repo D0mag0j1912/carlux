@@ -55,7 +55,9 @@
 
             <ion-row class="row">
                 <ion-col size-sm="4" offset-sm="4">
-                    <ion-button color="primary" class="sign-up-btn">{{ 'common.continue' | transloco }}</ion-button>
+                    <ion-button color="primary" class="sign-up-btn" (click)="continue()">{{
+                        'common.continue' | transloco
+                    }}</ion-button>
                 </ion-col>
             </ion-row>
         </ion-grid>

@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiCreatedResponse,
@@ -12,7 +12,10 @@ import { AuthService } from './auth.service';
 export class AuthController {
     constructor(private _authService: AuthService) {}
 
-    @ApiCreatedResponse()
+    @ApiCreatedResponse({
+        status: 201,
+        description: 'Server returns successful response',
+    })
     @ApiInternalServerErrorResponse({
         status: 500,
         description: 'Internal server error',
@@ -22,7 +25,7 @@ export class AuthController {
         description: 'Bad request from the client',
     })
     @Post('phone-verification')
-    async sendSMS(@Body('phoneNumber') phoneNumber: string) {
-        await this._authService.sendSMS(phoneNumber);
+    sendSMS(@Body('phoneNumber') phoneNumber: string): HttpStatus {
+        return this._authService.sendSMS(phoneNumber);
     }
 }
