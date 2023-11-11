@@ -36,7 +36,7 @@ export class AuthComponent implements AfterViewInit {
         }
     }
 
-    continue(): void {
+    continueWithPhoneNumber(): void {
         this._authService.authControllerSendSms().subscribe();
     }
 }
