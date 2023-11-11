@@ -7,6 +7,10 @@
     "auth": {
         "sign_in": "Prijava",
         "continue_with_google": "Nastavi s Google",
-        "continue_with_apple": "Nastavi s Apple"
+        "continue_with_apple": "Nastavi s Apple",
+        "phone_verification": "Provjera broja mobitela",
+        "errors": {
+            "sms_error": "Došlo je do greške pri slanju SMS-a"
+        }
     }
 }
