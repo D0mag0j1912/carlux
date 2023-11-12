@@ -16,7 +16,7 @@ import { TranslocoService } from '@ngneat/transloco';
 })
 export class AuthComponent implements AfterViewInit {
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
-    isVerificationOpened = signal<boolean>(false);
+    isVerificationOpened = signal(false);
 
     form = new FormGroup({
         phoneNumber: new FormControl('', Validators.required),

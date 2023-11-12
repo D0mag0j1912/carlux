@@ -73,7 +73,32 @@
                     </ion-buttons>
                 </ion-toolbar>
             </ion-header>
-            <ion-content> </ion-content>
+            <ion-content>
+                <div class="verification-content">
+                    <ion-text>
+                        {{ 'auth.enter_verification_code' | transloco }}
+                    </ion-text>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <ion-input fill="outline" mode="md" type="number"></ion-input>
+                            </ion-col>
+
+                            <ion-col>
+                                <ion-input fill="outline" mode="md" type="number"></ion-input>
+                            </ion-col>
+
+                            <ion-col>
+                                <ion-input fill="outline" mode="md" type="number"></ion-input>
+                            </ion-col>
+
+                            <ion-col>
+                                <ion-input fill="outline" mode="md" type="number"></ion-input>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+            </ion-content>
         </ng-template>
     </ion-modal>
 </ion-content>
