@@ -21,6 +21,7 @@ export class AuthComponent implements AfterViewInit {
     form = new FormGroup({
         phoneNumber: new FormControl('', Validators.required),
     });
+
     readonly UTILS_SCRIPT = environment.utilsScript;
 
     @ViewChild('phoneEl')
