@@ -84,21 +84,17 @@
                     </ion-text>
                     <ion-grid>
                         <ion-row>
-                            <ion-col>
-                                <ion-input #firstCodeEl fill="outline" mode="md" type="number"></ion-input>
-                            </ion-col>
-
-                            <ion-col>
-                                <ion-input fill="outline" mode="md" type="number"></ion-input>
-                            </ion-col>
-
-                            <ion-col>
-                                <ion-input fill="outline" mode="md" type="number"></ion-input>
-                            </ion-col>
-
-                            <ion-col>
-                                <ion-input fill="outline" mode="md" type="number"></ion-input>
-                            </ion-col>
+                            <ng-container *ngFor="let code of [].constructor(4); let i = index">
+                                <ion-col>
+                                    <ion-input
+                                        #code
+                                        fill="outline"
+                                        mode="md"
+                                        type="number"
+                                        (input)="onCodeChange($event, i)"
+                                    ></ion-input>
+                                </ion-col>
+                            </ng-container>
                         </ion-row>
                     </ion-grid>
                 </div>

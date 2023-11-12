@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, signal } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    QueryList,
+    ViewChild,
+    ViewChildren,
+    signal,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
@@ -27,8 +35,8 @@ export class AuthComponent implements AfterViewInit {
     @ViewChild('phoneEl')
     phoneEl: ElementRef | undefined;
 
-    @ViewChild('firstCodeEl', { read: IonInput })
-    firstCodeEl: IonInput | undefined;
+    @ViewChildren('code')
+    codesEl: QueryList<IonInput> | undefined;
 
     constructor(
         private _platformFacadeService: PlatformFacadeService,
@@ -72,8 +80,15 @@ export class AuthComponent implements AfterViewInit {
     }
 
     async focusFirstElement(): Promise<void> {
-        if (this.firstCodeEl) {
-            await this.firstCodeEl.setFocus();
+        if (this.codesEl) {
+            await this.codesEl.first.setFocus();
+        }
+    }
+
+    async onCodeChange(event: Event, index: number): Promise<void> {
+        const value = (event.target as HTMLInputElement).value;
+        if (this.codesEl && value) {
+            await this.codesEl.get(index + 1)?.setFocus();
         }
     }
 }
