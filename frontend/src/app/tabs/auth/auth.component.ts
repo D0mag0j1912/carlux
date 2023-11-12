@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
 import { AuthenticationService } from '../../api/services';
 import { EMPTY, catchError } from 'rxjs';
-import { ToastController } from '@ionic/angular';
+import { IonInput, ToastController } from '@ionic/angular';
 import { TOAST_DURATION } from '../../helpers/toast-duration';
 import { TranslocoService } from '@ngneat/transloco';
 
@@ -25,6 +25,9 @@ export class AuthComponent implements AfterViewInit {
 
     @ViewChild('phoneEl')
     phoneEl: ElementRef | undefined;
+
+    @ViewChild('firstCodeEl', { read: IonInput })
+    firstCodeEl: IonInput | undefined;
 
     constructor(
         private _platformFacadeService: PlatformFacadeService,
@@ -63,5 +66,11 @@ export class AuthComponent implements AfterViewInit {
 
     closeVerificationModal(): void {
         this.isVerificationOpened.set(false);
+    }
+
+    async focusFirstElement(): Promise<void> {
+        if (this.firstCodeEl) {
+            await this.firstCodeEl.setFocus();
+        }
     }
 }

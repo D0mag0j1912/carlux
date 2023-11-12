@@ -63,7 +63,7 @@
         </ion-grid>
     </form>
 
-    <ion-modal [isOpen]="isVerificationOpened()">
+    <ion-modal [isOpen]="isVerificationOpened()" (didPresent)="focusFirstElement()">
         <ng-template>
             <ion-header>
                 <ion-toolbar>
@@ -81,7 +81,7 @@
                     <ion-grid>
                         <ion-row>
                             <ion-col>
-                                <ion-input fill="outline" mode="md" type="number"></ion-input>
+                                <ion-input #firstCodeEl fill="outline" mode="md" type="number"></ion-input>
                             </ion-col>
 
                             <ion-col>
