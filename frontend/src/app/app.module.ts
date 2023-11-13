@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
 import { AppRoutingModule } from './app-routing.module';
 import { RootComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -14,6 +12,7 @@ import { TranslocoRootModule } from './transloco-root.module';
 import { appReducers } from '.';
 import { PlatformModule } from './tabs/platform/platform.module';
 import { ApiModule } from './api/api.module';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
     declarations: [RootComponent],
@@ -31,6 +30,7 @@ import { ApiModule } from './api/api.module';
             },
         }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        EffectsModule.forRoot([]),
         HttpClientModule,
         TranslocoRootModule,
         ApiModule.forRoot({ rootUrl: environment.apiUrl }),

@@ -2,6 +2,7 @@ import {
     AfterViewInit,
     Component,
     ElementRef,
+    OnInit,
     QueryList,
     ViewChild,
     ViewChildren,
@@ -11,18 +12,19 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
-import { AuthenticationService } from '../../api/services';
-import { EMPTY, catchError } from 'rxjs';
-import { IonInput, ToastController } from '@ionic/angular';
-import { TOAST_DURATION } from '../../helpers/toast-duration';
-import { TranslocoService } from '@ngneat/transloco';
+import { takeUntil } from 'rxjs';
+import { IonInput } from '@ionic/angular';
+import { AuthEventHubService } from './auth-event-hub.service';
+import { UnsubscribeService } from '../../services/unsubscribe.service';
+import { AuthFacadeService } from './auth-facade.service';
 
 @Component({
     selector: 'yac-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
+    providers: [UnsubscribeService],
 })
-export class AuthComponent implements AfterViewInit {
+export class AuthComponent implements OnInit, AfterViewInit {
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
     isVerificationOpened = signal(false);
 
@@ -39,11 +41,17 @@ export class AuthComponent implements AfterViewInit {
     codesEl: QueryList<IonInput> | undefined;
 
     constructor(
+        private _authEventHubService: AuthEventHubService,
+        private _authFacadeService: AuthFacadeService,
         private _platformFacadeService: PlatformFacadeService,
-        private _authService: AuthenticationService,
-        private _translocoService: TranslocoService,
-        private _toastController: ToastController,
+        private _unsubscribeService: UnsubscribeService,
     ) {}
+
+    ngOnInit(): void {
+        this._authEventHubService.smsSentSuccessfully$
+            .pipe(takeUntil(this._unsubscribeService))
+            .subscribe((_) => this.isVerificationOpened.set(true));
+    }
 
     ngAfterViewInit(): void {
         if (this.phoneEl) {
@@ -56,23 +64,7 @@ export class AuthComponent implements AfterViewInit {
     }
 
     continueWithPhoneNumber(): void {
-        this._authService
-            .authControllerSendSms()
-            .pipe(
-                catchError(async (_) => {
-                    const toast = await this._toastController.create({
-                        message: this._translocoService.translate('auth.errors.sms_error'),
-                        duration: TOAST_DURATION.ERROR,
-                        icon: 'warning',
-                        cssClass: 'toast--error',
-                    });
-                    await toast.present();
-                    return EMPTY;
-                }),
-            )
-            .subscribe((_) => {
-                this.isVerificationOpened.set(true);
-            });
+        this._authFacadeService.sendSMS();
     }
 
     closeVerificationModal(): void {
