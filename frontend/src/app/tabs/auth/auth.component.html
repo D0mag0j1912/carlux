@@ -77,7 +77,7 @@
                     </ion-buttons>
                 </ion-toolbar>
             </ion-header>
-            <ion-content class="verification-content">
+            <ion-content class="verification-content" *ngIf="isNotSMSLoading$ | async; else smsLoading">
                 <div class="verification-content--container">
                     <ion-text class="text">
                         {{ 'auth.enter_verification_code' | transloco }}
@@ -99,6 +99,9 @@
                     </ion-grid>
                 </div>
             </ion-content>
+            <ng-template #smsLoading>
+                <ion-spinner color="primary"></ion-spinner>
+            </ng-template>
         </ng-template>
     </ion-modal>
 </ion-content>

@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
-import { takeUntil } from 'rxjs';
+import { map, takeUntil } from 'rxjs';
 import { IonInput } from '@ionic/angular';
 import { AuthEventHubService } from './auth-event-hub.service';
 import { UnsubscribeService } from '../../services/unsubscribe.service';
@@ -26,6 +26,10 @@ import { AuthFacadeService } from './auth-facade.service';
 })
 export class AuthComponent implements OnInit, AfterViewInit {
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
+    isNotSMSLoading$ = this._authFacadeService
+        .selectSMSLoading()
+        .pipe(map((isSMSLoading: boolean) => !isSMSLoading));
+
     isVerificationOpened = signal(false);
 
     form = new FormGroup({
