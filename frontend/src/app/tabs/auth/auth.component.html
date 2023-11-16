@@ -55,9 +55,49 @@
 
             <ion-row class="row">
                 <ion-col size-sm="4" offset-sm="4">
-                    <ion-button color="primary" class="sign-up-btn">{{ 'common.continue' | transloco }}</ion-button>
+                    <ion-button color="primary" class="sign-up-btn" (click)="continueWithPhoneNumber()">{{
+                        'common.continue' | transloco
+                    }}</ion-button>
                 </ion-col>
             </ion-row>
         </ion-grid>
     </form>
+
+    <ion-modal [isOpen]="isVerificationOpened()" (keydown.escape)="closeVerificationModal()">
+        <ng-template>
+            <ion-header>
+                <ion-toolbar>
+                    <ion-title>{{ 'auth.phone_verification' | transloco }}</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button (click)="closeVerificationModal()">{{ 'common.cancel' | transloco }}</ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content class="verification-content" *ngIf="isNotSMSLoading$ | async; else smsLoading">
+                <div class="verification-content--container">
+                    <ion-text class="text">
+                        {{ 'auth.enter_verification_code' | transloco }}
+                    </ion-text>
+                    <ion-grid>
+                        <ion-row>
+                            <ng-container *ngFor="let code of [].constructor(4); let i = index">
+                                <ion-col>
+                                    <ion-input
+                                        #code
+                                        fill="outline"
+                                        mode="md"
+                                        type="number"
+                                        (input)="onCodeChange($event, i)"
+                                    ></ion-input>
+                                </ion-col>
+                            </ng-container>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+            </ion-content>
+            <ng-template #smsLoading>
+                <ion-spinner color="primary"></ion-spinner>
+            </ng-template>
+        </ng-template>
+    </ion-modal>
 </ion-content>
