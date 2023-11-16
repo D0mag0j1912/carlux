@@ -63,11 +63,7 @@
         </ion-grid>
     </form>
 
-    <ion-modal
-        [isOpen]="isVerificationOpened()"
-        (didPresent)="focusFirstElement()"
-        (keydown.escape)="closeVerificationModal()"
-    >
+    <ion-modal [isOpen]="isVerificationOpened()" (keydown.escape)="closeVerificationModal()">
         <ng-template>
             <ion-header>
                 <ion-toolbar>

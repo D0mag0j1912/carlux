@@ -7,7 +7,6 @@ import { AuthFacadeService } from '../auth-facade.service';
 import { ToastController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { TOAST_DURATION } from '../../../helpers/toast-duration';
-import { AuthEventHubService } from '../auth-event-hub.service';
 
 @Injectable()
 export class AuthEffects {
@@ -30,7 +29,6 @@ export class AuthEffects {
                     }),
                     map((_) => {
                         this._authenticationFacadeService.setSMSLoading(false);
-                        this._authEventHubService.emitSmsSending();
                         return AuthActions.sendSMSSuccess();
                     }),
                 ),
@@ -44,6 +42,5 @@ export class AuthEffects {
         private _translocoService: TranslocoService,
         private _authenticationService: AuthenticationService,
         private _authenticationFacadeService: AuthFacadeService,
-        private _authEventHubService: AuthEventHubService,
     ) {}
 }
