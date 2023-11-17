@@ -55,7 +55,7 @@ export class AuthComponent implements AfterViewInit {
     @ViewChild('phoneEl')
     phoneEl: ElementRef | undefined;
 
-    @ViewChildren('code')
+    @ViewChildren('codeEl')
     codesEl: QueryList<IonInput> | undefined;
 
     constructor(
@@ -84,14 +84,6 @@ export class AuthComponent implements AfterViewInit {
 
     async onCodeChange(event: Event, index: number): Promise<void> {
         const value = (event.target as HTMLInputElement).value;
-        const mappedArray = this.codeValues().map((codeValue, codeIndex) => {
-            if (codeIndex === index) {
-                const lastEnteredNumber = +value.slice(-1);
-                return { code: lastEnteredNumber };
-            }
-            return codeValue;
-        });
-        this.codeValues.set([...mappedArray]);
         if (this.codesEl && value) {
             await this.codesEl.get(index + 1)?.setFocus();
         }
