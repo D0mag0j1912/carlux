@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromAuth from './auth-reducers/auth.reducers';
 import { TranslocoModule } from '@ngneat/transloco';
 import { DomSanitizerModule } from '../../pipes/dom-sanitizer/dom-sanitizer.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeatureKeys } from '../../constants/feature-keys';
 import { AuthEffects } from './auth-effects/auth.effects';
 
@@ -19,6 +19,7 @@ const PIPES = [DomSanitizerModule];
     imports: [
         CommonModule,
         ReactiveFormsModule,
+        FormsModule,
         IonicModule,
         TranslocoModule,
         AuthRoutingModule,

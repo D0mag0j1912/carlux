@@ -1,15 +1,12 @@
 import {
     AfterViewInit,
     Component,
-    DestroyRef,
     ElementRef,
     QueryList,
     ViewChild,
     ViewChildren,
-    inject,
     signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
@@ -17,6 +14,10 @@ import { PlatformFacadeService } from '../platform/platform-facade/platform-faca
 import { map } from 'rxjs';
 import { IonInput } from '@ionic/angular';
 import { AuthFacadeService } from './auth-facade.service';
+
+type VerificationCodeType = {
+    code: number | null;
+};
 
 @Component({
     selector: 'yac-auth',
@@ -30,11 +31,24 @@ export class AuthComponent implements AfterViewInit {
         .pipe(map((isSMSLoading: boolean) => !isSMSLoading));
 
     isVerificationOpened = signal(false);
+    codeValues = signal<VerificationCodeType[]>([
+        {
+            code: null,
+        },
+        {
+            code: null,
+        },
+        {
+            code: null,
+        },
+        {
+            code: null,
+        },
+    ]);
 
     form = new FormGroup({
         phoneNumber: new FormControl('', Validators.required),
     });
-    private _destroyRef = inject(DestroyRef);
 
     readonly UTILS_SCRIPT = environment.utilsScript;
 
@@ -57,18 +71,6 @@ export class AuthComponent implements AfterViewInit {
                 utilsScript: this.UTILS_SCRIPT,
             });
         }
-
-        if (this.codesEl) {
-            this.codesEl.changes
-                .pipe(takeUntilDestroyed(this._destroyRef))
-                .subscribe((changes: QueryList<IonInput>) => {
-                    if (changes?.first) {
-                        setTimeout(async () => {
-                            await changes.first.setFocus();
-                        }, 100);
-                    }
-                });
-        }
     }
 
     continueWithPhoneNumber(): void {
@@ -82,6 +84,14 @@ export class AuthComponent implements AfterViewInit {
 
     async onCodeChange(event: Event, index: number): Promise<void> {
         const value = (event.target as HTMLInputElement).value;
+        const mappedArray = this.codeValues().map((codeValue, codeIndex) => {
+            if (codeIndex === index) {
+                const lastEnteredNumber = +value.slice(-1);
+                return { code: lastEnteredNumber };
+            }
+            return codeValue;
+        });
+        this.codeValues.set([...mappedArray]);
         if (this.codesEl && value) {
             await this.codesEl.get(index + 1)?.setFocus();
         }
