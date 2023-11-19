@@ -84,9 +84,17 @@ export class AuthComponent implements AfterViewInit {
     }
 
     async onCodeChange(event: Event, index: number): Promise<void> {
-        const value = (event.target as HTMLInputElement).value;
-        if (this.codesEl && value) {
-            await this.codesEl.get(index + 1)?.setFocus();
+        const isEmptyCode = this.codeValues().some((codeValue) => !codeValue.code);
+        if (!isEmptyCode) {
+            const code = this.codeValues()
+                .map((codeValue) => codeValue.code)
+                .toString();
+            this._authFacadeService.verifyCode(code);
+        } else {
+            const value = (event.target as HTMLInputElement).value;
+            if (this.codesEl && value) {
+                await this.codesEl.get(index + 1)?.setFocus();
+            }
         }
     }
 

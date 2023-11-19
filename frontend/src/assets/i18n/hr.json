@@ -11,7 +11,8 @@
         "phone_verification": "Provjera broja mobitela",
         "enter_verification_code": "Unesite verifikacijski kod",
         "errors": {
-            "sms_error": "Došlo je do greške pri slanju SMS-a"
+            "sms_error": "Došlo je do greške pri slanju SMS-a",
+            "verify_code_error": "Došlo je do greške pri verifikaciji koda"
         }
     }
 }

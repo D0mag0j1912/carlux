@@ -11,7 +11,8 @@
         "phone_verification": "Phone verification",
         "enter_verification_code": "Enter verification code",
         "errors": {
-            "sms_error": "Could not send a SMS"
+            "sms_error": "Could not send a SMS",
+            "verify_code_error": "Could not verify code"
         }
     }
 }

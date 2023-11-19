@@ -26,5 +26,9 @@ export class AuthFacadeService {
     setSMSLoading(isSMSLoading: boolean): void {
         this._store.dispatch(AuthActions.setSMSLoading({ isSMSLoading }));
     }
+
+    verifyCode(code: string): void {
+        this._store.dispatch(AuthActions.verifyCode({ code }));
+    }
     //Actions END ---------------------------
 }

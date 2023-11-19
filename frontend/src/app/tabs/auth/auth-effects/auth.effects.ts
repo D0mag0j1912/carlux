@@ -36,6 +36,29 @@ export class AuthEffects {
         ),
     );
 
+    verifyCode$ = createEffect(() =>
+        this._actions$.pipe(
+            ofType(AuthActions.verifyCode),
+            switchMap((action) =>
+                this._authenticationService.authControllerVerifyCode({ body: action.code }).pipe(
+                    catchError(async (_) => {
+                        const toast = await this._toastController.create({
+                            message: this._translocoService.translate(
+                                'auth.errors.verify_code_error',
+                            ),
+                            duration: TOAST_DURATION.ERROR,
+                            icon: 'warning',
+                            cssClass: 'toast--error',
+                        });
+                        await toast.present();
+                        return EMPTY;
+                    }),
+                    map((_) => AuthActions.verifyCodeSuccess()),
+                ),
+            ),
+        ),
+    );
+
     constructor(
         private _actions$: Actions,
         private _toastController: ToastController,
