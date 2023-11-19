@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { IonInput } from '@ionic/angular';
 import { AuthFacadeService } from './auth-facade.service';
 
@@ -69,6 +69,14 @@ export class AuthComponent implements AfterViewInit {
                 initialCountry: 'hr',
                 separateDialCode: true,
                 utilsScript: this.UTILS_SCRIPT,
+            });
+        }
+
+        if (this.codesEl) {
+            this.codesEl.changes.pipe(take(1)).subscribe((changes: QueryList<IonInput>) => {
+                setTimeout(async () => {
+                    await changes.first.setFocus();
+                }, 100);
             });
         }
     }
