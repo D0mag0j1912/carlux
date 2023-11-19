@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AuthActions from '../auth-actions/auth.actions';
-import { EMPTY, catchError, map, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
 import { AuthenticationService } from '../../../api/services';
 import { AuthFacadeService } from '../auth-facade.service';
 import { ToastController } from '@ionic/angular';
@@ -24,13 +24,10 @@ export class AuthEffects {
                             cssClass: 'toast--error',
                         });
                         await toast.present();
-                        this._authenticationFacadeService.setSMSLoading(false);
                         return EMPTY;
                     }),
-                    map((_) => {
-                        this._authenticationFacadeService.setSMSLoading(false);
-                        return AuthActions.sendSMSSuccess();
-                    }),
+                    map((_) => AuthActions.sendSMSSuccess()),
+                    finalize(() => this._authenticationFacadeService.setSMSLoading(false)),
                 ),
             ),
         ),
