@@ -83,6 +83,17 @@ export class AuthComponent implements AfterViewInit {
         }
     }
 
+    async onCodeChange(event: Event, index: number): Promise<void> {
+        const value = (event.target as HTMLInputElement).value;
+        if (this.codesEl && value) {
+            await this.codesEl.get(index + 1)?.setFocus();
+        }
+    }
+
+    async onModalDismiss(): Promise<void> {
+        this.closeVerificationModal();
+    }
+
     continueWithPhoneNumber(): void {
         this.isVerificationOpened.set(true);
         this._authFacadeService.sendSMS();
@@ -92,12 +103,5 @@ export class AuthComponent implements AfterViewInit {
         const mappedCodeValues = this.codeValues().map((_) => ({ code: null }));
         this.codeValues.set(mappedCodeValues);
         this.isVerificationOpened.set(false);
-    }
-
-    async onCodeChange(event: Event, index: number): Promise<void> {
-        const value = (event.target as HTMLInputElement).value;
-        if (this.codesEl && value) {
-            await this.codesEl.get(index + 1)?.setFocus();
-        }
     }
 }

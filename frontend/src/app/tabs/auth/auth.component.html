@@ -63,7 +63,7 @@
         </ion-grid>
     </form>
 
-    <ion-modal [isOpen]="isVerificationOpened()" (keydown.escape)="closeVerificationModal()">
+    <ion-modal [isOpen]="isVerificationOpened()" (didDismiss)="onModalDismiss()">
         <ng-template>
             <ion-header>
                 <ion-toolbar>
