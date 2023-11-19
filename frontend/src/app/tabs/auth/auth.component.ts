@@ -19,7 +19,7 @@ type VerificationCodeType = {
     code: number | null;
 };
 
-const INTIIAL_CODE_VALUES: VerificationCodeType[] = [
+const INITIAL_CODE_VALUES: VerificationCodeType[] = [
     {
         code: null,
     },
@@ -46,7 +46,7 @@ export class AuthComponent implements AfterViewInit {
         .pipe(map((isSMSLoading: boolean) => !isSMSLoading));
 
     isVerificationOpened = signal(false);
-    codeValues = signal(INTIIAL_CODE_VALUES);
+    codeValues = signal(INITIAL_CODE_VALUES);
 
     form = new FormGroup({
         phoneNumber: new FormControl('', Validators.required),
@@ -89,6 +89,8 @@ export class AuthComponent implements AfterViewInit {
     }
 
     closeVerificationModal(): void {
+        const mappedCodeValues = this.codeValues().map((_) => ({ code: null }));
+        this.codeValues.set(mappedCodeValues);
         this.isVerificationOpened.set(false);
     }
 
