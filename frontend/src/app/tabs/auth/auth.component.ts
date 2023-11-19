@@ -19,6 +19,21 @@ type VerificationCodeType = {
     code: number | null;
 };
 
+const INTIIAL_CODE_VALUES: VerificationCodeType[] = [
+    {
+        code: null,
+    },
+    {
+        code: null,
+    },
+    {
+        code: null,
+    },
+    {
+        code: null,
+    },
+];
+
 @Component({
     selector: 'yac-auth',
     templateUrl: './auth.component.html',
@@ -31,20 +46,7 @@ export class AuthComponent implements AfterViewInit {
         .pipe(map((isSMSLoading: boolean) => !isSMSLoading));
 
     isVerificationOpened = signal(false);
-    codeValues = signal<VerificationCodeType[]>([
-        {
-            code: null,
-        },
-        {
-            code: null,
-        },
-        {
-            code: null,
-        },
-        {
-            code: null,
-        },
-    ]);
+    codeValues = signal(INTIIAL_CODE_VALUES);
 
     form = new FormGroup({
         phoneNumber: new FormControl('', Validators.required),
