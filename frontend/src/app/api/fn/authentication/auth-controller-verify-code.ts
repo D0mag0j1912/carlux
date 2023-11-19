@@ -7,12 +7,12 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface AuthControllerSendSms$Params {
+export interface AuthControllerVerifyCode$Params {
       body: string
 }
 
-export function authControllerSendSms(http: HttpClient, rootUrl: string, params: AuthControllerSendSms$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, authControllerSendSms.PATH, 'post');
+export function authControllerVerifyCode(http: HttpClient, rootUrl: string, params: AuthControllerVerifyCode$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, authControllerVerifyCode.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
   }
@@ -27,4 +27,4 @@ export function authControllerSendSms(http: HttpClient, rootUrl: string, params:
   );
 }
 
-authControllerSendSms.PATH = '/api/auth/send-sms';
+authControllerVerifyCode.PATH = '/api/auth/phone-verification';

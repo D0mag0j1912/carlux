@@ -80,13 +80,15 @@
                     </ion-text>
                     <ion-grid>
                         <ion-row>
-                            <ng-container *ngFor="let code of [].constructor(4); let i = index">
+                            <ng-container *ngFor="let codeValue of codeValues(); let i = index">
                                 <ion-col>
                                     <ion-input
-                                        #code
+                                        #codeEl
                                         fill="outline"
                                         mode="md"
-                                        type="number"
+                                        type="text"
+                                        maxlength="1"
+                                        [(ngModel)]="codeValue.code"
                                         (input)="onCodeChange($event, i)"
                                     ></ion-input>
                                 </ion-col>

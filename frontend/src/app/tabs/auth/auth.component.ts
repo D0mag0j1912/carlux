@@ -1,22 +1,38 @@
 import {
     AfterViewInit,
     Component,
-    DestroyRef,
     ElementRef,
     QueryList,
     ViewChild,
     ViewChildren,
-    inject,
     signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { IonInput } from '@ionic/angular';
 import { AuthFacadeService } from './auth-facade.service';
+
+type VerificationCodeType = {
+    code: number | null;
+};
+
+const INITIAL_CODE_VALUES: VerificationCodeType[] = [
+    {
+        code: null,
+    },
+    {
+        code: null,
+    },
+    {
+        code: null,
+    },
+    {
+        code: null,
+    },
+];
 
 @Component({
     selector: 'yac-auth',
@@ -30,18 +46,18 @@ export class AuthComponent implements AfterViewInit {
         .pipe(map((isSMSLoading: boolean) => !isSMSLoading));
 
     isVerificationOpened = signal(false);
+    codeValues = signal(INITIAL_CODE_VALUES);
 
     form = new FormGroup({
         phoneNumber: new FormControl('', Validators.required),
     });
-    private _destroyRef = inject(DestroyRef);
 
     readonly UTILS_SCRIPT = environment.utilsScript;
 
     @ViewChild('phoneEl')
     phoneEl: ElementRef | undefined;
 
-    @ViewChildren('code')
+    @ViewChildren('codeEl')
     codesEl: QueryList<IonInput> | undefined;
 
     constructor(
@@ -59,15 +75,11 @@ export class AuthComponent implements AfterViewInit {
         }
 
         if (this.codesEl) {
-            this.codesEl.changes
-                .pipe(takeUntilDestroyed(this._destroyRef))
-                .subscribe((changes: QueryList<IonInput>) => {
-                    if (changes?.first) {
-                        setTimeout(async () => {
-                            await changes.first.setFocus();
-                        }, 100);
-                    }
-                });
+            this.codesEl.changes.pipe(take(1)).subscribe((changes: QueryList<IonInput>) => {
+                setTimeout(async () => {
+                    await changes.first.setFocus();
+                }, 100);
+            });
         }
     }
 
@@ -77,6 +89,8 @@ export class AuthComponent implements AfterViewInit {
     }
 
     closeVerificationModal(): void {
+        const mappedCodeValues = this.codeValues().map((_) => ({ code: null }));
+        this.codeValues.set(mappedCodeValues);
         this.isVerificationOpened.set(false);
     }
 

@@ -15,7 +15,7 @@ export class AuthEffects {
             ofType(AuthActions.sendSMS),
             tap((_) => this._authenticationFacadeService.setSMSLoading(true)),
             switchMap((_) =>
-                this._authenticationService.authControllerSendSms().pipe(
+                this._authenticationService.authControllerSendSms({ body: '' }).pipe(
                     catchError(async (_) => {
                         const toast = await this._toastController.create({
                             message: this._translocoService.translate('auth.errors.sms_error'),
