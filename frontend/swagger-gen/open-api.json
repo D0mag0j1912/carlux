@@ -1,12 +1,32 @@
 {
     "openapi": "3.0.0",
     "paths": {
-        "/api/auth/phone-verification": {
+        "/api/auth/send-sms": {
             "post": {
                 "operationId": "AuthController_sendSMS",
                 "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "type": "string" } } }
+                },
                 "responses": {
-                    "201": { "description": "" },
+                    "201": { "description": "Server returns successful response" },
+                    "400": { "description": "Bad request from the client" },
+                    "500": { "description": "Internal server error" }
+                },
+                "tags": ["Authentication"]
+            }
+        },
+        "/api/auth/phone-verification": {
+            "post": {
+                "operationId": "AuthController_verifyCode",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "type": "string" } } }
+                },
+                "responses": {
+                    "201": { "description": "Server returns successful response" },
                     "400": { "description": "Bad request from the client" },
                     "500": { "description": "Internal server error" }
                 },

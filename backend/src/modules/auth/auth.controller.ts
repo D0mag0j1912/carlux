@@ -30,8 +30,29 @@ export class AuthController {
         type: String,
         isArray: false,
     })
-    @Post('phone-verification')
+    @Post('send-sms')
     sendSMS(@Body('phoneNumber') phoneNumber: string): HttpStatus {
         return this._authService.sendSMS(phoneNumber);
+    }
+
+    @ApiCreatedResponse({
+        status: 201,
+        description: RESPONSE_MESSAGE.CREATED,
+    })
+    @ApiInternalServerErrorResponse({
+        status: 500,
+        description: RESPONSE_MESSAGE.INTERNAL_SERVER_ERROR,
+    })
+    @ApiBadRequestResponse({
+        status: 404,
+        description: RESPONSE_MESSAGE.NOT_FOUND,
+    })
+    @ApiBody({
+        type: String,
+        isArray: false,
+    })
+    @Post('phone-verification')
+    verifyCode(@Body('code') code: string): HttpStatus {
+        return this._authService.verifyCode(code);
     }
 }
