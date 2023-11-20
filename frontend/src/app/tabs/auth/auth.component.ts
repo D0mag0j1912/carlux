@@ -8,13 +8,21 @@ import {
     inject,
     signal,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+    Validators,
+} from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
 import { map, take } from 'rxjs';
-import { IonInput } from '@ionic/angular';
+import { IonInput, IonicModule } from '@ionic/angular';
 import { AuthFacadeService } from './auth-facade.service';
+import { CommonModule } from '@angular/common';
+import { TranslocoModule } from '@ngneat/transloco';
 
 type VerificationCodeType = {
     code: number | null;
@@ -36,6 +44,8 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
 ];
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, IonicModule, TranslocoModule],
     selector: 'yac-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
