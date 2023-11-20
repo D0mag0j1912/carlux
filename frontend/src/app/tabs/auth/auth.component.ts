@@ -5,6 +5,7 @@ import {
     QueryList,
     ViewChild,
     ViewChildren,
+    inject,
     signal,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -40,8 +41,11 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
     styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements AfterViewInit {
-    isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
-    isNotSMSLoading$ = this._authFacadeService
+    #authFacadeService = inject(AuthFacadeService);
+    #platformFacadeService = inject(PlatformFacadeService);
+
+    isDesktopMode$ = this.#platformFacadeService.selectIsDesktopMode();
+    isNotSMSLoading$ = this.#authFacadeService
         .selectSMSLoading()
         .pipe(map((isSMSLoading: boolean) => !isSMSLoading));
 
@@ -59,11 +63,6 @@ export class AuthComponent implements AfterViewInit {
 
     @ViewChildren('codeEl')
     codesEl: QueryList<IonInput> | undefined;
-
-    constructor(
-        private _authFacadeService: AuthFacadeService,
-        private _platformFacadeService: PlatformFacadeService,
-    ) {}
 
     ngAfterViewInit(): void {
         if (this.phoneEl) {
@@ -89,7 +88,7 @@ export class AuthComponent implements AfterViewInit {
             const code = this.codeValues()
                 .map((codeValue) => codeValue.code)
                 .toString();
-            this._authFacadeService.verifyCode(code);
+            this.#authFacadeService.verifyCode(code);
         } else {
             const value = (event.target as HTMLInputElement).value;
             if (this.codesEl && value) {
@@ -104,7 +103,7 @@ export class AuthComponent implements AfterViewInit {
 
     continueWithPhoneNumber(): void {
         this.isVerificationOpened.set(true);
-        this._authFacadeService.sendSMS();
+        this.#authFacadeService.sendSMS();
     }
 
     closeVerificationModal(): void {
