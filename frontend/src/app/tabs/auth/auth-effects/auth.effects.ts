@@ -10,13 +10,15 @@ import { SharedFacadeService } from '../../shared/shared-facade.service';
 @Injectable()
 export class AuthEffects {
     #sharedFacadeService = inject(SharedFacadeService);
+    #authenticationService = inject(AuthenticationService);
+    #authenticationFacadeService = inject(AuthFacadeService);
 
     sendSMS$ = createEffect(() =>
         this._actions$.pipe(
             ofType(AuthActions.sendSMS),
-            tap((_) => this._authenticationFacadeService.setSMSLoading(true)),
+            tap((_) => this.#authenticationFacadeService.setSMSLoading(true)),
             switchMap((_) =>
-                this._authenticationService.authControllerSendSms({ body: '' }).pipe(
+                this.#authenticationService.authControllerSendSms({ body: '' }).pipe(
                     catchError((_) => {
                         this.#sharedFacadeService.showToastMessage(
                             'auth.errors.sms_error',
@@ -27,7 +29,7 @@ export class AuthEffects {
                         return EMPTY;
                     }),
                     map((_) => AuthActions.sendSMSSuccess()),
-                    finalize(() => this._authenticationFacadeService.setSMSLoading(false)),
+                    finalize(() => this.#authenticationFacadeService.setSMSLoading(false)),
                 ),
             ),
         ),
@@ -37,7 +39,7 @@ export class AuthEffects {
         this._actions$.pipe(
             ofType(AuthActions.verifyCode),
             switchMap((action) =>
-                this._authenticationService.authControllerVerifyCode({ body: action.code }).pipe(
+                this.#authenticationService.authControllerVerifyCode({ body: action.code }).pipe(
                     catchError(async (_) => {
                         this.#sharedFacadeService.showToastMessage(
                             'auth.errors.verify_code_error',
@@ -53,9 +55,5 @@ export class AuthEffects {
         ),
     );
 
-    constructor(
-        private _actions$: Actions,
-        private _authenticationService: AuthenticationService,
-        private _authenticationFacadeService: AuthFacadeService,
-    ) {}
+    constructor(private _actions$: Actions) {}
 }
