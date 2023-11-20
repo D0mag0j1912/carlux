@@ -13,6 +13,7 @@ import { appReducers } from '.';
 import { PlatformModule } from './tabs/platform/platform.module';
 import { ApiModule } from './api/api.module';
 import { EffectsModule } from '@ngrx/effects';
+import { SharedEffects } from './tabs/shared/shared-effects/shared.effects';
 
 @NgModule({
     declarations: [RootComponent],
@@ -30,7 +31,7 @@ import { EffectsModule } from '@ngrx/effects';
             },
         }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-        EffectsModule.forRoot([]),
+        EffectsModule.forRoot([SharedEffects]),
         HttpClientModule,
         TranslocoRootModule,
         ApiModule.forRoot({ rootUrl: environment.apiUrl }),
