@@ -7,7 +7,7 @@ import { selectSMSLoading } from './auth-selectors/auth.selectors';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class AuthFacadeService {
+export class AuthenticationFacadeService {
     private _selectSMSLoading$ = this._store.select(selectSMSLoading);
 
     constructor(private _store: Store<AppState[FeatureKeys.AUTH]>) {}

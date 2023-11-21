@@ -3,18 +3,21 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AuthActions from '../auth-actions/auth.actions';
 import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
 import { AuthenticationService } from '../../../api/services';
-import { AuthFacadeService } from '../auth-facade.service';
+import { AuthenticationFacadeService } from '../auth-facade.service';
 import { TOAST_DURATION } from '../../../constants/toast-duration';
 import { SharedFacadeService } from '../../shared/shared-facade.service';
+import { AuthenticationEventEmitterService } from '../auth-event-emitter/auth-event-emitter.service';
 
 @Injectable()
 export class AuthEffects {
+    #actions$ = inject(Actions);
     #sharedFacadeService = inject(SharedFacadeService);
     #authenticationService = inject(AuthenticationService);
-    #authenticationFacadeService = inject(AuthFacadeService);
+    #authenticationFacadeService = inject(AuthenticationFacadeService);
+    #authenticationEventEmitterService = inject(AuthenticationEventEmitterService);
 
     sendSMS$ = createEffect(() =>
-        this._actions$.pipe(
+        this.#actions$.pipe(
             ofType(AuthActions.sendSMS),
             tap((_) => this.#authenticationFacadeService.setSMSLoading(true)),
             switchMap((_) =>
@@ -26,9 +29,13 @@ export class AuthEffects {
                             'warning',
                             'toast--error',
                         );
+                        this.#authenticationEventEmitterService;
                         return EMPTY;
                     }),
-                    map((_) => AuthActions.sendSMSSuccess()),
+                    map((_) => {
+                        this.#authenticationEventEmitterService.emitSmsSent();
+                        return AuthActions.sendSMSSuccess();
+                    }),
                     finalize(() => this.#authenticationFacadeService.setSMSLoading(false)),
                 ),
             ),
@@ -36,7 +43,7 @@ export class AuthEffects {
     );
 
     verifyCode$ = createEffect(() =>
-        this._actions$.pipe(
+        this.#actions$.pipe(
             ofType(AuthActions.verifyCode),
             switchMap((action) =>
                 this.#authenticationService.authControllerVerifyCode({ body: action.code }).pipe(
@@ -54,6 +61,4 @@ export class AuthEffects {
             ),
         ),
     );
-
-    constructor(private _actions$: Actions) {}
 }

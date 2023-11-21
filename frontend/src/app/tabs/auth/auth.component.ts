@@ -1,7 +1,9 @@
 import {
     AfterViewInit,
     Component,
+    DestroyRef,
     ElementRef,
+    OnInit,
     QueryList,
     ViewChild,
     ViewChildren,
@@ -19,10 +21,12 @@ import * as intlTelInput from 'intl-tel-input';
 import { environment } from '../../../environments/environment';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
 import { map, take } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IonInput, IonicModule } from '@ionic/angular';
-import { AuthFacadeService } from './auth-facade.service';
+import { AuthenticationFacadeService } from './auth-facade.service';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
+import { AuthenticationEventEmitterService } from './auth-event-emitter/auth-event-emitter.service';
 
 type VerificationCodeType = {
     code: number | null;
@@ -50,9 +54,11 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent implements AfterViewInit {
-    #authFacadeService = inject(AuthFacadeService);
+export class AuthComponent implements OnInit, AfterViewInit {
+    #authFacadeService = inject(AuthenticationFacadeService);
+    #authEventEmitterService = inject(AuthenticationEventEmitterService);
     #platformFacadeService = inject(PlatformFacadeService);
+    #destroyRef = inject(DestroyRef);
 
     isDesktopMode$ = this.#platformFacadeService.selectIsDesktopMode();
     isNotSMSLoading$ = this.#authFacadeService
@@ -73,6 +79,13 @@ export class AuthComponent implements AfterViewInit {
 
     @ViewChildren('codeEl')
     codesEl: QueryList<IonInput> | undefined;
+
+    ngOnInit(): void {
+        this.#authEventEmitterService
+            .getSmsSent()
+            .pipe(takeUntilDestroyed(this.#destroyRef))
+            .subscribe((_) => this.isVerificationOpened.set(true));
+    }
 
     ngAfterViewInit(): void {
         if (this.phoneEl) {
@@ -112,7 +125,6 @@ export class AuthComponent implements AfterViewInit {
     }
 
     continueWithPhoneNumber(): void {
-        this.isVerificationOpened.set(true);
         this.#authFacadeService.sendSMS();
     }
 
