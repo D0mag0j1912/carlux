@@ -8,6 +8,7 @@ import {
 } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
+import { VerifyCodeDto } from './models/verify-code';
 
 @ApiTags('Authentication')
 @Controller('api/auth')
@@ -52,7 +53,7 @@ export class AuthController {
         isArray: false,
     })
     @Post('phone-verification')
-    verifyCode(@Body('code') code: string): HttpStatus {
-        return this._authService.verifyCode(code);
+    verifyCode(@Body() body: VerifyCodeDto): HttpStatus {
+        return this._authService.verifyCode(body.code);
     }
 }

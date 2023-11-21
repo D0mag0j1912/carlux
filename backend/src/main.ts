@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap(): Promise<void> {
     const app = await NestFactory.create(AppModule);
@@ -9,6 +10,7 @@ async function bootstrap(): Promise<void> {
         allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'authorization'],
         methods: ['GET', 'POST', 'DELETE', 'OPTIONS', 'PUT'],
     });
+    app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true }));
 
     /*Swagger documentation */
     const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
