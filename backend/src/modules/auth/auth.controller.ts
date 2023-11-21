@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, ParseIntPipe, Post } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiBody,
@@ -49,11 +49,11 @@ export class AuthController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @ApiBody({
-        type: String,
+        type: VerifyCodeDto,
         isArray: false,
     })
     @Post('phone-verification')
-    verifyCode(@Body() body: VerifyCodeDto): HttpStatus {
+    verifyCode(@Body(ParseIntPipe) body: VerifyCodeDto): HttpStatus {
         return this._authService.verifyCode(body.code);
     }
 }

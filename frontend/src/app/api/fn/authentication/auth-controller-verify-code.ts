@@ -6,9 +6,10 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { VerifyCodeDto } from '../../models/verify-code-dto';
 
 export interface AuthControllerVerifyCode$Params {
-      body: string
+      body: VerifyCodeDto
 }
 
 export function authControllerVerifyCode(http: HttpClient, rootUrl: string, params: AuthControllerVerifyCode$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {

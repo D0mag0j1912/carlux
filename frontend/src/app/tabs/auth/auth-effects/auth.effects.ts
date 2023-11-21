@@ -46,18 +46,20 @@ export class AuthEffects {
         this.#actions$.pipe(
             ofType(AuthActions.verifyCode),
             switchMap((action) =>
-                this.#authenticationService.authControllerVerifyCode({ body: action.code }).pipe(
-                    catchError(async (_) => {
-                        this.#sharedFacadeService.showToastMessage(
-                            'auth.errors.verify_code_error',
-                            TOAST_DURATION.ERROR,
-                            'warning',
-                            'toast--error',
-                        );
-                        return EMPTY;
-                    }),
-                    map((_) => AuthActions.verifyCodeSuccess()),
-                ),
+                this.#authenticationService
+                    .authControllerVerifyCode({ body: { code: action.code } })
+                    .pipe(
+                        catchError(async (_) => {
+                            this.#sharedFacadeService.showToastMessage(
+                                'auth.errors.verify_code_error',
+                                TOAST_DURATION.ERROR,
+                                'warning',
+                                'toast--error',
+                            );
+                            return EMPTY;
+                        }),
+                        map((_) => AuthActions.verifyCodeSuccess()),
+                    ),
             ),
         ),
     );
