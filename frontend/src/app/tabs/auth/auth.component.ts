@@ -110,7 +110,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
         if (!isEmptyCode) {
             const code = this.codeValues()
                 .map((codeValue) => codeValue.code)
-                .toString();
+                .join('');
             this.#authFacadeService.verifyCode(code);
         } else {
             const value = (event.target as HTMLInputElement).value;
