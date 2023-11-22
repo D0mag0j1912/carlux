@@ -18,14 +18,14 @@ import {
     Validators,
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
-import { environment } from '../../../environments/environment';
-import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
 import { map, take } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IonInput, IonicModule } from '@ionic/angular';
-import { AuthenticationFacadeService } from './auth-facade.service';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
+import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
+import { environment } from '../../../environments/environment';
+import { AuthenticationFacadeService } from './auth-facade.service';
 import { AuthenticationEventEmitterService } from './auth-event-emitter/auth-event-emitter.service';
 
 type VerificationCodeType = {

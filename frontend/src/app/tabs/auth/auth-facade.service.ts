@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AppState } from '../..';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { AppState } from '../..';
 import { FeatureKeys } from '../../constants/feature-keys';
 import * as AuthActions from './auth-actions/auth.actions';
 import { selectSMSLoading } from './auth-selectors/auth.selectors';
-import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationFacadeService {

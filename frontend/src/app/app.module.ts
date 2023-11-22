@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { AppRoutingModule } from './app-routing.module';
-import { RootComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import { TranslocoRootModule } from './transloco-root.module';
-import { appReducers } from '.';
+import { EffectsModule } from '@ngrx/effects';
+import { environment } from '../environments/environment';
 import { PlatformModule } from './tabs/platform/platform.module';
 import { ApiModule } from './api/api.module';
-import { EffectsModule } from '@ngrx/effects';
+import { TranslocoRootModule } from './transloco-root.module';
+import { RootComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { SharedEffects } from './tabs/shared/shared-effects/shared.effects';
+import { appReducers } from '.';
 
 @NgModule({
     declarations: [RootComponent],

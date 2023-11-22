@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as AuthActions from '../auth-actions/auth.actions';
 import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
+import * as AuthActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
 import { TOAST_DURATION } from '../../../constants/toast-duration';
@@ -47,7 +47,7 @@ export class AuthEffects {
             ofType(AuthActions.verifyCode),
             switchMap((action) =>
                 this.#authenticationService
-                    .authControllerVerifyCode({ body: { code: action.code } })
+                    .authControllerVerifyCode({ body: { code: +action.code } })
                     .pipe(
                         catchError(async (_) => {
                             this.#sharedFacadeService.showToastMessage(

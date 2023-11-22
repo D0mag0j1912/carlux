@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
+        // eslint-disable-next-line @typescript-eslint/promise-function-async
         loadChildren: () => import('./tabs/tabs.module').then((module) => module.TabsModule),
     },
 ];
