@@ -19,7 +19,7 @@ export class AuthEffects {
     sendSMS$ = createEffect(() =>
         this.#actions$.pipe(
             ofType(AuthActions.sendSMS),
-            tap((_) => this.#authenticationFacadeService.setSMSLoading(true)),
+            tap((_) => this.#authenticationFacadeService.setLoading(true)),
             switchMap((_) =>
                 this.#authenticationService.authControllerSendSms({ body: '' }).pipe(
                     catchError((_) => {
@@ -36,7 +36,7 @@ export class AuthEffects {
                         this.#authenticationEventEmitterService.emitSmsSent();
                         return AuthActions.sendSMSSuccess();
                     }),
-                    finalize(() => this.#authenticationFacadeService.setSMSLoading(false)),
+                    finalize(() => this.#authenticationFacadeService.setLoading(false)),
                 ),
             ),
         ),

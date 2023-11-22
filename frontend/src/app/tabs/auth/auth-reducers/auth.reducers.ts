@@ -2,17 +2,17 @@ import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from '../auth-actions/auth.actions';
 
 export interface AuthState {
-    isSMSLoading: boolean;
+    isLoading: boolean;
 }
 
 export const initialAuthState: AuthState = {
-    isSMSLoading: false,
+    isLoading: false,
 };
 
 export const authReducers = createReducer(
     initialAuthState,
-    on(AuthActions.setSMSLoading, (state, { isSMSLoading }) => ({
+    on(AuthActions.setLoading, (state, { isLoading }) => ({
         ...state,
-        isSMSLoading,
+        isLoading,
     })),
 );

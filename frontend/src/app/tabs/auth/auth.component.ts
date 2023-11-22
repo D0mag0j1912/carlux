@@ -61,9 +61,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
     #destroyRef = inject(DestroyRef);
 
     isDesktopMode$ = this.#platformFacadeService.selectIsDesktopMode();
-    isNotSMSLoading$ = this.#authFacadeService
-        .selectSMSLoading()
-        .pipe(map((isSMSLoading: boolean) => !isSMSLoading));
+    isNotLoading$ = this.#authFacadeService
+        .selectLoading()
+        .pipe(map((isNotLoading: boolean) => !isNotLoading));
 
     isVerificationOpened = signal(false);
     codeValues = signal(INITIAL_CODE_VALUES);

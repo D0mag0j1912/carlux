@@ -4,17 +4,17 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../..';
 import { FeatureKeys } from '../../constants/feature-keys';
 import * as AuthActions from './auth-actions/auth.actions';
-import { selectSMSLoading } from './auth-selectors/auth.selectors';
+import { selectLoading } from './auth-selectors/auth.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationFacadeService {
-    private _selectSMSLoading$ = this._store.select(selectSMSLoading);
+    private _selectLoading$ = this._store.select(selectLoading);
 
     constructor(private _store: Store<AppState[FeatureKeys.AUTH]>) {}
 
     //Selectors BEGIN -------------------------
-    selectSMSLoading(): Observable<boolean> {
-        return this._selectSMSLoading$;
+    selectLoading(): Observable<boolean> {
+        return this._selectLoading$;
     }
     //Selectors END ---------------------------
 
@@ -23,8 +23,8 @@ export class AuthenticationFacadeService {
         this._store.dispatch(AuthActions.sendSMS());
     }
 
-    setSMSLoading(isSMSLoading: boolean): void {
-        this._store.dispatch(AuthActions.setSMSLoading({ isSMSLoading }));
+    setLoading(isLoading: boolean): void {
+        this._store.dispatch(AuthActions.setLoading({ isLoading: isLoading }));
     }
 
     verifyCode(code: string): void {

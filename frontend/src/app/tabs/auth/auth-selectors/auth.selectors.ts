@@ -4,7 +4,7 @@ import { FeatureKeys } from '../../../constants/feature-keys';
 
 export const selectAuthState = createFeatureSelector<AuthState>(FeatureKeys.AUTH);
 
-export const selectSMSLoading = createSelector(
+export const selectLoading = createSelector(
     selectAuthState,
-    (authState: AuthState) => authState.isSMSLoading,
+    (authState: AuthState) => authState.isLoading,
 );

@@ -4,9 +4,9 @@ export const sendSMS = createAction('[Authentication] Send SMS');
 
 export const sendSMSSuccess = createAction('[Authentication] Send SMS Success');
 
-export const setSMSLoading = createAction(
+export const setLoading = createAction(
     '[Authentication] Set SMS Loading',
-    props<{ isSMSLoading: boolean }>(),
+    props<{ isLoading: boolean }>(),
 );
 
 export const verifyCode = createAction('[Authentication] Verify code', props<{ code: string }>());
