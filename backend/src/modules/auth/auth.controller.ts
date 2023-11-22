@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiBody,
@@ -6,8 +6,8 @@ import {
     ApiInternalServerErrorResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import { AuthService } from './auth.service';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
+import { AuthService } from './auth.service';
 import { VerifyCodeDto } from './models/verify-code';
 
 @ApiTags('Authentication')
