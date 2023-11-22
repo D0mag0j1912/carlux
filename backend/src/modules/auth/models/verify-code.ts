@@ -1,14 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, Length } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNotEmpty, IsNumber, Max, Min } from 'class-validator';
 
 export class VerifyCodeDto {
     @ApiProperty({
-        type: String,
+        type: Number,
         isArray: false,
         required: true,
     })
+    @Type(() => Number)
     @IsNumber()
-    @Length(4, 4)
+    @Min(1000)
+    @Max(10000)
     @IsNotEmpty()
-    code: string;
+    code: number;
 }

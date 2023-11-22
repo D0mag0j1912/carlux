@@ -53,7 +53,10 @@ export class AuthController {
         isArray: false,
     })
     @Post('phone-verification')
-    verifyCode(@Body(ParseIntPipe) body: VerifyCodeDto): HttpStatus {
+    verifyCode(@Body() body: VerifyCodeDto): {
+        message: string;
+        status: HttpStatus;
+    } {
         return this._authService.verifyCode(body.code);
     }
 }

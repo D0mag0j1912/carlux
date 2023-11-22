@@ -11,7 +11,20 @@ export class AuthService {
         return HttpStatus.CREATED;
     }
 
-    verifyCode(code: string): HttpStatus {
-        return MOCK_PHONE_VERIFICATION_CODE === code ? HttpStatus.CREATED : HttpStatus.UNAUTHORIZED;
+    verifyCode(code: number): {
+        message: string;
+        status: HttpStatus;
+    } {
+        if (MOCK_PHONE_VERIFICATION_CODE === code) {
+            return {
+                message: 'Valid verification code',
+                status: HttpStatus.CREATED,
+            };
+        } else {
+            return {
+                message: 'Invalid verification code.',
+                status: HttpStatus.UNAUTHORIZED,
+            };
+        }
     }
 }
