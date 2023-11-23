@@ -8,3 +8,8 @@ export const selectLoading = createSelector(
     selectAuthState,
     (authState: AuthState) => authState.isLoading,
 );
+
+export const selectSMSResponse = createSelector(
+    selectAuthState,
+    (authState: AuthState) => authState.smsResponse,
+);

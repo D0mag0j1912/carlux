@@ -1,11 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, delay, finalize, map, switchMap, tap } from 'rxjs';
 import * as AuthActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
 import { TOAST_DURATION } from '../../../constants/toast-duration';
 import { SharedFacadeService } from '../../shared/shared-facade.service';
+import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 
 @Injectable()
 export class AuthEffects {
@@ -20,6 +21,7 @@ export class AuthEffects {
             tap((_) => this._authenticationFacadeService.setLoading(true)),
             switchMap((_) =>
                 this._authenticationService.authControllerSendSms({ body: '' }).pipe(
+                    delay(5000),
                     catchError((_) => {
                         this._sharedFacadeService.showToastMessage(
                             'auth.errors.sms_error',
@@ -29,7 +31,7 @@ export class AuthEffects {
                         );
                         return EMPTY;
                     }),
-                    map((_) => AuthActions.sendSMSSuccess()),
+                    map((response: StatusResponse) => AuthActions.sendSMSSuccess({ response })),
                     finalize(() => this._authenticationFacadeService.setLoading(false)),
                 ),
             ),

@@ -57,7 +57,9 @@ export class AuthComponent implements AfterViewInit {
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
     isNotLoading$ = this._authFacadeService
         .selectLoading()
-        .pipe(map((isNotLoading: boolean) => !isNotLoading));
+        .pipe(map((isLoading: boolean) => !isLoading));
+
+    smsResponse$ = this._authFacadeService.selectSMSResponse();
 
     isVerificationOpened = signal(false);
     codeValues = signal(INITIAL_CODE_VALUES);

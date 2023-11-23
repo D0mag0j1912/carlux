@@ -73,35 +73,41 @@
                     </ion-buttons>
                 </ion-toolbar>
             </ion-header>
-            <ion-content class="verification-content" *ngIf="isNotLoading$ | async; else loading">
-                <div class="verification-content--container">
-                    <ion-text class="text">
-                        {{ 'auth.enter_verification_code' | transloco }}
-                    </ion-text>
-                    <ion-grid>
-                        <ion-row>
-                            <ng-container *ngFor="let codeValue of codeValues(); let i = index">
-                                <ion-col>
-                                    <ion-input
-                                        #codeEl
-                                        fill="outline"
-                                        mode="md"
-                                        type="text"
-                                        maxlength="1"
-                                        [(ngModel)]="codeValue.code"
-                                        (input)="onCodeChange($event, i)"
-                                    ></ion-input>
-                                </ion-col>
-                            </ng-container>
-                        </ion-row>
-                    </ion-grid>
-                </div>
+            <ion-content class="verification-content">
+                <ng-container *ngIf="isNotLoading$ | async; else loading">
+                    <ng-container *ngIf="smsResponse$ | async as smsResponse">
+                        <ng-container *ngIf="smsResponse.status === 201">
+                            <div class="verification-content--container">
+                                <ion-text class="text">
+                                    {{ 'auth.enter_verification_code' | transloco }}
+                                </ion-text>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ng-container *ngFor="let codeValue of codeValues(); let i = index">
+                                            <ion-col>
+                                                <ion-input
+                                                    #codeEl
+                                                    fill="outline"
+                                                    mode="md"
+                                                    type="text"
+                                                    maxlength="1"
+                                                    [(ngModel)]="codeValue.code"
+                                                    (input)="onCodeChange($event, i)"
+                                                ></ion-input>
+                                            </ion-col>
+                                        </ng-container>
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+                <ng-template #loading>
+                    <div class="spinner-wrapper">
+                        <ion-spinner color="primary"></ion-spinner>
+                    </div>
+                </ng-template>
             </ion-content>
-            <ng-template #loading>
-                <div class="spinner-wrapper">
-                    <ion-spinner color="primary"></ion-spinner>
-                </div>
-            </ng-template>
         </ng-template>
     </ion-modal>
 </ion-content>
