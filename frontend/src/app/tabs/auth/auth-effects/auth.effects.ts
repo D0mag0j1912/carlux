@@ -41,6 +41,7 @@ export class AuthEffects {
     verifyCode$ = createEffect(() =>
         this._actions$.pipe(
             ofType(AuthActions.verifyCode),
+            tap((_) => this._authenticationFacadeService.setLoading(true)),
             switchMap((action) =>
                 this._authenticationService
                     .authControllerVerifyCode({ body: { code: +action.code } })
@@ -55,6 +56,7 @@ export class AuthEffects {
                             return EMPTY;
                         }),
                         map((_) => AuthActions.verifyCodeSuccess()),
+                        finalize(() => this._authenticationFacadeService.setLoading(false)),
                     ),
             ),
         ),
