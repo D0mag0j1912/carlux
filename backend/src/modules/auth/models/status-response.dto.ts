@@ -2,7 +2,7 @@ import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class VerifyCodeResponseDto {
+export class StatusResponseDto {
     @ApiProperty({
         type: String,
         isArray: false,
@@ -13,7 +13,7 @@ export class VerifyCodeResponseDto {
     message: string;
 
     @ApiProperty({
-        type: HttpStatus,
+        type: Number,
         isArray: false,
         required: true,
     })

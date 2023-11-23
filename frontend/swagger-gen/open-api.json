@@ -17,7 +17,14 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Server returns successful response"
+                        "description": "Server returns successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StatusResponseDto"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad request from the client"
@@ -38,14 +45,21 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "string"
+                                "$ref": "#/components/schemas/VerifyCodeDto"
                             }
                         }
                     }
                 },
                 "responses": {
                     "201": {
-                        "description": "Server returns successful response"
+                        "description": "Server returns successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StatusResponseDto"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad request from the client"
@@ -67,6 +81,28 @@
     "tags": [],
     "servers": [],
     "components": {
-        "schemas": {}
+        "schemas": {
+            "StatusResponseDto": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "number"
+                    }
+                },
+                "required": ["message", "status"]
+            },
+            "VerifyCodeDto": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "number"
+                    }
+                },
+                "required": ["code"]
+            }
+        }
     }
 }
