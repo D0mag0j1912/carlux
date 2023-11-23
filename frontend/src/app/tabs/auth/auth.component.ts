@@ -55,13 +55,13 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
     styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit, AfterViewInit {
-    #authFacadeService = inject(AuthenticationFacadeService);
-    #authEventEmitterService = inject(AuthenticationEventEmitterService);
-    #platformFacadeService = inject(PlatformFacadeService);
-    #destroyRef = inject(DestroyRef);
+    private _authFacadeService = inject(AuthenticationFacadeService);
+    private _authEventEmitterService = inject(AuthenticationEventEmitterService);
+    private _platformFacadeService = inject(PlatformFacadeService);
+    private _destroyRef = inject(DestroyRef);
 
-    isDesktopMode$ = this.#platformFacadeService.selectIsDesktopMode();
-    isNotLoading$ = this.#authFacadeService
+    isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
+    isNotLoading$ = this._authFacadeService
         .selectLoading()
         .pipe(map((isNotLoading: boolean) => !isNotLoading));
 
@@ -81,9 +81,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
     codesEl: QueryList<IonInput> | undefined;
 
     ngOnInit(): void {
-        this.#authEventEmitterService
+        this._authEventEmitterService
             .getSmsSent()
-            .pipe(takeUntilDestroyed(this.#destroyRef))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((_) => this.isVerificationOpened.set(true));
     }
 
@@ -111,7 +111,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
             const code = this.codeValues()
                 .map((codeValue) => codeValue.code)
                 .join('');
-            this.#authFacadeService.verifyCode(code);
+            this._authFacadeService.verifyCode(code);
         } else {
             const value = (event.target as HTMLInputElement).value;
             if (this.codesEl && value) {
@@ -125,7 +125,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
     }
 
     continueWithPhoneNumber(): void {
-        this.#authFacadeService.sendSMS();
+        this._authFacadeService.sendSMS();
     }
 
     closeVerificationModal(): void {

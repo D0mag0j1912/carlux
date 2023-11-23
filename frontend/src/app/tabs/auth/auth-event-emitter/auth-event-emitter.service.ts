@@ -3,13 +3,13 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationEventEmitterService {
-    #smsSent$ = new Subject<void>();
+    private _smsSent$ = new Subject<void>();
 
     getSmsSent(): Observable<void> {
-        return this.#smsSent$.asObservable();
+        return this._smsSent$.asObservable();
     }
 
     emitSmsSent(): void {
-        this.#smsSent$.next();
+        this._smsSent$.next();
     }
 }

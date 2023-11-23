@@ -10,47 +10,47 @@ import { AuthenticationEventEmitterService } from '../auth-event-emitter/auth-ev
 
 @Injectable()
 export class AuthEffects {
-    #actions$ = inject(Actions);
-    #sharedFacadeService = inject(SharedFacadeService);
-    #authenticationService = inject(AuthenticationService);
-    #authenticationFacadeService = inject(AuthenticationFacadeService);
-    #authenticationEventEmitterService = inject(AuthenticationEventEmitterService);
+    private _actions$ = inject(Actions);
+    private _sharedFacadeService = inject(SharedFacadeService);
+    private _authenticationService = inject(AuthenticationService);
+    private _authenticationFacadeService = inject(AuthenticationFacadeService);
+    private _authenticationEventEmitterService = inject(AuthenticationEventEmitterService);
 
     sendSMS$ = createEffect(() =>
-        this.#actions$.pipe(
+        this._actions$.pipe(
             ofType(AuthActions.sendSMS),
-            tap((_) => this.#authenticationFacadeService.setLoading(true)),
+            tap((_) => this._authenticationFacadeService.setLoading(true)),
             switchMap((_) =>
-                this.#authenticationService.authControllerSendSms({ body: '' }).pipe(
+                this._authenticationService.authControllerSendSms({ body: '' }).pipe(
                     catchError((_) => {
-                        this.#sharedFacadeService.showToastMessage(
+                        this._sharedFacadeService.showToastMessage(
                             'auth.errors.sms_error',
                             TOAST_DURATION.ERROR,
                             'warning',
                             'toast--error',
                         );
-                        this.#authenticationEventEmitterService;
+                        this._authenticationEventEmitterService;
                         return EMPTY;
                     }),
                     map((_) => {
-                        this.#authenticationEventEmitterService.emitSmsSent();
+                        this._authenticationEventEmitterService.emitSmsSent();
                         return AuthActions.sendSMSSuccess();
                     }),
-                    finalize(() => this.#authenticationFacadeService.setLoading(false)),
+                    finalize(() => this._authenticationFacadeService.setLoading(false)),
                 ),
             ),
         ),
     );
 
     verifyCode$ = createEffect(() =>
-        this.#actions$.pipe(
+        this._actions$.pipe(
             ofType(AuthActions.verifyCode),
             switchMap((action) =>
-                this.#authenticationService
+                this._authenticationService
                     .authControllerVerifyCode({ body: { code: +action.code } })
                     .pipe(
                         catchError(async (_) => {
-                            this.#sharedFacadeService.showToastMessage(
+                            this._sharedFacadeService.showToastMessage(
                                 'auth.errors.verify_code_error',
                                 TOAST_DURATION.ERROR,
                                 'warning',
