@@ -6,7 +6,6 @@ import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
 import { TOAST_DURATION } from '../../../constants/toast-duration';
 import { SharedFacadeService } from '../../shared/shared-facade.service';
-import { AuthenticationEventEmitterService } from '../auth-event-emitter/auth-event-emitter.service';
 
 @Injectable()
 export class AuthEffects {
@@ -14,7 +13,6 @@ export class AuthEffects {
     private _sharedFacadeService = inject(SharedFacadeService);
     private _authenticationService = inject(AuthenticationService);
     private _authenticationFacadeService = inject(AuthenticationFacadeService);
-    private _authenticationEventEmitterService = inject(AuthenticationEventEmitterService);
 
     sendSMS$ = createEffect(() =>
         this._actions$.pipe(
@@ -29,13 +27,9 @@ export class AuthEffects {
                             'warning',
                             'toast--error',
                         );
-                        this._authenticationEventEmitterService;
                         return EMPTY;
                     }),
-                    map((_) => {
-                        this._authenticationEventEmitterService.emitSmsSent();
-                        return AuthActions.sendSMSSuccess();
-                    }),
+                    map((_) => AuthActions.sendSMSSuccess()),
                     finalize(() => this._authenticationFacadeService.setLoading(false)),
                 ),
             ),
