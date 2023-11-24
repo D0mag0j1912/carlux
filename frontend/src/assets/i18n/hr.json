@@ -2,7 +2,8 @@
     "common": {
         "cancel": "Odustani",
         "or": "ILI",
-        "continue": "Nastavi"
+        "continue": "Nastavi",
+        "try_again": "Pokušaj ponovno"
     },
     "auth": {
         "sign_in": "Prijava",
@@ -12,7 +13,8 @@
         "enter_verification_code": "Unesite verifikacijski kod",
         "errors": {
             "sms_error": "Došlo je do greške pri slanju SMS-a. Molimo pokušajte ponovno.",
-            "verify_code_error": "Došlo je do greške pri verifikaciji koda. Molimo pokušajte ponovno."
+            "verify_code_error": "Došlo je do greške pri verifikaciji koda. Molimo pokušajte ponovno.",
+            "invalid_verification_code": "Neispravan verifikacijski kod"
         }
     }
 }

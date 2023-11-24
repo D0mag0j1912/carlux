@@ -69,14 +69,29 @@
         .text {
             margin-bottom: 10px;
             font-size: var(--ion-font-l);
+            line-height: 24px;
             text-align: center;
         }
     }
-}
 
-.spinner-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    .verification-code-error {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 15px;
+        height: 100%;
+
+        .text {
+            font-size: var(--ion-font-l);
+            line-height: 24px;
+        }
+    }
+
+    .spinner-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
 }

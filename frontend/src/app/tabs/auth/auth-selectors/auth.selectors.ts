@@ -13,3 +13,8 @@ export const selectSMSResponse = createSelector(
     selectAuthState,
     (authState: AuthState) => authState.smsResponse,
 );
+
+export const selectVerifyCodeResponse = createSelector(
+    selectAuthState,
+    (authState: AuthState) => authState.verifyCodeResponse,
+);

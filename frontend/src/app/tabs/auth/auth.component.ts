@@ -16,7 +16,7 @@ import {
     Validators,
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
-import { map, take } from 'rxjs';
+import { combineLatest, map, take } from 'rxjs';
 import { IonInput, IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
@@ -59,7 +59,10 @@ export class AuthComponent implements AfterViewInit {
         .selectLoading()
         .pipe(map((isLoading: boolean) => !isLoading));
 
-    smsResponse$ = this._authFacadeService.selectSMSResponse();
+    combinedResponses$ = combineLatest([
+        this._authFacadeService.selectSMSResponse(),
+        this._authFacadeService.selectVerifyCodeResponse(),
+    ]);
 
     isVerificationOpened = signal(false);
     codeValues = signal(INITIAL_CODE_VALUES);
@@ -122,5 +125,9 @@ export class AuthComponent implements AfterViewInit {
         const mappedCodeValues = this.codeValues().map((_) => ({ code: null }));
         this.codeValues.set(mappedCodeValues);
         this.isVerificationOpened.set(false);
+    }
+
+    tryAgain(): void {
+        //TODO: Switch to form
     }
 }

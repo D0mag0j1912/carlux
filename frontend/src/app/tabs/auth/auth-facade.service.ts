@@ -3,15 +3,21 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../..';
 import { FeatureKeys } from '../../constants/feature-keys';
-import { StatusResponseDto } from '../../api/models/status-response-dto';
+import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
 import * as AuthActions from './auth-actions/auth.actions';
-import { selectLoading, selectSMSResponse } from './auth-selectors/auth.selectors';
+import {
+    selectLoading,
+    selectSMSResponse,
+    selectVerifyCodeResponse,
+} from './auth-selectors/auth.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationFacadeService {
     private _selectLoading$ = this._store.select(selectLoading);
 
     private _selectSMSResponse$ = this._store.select(selectSMSResponse);
+
+    private _selectVerifyCodeResponse$ = this._store.select(selectVerifyCodeResponse);
 
     constructor(private _store: Store<AppState[FeatureKeys.AUTH]>) {}
 
@@ -20,8 +26,12 @@ export class AuthenticationFacadeService {
         return this._selectLoading$;
     }
 
-    selectSMSResponse(): Observable<StatusResponseDto | undefined> {
+    selectSMSResponse(): Observable<StatusResponse | undefined> {
         return this._selectSMSResponse$;
+    }
+
+    selectVerifyCodeResponse(): Observable<StatusResponse | undefined> {
+        return this._selectVerifyCodeResponse$;
     }
     //Selectors END ---------------------------
 

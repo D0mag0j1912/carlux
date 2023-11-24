@@ -46,7 +46,7 @@ export class AuthEffects {
                 this._authenticationService
                     .authControllerVerifyCode({ body: { code: +action.code } })
                     .pipe(
-                        catchError(async (_) => {
+                        catchError((_) => {
                             this._sharedFacadeService.showToastMessage(
                                 'auth.errors.verify_code_error',
                                 TOAST_DURATION.ERROR,
@@ -55,7 +55,9 @@ export class AuthEffects {
                             );
                             return EMPTY;
                         }),
-                        map((_) => AuthActions.verifyCodeSuccess()),
+                        map((response: StatusResponse) =>
+                            AuthActions.verifyCodeSuccess({ response }),
+                        ),
                         finalize(() => this._authenticationFacadeService.setLoading(false)),
                     ),
             ),

@@ -75,8 +75,10 @@
             </ion-header>
             <ion-content class="verification-content">
                 <ng-container *ngIf="isNotLoading$ | async; else loading">
-                    <ng-container *ngIf="smsResponse$ | async as smsResponse">
-                        <ng-container *ngIf="smsResponse.status === 201">
+                    <ng-container *ngIf="combinedResponses$ | async as combinedResponse">
+                        <ng-container
+                            *ngIf="combinedResponse[0]?.status === 201 && combinedResponse[1]?.status !== 401"
+                        >
                             <div class="verification-content--container">
                                 <ion-text class="text">
                                     {{ 'auth.enter_verification_code' | transloco }}
@@ -98,6 +100,16 @@
                                         </ng-container>
                                     </ion-row>
                                 </ion-grid>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="combinedResponse[1]?.status === 401">
+                            <div class="verification-code-error">
+                                <ion-text class="text">
+                                    {{ 'auth.errors.invalid_verification_code' | transloco }}
+                                </ion-text>
+                                <ion-button (click)="tryAgain()">
+                                    {{ 'common.try_again' | transloco }}
+                                </ion-button>
                             </div>
                         </ng-container>
                     </ng-container>

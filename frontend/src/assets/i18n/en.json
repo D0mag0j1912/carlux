@@ -2,7 +2,8 @@
     "common": {
         "cancel": "Cancel",
         "or": "OR",
-        "continue": "Continue"
+        "continue": "Continue",
+        "try_again": "Try again"
     },
     "auth": {
         "sign_in": "Sign in",
@@ -12,7 +13,8 @@
         "enter_verification_code": "Enter verification code",
         "errors": {
             "sms_error": "Could not send a SMS. Please try again.",
-            "verify_code_error": "Could not verify code. Please try again."
+            "verify_code_error": "Could not verify code. Please try again.",
+            "invalid_verification_code": "Invalid verification code"
         }
     }
 }
