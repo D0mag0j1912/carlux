@@ -15,7 +15,7 @@ export const setLoading = createAction(
 
 export const verifyCode = createAction('[Authentication] Verify code', props<{ code: string }>());
 
-export const verifyCodeSuccess = createAction(
-    '[Authentication] Verify code success',
-    props<{ response: StatusResponse }>(),
+export const setVerifyCode = createAction(
+    '[Authentication] Set verify code',
+    props<{ response: StatusResponse | undefined }>(),
 );

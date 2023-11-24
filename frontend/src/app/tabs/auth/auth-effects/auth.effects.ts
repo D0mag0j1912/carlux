@@ -21,6 +21,7 @@ export class AuthEffects {
             tap((_) => this._authenticationFacadeService.setLoading(true)),
             switchMap((_) =>
                 this._authenticationService.authControllerSendSms({ body: '' }).pipe(
+                    //TODO: Remove delay after testing
                     delay(5000),
                     catchError((_) => {
                         this._sharedFacadeService.showToastMessage(
@@ -55,9 +56,7 @@ export class AuthEffects {
                             );
                             return EMPTY;
                         }),
-                        map((response: StatusResponse) =>
-                            AuthActions.verifyCodeSuccess({ response }),
-                        ),
+                        map((response: StatusResponse) => AuthActions.setVerifyCode({ response })),
                         finalize(() => this._authenticationFacadeService.setLoading(false)),
                     ),
             ),

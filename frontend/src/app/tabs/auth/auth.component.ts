@@ -122,12 +122,22 @@ export class AuthComponent implements AfterViewInit {
     }
 
     closeVerificationModal(): void {
-        const mappedCodeValues = this.codeValues().map((_) => ({ code: null }));
-        this.codeValues.set(mappedCodeValues);
+        this._resetForm();
         this.isVerificationOpened.set(false);
     }
 
     tryAgain(): void {
-        //TODO: Switch to form
+        this._authFacadeService.setVerifyCode(undefined);
+        this._resetForm();
+        setTimeout(async () => {
+            if (this.codesEl?.first) {
+                await this.codesEl.first.setFocus();
+            }
+        });
+    }
+
+    private _resetForm(): void {
+        const mappedCodeValues = this.codeValues().map((_) => ({ code: null }));
+        this.codeValues.set(mappedCodeValues);
     }
 }
