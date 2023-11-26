@@ -156,6 +156,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
     closeVerificationModal(): void {
         this._resetForm();
         this.isVerificationModalOpened.set(false);
+        this.isVerificationSet.set(false);
     }
 
     tryAgain(): void {
