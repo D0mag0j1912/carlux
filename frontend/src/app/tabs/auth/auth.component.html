@@ -76,7 +76,7 @@
             <ion-content class="verification-content">
                 <ng-container *ngIf="isNotLoading$ | async; else loading">
                     <ng-container *ngIf="smsResponse$ | async as smsResponse">
-                        <ng-container *ngIf="smsResponse?.status === 201 && isVerificationCodeValid()">
+                        <ng-container *ngIf="smsResponse?.status === 201 && !isVerificationSet()">
                             <div class="verification-content--container">
                                 <ion-text class="text">
                                     {{ 'auth.enter_verification_code' | transloco }}
@@ -100,16 +100,16 @@
                                 </ion-grid>
                             </div>
                         </ng-container>
-                        <ng-container *ngIf="!isVerificationCodeValid()">
-                            <div class="verification-code-error">
-                                <ion-text class="text">
-                                    {{ 'auth.errors.invalid_verification_code' | transloco }}
-                                </ion-text>
-                                <ion-button (click)="tryAgain()">
-                                    {{ 'common.try_again' | transloco }}
-                                </ion-button>
-                            </div>
-                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!isVerificationCodeValid() && isVerificationSet()">
+                        <div class="verification-code-error">
+                            <ion-text class="text">
+                                {{ 'auth.errors.invalid_verification_code' | transloco }}
+                            </ion-text>
+                            <ion-button (click)="tryAgain()">
+                                {{ 'common.try_again' | transloco }}
+                            </ion-button>
+                        </div>
                     </ng-container>
                 </ng-container>
                 <ng-template #loading>

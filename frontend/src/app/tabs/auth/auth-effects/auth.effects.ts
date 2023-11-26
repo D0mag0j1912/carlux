@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, catchError, delay, finalize, map, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
 import * as AuthActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
@@ -21,8 +21,6 @@ export class AuthEffects {
             tap((_) => this._authenticationFacadeService.setLoading(true)),
             switchMap((_) =>
                 this._authenticationService.authControllerSendSms({ body: '' }).pipe(
-                    //TODO: Remove delay after testing
-                    delay(2000),
                     catchError((_) => {
                         this._sharedFacadeService.showToastMessage(
                             'auth.errors.sms_error',
@@ -47,8 +45,6 @@ export class AuthEffects {
                 this._authenticationService
                     .authControllerVerifyCode({ body: { code: +action.code } })
                     .pipe(
-                        //TODO: Remove delay after testing
-                        delay(2000),
                         catchError((_) => {
                             this._sharedFacadeService.showToastMessage(
                                 'auth.errors.verify_code_error',
@@ -58,7 +54,9 @@ export class AuthEffects {
                             );
                             return EMPTY;
                         }),
-                        map((response: StatusResponse) => AuthActions.setVerifyCode({ response })),
+                        map((response: StatusResponse) =>
+                            AuthActions.verifyCodeSuccess({ response }),
+                        ),
                         finalize(() => this._authenticationFacadeService.setLoading(false)),
                     ),
             ),

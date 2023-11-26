@@ -20,13 +20,14 @@ import {
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { map, take } from 'rxjs';
-import { IonInput, IonicModule } from '@ionic/angular';
+import { IonInput, IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
 import { environment } from '../../../environments/environment';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
 import { AuthenticationFacadeService } from './auth-facade.service';
+import { PersonalInformationDialogComponent } from './components/personal-information-dialog/personal-information-dialog.component';
 
 type VerificationCodeType = {
     code: number | null;
@@ -49,7 +50,14 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
 
 @Component({
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, IonicModule, TranslocoModule],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        IonicModule,
+        TranslocoModule,
+        PersonalInformationDialogComponent,
+    ],
     selector: 'yac-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
@@ -58,6 +66,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
     private _authFacadeService = inject(AuthenticationFacadeService);
     private _platformFacadeService = inject(PlatformFacadeService);
     private _destroyRef = inject(DestroyRef);
+    private _modalController = inject(ModalController);
 
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
     isNotLoading$ = this._authFacadeService
@@ -67,6 +76,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
 
     isVerificationModalOpened = signal(false);
     codeValues = signal(INITIAL_CODE_VALUES);
+    isVerificationSet = signal(false);
     isVerificationCodeValid = signal(false);
 
     form = new FormGroup({
@@ -85,9 +95,19 @@ export class AuthComponent implements OnInit, AfterViewInit {
         this._authFacadeService
             .selectVerifyCodeResponse()
             .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((response: StatusResponse | undefined) => {
-                const isVerificationCodeValid = response?.status === 401 ? false : true;
-                this.isVerificationCodeValid.set(isVerificationCodeValid);
+            .subscribe(async (response: StatusResponse | undefined) => {
+                if (response) {
+                    this.isVerificationSet.set(true);
+                    const isVerificationValid = response?.status === 201 ? true : false;
+                    this.isVerificationCodeValid.set(isVerificationValid);
+                    if (this.isVerificationCodeValid()) {
+                        this.isVerificationModalOpened.set(false);
+                        const modal = await this._modalController.create({
+                            component: PersonalInformationDialogComponent,
+                        });
+                        await modal.present();
+                    }
+                }
             });
     }
 
@@ -139,13 +159,13 @@ export class AuthComponent implements OnInit, AfterViewInit {
     }
 
     tryAgain(): void {
-        this._authFacadeService.setVerifyCode(undefined);
+        this.isVerificationSet.set(false);
         this._resetForm();
         setTimeout(async () => {
             if (this.codesEl?.first) {
                 await this.codesEl.first.setFocus();
             }
-        });
+        }, 100);
     }
 
     private _resetForm(): void {

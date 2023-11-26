@@ -47,9 +47,5 @@ export class AuthenticationFacadeService {
     verifyCode(code: string): void {
         this._store.dispatch(AuthActions.verifyCode({ code }));
     }
-
-    setVerifyCode(response: StatusResponse | undefined): void {
-        this._store.dispatch(AuthActions.setVerifyCode({ response }));
-    }
     //Actions END ---------------------------
 }

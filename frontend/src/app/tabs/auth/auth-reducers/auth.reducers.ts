@@ -24,8 +24,8 @@ export const authReducers = createReducer(
         ...state,
         smsResponse: { ...response },
     })),
-    on(AuthActions.setVerifyCode, (state, { response }) => ({
+    on(AuthActions.verifyCodeSuccess, (state, { response }) => ({
         ...state,
-        verifyCodeResponse: response ? { ...response } : undefined,
+        verifyCodeResponse: { ...response },
     })),
 );
