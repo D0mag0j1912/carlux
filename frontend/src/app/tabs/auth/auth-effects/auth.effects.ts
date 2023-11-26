@@ -22,7 +22,7 @@ export class AuthEffects {
             switchMap((_) =>
                 this._authenticationService.authControllerSendSms({ body: '' }).pipe(
                     //TODO: Remove delay after testing
-                    delay(5000),
+                    delay(2000),
                     catchError((_) => {
                         this._sharedFacadeService.showToastMessage(
                             'auth.errors.sms_error',
@@ -47,6 +47,8 @@ export class AuthEffects {
                 this._authenticationService
                     .authControllerVerifyCode({ body: { code: +action.code } })
                     .pipe(
+                        //TODO: Remove delay after testing
+                        delay(2000),
                         catchError((_) => {
                             this._sharedFacadeService.showToastMessage(
                                 'auth.errors.verify_code_error',

@@ -1,13 +1,16 @@
 import {
     AfterViewInit,
     Component,
+    DestroyRef,
     ElementRef,
+    OnInit,
     QueryList,
     ViewChild,
     ViewChildren,
     inject,
     signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     FormControl,
     FormGroup,
@@ -16,12 +19,13 @@ import {
     Validators,
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
-import { combineLatest, map, take } from 'rxjs';
+import { map, take } from 'rxjs';
 import { IonInput, IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
 import { environment } from '../../../environments/environment';
+import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
 import { AuthenticationFacadeService } from './auth-facade.service';
 
 type VerificationCodeType = {
@@ -50,22 +54,20 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent implements AfterViewInit {
+export class AuthComponent implements OnInit, AfterViewInit {
     private _authFacadeService = inject(AuthenticationFacadeService);
     private _platformFacadeService = inject(PlatformFacadeService);
+    private _destroyRef = inject(DestroyRef);
 
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
     isNotLoading$ = this._authFacadeService
         .selectLoading()
         .pipe(map((isLoading: boolean) => !isLoading));
+    smsResponse$ = this._authFacadeService.selectSMSResponse();
 
-    combinedResponses$ = combineLatest([
-        this._authFacadeService.selectSMSResponse(),
-        this._authFacadeService.selectVerifyCodeResponse(),
-    ]);
-
-    isVerificationOpened = signal(false);
+    isVerificationModalOpened = signal(false);
     codeValues = signal(INITIAL_CODE_VALUES);
+    isVerificationCodeValid = signal(false);
 
     form = new FormGroup({
         phoneNumber: new FormControl('', Validators.required),
@@ -78,6 +80,16 @@ export class AuthComponent implements AfterViewInit {
 
     @ViewChildren('codeEl')
     codesEl: QueryList<IonInput> | undefined;
+
+    ngOnInit(): void {
+        this._authFacadeService
+            .selectVerifyCodeResponse()
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((response: StatusResponse | undefined) => {
+                const isVerificationCodeValid = response?.status === 401 ? false : true;
+                this.isVerificationCodeValid.set(isVerificationCodeValid);
+            });
+    }
 
     ngAfterViewInit(): void {
         if (this.phoneEl) {
@@ -117,13 +129,13 @@ export class AuthComponent implements AfterViewInit {
     }
 
     continueWithPhoneNumber(): void {
-        this.isVerificationOpened.set(true);
+        this.isVerificationModalOpened.set(true);
         this._authFacadeService.sendSMS();
     }
 
     closeVerificationModal(): void {
         this._resetForm();
-        this.isVerificationOpened.set(false);
+        this.isVerificationModalOpened.set(false);
     }
 
     tryAgain(): void {
