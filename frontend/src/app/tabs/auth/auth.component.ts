@@ -19,7 +19,7 @@ import {
     Validators,
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
-import { map, take } from 'rxjs';
+import { filter, map, take } from 'rxjs';
 import { IonInput, IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
@@ -94,19 +94,17 @@ export class AuthComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this._authFacadeService
             .selectVerifyCodeResponse()
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(async (response: StatusResponse | undefined) => {
-                if (response) {
-                    this.isVerificationSet.set(true);
-                    const isVerificationValid = response?.status === 201 ? true : false;
-                    this.isVerificationCodeValid.set(isVerificationValid);
-                    if (this.isVerificationCodeValid()) {
-                        this.isVerificationModalOpened.set(false);
-                        const modal = await this._modalController.create({
-                            component: PersonalInformationDialogComponent,
-                        });
-                        await modal.present();
-                    }
+            .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
+            .subscribe(async (response: StatusResponse) => {
+                this.isVerificationSet.set(true);
+                const isVerificationValid = response?.status === 201 ? true : false;
+                this.isVerificationCodeValid.set(isVerificationValid);
+                if (this.isVerificationCodeValid()) {
+                    this.isVerificationModalOpened.set(false);
+                    const modal = await this._modalController.create({
+                        component: PersonalInformationDialogComponent,
+                    });
+                    await modal.present();
                 }
             });
     }
