@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar>
+        <ng-container *transloco="let t">
+            <ion-title class="title">
+                {{ t('auth.personal_information.title') }}
+            </ion-title>
+        </ng-container>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ng-container *transloco="let t">
+        <form [formGroup]="form">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-input
+                            type="text"
+                            formControlName="firstName"
+                            labelPlacement="floating"
+                            [label]="t('auth.personal_information.first_name')"
+                        ></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-input
+                            type="text"
+                            formControlName="lastName"
+                            labelPlacement="floating"
+                            [label]="t('auth.personal_information.last_name')"
+                        ></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-input
+                            type="text"
+                            formControlName="email"
+                            labelPlacement="floating"
+                            [label]="t('auth.personal_information.email')"
+                        ></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-button>
+                            {{ t('auth.register') }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+    </ng-container>
+</ion-content>

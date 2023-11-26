@@ -11,6 +11,13 @@
         "continue_with_apple": "Continue with Apple",
         "phone_verification": "Phone verification",
         "enter_verification_code": "Enter verification code",
+        "personal_information": {
+            "title": "Personal information",
+            "first_name": "First name",
+            "last_name": "Last name",
+            "email": "E-mail"
+        },
+        "register": "Register",
         "errors": {
             "sms_error": "Could not send a SMS. Please try again.",
             "verify_code_error": "Could not verify code. Please try again.",
