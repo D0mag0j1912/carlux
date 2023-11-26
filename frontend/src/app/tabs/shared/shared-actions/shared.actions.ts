@@ -10,3 +10,11 @@ export const showToastMessage = createAction(
         cssClass: string;
     }>(),
 );
+
+export const showLoadingIndicator = createAction(
+    '[Shared] Show loading indicator',
+    props<{
+        message: string;
+        duration: number;
+    }>(),
+);

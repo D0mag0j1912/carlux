@@ -1,13 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import * as SharedActions from '../shared-actions/shared.actions';
 
 @Injectable()
 export class SharedEffects {
     private _toastController = inject(ToastController);
+    private _loadingController = inject(LoadingController);
     private _translocoService = inject(TranslocoService);
 
     showToastMessage$ = createEffect(
@@ -22,6 +23,22 @@ export class SharedEffects {
                         cssClass: action.cssClass,
                     });
                     await toast.present();
+                }),
+            ),
+        { dispatch: false },
+    );
+
+    showLoadingIndicator$ = createEffect(
+        () =>
+            this._actions$.pipe(
+                ofType(SharedActions.showLoadingIndicator),
+                tap(async (action) => {
+                    const loading = await this._loadingController.create({
+                        message: action.message,
+                        duration: action.duration,
+                    });
+
+                    await loading.present();
                 }),
             ),
         { dispatch: false },
