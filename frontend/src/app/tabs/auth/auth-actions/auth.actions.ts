@@ -1,10 +1,21 @@
 import { createAction, props } from '@ngrx/store';
+import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 
 export const sendSMS = createAction('[Authentication] Send SMS');
 
-export const sendSMSSuccess = createAction('[Authentication] Send SMS Success');
-
-export const setSMSLoading = createAction(
+export const setLoading = createAction(
     '[Authentication] Set SMS Loading',
-    props<{ isSMSLoading: boolean }>(),
+    props<{ isLoading: boolean }>(),
+);
+
+export const sendSMSSuccess = createAction(
+    '[Authentication] Send SMS Success',
+    props<{ response: StatusResponse }>(),
+);
+
+export const verifyCode = createAction('[Authentication] Verify code', props<{ code: string }>());
+
+export const verifyCodeSuccess = createAction(
+    '[Authentication] Verify code success',
+    props<{ response: StatusResponse }>(),
 );

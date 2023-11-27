@@ -13,6 +13,7 @@ import { authControllerSendSms } from '../fn/authentication/auth-controller-send
 import { AuthControllerSendSms$Params } from '../fn/authentication/auth-controller-send-sms';
 import { authControllerVerifyCode } from '../fn/authentication/auth-controller-verify-code';
 import { AuthControllerVerifyCode$Params } from '../fn/authentication/auth-controller-verify-code';
+import { StatusResponseDto } from '../models/status-response-dto';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends BaseService {
@@ -29,7 +30,7 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authControllerSendSms$Response(params: AuthControllerSendSms$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  authControllerSendSms$Response(params: AuthControllerSendSms$Params, context?: HttpContext): Observable<StrictHttpResponse<StatusResponseDto>> {
     return authControllerSendSms(this.http, this.rootUrl, params, context);
   }
 
@@ -39,9 +40,9 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authControllerSendSms(params: AuthControllerSendSms$Params, context?: HttpContext): Observable<void> {
+  authControllerSendSms(params: AuthControllerSendSms$Params, context?: HttpContext): Observable<StatusResponseDto> {
     return this.authControllerSendSms$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+      map((r: StrictHttpResponse<StatusResponseDto>): StatusResponseDto => r.body)
     );
   }
 
@@ -54,7 +55,7 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authControllerVerifyCode$Response(params: AuthControllerVerifyCode$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  authControllerVerifyCode$Response(params: AuthControllerVerifyCode$Params, context?: HttpContext): Observable<StrictHttpResponse<StatusResponseDto>> {
     return authControllerVerifyCode(this.http, this.rootUrl, params, context);
   }
 
@@ -64,9 +65,9 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authControllerVerifyCode(params: AuthControllerVerifyCode$Params, context?: HttpContext): Observable<void> {
+  authControllerVerifyCode(params: AuthControllerVerifyCode$Params, context?: HttpContext): Observable<StatusResponseDto> {
     return this.authControllerVerifyCode$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+      map((r: StrictHttpResponse<StatusResponseDto>): StatusResponseDto => r.body)
     );
   }
 

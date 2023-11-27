@@ -63,7 +63,7 @@
         </ion-grid>
     </form>
 
-    <ion-modal [isOpen]="isVerificationOpened()" (keydown.escape)="closeVerificationModal()">
+    <ion-modal [isOpen]="isVerificationModalOpened()" (didDismiss)="onModalDismiss()">
         <ng-template>
             <ion-header>
                 <ion-toolbar>
@@ -73,33 +73,51 @@
                     </ion-buttons>
                 </ion-toolbar>
             </ion-header>
-            <ion-content class="verification-content" *ngIf="isNotSMSLoading$ | async; else smsLoading">
-                <div class="verification-content--container">
-                    <ion-text class="text">
-                        {{ 'auth.enter_verification_code' | transloco }}
-                    </ion-text>
-                    <ion-grid>
-                        <ion-row>
-                            <ng-container *ngFor="let codeValue of codeValues(); let i = index">
-                                <ion-col>
-                                    <ion-input
-                                        #codeEl
-                                        fill="outline"
-                                        mode="md"
-                                        type="text"
-                                        maxlength="1"
-                                        [(ngModel)]="codeValue.code"
-                                        (input)="onCodeChange($event, i)"
-                                    ></ion-input>
-                                </ion-col>
-                            </ng-container>
-                        </ion-row>
-                    </ion-grid>
-                </div>
+            <ion-content class="verification-content">
+                <ng-container *ngIf="isNotLoading$ | async; else loading">
+                    <ng-container *ngIf="smsResponse$ | async as smsResponse">
+                        <ng-container *ngIf="smsResponse?.status === 201 && !isVerificationSet()">
+                            <div class="verification-content--container">
+                                <ion-text class="text">
+                                    {{ 'auth.enter_verification_code' | transloco }}
+                                </ion-text>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ng-container *ngFor="let codeValue of codeValues(); let i = index">
+                                            <ion-col>
+                                                <ion-input
+                                                    #codeEl
+                                                    fill="outline"
+                                                    mode="md"
+                                                    type="text"
+                                                    maxlength="1"
+                                                    [(ngModel)]="codeValue.code"
+                                                    (input)="onCodeChange($event, i)"
+                                                ></ion-input>
+                                            </ion-col>
+                                        </ng-container>
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!isVerificationCodeValid() && isVerificationSet()">
+                        <div class="verification-code-error">
+                            <ion-text class="text">
+                                {{ 'auth.errors.invalid_verification_code' | transloco }}
+                            </ion-text>
+                            <ion-button (click)="tryAgain()">
+                                {{ 'common.try_again' | transloco }}
+                            </ion-button>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <ng-template #loading>
+                    <div class="spinner-wrapper">
+                        <ion-spinner color="primary"></ion-spinner>
+                    </div>
+                </ng-template>
             </ion-content>
-            <ng-template #smsLoading>
-                <ion-spinner color="primary"></ion-spinner>
-            </ng-template>
         </ng-template>
     </ion-modal>
 </ion-content>

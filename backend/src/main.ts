@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
@@ -9,6 +10,7 @@ async function bootstrap(): Promise<void> {
         allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'authorization'],
         methods: ['GET', 'POST', 'DELETE', 'OPTIONS', 'PUT'],
     });
+    app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true }));
 
     /*Swagger documentation */
     const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
@@ -21,4 +23,4 @@ async function bootstrap(): Promise<void> {
 
     await app.listen(3000);
 }
-bootstrap();
+void bootstrap();

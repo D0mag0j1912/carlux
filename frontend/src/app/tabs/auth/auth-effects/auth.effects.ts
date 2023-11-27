@@ -1,46 +1,71 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
 import * as AuthActions from '../auth-actions/auth.actions';
-import { EMPTY, catchError, map, switchMap, tap } from 'rxjs';
 import { AuthenticationService } from '../../../api/services';
-import { AuthFacadeService } from '../auth-facade.service';
-import { ToastController } from '@ionic/angular';
-import { TranslocoService } from '@ngneat/transloco';
-import { TOAST_DURATION } from '../../../helpers/toast-duration';
+import { AuthenticationFacadeService } from '../auth-facade.service';
+import { TOAST_DURATION } from '../../../constants/toast-duration';
+import { SharedFacadeService } from '../../shared/shared-facade.service';
+import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
+import { LOADING_CONTROLLER_DURATION } from '../../../constants/loading-controller-duration';
 
 @Injectable()
 export class AuthEffects {
+    private _actions$ = inject(Actions);
+    private _sharedFacadeService = inject(SharedFacadeService);
+    private _authenticationService = inject(AuthenticationService);
+    private _authenticationFacadeService = inject(AuthenticationFacadeService);
+
     sendSMS$ = createEffect(() =>
         this._actions$.pipe(
             ofType(AuthActions.sendSMS),
-            tap((_) => this._authenticationFacadeService.setSMSLoading(true)),
+            tap((_) => this._authenticationFacadeService.setLoading(true)),
             switchMap((_) =>
                 this._authenticationService.authControllerSendSms({ body: '' }).pipe(
-                    catchError(async (_) => {
-                        const toast = await this._toastController.create({
-                            message: this._translocoService.translate('auth.errors.sms_error'),
-                            duration: TOAST_DURATION.ERROR,
-                            icon: 'warning',
-                            cssClass: 'toast--error',
-                        });
-                        await toast.present();
-                        this._authenticationFacadeService.setSMSLoading(false);
+                    catchError((_) => {
+                        this._sharedFacadeService.showToastMessage(
+                            'auth.errors.sms_error',
+                            TOAST_DURATION.ERROR,
+                            'warning',
+                            'toast--error',
+                        );
                         return EMPTY;
                     }),
-                    map((_) => {
-                        this._authenticationFacadeService.setSMSLoading(false);
-                        return AuthActions.sendSMSSuccess();
-                    }),
+                    map((response: StatusResponse) => AuthActions.sendSMSSuccess({ response })),
+                    finalize(() => this._authenticationFacadeService.setLoading(false)),
                 ),
             ),
         ),
     );
 
-    constructor(
-        private _actions$: Actions,
-        private _toastController: ToastController,
-        private _translocoService: TranslocoService,
-        private _authenticationService: AuthenticationService,
-        private _authenticationFacadeService: AuthFacadeService,
-    ) {}
+    verifyCode$ = createEffect(() =>
+        this._actions$.pipe(
+            ofType(AuthActions.verifyCode),
+            tap((_) =>
+                this._sharedFacadeService.showLoadingIndicator(
+                    'auth.verifying_code',
+                    LOADING_CONTROLLER_DURATION.STANDARD,
+                ),
+            ),
+            switchMap((action) =>
+                this._authenticationService
+                    .authControllerVerifyCode({ body: { code: +action.code } })
+                    .pipe(
+                        catchError((_) => {
+                            this._sharedFacadeService.showToastMessage(
+                                'auth.errors.verify_code_error',
+                                TOAST_DURATION.ERROR,
+                                'warning',
+                                'toast--error',
+                            );
+                            return EMPTY;
+                        }),
+                        map((response: StatusResponse) =>
+                            AuthActions.verifyCodeSuccess({ response }),
+                        ),
+                        finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
+                    ),
+            ),
+        ),
+    );
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiBody,
@@ -6,8 +6,10 @@ import {
     ApiInternalServerErrorResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import { AuthService } from './auth.service';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
+import { AuthService } from './auth.service';
+import { VerifyCodeDto } from './models/verify-code.dto';
+import { StatusResponseDto } from './models/status-response.dto';
 
 @ApiTags('Authentication')
 @Controller('api/auth')
@@ -17,6 +19,7 @@ export class AuthController {
     @ApiCreatedResponse({
         status: 201,
         description: RESPONSE_MESSAGE.CREATED,
+        type: StatusResponseDto,
     })
     @ApiInternalServerErrorResponse({
         status: 500,
@@ -31,13 +34,14 @@ export class AuthController {
         isArray: false,
     })
     @Post('send-sms')
-    sendSMS(@Body('phoneNumber') phoneNumber: string): HttpStatus {
+    sendSMS(@Body('phoneNumber') phoneNumber: string): StatusResponseDto {
         return this._authService.sendSMS(phoneNumber);
     }
 
     @ApiCreatedResponse({
         status: 201,
         description: RESPONSE_MESSAGE.CREATED,
+        type: StatusResponseDto,
     })
     @ApiInternalServerErrorResponse({
         status: 500,
@@ -48,11 +52,11 @@ export class AuthController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @ApiBody({
-        type: String,
+        type: VerifyCodeDto,
         isArray: false,
     })
     @Post('phone-verification')
-    verifyCode(@Body('code') code: string): HttpStatus {
-        return this._authService.verifyCode(code);
+    verifyCode(@Body() body: VerifyCodeDto): StatusResponseDto {
+        return this._authService.verifyCode(body.code);
     }
 }

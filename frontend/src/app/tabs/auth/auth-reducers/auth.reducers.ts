@@ -1,18 +1,31 @@
 import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from '../auth-actions/auth.actions';
+import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 
 export interface AuthState {
-    isSMSLoading: boolean;
+    isLoading: boolean;
+    smsResponse: StatusResponse | undefined;
+    verifyCodeResponse: StatusResponse | undefined;
 }
 
 export const initialAuthState: AuthState = {
-    isSMSLoading: false,
+    isLoading: false,
+    smsResponse: undefined,
+    verifyCodeResponse: undefined,
 };
 
 export const authReducers = createReducer(
     initialAuthState,
-    on(AuthActions.setSMSLoading, (state, { isSMSLoading }) => ({
+    on(AuthActions.setLoading, (state, { isLoading }) => ({
         ...state,
-        isSMSLoading,
+        isLoading,
+    })),
+    on(AuthActions.sendSMSSuccess, (state, { response }) => ({
+        ...state,
+        smsResponse: { ...response },
+    })),
+    on(AuthActions.verifyCodeSuccess, (state, { response }) => ({
+        ...state,
+        verifyCodeResponse: { ...response },
     })),
 );

@@ -2,7 +2,8 @@
     "common": {
         "cancel": "Odustani",
         "or": "ILI",
-        "continue": "Nastavi"
+        "continue": "Nastavi",
+        "try_again": "Pokušaj ponovno"
     },
     "auth": {
         "sign_in": "Prijava",
@@ -10,8 +11,18 @@
         "continue_with_apple": "Nastavi s Apple",
         "phone_verification": "Provjera broja mobitela",
         "enter_verification_code": "Unesite verifikacijski kod",
+        "verifying_code": "Verificiramo kod...",
+        "personal_information": {
+            "title": "Osobne informacije",
+            "first_name": "Ime",
+            "last_name": "Prezime",
+            "email": "E-mail"
+        },
+        "register": "Registriraj se",
         "errors": {
-            "sms_error": "Došlo je do greške pri slanju SMS-a"
+            "sms_error": "Došlo je do greške pri slanju SMS-a. Molimo pokušajte ponovno.",
+            "verify_code_error": "Došlo je do greške pri verifikaciji koda. Molimo pokušajte ponovno.",
+            "invalid_verification_code": "Neispravan verifikacijski kod"
         }
     }
 }

@@ -3,4 +3,6 @@ export { BaseService } from './base-service';
 export { RequestBuilder } from './request-builder';
 export { StrictHttpResponse } from './strict-http-response';
 export { ApiModule } from './api.module';
+export { StatusResponseDto } from './models/status-response-dto';
+export { VerifyCodeDto } from './models/verify-code-dto';
 export { AuthenticationService } from './services/authentication.service';

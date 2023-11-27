@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user.entity';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TwilioModule } from 'nestjs-twilio';
+import { User } from './entity/user.entity';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { TwilioModule } from 'nestjs-twilio';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 const SERVICES = [AuthService];
 
