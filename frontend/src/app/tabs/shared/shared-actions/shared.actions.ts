@@ -18,3 +18,5 @@ export const showLoadingIndicator = createAction(
         duration: number;
     }>(),
 );
+
+export const dismissLoadingIndicator = createAction('[Shared] Dismiss loading indicator');

@@ -10,6 +10,7 @@ export class SharedEffects {
     private _toastController = inject(ToastController);
     private _loadingController = inject(LoadingController);
     private _translocoService = inject(TranslocoService);
+    private _actions$ = inject(Actions);
 
     showToastMessage$ = createEffect(
         () =>
@@ -34,7 +35,7 @@ export class SharedEffects {
                 ofType(SharedActions.showLoadingIndicator),
                 tap(async (action) => {
                     const loading = await this._loadingController.create({
-                        message: action.message,
+                        message: this._translocoService.translate(action.message),
                         duration: action.duration,
                     });
 
@@ -44,5 +45,10 @@ export class SharedEffects {
         { dispatch: false },
     );
 
-    constructor(private _actions$: Actions) {}
+    dismissLoadingIndicator$ = createEffect(() =>
+        this._actions$.pipe(
+            ofType(SharedActions.dismissLoadingIndicator),
+            tap(async (_) => await this._loadingController.dismiss()),
+        ),
+    );
 }

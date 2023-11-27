@@ -17,5 +17,13 @@ export class SharedFacadeService {
     ): void {
         this._store.dispatch(SharedActions.showToastMessage({ message, duration, icon, cssClass }));
     }
+
+    showLoadingIndicator(message: string, duration: number): void {
+        this._store.dispatch(SharedActions.showLoadingIndicator({ message, duration }));
+    }
+
+    dismissLoadingIndicator(): void {
+        this._store.dispatch(SharedActions.dismissLoadingIndicator());
+    }
     //Actions END ---------------------------
 }
