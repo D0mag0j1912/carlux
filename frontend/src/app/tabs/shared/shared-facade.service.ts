@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../index';
-import { PopupDurationsValuesType } from './models/popup-duration.type';
+import { PopupDurationsValuesType } from './models/popup-durations.type';
 import * as SharedActions from './shared-actions/shared.actions';
 
 @Injectable({ providedIn: 'root' })
@@ -18,7 +18,7 @@ export class SharedFacadeService {
         this._store.dispatch(SharedActions.showToastMessage({ message, duration, icon, cssClass }));
     }
 
-    showLoadingIndicator(message: string, duration: number): void {
+    showLoadingIndicator(message: string, duration: PopupDurationsValuesType): void {
         this._store.dispatch(SharedActions.showLoadingIndicator({ message, duration }));
     }
 

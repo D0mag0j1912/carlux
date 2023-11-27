@@ -49,7 +49,11 @@ export class SharedEffects {
         () =>
             this._actions$.pipe(
                 ofType(SharedActions.dismissLoadingIndicator),
-                tap(async (_) => await this._loadingController.dismiss()),
+                tap((_) => {
+                    setTimeout(async () => {
+                        await this._loadingController.dismiss();
+                    }, 100);
+                }),
             ),
         { dispatch: false },
     );
