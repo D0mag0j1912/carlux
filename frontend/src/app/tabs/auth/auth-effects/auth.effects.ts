@@ -4,7 +4,7 @@ import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
 import * as AuthActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
-import { POPUP_DURATIONS } from '../../../constants/popup-duration';
+import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { SharedFacadeService } from '../../shared/shared-facade.service';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 

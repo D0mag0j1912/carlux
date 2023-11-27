@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../index';
-import { PopupDurationValuesType } from './models/toast-duration.type';
+import { PopupDurationsValuesType } from './models/popup-duration.type';
 import * as SharedActions from './shared-actions/shared.actions';
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +11,7 @@ export class SharedFacadeService {
     //Actions BEGIN ---------------------------
     showToastMessage(
         message: string,
-        duration: PopupDurationValuesType,
+        duration: PopupDurationsValuesType,
         icon: 'warning',
         cssClass: string,
     ): void {
