@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
-import { PopupDurationValuesType } from '../models/toast-duration.type';
+import { PopupDurationsValuesType } from '../models/popup-duration.type';
 
 export const showToastMessage = createAction(
     '[Shared] Show toast message',
     props<{
         message: string;
-        duration: PopupDurationValuesType;
+        duration: PopupDurationsValuesType;
         icon: 'warning';
         cssClass: string;
     }>(),
