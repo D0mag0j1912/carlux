@@ -45,10 +45,12 @@ export class SharedEffects {
         { dispatch: false },
     );
 
-    dismissLoadingIndicator$ = createEffect(() =>
-        this._actions$.pipe(
-            ofType(SharedActions.dismissLoadingIndicator),
-            tap(async (_) => await this._loadingController.dismiss()),
-        ),
+    dismissLoadingIndicator$ = createEffect(
+        () =>
+            this._actions$.pipe(
+                ofType(SharedActions.dismissLoadingIndicator),
+                tap(async (_) => await this._loadingController.dismiss()),
+            ),
+        { dispatch: false },
     );
 }

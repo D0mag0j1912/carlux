@@ -63,6 +63,7 @@ export class AuthEffects {
                         map((response: StatusResponse) =>
                             AuthActions.verifyCodeSuccess({ response }),
                         ),
+                        finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
                     ),
             ),
         ),
