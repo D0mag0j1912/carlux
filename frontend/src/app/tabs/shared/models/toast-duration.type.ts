@@ -1,4 +1,4 @@
-import { TOAST_DURATION } from '../../../constants/toast-duration';
+import { POPUP_DURATIONS } from '../../../constants/popup-duration';
 
-type ToastDurationKeysType = keyof typeof TOAST_DURATION;
-export type ToastDurationValuesType = (typeof TOAST_DURATION)[ToastDurationKeysType];
+type PopupDurationKeysType = keyof typeof POPUP_DURATIONS;
+export type PopupDurationValuesType = (typeof POPUP_DURATIONS)[PopupDurationKeysType];

@@ -4,10 +4,9 @@ import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
 import * as AuthActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
-import { TOAST_DURATION } from '../../../constants/toast-duration';
+import { POPUP_DURATIONS } from '../../../constants/popup-duration';
 import { SharedFacadeService } from '../../shared/shared-facade.service';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
-import { LOADING_CONTROLLER_DURATION } from '../../../constants/loading-controller-duration';
 
 @Injectable()
 export class AuthEffects {
@@ -25,7 +24,7 @@ export class AuthEffects {
                     catchError((_) => {
                         this._sharedFacadeService.showToastMessage(
                             'auth.errors.sms_error',
-                            TOAST_DURATION.ERROR,
+                            POPUP_DURATIONS.ERROR,
                             'warning',
                             'toast--error',
                         );
@@ -44,7 +43,7 @@ export class AuthEffects {
             tap((_) =>
                 this._sharedFacadeService.showLoadingIndicator(
                     'auth.verifying_code',
-                    LOADING_CONTROLLER_DURATION.STANDARD,
+                    POPUP_DURATIONS.STANDARD,
                 ),
             ),
             switchMap((action) =>
@@ -54,7 +53,7 @@ export class AuthEffects {
                         catchError((_) => {
                             this._sharedFacadeService.showToastMessage(
                                 'auth.errors.verify_code_error',
-                                TOAST_DURATION.ERROR,
+                                POPUP_DURATIONS.ERROR,
                                 'warning',
                                 'toast--error',
                             );
