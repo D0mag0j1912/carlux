@@ -28,12 +28,6 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "noImplicitAny": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "verbatimModuleSyntax": true,
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "noUncheckedIndexedAccess": true,
   },
   "angularCompilerOptions": {
       "enableI18nLegacyMessageIdFormat": false,

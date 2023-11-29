@@ -3,7 +3,14 @@
         "cancel": "Odustani",
         "or": "ILI",
         "continue": "Nastavi",
-        "try_again": "Pokušaj ponovno"
+        "try_again": "Pokušaj ponovno",
+        "enter_email": "Unesite email",
+        "enter_first_name": "Unesite ime",
+        "enter_last_name": "Unesite prezime",
+        "errors": {
+            "invalid_email": "Neispravan email",
+            "field_required": "Polje je obvezno za unos"
+        }
     },
     "auth": {
         "sign_in": "Prijava",
@@ -16,7 +23,7 @@
             "title": "Osobne informacije",
             "first_name": "Ime",
             "last_name": "Prezime",
-            "email": "E-mail"
+            "email": "Email"
         },
         "register": "Registriraj se",
         "errors": {

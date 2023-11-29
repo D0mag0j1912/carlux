@@ -15,4 +15,10 @@ export class PersonalInformationDialogComponent {
         lastName: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required, Validators.email]),
     });
+
+    register(): void {
+        if (!this.form.valid) {
+            return;
+        }
+    }
 }

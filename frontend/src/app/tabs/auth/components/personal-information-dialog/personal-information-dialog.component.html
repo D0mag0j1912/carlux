@@ -10,50 +10,54 @@
 
 <ion-content [fullscreen]="true">
     <ng-container *transloco="let t">
-        <form [formGroup]="form">
+        <form class="form" [formGroup]="form">
             <ion-grid>
                 <ion-row>
                     <ion-col>
-                        <ion-item>
-                            <ion-input
-                                type="text"
-                                formControlName="firstName"
-                                labelPlacement="floating"
-                                [label]="t('auth.personal_information.first_name')"
-                            ></ion-input>
-                        </ion-item>
+                        <ion-input
+                            type="text"
+                            fill="solid"
+                            formControlName="firstName"
+                            labelPlacement="floating"
+                            [helperText]="t('common.enter_first_name')"
+                            [errorText]="t('common.errors.field_required')"
+                            [label]="t('auth.personal_information.first_name')"
+                        ></ion-input>
                     </ion-col>
                 </ion-row>
 
                 <ion-row>
                     <ion-col>
-                        <ion-item>
-                            <ion-input
-                                type="text"
-                                formControlName="lastName"
-                                labelPlacement="floating"
-                                [label]="t('auth.personal_information.last_name')"
-                            ></ion-input>
-                        </ion-item>
+                        <ion-input
+                            type="text"
+                            fill="solid"
+                            formControlName="lastName"
+                            labelPlacement="floating"
+                            [helperText]="t('common.enter_last_name')"
+                            [errorText]="t('common.errors.field_required')"
+                            [label]="t('auth.personal_information.last_name')"
+                        ></ion-input>
                     </ion-col>
                 </ion-row>
 
                 <ion-row>
                     <ion-col>
-                        <ion-item>
-                            <ion-input
-                                type="text"
-                                formControlName="email"
-                                labelPlacement="floating"
-                                [label]="t('auth.personal_information.email')"
-                            ></ion-input>
-                        </ion-item>
+                        <ion-input
+                            email
+                            type="email"
+                            fill="solid"
+                            formControlName="email"
+                            labelPlacement="floating"
+                            [helperText]="t('common.enter_email')"
+                            [errorText]="t('common.errors.invalid_email')"
+                            [label]="t('auth.personal_information.email')"
+                        ></ion-input>
                     </ion-col>
                 </ion-row>
 
                 <ion-row>
                     <ion-col class="ion-text-center">
-                        <ion-button class="register-btn">
+                        <ion-button class="register-btn" (click)="register()">
                             {{ t('auth.register') }}
                         </ion-button>
                     </ion-col>
