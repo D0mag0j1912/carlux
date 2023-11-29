@@ -10,9 +10,11 @@ import { TranslocoModule } from '@ngneat/transloco';
     styleUrls: ['./personal-information-dialog.component.scss'],
 })
 export class PersonalInformationDialogComponent {
+    readonly MAX_CHARACTERS = 100;
+
     form = new FormGroup({
-        firstName: new FormControl('', [Validators.required]),
-        lastName: new FormControl('', [Validators.required]),
+        firstName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+        lastName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
         email: new FormControl('', [Validators.required, Validators.email]),
     });
 

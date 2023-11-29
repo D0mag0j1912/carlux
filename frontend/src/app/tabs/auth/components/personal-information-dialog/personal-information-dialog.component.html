@@ -20,7 +20,11 @@
                             formControlName="firstName"
                             labelPlacement="floating"
                             [helperText]="t('common.enter_first_name')"
-                            [errorText]="t('common.errors.field_required')"
+                            [errorText]="
+                                form.controls.firstName.errors?.required
+                                    ? t('common.errors.field_required')
+                                    : t('common.errors.max_characters', { n: MAX_CHARACTERS })
+                            "
                             [label]="t('auth.personal_information.first_name')"
                         ></ion-input>
                     </ion-col>
@@ -34,7 +38,11 @@
                             formControlName="lastName"
                             labelPlacement="floating"
                             [helperText]="t('common.enter_last_name')"
-                            [errorText]="t('common.errors.field_required')"
+                            [errorText]="
+                                form.controls.lastName.errors?.required
+                                    ? t('common.errors.field_required')
+                                    : t('common.errors.max_characters', { n: MAX_CHARACTERS })
+                            "
                             [label]="t('auth.personal_information.last_name')"
                         ></ion-input>
                     </ion-col>
@@ -49,7 +57,11 @@
                             formControlName="email"
                             labelPlacement="floating"
                             [helperText]="t('common.enter_email')"
-                            [errorText]="t('common.errors.invalid_email')"
+                            [errorText]="
+                                form.controls.email.errors?.email
+                                    ? t('common.errors.invalid_email')
+                                    : t('common.errors.field_required')
+                            "
                             [label]="t('auth.personal_information.email')"
                         ></ion-input>
                     </ion-col>

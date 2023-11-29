@@ -9,7 +9,8 @@
         "enter_last_name": "Unesite prezime",
         "errors": {
             "invalid_email": "Neispravan email",
-            "field_required": "Polje je obvezno za unos"
+            "field_required": "Polje je obvezno za unos",
+            "max_characters": "Polje podržava {{ n }} znakova"
         }
     },
     "auth": {
