@@ -22,7 +22,9 @@ export class DateTimePickerComponent {
     dateTimeEl: IonDatetime | undefined;
 
     dateChanged(currentDateValue: string | string[] | null | undefined): void {
-        //this.dateValue = currentDateValue;
+        if (typeof currentDateValue === 'string') {
+            this.dateValue = currentDateValue;
+        }
     }
 
     async close(): Promise<void> {

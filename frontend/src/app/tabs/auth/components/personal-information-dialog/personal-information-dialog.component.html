@@ -58,6 +58,7 @@
                             [helperText]="t('auth.personal_information.enter_birth_date')"
                             [errorText]="t('common.errors.field_required')"
                             [label]="t('auth.personal_information.birth_date')"
+                            (ionFocus)="onOpenDatetimePicker()"
                         >
                         </ion-input>
                     </ion-col>
