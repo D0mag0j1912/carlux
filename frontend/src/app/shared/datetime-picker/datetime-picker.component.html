@@ -1,12 +1,11 @@
 <ion-content *transloco="let t">
     <ion-datetime
         #datetime
-        presentation="date-time"
+        presentation="date"
         size="cover"
         firstDayOfWeek="1"
         [value]="dateValue"
         [max]="maxDate"
-        [min]="minDate"
         (ionChange)="dateChanged(datetime.value)"
     >
         <ion-buttons slot="buttons">

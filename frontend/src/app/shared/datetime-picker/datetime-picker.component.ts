@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, inject } from '@angular/core';
 import { IonDatetime, IonicModule, ModalController } from '@ionic/angular';
-import { format, subMonths } from 'date-fns';
+import { format } from 'date-fns';
 import { TranslocoModule } from '@ngneat/transloco';
 import { DialogRoles } from '../../constants/dialog-roles';
 
@@ -13,7 +13,6 @@ export class DateTimePickerComponent {
     private _modalController = inject(ModalController);
 
     maxDate = format(new Date(), 'yyyy-MM-dd');
-    minDate = format(subMonths(new Date(), 2), 'yyyy-MM-dd');
 
     @Input()
     dateValue: string | undefined;

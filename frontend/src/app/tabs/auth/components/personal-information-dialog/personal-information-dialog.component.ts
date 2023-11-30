@@ -46,7 +46,7 @@ export class PersonalInformationDialogComponent {
                     const [date, time] = data.data.split('T');
                     const formattedDate = format(
                         parseISO(format(new Date(date), 'yyyy-MM-dd') + `T${time}`),
-                        'MMM d, yyyy, HH:mm',
+                        'MMM d, yyyy',
                     );
                     this.form.controls.birthDate.patchValue(formattedDate);
                 }
