@@ -19,7 +19,7 @@
                             fill="solid"
                             formControlName="firstName"
                             labelPlacement="floating"
-                            [helperText]="t('common.enter_first_name')"
+                            [helperText]="t('auth.personal_information.enter_first_name')"
                             [errorText]="
                                 form.controls.firstName.errors?.required
                                     ? t('common.errors.field_required')
@@ -37,7 +37,7 @@
                             fill="solid"
                             formControlName="lastName"
                             labelPlacement="floating"
-                            [helperText]="t('common.enter_last_name')"
+                            [helperText]="t('auth.personal_information.enter_last_name')"
                             [errorText]="
                                 form.controls.lastName.errors?.required
                                     ? t('common.errors.field_required')
@@ -51,12 +51,27 @@
                 <ion-row>
                     <ion-col>
                         <ion-input
+                            type="text"
+                            fill="solid"
+                            formControlName="birthDate"
+                            labelPlacement="floating"
+                            [helperText]="t('auth.personal_information.enter_birth_date')"
+                            [errorText]="t('common.errors.field_required')"
+                            [label]="t('auth.personal_information.birth_date')"
+                        >
+                        </ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-input
                             email
                             type="email"
                             fill="solid"
                             formControlName="email"
                             labelPlacement="floating"
-                            [helperText]="t('common.enter_email')"
+                            [helperText]="t('auth.personal_information.enter_email')"
                             [errorText]="
                                 form.controls.email.errors?.email
                                     ? t('common.errors.invalid_email')

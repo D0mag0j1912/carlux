@@ -4,13 +4,14 @@
         "or": "OR",
         "continue": "Continue",
         "try_again": "Try again",
-        "enter_email": "Enter an email",
-        "enter_first_name": "Enter a first name",
-        "enter_last_name": "Enter a last name",
         "errors": {
             "invalid_email": "Invalid email",
             "field_required": "Field is required",
             "max_characters": "Field supports {{ n }} characters"
+        },
+        "actions": {
+            "close": "Close",
+            "confirm": "Confirm"
         }
     },
     "auth": {
@@ -24,7 +25,12 @@
             "title": "Personal information",
             "first_name": "First name",
             "last_name": "Last name",
-            "email": "Email"
+            "birth_date": "Birth date",
+            "email": "Email",
+            "enter_first_name": "Enter a first name",
+            "enter_last_name": "Enter a last name",
+            "enter_birth_date": "Enter a birth date",
+            "enter_email": "Enter an email"
         },
         "register": "Register",
         "errors": {
