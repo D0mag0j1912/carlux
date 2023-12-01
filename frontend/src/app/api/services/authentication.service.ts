@@ -9,6 +9,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { authControllerRegister } from '../fn/authentication/auth-controller-register';
+import { AuthControllerRegister$Params } from '../fn/authentication/auth-controller-register';
 import { authControllerSendSms } from '../fn/authentication/auth-controller-send-sms';
 import { AuthControllerSendSms$Params } from '../fn/authentication/auth-controller-send-sms';
 import { authControllerVerifyCode } from '../fn/authentication/auth-controller-verify-code';
@@ -68,6 +70,31 @@ export class AuthenticationService extends BaseService {
   authControllerVerifyCode(params: AuthControllerVerifyCode$Params, context?: HttpContext): Observable<StatusResponseDto> {
     return this.authControllerVerifyCode$Response(params, context).pipe(
       map((r: StrictHttpResponse<StatusResponseDto>): StatusResponseDto => r.body)
+    );
+  }
+
+  /** Path part for operation `authControllerRegister()` */
+  static readonly AuthControllerRegisterPath = '/api/auth/register';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `authControllerRegister()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authControllerRegister$Response(params: AuthControllerRegister$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return authControllerRegister(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `authControllerRegister$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authControllerRegister(params: AuthControllerRegister$Params, context?: HttpContext): Observable<void> {
+    return this.authControllerRegister$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

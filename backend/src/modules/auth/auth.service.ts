@@ -35,7 +35,10 @@ export class AuthService {
     }
 
     async register(user: User): Promise<User> {
-        const newUser = this._userRepository.create({ ...user, CreatedAt: new Date() });
+        const newUser = this._userRepository.create({
+            ...user,
+            CreatedAt: new Date().toISOString(),
+        });
         return this._userRepository.save(newUser);
     }
 }

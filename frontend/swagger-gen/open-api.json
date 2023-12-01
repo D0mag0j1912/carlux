@@ -70,6 +70,28 @@
                 },
                 "tags": ["Authentication"]
             }
+        },
+        "/api/auth/register": {
+            "post": {
+                "operationId": "AuthController_register",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": ["Authentication"]
+            }
         }
     },
     "info": {
@@ -102,6 +124,36 @@
                     }
                 },
                 "required": ["code"]
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "Id": {
+                        "type": "number",
+                        "description": "Id of the user"
+                    },
+                    "FirstName": {
+                        "type": "string",
+                        "description": "Users first name"
+                    },
+                    "LastName": {
+                        "type": "string",
+                        "description": "Users last name"
+                    },
+                    "BirthDate": {
+                        "type": "string",
+                        "description": "Users birth date"
+                    },
+                    "Email": {
+                        "type": "string",
+                        "description": "Users email"
+                    },
+                    "CreatedAt": {
+                        "type": "string",
+                        "description": "Date when the user was created"
+                    }
+                },
+                "required": ["Id", "FirstName", "LastName", "BirthDate", "Email"]
             }
         }
     }
