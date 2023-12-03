@@ -26,6 +26,7 @@ export class PersonalInformationDialogComponent implements OnInit {
     private _navController = inject(NavController);
 
     readonly MAX_CHARACTERS = 100;
+    readonly DATE_FORMAT = `yyyy-MM-dd'T'HH:mm:ss'Z'`;
 
     form = new FormGroup({
         firstName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
@@ -48,7 +49,7 @@ export class PersonalInformationDialogComponent implements OnInit {
         const modal = await this._modalController.create({
             component: DateTimePickerComponent,
             componentProps: {
-                dateValue: format(new Date(), `yyyy-MM-dd'T'HH:mm:ss'Z'`),
+                dateValue: format(new Date(), this.DATE_FORMAT),
             },
             cssClass: 'datetime-picker',
         });
