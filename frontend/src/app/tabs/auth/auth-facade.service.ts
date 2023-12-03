@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../..';
 import { FeatureKeys } from '../../constants/feature-keys';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
+import { User } from '../../api/models/user';
 import * as AuthActions from './auth-actions/auth.actions';
 import {
     selectLoading,
@@ -46,6 +47,10 @@ export class AuthenticationFacadeService {
 
     verifyCode(code: string): void {
         this._store.dispatch(AuthActions.verifyCode({ code }));
+    }
+
+    registerUser(user: User): void {
+        this._store.dispatch(AuthActions.registerUser({ user }));
     }
     //Actions END ---------------------------
 }

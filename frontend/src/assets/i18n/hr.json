@@ -3,7 +3,16 @@
         "cancel": "Odustani",
         "or": "ILI",
         "continue": "Nastavi",
-        "try_again": "Pokušaj ponovno"
+        "try_again": "Pokušaj ponovno",
+        "errors": {
+            "invalid_email": "Neispravan email",
+            "field_required": "Polje je obvezno za unos",
+            "max_characters": "Polje podržava {{ n }} znakova"
+        },
+        "actions": {
+            "close": "Izađi",
+            "confirm": "Potvrdi"
+        }
     },
     "auth": {
         "sign_in": "Prijava",
@@ -11,18 +20,27 @@
         "continue_with_apple": "Nastavi s Apple",
         "phone_verification": "Provjera broja mobitela",
         "enter_verification_code": "Unesite verifikacijski kod",
-        "verifying_code": "Verificiramo kod...",
+        "loading": {
+            "verifying_code": "Verificiramo kod...",
+            "registering": "Registriramo korisnika..."
+        },
         "personal_information": {
             "title": "Osobne informacije",
             "first_name": "Ime",
             "last_name": "Prezime",
-            "email": "E-mail"
+            "birth_date": "Datum rođenja",
+            "email": "Email",
+            "enter_first_name": "Unesite ime",
+            "enter_last_name": "Unesite prezime",
+            "enter_birth_date": "Unesite datum rođenja",
+            "enter_email": "Unesite email"
         },
         "register": "Registriraj se",
         "errors": {
             "sms_error": "Došlo je do greške pri slanju SMS-a. Molimo pokušajte ponovno.",
             "verify_code_error": "Došlo je do greške pri verifikaciji koda. Molimo pokušajte ponovno.",
-            "invalid_verification_code": "Neispravan verifikacijski kod"
+            "invalid_verification_code": "Neispravan verifikacijski kod",
+            "register": "Došlo je do greške pri registraciji. Molimo pokušajte ponovno."
         }
     }
 }

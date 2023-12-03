@@ -10,6 +10,7 @@ import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { AuthService } from './auth.service';
 import { VerifyCodeDto } from './models/verify-code.dto';
 import { StatusResponseDto } from './models/status-response.dto';
+import { User } from './entity/user.entity';
 
 @ApiTags('Authentication')
 @Controller('api/auth')
@@ -58,5 +59,10 @@ export class AuthController {
     @Post('phone-verification')
     verifyCode(@Body() body: VerifyCodeDto): StatusResponseDto {
         return this._authService.verifyCode(body.code);
+    }
+
+    @Post('register')
+    async register(@Body() body: User): Promise<User> {
+        return this._authService.register(body);
     }
 }

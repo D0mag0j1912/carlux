@@ -3,7 +3,16 @@
         "cancel": "Cancel",
         "or": "OR",
         "continue": "Continue",
-        "try_again": "Try again"
+        "try_again": "Try again",
+        "errors": {
+            "invalid_email": "Invalid email",
+            "field_required": "Field is required",
+            "max_characters": "Field supports {{ n }} characters"
+        },
+        "actions": {
+            "close": "Close",
+            "confirm": "Confirm"
+        }
     },
     "auth": {
         "sign_in": "Sign in",
@@ -11,18 +20,27 @@
         "continue_with_apple": "Continue with Apple",
         "phone_verification": "Phone verification",
         "enter_verification_code": "Enter verification code",
-        "verifying_code": "Verifying code...",
+        "loading": {
+            "verifying_code": "Verifying code...",
+            "registering": "Registering user..."
+        },
         "personal_information": {
             "title": "Personal information",
             "first_name": "First name",
             "last_name": "Last name",
-            "email": "E-mail"
+            "birth_date": "Birth date",
+            "email": "Email",
+            "enter_first_name": "Enter a first name",
+            "enter_last_name": "Enter a last name",
+            "enter_birth_date": "Enter a birth date",
+            "enter_email": "Enter an email"
         },
         "register": "Register",
         "errors": {
             "sms_error": "Could not send a SMS. Please try again.",
             "verify_code_error": "Could not verify code. Please try again.",
-            "invalid_verification_code": "Invalid verification code"
+            "invalid_verification_code": "Invalid verification code",
+            "register": "Could not register the user. Please try again."
         }
     }
 }

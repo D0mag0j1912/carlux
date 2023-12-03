@@ -1,0 +1,16 @@
+<ion-content *transloco="let t">
+    <ion-datetime
+        #datetime
+        presentation="date"
+        size="cover"
+        firstDayOfWeek="1"
+        [value]="dateValue"
+        [max]="maxDate"
+        (ionChange)="dateChanged(datetime.value)"
+    >
+        <ion-buttons slot="buttons">
+            <ion-button (click)="close()">{{ t('common.actions.close') }}</ion-button>
+            <ion-button color="primary" (click)="select()">{{ t('common.actions.confirm') }}</ion-button>
+        </ion-buttons>
+    </ion-datetime>
+</ion-content>

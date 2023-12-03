@@ -10,14 +10,21 @@
 
 <ion-content [fullscreen]="true">
     <ng-container *transloco="let t">
-        <form [formGroup]="form">
+        <form class="form" [formGroup]="form">
             <ion-grid>
                 <ion-row>
                     <ion-col>
                         <ion-input
                             type="text"
+                            fill="solid"
                             formControlName="firstName"
                             labelPlacement="floating"
+                            [helperText]="t('auth.personal_information.enter_first_name')"
+                            [errorText]="
+                                form.controls.firstName.errors?.required
+                                    ? t('common.errors.field_required')
+                                    : t('common.errors.max_characters', { n: MAX_CHARACTERS })
+                            "
                             [label]="t('auth.personal_information.first_name')"
                         ></ion-input>
                     </ion-col>
@@ -27,8 +34,15 @@
                     <ion-col>
                         <ion-input
                             type="text"
+                            fill="solid"
                             formControlName="lastName"
                             labelPlacement="floating"
+                            [helperText]="t('auth.personal_information.enter_last_name')"
+                            [errorText]="
+                                form.controls.lastName.errors?.required
+                                    ? t('common.errors.field_required')
+                                    : t('common.errors.max_characters', { n: MAX_CHARACTERS })
+                            "
                             [label]="t('auth.personal_information.last_name')"
                         ></ion-input>
                     </ion-col>
@@ -38,16 +52,40 @@
                     <ion-col>
                         <ion-input
                             type="text"
+                            fill="solid"
+                            formControlName="birthDate"
+                            labelPlacement="floating"
+                            [helperText]="t('auth.personal_information.enter_birth_date')"
+                            [errorText]="t('common.errors.field_required')"
+                            [label]="t('auth.personal_information.birth_date')"
+                            (ionFocus)="onOpenDatetimePicker()"
+                        >
+                        </ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-input
+                            email
+                            type="email"
+                            fill="solid"
                             formControlName="email"
                             labelPlacement="floating"
+                            [helperText]="t('auth.personal_information.enter_email')"
+                            [errorText]="
+                                form.controls.email.errors?.email
+                                    ? t('common.errors.invalid_email')
+                                    : t('common.errors.field_required')
+                            "
                             [label]="t('auth.personal_information.email')"
                         ></ion-input>
                     </ion-col>
                 </ion-row>
 
                 <ion-row>
-                    <ion-col>
-                        <ion-button>
+                    <ion-col class="ion-text-center">
+                        <ion-button class="register-btn" (click)="register()">
                             {{ t('auth.register') }}
                         </ion-button>
                     </ion-col>

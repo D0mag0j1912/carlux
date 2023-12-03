@@ -21,7 +21,7 @@ export class SharedEffects {
                         message: this._translocoService.translate(action.message),
                         duration: action.duration,
                         icon: action.icon,
-                        cssClass: action.cssClass,
+                        cssClass: action.icon === 'warning' ? 'toast--error' : 'toast--success',
                     });
                     await toast.present();
                 }),
@@ -36,7 +36,6 @@ export class SharedEffects {
                 tap(async (action) => {
                     const loading = await this._loadingController.create({
                         message: this._translocoService.translate(action.message),
-                        duration: action.duration,
                     });
 
                     await loading.present();
@@ -49,7 +48,11 @@ export class SharedEffects {
         () =>
             this._actions$.pipe(
                 ofType(SharedActions.dismissLoadingIndicator),
-                tap(async (_) => await this._loadingController.dismiss()),
+                tap((_) => {
+                    setTimeout(async () => {
+                        await this._loadingController.dismiss();
+                    }, 100);
+                }),
             ),
         { dispatch: false },
     );
