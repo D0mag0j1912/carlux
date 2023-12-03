@@ -6,7 +6,7 @@ export const showToastMessage = createAction(
     props<{
         message: string;
         duration: PopupDurationsValuesType;
-        icon: 'warning';
+        icon: 'warning' | 'success';
     }>(),
 );
 

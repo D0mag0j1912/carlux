@@ -21,7 +21,7 @@ export class SharedEffects {
                         message: this._translocoService.translate(action.message),
                         duration: action.duration,
                         icon: action.icon,
-                        cssClass: 'toast--error',
+                        cssClass: action.icon === 'warning' ? 'toast--error' : 'toast--success',
                     });
                     await toast.present();
                 }),
