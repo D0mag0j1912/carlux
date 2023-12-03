@@ -25,6 +25,14 @@ const routes: Routes = [
                 ],
             },
             {
+                path: 'marina-list',
+                // eslint-disable-next-line @typescript-eslint/promise-function-async
+                loadComponent: () =>
+                    import('./marina-list/marina-list.component').then(
+                        (component) => component.MarinaListComponent,
+                    ),
+            },
+            {
                 path: '',
                 redirectTo: '/tabs/auth',
                 pathMatch: 'full',
