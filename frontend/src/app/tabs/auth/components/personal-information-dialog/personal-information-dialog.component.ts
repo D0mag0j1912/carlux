@@ -8,6 +8,8 @@ import { OverlayEventDetail } from '@ionic/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { DialogRoles } from '../../../../constants/dialog-roles';
+import { AuthenticationFacadeService } from '../../auth-facade.service';
+import { User } from '../../../../api/models/user';
 
 @Component({
     standalone: true,
@@ -16,6 +18,7 @@ import { DialogRoles } from '../../../../constants/dialog-roles';
     styleUrls: ['./personal-information-dialog.component.scss'],
 })
 export class PersonalInformationDialogComponent {
+    private _authenticationFacadeService = inject(AuthenticationFacadeService);
     private _modalController = inject(ModalController);
     private _destroyRef = inject(DestroyRef);
 
@@ -57,5 +60,12 @@ export class PersonalInformationDialogComponent {
         if (!this.form.valid) {
             return;
         }
+        const user: User = {
+            FirstName: this.form.value.firstName ?? '',
+            LastName: this.form.value.lastName ?? '',
+            BirthDate: this.form.value.birthDate ?? new Date().toISOString(),
+            Email: this.form.value.email ?? '',
+        };
+        this._authenticationFacadeService.registerUser(user);
     }
 }
