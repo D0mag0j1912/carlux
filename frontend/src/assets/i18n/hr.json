@@ -36,7 +36,8 @@
         "errors": {
             "sms_error": "Došlo je do greške pri slanju SMS-a. Molimo pokušajte ponovno.",
             "verify_code_error": "Došlo je do greške pri verifikaciji koda. Molimo pokušajte ponovno.",
-            "invalid_verification_code": "Neispravan verifikacijski kod"
+            "invalid_verification_code": "Neispravan verifikacijski kod",
+            "register": "Došlo je do greške pri registraciji. Molimo pokušajte ponovno."
         }
     }
 }

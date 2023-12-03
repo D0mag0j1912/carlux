@@ -9,13 +9,8 @@ export class SharedFacadeService {
     constructor(private _store: Store<AppState>) {}
 
     //Actions BEGIN ---------------------------
-    showToastMessage(
-        message: string,
-        duration: PopupDurationsValuesType,
-        icon: 'warning',
-        cssClass: string,
-    ): void {
-        this._store.dispatch(SharedActions.showToastMessage({ message, duration, icon, cssClass }));
+    showToastMessage(message: string, duration: PopupDurationsValuesType, icon: 'warning'): void {
+        this._store.dispatch(SharedActions.showToastMessage({ message, duration, icon }));
     }
 
     showLoadingIndicator(message: string, duration: PopupDurationsValuesType): void {

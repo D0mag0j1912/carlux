@@ -36,7 +36,8 @@
         "errors": {
             "sms_error": "Could not send a SMS. Please try again.",
             "verify_code_error": "Could not verify code. Please try again.",
-            "invalid_verification_code": "Invalid verification code"
+            "invalid_verification_code": "Invalid verification code",
+            "register": "Could not register the user. Please try again."
         }
     }
 }

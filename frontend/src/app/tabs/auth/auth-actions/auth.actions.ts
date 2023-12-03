@@ -22,3 +22,5 @@ export const verifyCodeSuccess = createAction(
 );
 
 export const registerUser = createAction('[Authentication] Register user', props<{ user: User }>());
+
+export const registerUserSuccess = createAction('[Authentication] Register user success');

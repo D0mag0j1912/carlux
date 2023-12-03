@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, concatMap, finalize, map, switchMap, tap } from 'rxjs';
 import * as AuthActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
@@ -26,7 +26,6 @@ export class AuthEffects {
                             'auth.errors.sms_error',
                             POPUP_DURATIONS.ERROR,
                             'warning',
-                            'toast--error',
                         );
                         return EMPTY;
                     }),
@@ -55,7 +54,6 @@ export class AuthEffects {
                                 'auth.errors.verify_code_error',
                                 POPUP_DURATIONS.ERROR,
                                 'warning',
-                                'toast--error',
                             );
                             return EMPTY;
                         }),
@@ -64,6 +62,25 @@ export class AuthEffects {
                         ),
                         finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
                     ),
+            ),
+        ),
+    );
+
+    registerUser$ = createEffect(() =>
+        this._actions$.pipe(
+            ofType(AuthActions.registerUser),
+            concatMap((action) =>
+                this._authenticationService.authControllerRegister({ body: action.user }).pipe(
+                    catchError((_) => {
+                        this._sharedFacadeService.showToastMessage(
+                            'auth.errors.register',
+                            POPUP_DURATIONS.ERROR,
+                            'warning',
+                        );
+                        return EMPTY;
+                    }),
+                    map((_) => AuthActions.registerUserSuccess()),
+                ),
             ),
         ),
     );

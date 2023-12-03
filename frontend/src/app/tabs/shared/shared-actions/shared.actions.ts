@@ -7,7 +7,6 @@ export const showToastMessage = createAction(
         message: string;
         duration: PopupDurationsValuesType;
         icon: 'warning';
-        cssClass: string;
     }>(),
 );
 

@@ -57,6 +57,7 @@ export class PersonalInformationDialogComponent {
     }
 
     register(): void {
+        this.form.markAllAsTouched();
         if (!this.form.valid) {
             return;
         }
