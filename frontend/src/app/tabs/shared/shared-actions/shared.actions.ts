@@ -14,7 +14,6 @@ export const showLoadingIndicator = createAction(
     '[Shared] Show loading indicator',
     props<{
         message: string;
-        duration: PopupDurationsValuesType;
     }>(),
 );
 

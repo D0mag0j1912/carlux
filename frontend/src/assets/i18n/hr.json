@@ -20,7 +20,10 @@
         "continue_with_apple": "Nastavi s Apple",
         "phone_verification": "Provjera broja mobitela",
         "enter_verification_code": "Unesite verifikacijski kod",
-        "verifying_code": "Verificiramo kod...",
+        "loading": {
+            "verifying_code": "Verificiramo kod...",
+            "registering": "Registriramo korisnika..."
+        },
         "personal_information": {
             "title": "Osobne informacije",
             "first_name": "Ime",

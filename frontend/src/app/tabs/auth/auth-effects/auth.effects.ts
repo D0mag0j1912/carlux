@@ -40,10 +40,7 @@ export class AuthEffects {
         this._actions$.pipe(
             ofType(AuthActions.verifyCode),
             tap((_) =>
-                this._sharedFacadeService.showLoadingIndicator(
-                    'auth.verifying_code',
-                    POPUP_DURATIONS.STANDARD,
-                ),
+                this._sharedFacadeService.showLoadingIndicator('auth.loading.verifying_code'),
             ),
             switchMap((action) =>
                 this._authenticationService
@@ -69,6 +66,7 @@ export class AuthEffects {
     registerUser$ = createEffect(() =>
         this._actions$.pipe(
             ofType(AuthActions.registerUser),
+            tap((_) => this._sharedFacadeService.showLoadingIndicator('auth.loading.registering')),
             concatMap((action) =>
                 this._authenticationService.authControllerRegister({ body: action.user }).pipe(
                     catchError((_) => {
@@ -79,7 +77,10 @@ export class AuthEffects {
                         );
                         return EMPTY;
                     }),
-                    map((_) => AuthActions.registerUserSuccess()),
+                    map((_) => {
+                        this._sharedFacadeService.dismissLoadingIndicator();
+                        return AuthActions.registerUserSuccess();
+                    }),
                 ),
             ),
         ),

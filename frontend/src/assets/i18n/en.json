@@ -20,7 +20,10 @@
         "continue_with_apple": "Continue with Apple",
         "phone_verification": "Phone verification",
         "enter_verification_code": "Enter verification code",
-        "verifying_code": "Verifying code...",
+        "loading": {
+            "verifying_code": "Verifying code...",
+            "registering": "Registering user..."
+        },
         "personal_information": {
             "title": "Personal information",
             "first_name": "First name",

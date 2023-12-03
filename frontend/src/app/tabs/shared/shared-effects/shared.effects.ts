@@ -36,7 +36,6 @@ export class SharedEffects {
                 tap(async (action) => {
                     const loading = await this._loadingController.create({
                         message: this._translocoService.translate(action.message),
-                        duration: action.duration,
                     });
 
                     await loading.present();

@@ -13,8 +13,8 @@ export class SharedFacadeService {
         this._store.dispatch(SharedActions.showToastMessage({ message, duration, icon }));
     }
 
-    showLoadingIndicator(message: string, duration: PopupDurationsValuesType): void {
-        this._store.dispatch(SharedActions.showLoadingIndicator({ message, duration }));
+    showLoadingIndicator(message: string): void {
+        this._store.dispatch(SharedActions.showLoadingIndicator({ message }));
     }
 
     dismissLoadingIndicator(): void {
