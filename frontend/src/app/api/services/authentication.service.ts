@@ -9,6 +9,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { authControllerEmailExists } from '../fn/authentication/auth-controller-email-exists';
+import { AuthControllerEmailExists$Params } from '../fn/authentication/auth-controller-email-exists';
 import { authControllerRegister } from '../fn/authentication/auth-controller-register';
 import { AuthControllerRegister$Params } from '../fn/authentication/auth-controller-register';
 import { authControllerSendSms } from '../fn/authentication/auth-controller-send-sms';
@@ -96,6 +98,31 @@ export class AuthenticationService extends BaseService {
   authControllerRegister(params: AuthControllerRegister$Params, context?: HttpContext): Observable<User> {
     return this.authControllerRegister$Response(params, context).pipe(
       map((r: StrictHttpResponse<User>): User => r.body)
+    );
+  }
+
+  /** Path part for operation `authControllerEmailExists()` */
+  static readonly AuthControllerEmailExistsPath = '/api/auth/email-exists';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `authControllerEmailExists()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authControllerEmailExists$Response(params: AuthControllerEmailExists$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return authControllerEmailExists(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `authControllerEmailExists$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authControllerEmailExists(params: AuthControllerEmailExists$Params, context?: HttpContext): Observable<boolean> {
+    return this.authControllerEmailExists$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
     );
   }
 

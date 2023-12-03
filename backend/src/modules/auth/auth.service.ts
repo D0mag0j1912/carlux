@@ -41,4 +41,16 @@ export class AuthService {
         });
         return this._userRepository.save(newUser);
     }
+
+    async emailExists(email: string): Promise<boolean> {
+        const user = await this._userRepository.find({
+            select: {
+                Email: true,
+            },
+            where: {
+                Email: email,
+            },
+        });
+        return !!user;
+    }
 }

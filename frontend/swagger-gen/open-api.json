@@ -105,6 +105,41 @@
                 },
                 "tags": ["Authentication"]
             }
+        },
+        "/api/auth/email-exists": {
+            "get": {
+                "operationId": "AuthController_emailExists",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EmailDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Response indicating that response was successfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Authentication"]
+            }
         }
     },
     "info": {
@@ -167,6 +202,15 @@
                     }
                 },
                 "required": ["FirstName", "LastName", "BirthDate", "Email"]
+            },
+            "EmailDto": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "required": ["email"]
             }
         }
     }
