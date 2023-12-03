@@ -16,6 +16,7 @@ import { AuthControllerSendSms$Params } from '../fn/authentication/auth-controll
 import { authControllerVerifyCode } from '../fn/authentication/auth-controller-verify-code';
 import { AuthControllerVerifyCode$Params } from '../fn/authentication/auth-controller-verify-code';
 import { StatusResponseDto } from '../models/status-response-dto';
+import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends BaseService {
@@ -82,7 +83,7 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authControllerRegister$Response(params: AuthControllerRegister$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  authControllerRegister$Response(params: AuthControllerRegister$Params, context?: HttpContext): Observable<StrictHttpResponse<User>> {
     return authControllerRegister(this.http, this.rootUrl, params, context);
   }
 
@@ -92,9 +93,9 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authControllerRegister(params: AuthControllerRegister$Params, context?: HttpContext): Observable<void> {
+  authControllerRegister(params: AuthControllerRegister$Params, context?: HttpContext): Observable<User> {
     return this.authControllerRegister$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+      map((r: StrictHttpResponse<User>): User => r.body)
     );
   }
 

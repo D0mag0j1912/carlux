@@ -87,7 +87,20 @@
                 },
                 "responses": {
                     "201": {
-                        "description": ""
+                        "description": "Server returns successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 },
                 "tags": ["Authentication"]

@@ -17,6 +17,7 @@ import { User } from './entity/user.entity';
 export class AuthController {
     constructor(private _authService: AuthService) {}
 
+    //------ SEND SMS ------------------
     @ApiCreatedResponse({
         status: 201,
         description: RESPONSE_MESSAGE.CREATED,
@@ -39,6 +40,7 @@ export class AuthController {
         return this._authService.sendSMS(phoneNumber);
     }
 
+    //------ PHONE VERIFICATION ------------------
     @ApiCreatedResponse({
         status: 201,
         description: RESPONSE_MESSAGE.CREATED,
@@ -61,6 +63,24 @@ export class AuthController {
         return this._authService.verifyCode(body.code);
     }
 
+    //------ REGISTRATION ------------------
+    @ApiCreatedResponse({
+        status: 201,
+        description: RESPONSE_MESSAGE.CREATED,
+        type: User,
+    })
+    @ApiInternalServerErrorResponse({
+        status: 500,
+        description: RESPONSE_MESSAGE.INTERNAL_SERVER_ERROR,
+    })
+    @ApiBadRequestResponse({
+        status: 404,
+        description: RESPONSE_MESSAGE.NOT_FOUND,
+    })
+    @ApiBody({
+        type: User,
+        isArray: false,
+    })
     @Post('register')
     async register(@Body() body: User): Promise<User> {
         return this._authService.register(body);
