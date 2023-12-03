@@ -7,6 +7,7 @@ import { AuthenticationFacadeService } from '../auth-facade.service';
 import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { SharedFacadeService } from '../../shared/shared-facade.service';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
+import { AuthenticationEventEmitterService } from '../event-emitter/auth-event-emitter.service';
 
 @Injectable()
 export class AuthEffects {
@@ -14,6 +15,7 @@ export class AuthEffects {
     private _sharedFacadeService = inject(SharedFacadeService);
     private _authenticationService = inject(AuthenticationService);
     private _authenticationFacadeService = inject(AuthenticationFacadeService);
+    private _authenticationEventEmitterService = inject(AuthenticationEventEmitterService);
 
     sendSMS$ = createEffect(() =>
         this._actions$.pipe(
@@ -79,6 +81,7 @@ export class AuthEffects {
                     }),
                     map((_) => {
                         this._sharedFacadeService.dismissLoadingIndicator();
+                        this._authenticationEventEmitterService.emitRegistrationSuccess();
                         return AuthActions.registerUserSuccess();
                     }),
                 ),

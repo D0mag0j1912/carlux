@@ -1,6 +1,6 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController, NavController } from '@ionic/angular';
 import { TranslocoModule } from '@ngneat/transloco';
 import { format, parseISO } from 'date-fns';
 import { from } from 'rxjs';
@@ -10,6 +10,7 @@ import { DateTimePickerComponent } from '../../../../shared/datetime-picker/date
 import { DialogRoles } from '../../../../constants/dialog-roles';
 import { AuthenticationFacadeService } from '../../auth-facade.service';
 import { User } from '../../../../api/models/user';
+import { AuthenticationEventEmitterService } from '../../event-emitter/auth-event-emitter.service';
 
 @Component({
     standalone: true,
@@ -17,10 +18,12 @@ import { User } from '../../../../api/models/user';
     templateUrl: './personal-information-dialog.component.html',
     styleUrls: ['./personal-information-dialog.component.scss'],
 })
-export class PersonalInformationDialogComponent {
+export class PersonalInformationDialogComponent implements OnInit {
+    private _authenticationEventEmitterService = inject(AuthenticationEventEmitterService);
     private _authenticationFacadeService = inject(AuthenticationFacadeService);
     private _modalController = inject(ModalController);
     private _destroyRef = inject(DestroyRef);
+    private _navController = inject(NavController);
 
     readonly MAX_CHARACTERS = 100;
 
@@ -30,6 +33,16 @@ export class PersonalInformationDialogComponent {
         birthDate: new FormControl<string | undefined>('', [Validators.required]),
         email: new FormControl('', [Validators.required, Validators.email]),
     });
+
+    ngOnInit(): void {
+        this._authenticationEventEmitterService
+            .getRegistrationSuccess()
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(async (_) => {
+                await this._modalController.dismiss();
+                await this._navController.navigateForward('tabs/marina-list');
+            });
+    }
 
     async onOpenDatetimePicker(): Promise<void> {
         const modal = await this._modalController.create({
