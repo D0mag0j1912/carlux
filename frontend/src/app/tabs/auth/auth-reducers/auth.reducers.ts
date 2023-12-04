@@ -6,12 +6,14 @@ export interface AuthState {
     isLoading: boolean;
     smsResponse: StatusResponse | undefined;
     verifyCodeResponse: StatusResponse | undefined;
+    isEmailAvailable: boolean;
 }
 
 export const initialAuthState: AuthState = {
     isLoading: false,
     smsResponse: undefined,
     verifyCodeResponse: undefined,
+    isEmailAvailable: true,
 };
 
 export const authReducers = createReducer(
@@ -27,5 +29,9 @@ export const authReducers = createReducer(
     on(AuthActions.verifyCodeSuccess, (state, { response }) => ({
         ...state,
         verifyCodeResponse: { ...response },
+    })),
+    on(AuthActions.setIsEmailAvailable, (state, { isEmailAvailable }) => ({
+        ...state,
+        isEmailAvailable,
     })),
 );

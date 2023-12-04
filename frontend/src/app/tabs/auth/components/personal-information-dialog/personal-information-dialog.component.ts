@@ -11,6 +11,7 @@ import { DialogRoles } from '../../../../constants/dialog-roles';
 import { AuthenticationFacadeService } from '../../auth-facade.service';
 import { User } from '../../../../api/models/user';
 import { AuthenticationEventEmitterService } from '../../event-emitter/auth-event-emitter.service';
+import { isEmailAvailable } from '../../validators/email-available.validator';
 
 @Component({
     standalone: true,
@@ -32,7 +33,11 @@ export class PersonalInformationDialogComponent implements OnInit {
         firstName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
         lastName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
         birthDate: new FormControl<string | undefined>('', [Validators.required]),
-        email: new FormControl('', [Validators.required, Validators.email]),
+        email: new FormControl(
+            '',
+            [Validators.required, Validators.email],
+            isEmailAvailable(this._authenticationFacadeService),
+        ),
     });
 
     ngOnInit(): void {

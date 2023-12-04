@@ -7,7 +7,8 @@
         "errors": {
             "invalid_email": "Invalid email",
             "field_required": "Field is required",
-            "max_characters": "Field supports {{ n }} characters"
+            "max_characters": "Field supports {{ n }} characters",
+            "generic": "An error has occured"
         },
         "actions": {
             "close": "Close",

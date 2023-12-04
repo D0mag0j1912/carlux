@@ -7,7 +7,8 @@
         "errors": {
             "invalid_email": "Neispravan email",
             "field_required": "Polje je obvezno za unos",
-            "max_characters": "Polje podržava {{ n }} znakova"
+            "max_characters": "Polje podržava {{ n }} znakova",
+            "generic": "Došlo je do greške"
         },
         "actions": {
             "close": "Izađi",
