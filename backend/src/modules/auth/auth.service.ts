@@ -43,7 +43,7 @@ export class AuthService {
     }
 
     async emailExists(email: string): Promise<boolean> {
-        const user = await this._userRepository.find({
+        const user: User[] = await this._userRepository.find({
             select: {
                 Email: true,
             },
@@ -51,6 +51,6 @@ export class AuthService {
                 Email: email,
             },
         });
-        return !!user;
+        return !!user.length;
     }
 }
