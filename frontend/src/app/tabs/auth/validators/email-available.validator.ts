@@ -16,7 +16,7 @@ export function isEmailAvailable(
                     return authenticationFacadeService.selectIsEmailAvailable().pipe(
                         map((isEmailAvailable: boolean) => {
                             if (!isEmailAvailable) {
-                                return { isEmailAvailable: true };
+                                return { emailNotAvailable: true };
                             }
                             return null;
                         }),
