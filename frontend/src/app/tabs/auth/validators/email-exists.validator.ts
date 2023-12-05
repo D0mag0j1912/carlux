@@ -16,7 +16,7 @@ export function emailExistsValidator(): AsyncValidatorFn {
                     authenticationService.getEmailExists(email);
                     return authenticationService.selectEmailExists().pipe(
                         map((doesEmailExists: boolean) => {
-                            if (doesEmailExists) {
+                            if (!doesEmailExists) {
                                 return { emailNotAvailable: true };
                             }
                             return null;
