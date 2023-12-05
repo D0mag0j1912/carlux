@@ -33,11 +33,7 @@ export class PersonalInformationDialogComponent implements OnInit {
         firstName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
         lastName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
         birthDate: new FormControl<string | undefined>('', [Validators.required]),
-        email: new FormControl(
-            '',
-            [Validators.required, Validators.email],
-            isEmailAvailable(this._authenticationFacadeService),
-        ),
+        email: new FormControl('', [Validators.required, Validators.email], isEmailAvailable()),
     });
 
     ngOnInit(): void {

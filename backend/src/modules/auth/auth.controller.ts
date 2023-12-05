@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiBody,
@@ -101,12 +101,8 @@ export class AuthController {
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
-    @ApiBody({
-        type: EmailDto,
-        isArray: false,
-    })
     @Get('email-exists')
-    async emailExists(@Body() body: EmailDto): Promise<boolean> {
-        return this._authService.emailExists(body.email);
+    async emailExists(@Query() query: EmailDto): Promise<boolean> {
+        return this._authService.emailExists(query.email);
     }
 }

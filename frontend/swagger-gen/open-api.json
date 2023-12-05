@@ -109,17 +109,16 @@
         "/api/auth/email-exists": {
             "get": {
                 "operationId": "AuthController_emailExists",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/EmailDto"
-                            }
+                "parameters": [
+                    {
+                        "name": "email",
+                        "required": true,
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
                         }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Response indicating that response was successfull",
@@ -202,15 +201,6 @@
                     }
                 },
                 "required": ["FirstName", "LastName", "BirthDate", "Email"]
-            },
-            "EmailDto": {
-                "type": "object",
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    }
-                },
-                "required": ["email"]
             }
         }
     }

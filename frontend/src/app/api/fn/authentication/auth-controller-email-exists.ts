@@ -6,16 +6,15 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { EmailDto } from '../../models/email-dto';
 
 export interface AuthControllerEmailExists$Params {
-      body: EmailDto
+  email: string;
 }
 
 export function authControllerEmailExists(http: HttpClient, rootUrl: string, params: AuthControllerEmailExists$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
   const rb = new RequestBuilder(rootUrl, authControllerEmailExists.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.query('email', params.email, {});
   }
 
   return http.request(

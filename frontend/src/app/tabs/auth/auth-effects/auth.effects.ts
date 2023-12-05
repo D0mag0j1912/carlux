@@ -69,21 +69,19 @@ export class AuthEffects {
         this._actions$.pipe(
             ofType(AuthActions.getIsEmailAvailable),
             switchMap((action) =>
-                this._authenticationService
-                    .authControllerEmailExists({ body: { email: action.email } })
-                    .pipe(
-                        catchError((_) => {
-                            this._sharedFacadeService.showToastMessage(
-                                'common.errors.generic',
-                                POPUP_DURATIONS.ERROR,
-                                'warning',
-                            );
-                            return EMPTY;
-                        }),
-                        map((isEmailAvailable: boolean) =>
-                            AuthActions.setIsEmailAvailable({ isEmailAvailable }),
-                        ),
+                this._authenticationService.authControllerEmailExists({ email: action.email }).pipe(
+                    catchError((_) => {
+                        this._sharedFacadeService.showToastMessage(
+                            'common.errors.generic',
+                            POPUP_DURATIONS.ERROR,
+                            'warning',
+                        );
+                        return EMPTY;
+                    }),
+                    map((isEmailAvailable: boolean) =>
+                        AuthActions.setIsEmailAvailable({ isEmailAvailable }),
                     ),
+                ),
             ),
         ),
     );
