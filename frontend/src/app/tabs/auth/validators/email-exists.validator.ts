@@ -3,7 +3,7 @@ import { AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { EMPTY, map, switchMap, timer } from 'rxjs';
 import { AuthenticationFacadeService } from '../auth-facade.service';
 
-export function isEmailAvailable(): AsyncValidatorFn {
+export function emailExistsValidator(): AsyncValidatorFn {
     const authenticationService = inject(AuthenticationFacadeService);
     return (control: AbstractControl<string>) =>
         timer(500).pipe(
@@ -13,10 +13,10 @@ export function isEmailAvailable(): AsyncValidatorFn {
                     if (!email) {
                         return EMPTY;
                     }
-                    authenticationService.getIsEmailAvailable(email);
-                    return authenticationService.selectIsEmailAvailable().pipe(
-                        map((isEmailAvailable: boolean) => {
-                            if (!isEmailAvailable) {
+                    authenticationService.getEmailExists(email);
+                    return authenticationService.selectEmailExists().pipe(
+                        map((doesEmailExists: boolean) => {
+                            if (doesEmailExists) {
                                 return { emailNotAvailable: true };
                             }
                             return null;

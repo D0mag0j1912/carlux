@@ -18,9 +18,7 @@ export class AuthenticationFacadeService {
         GetCandidatesSelectors.selectVerifyCodeResponse,
     );
 
-    private _selectIsEmailAvailable$ = this._store.select(
-        GetCandidatesSelectors.selectIsEmailAvailable,
-    );
+    private _selectEmailExists$ = this._store.select(GetCandidatesSelectors.selectEmailExists);
 
     constructor(private _store: Store<AppState[FeatureKeys.AUTH]>) {}
 
@@ -37,8 +35,8 @@ export class AuthenticationFacadeService {
         return this._selectVerifyCodeResponse$;
     }
 
-    selectIsEmailAvailable(): Observable<boolean> {
-        return this._selectIsEmailAvailable$;
+    selectEmailExists(): Observable<boolean> {
+        return this._selectEmailExists$;
     }
     //Selectors END ---------------------------
 
@@ -55,8 +53,8 @@ export class AuthenticationFacadeService {
         this._store.dispatch(AuthActions.verifyCode({ code }));
     }
 
-    getIsEmailAvailable(email: string): void {
-        this._store.dispatch(AuthActions.getIsEmailAvailable({ email }));
+    getEmailExists(email: string): void {
+        this._store.dispatch(AuthActions.getEmailExists({ email }));
     }
 
     registerUser(user: User): void {

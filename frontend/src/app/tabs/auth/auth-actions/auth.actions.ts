@@ -21,14 +21,14 @@ export const verifyCodeSuccess = createAction(
     props<{ response: StatusResponse }>(),
 );
 
-export const getIsEmailAvailable = createAction(
-    '[Authentication] Get is email available',
+export const getEmailExists = createAction(
+    '[Authentication] Get email exists',
     props<{ email: string }>(),
 );
 
-export const setIsEmailAvailable = createAction(
-    '[Authentication] Set is email available',
-    props<{ isEmailAvailable: boolean }>(),
+export const setEmailExists = createAction(
+    '[Authentication] Set email exists',
+    props<{ emailExists: boolean }>(),
 );
 
 export const registerUser = createAction('[Authentication] Register user', props<{ user: User }>());

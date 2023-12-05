@@ -20,8 +20,8 @@ export const selectVerifyCodeResponse = createSelector(
     (authState: AuthState) => authState.verifyCodeResponse,
 );
 
-export const selectIsEmailAvailable = createSelector(
+export const selectEmailExists = createSelector(
     selectAuthState,
-    (authState: AuthState) => authState.isEmailAvailable,
+    (authState: AuthState) => authState.emailExists,
 );
 //--------------SELECTORS END--------------

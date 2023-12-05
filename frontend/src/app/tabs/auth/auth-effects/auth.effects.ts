@@ -65,9 +65,9 @@ export class AuthEffects {
         ),
     );
 
-    isEmailAvailable$ = createEffect(() =>
+    emailExists$ = createEffect(() =>
         this._actions$.pipe(
-            ofType(AuthActions.getIsEmailAvailable),
+            ofType(AuthActions.getEmailExists),
             switchMap((action) =>
                 this._authenticationService.authControllerEmailExists({ email: action.email }).pipe(
                     catchError((_) => {
@@ -78,9 +78,7 @@ export class AuthEffects {
                         );
                         return EMPTY;
                     }),
-                    map((isEmailAvailable: boolean) =>
-                        AuthActions.setIsEmailAvailable({ isEmailAvailable }),
-                    ),
+                    map((emailExists: boolean) => AuthActions.setEmailExists({ emailExists })),
                 ),
             ),
         ),
