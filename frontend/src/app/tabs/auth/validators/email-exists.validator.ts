@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn } from '@angular/forms';
-import { EMPTY, map, switchMap, timer } from 'rxjs';
+import { EMPTY, map, switchMap, tap, timer } from 'rxjs';
 import { AuthenticationFacadeService } from '../auth-facade.service';
 
 export function emailExistsValidator(): AsyncValidatorFn {
-    const authenticationService = inject(AuthenticationFacadeService);
+    const authenticationFacadeService = inject(AuthenticationFacadeService);
     return (control: AbstractControl<string>) =>
         timer(500).pipe(
             switchMap((_) => {
@@ -13,10 +13,11 @@ export function emailExistsValidator(): AsyncValidatorFn {
                     if (!email) {
                         return EMPTY;
                     }
-                    authenticationService.getEmailExists(email);
-                    return authenticationService.selectEmailExists().pipe(
+                    authenticationFacadeService.getEmailExists(email);
+                    return authenticationFacadeService.selectEmailExists().pipe(
+                        tap((_) => control.markAsTouched()),
                         map((doesEmailExists: boolean) => {
-                            if (!doesEmailExists) {
+                            if (doesEmailExists) {
                                 return { emailNotAvailable: true };
                             }
                             return null;
