@@ -87,7 +87,54 @@
                 },
                 "responses": {
                     "201": {
-                        "description": ""
+                        "description": "Server returns successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Authentication"]
+            }
+        },
+        "/api/auth/email-exists": {
+            "get": {
+                "operationId": "AuthController_emailExists",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "required": true,
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Response indicating that response was successfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 },
                 "tags": ["Authentication"]

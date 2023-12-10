@@ -6,19 +6,19 @@ import { FeatureKeys } from '../../constants/feature-keys';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
 import { User } from '../../api/models/user';
 import * as AuthActions from './auth-actions/auth.actions';
-import {
-    selectLoading,
-    selectSMSResponse,
-    selectVerifyCodeResponse,
-} from './auth-selectors/auth.selectors';
+import * as GetCandidatesSelectors from './auth-selectors/auth.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationFacadeService {
-    private _selectLoading$ = this._store.select(selectLoading);
+    private _selectLoading$ = this._store.select(GetCandidatesSelectors.selectLoading);
 
-    private _selectSMSResponse$ = this._store.select(selectSMSResponse);
+    private _selectSMSResponse$ = this._store.select(GetCandidatesSelectors.selectSMSResponse);
 
-    private _selectVerifyCodeResponse$ = this._store.select(selectVerifyCodeResponse);
+    private _selectVerifyCodeResponse$ = this._store.select(
+        GetCandidatesSelectors.selectVerifyCodeResponse,
+    );
+
+    private _selectEmailExists$ = this._store.select(GetCandidatesSelectors.selectEmailExists);
 
     constructor(private _store: Store<AppState[FeatureKeys.AUTH]>) {}
 
@@ -34,6 +34,10 @@ export class AuthenticationFacadeService {
     selectVerifyCodeResponse(): Observable<StatusResponse | undefined> {
         return this._selectVerifyCodeResponse$;
     }
+
+    selectEmailExists(): Observable<boolean> {
+        return this._selectEmailExists$;
+    }
     //Selectors END ---------------------------
 
     //Actions BEGIN ---------------------------
@@ -47,6 +51,10 @@ export class AuthenticationFacadeService {
 
     verifyCode(code: string): void {
         this._store.dispatch(AuthActions.verifyCode({ code }));
+    }
+
+    getEmailExists(email: string): void {
+        this._store.dispatch(AuthActions.getEmailExists({ email }));
     }
 
     registerUser(user: User): void {

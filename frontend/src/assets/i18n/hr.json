@@ -7,7 +7,8 @@
         "errors": {
             "invalid_email": "Neispravan email",
             "field_required": "Polje je obvezno za unos",
-            "max_characters": "Polje podržava {{ n }} znakova"
+            "max_characters": "Polje podržava {{ n }} znakova",
+            "generic": "Došlo je do greške"
         },
         "actions": {
             "close": "Izađi",
@@ -40,7 +41,8 @@
             "sms_error": "Došlo je do greške pri slanju SMS-a. Molimo pokušajte ponovno.",
             "verify_code_error": "Došlo je do greške pri verifikaciji koda. Molimo pokušajte ponovno.",
             "invalid_verification_code": "Neispravan verifikacijski kod",
-            "register": "Došlo je do greške pri registraciji. Molimo pokušajte ponovno."
+            "register": "Došlo je do greške pri registraciji. Molimo pokušajte ponovno.",
+            "email_exists": "Email već postoji"
         }
     }
 }

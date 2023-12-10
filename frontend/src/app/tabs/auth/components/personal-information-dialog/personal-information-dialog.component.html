@@ -76,7 +76,9 @@
                             [errorText]="
                                 form.controls.email.errors?.email
                                     ? t('common.errors.invalid_email')
-                                    : t('common.errors.field_required')
+                                    : form.controls.email.errors?.emailNotAvailable
+                                      ? t('auth.errors.email_exists')
+                                      : t('common.errors.field_required')
                             "
                             [label]="t('auth.personal_information.email')"
                         ></ion-input>

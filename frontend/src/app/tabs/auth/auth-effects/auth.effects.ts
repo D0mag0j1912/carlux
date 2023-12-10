@@ -65,6 +65,28 @@ export class AuthEffects {
         ),
     );
 
+    emailExists$ = createEffect(() =>
+        this._actions$.pipe(
+            ofType(AuthActions.getEmailExists),
+            switchMap((action) =>
+                this._authenticationService.authControllerEmailExists({ email: action.email }).pipe(
+                    catchError((_) => {
+                        this._sharedFacadeService.showToastMessage(
+                            'common.errors.generic',
+                            POPUP_DURATIONS.ERROR,
+                            'warning',
+                        );
+                        return EMPTY;
+                    }),
+                    map((emailExists: boolean) => AuthActions.setEmailExists({ emailExists })),
+                    tap((_) => {
+                        this._authenticationEventEmitterService.emitEmailExistsSuccess();
+                    }),
+                ),
+            ),
+        ),
+    );
+
     registerUser$ = createEffect(() =>
         this._actions$.pipe(
             ofType(AuthActions.registerUser),

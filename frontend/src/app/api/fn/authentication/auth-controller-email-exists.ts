@@ -6,16 +6,15 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { User } from '../../models/user';
 
-export interface AuthControllerRegister$Params {
-      body: User
+export interface AuthControllerEmailExists$Params {
+  email: string;
 }
 
-export function authControllerRegister(http: HttpClient, rootUrl: string, params: AuthControllerRegister$Params, context?: HttpContext): Observable<StrictHttpResponse<User>> {
-  const rb = new RequestBuilder(rootUrl, authControllerRegister.PATH, 'post');
+export function authControllerEmailExists(http: HttpClient, rootUrl: string, params: AuthControllerEmailExists$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+  const rb = new RequestBuilder(rootUrl, authControllerEmailExists.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.query('email', params.email, {});
   }
 
   return http.request(
@@ -23,9 +22,9 @@ export function authControllerRegister(http: HttpClient, rootUrl: string, params
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<User>;
+      return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
     })
   );
 }
 
-authControllerRegister.PATH = '/api/auth/register';
+authControllerEmailExists.PATH = '/api/auth/email-exists';
