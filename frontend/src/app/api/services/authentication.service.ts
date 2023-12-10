@@ -17,8 +17,8 @@ import { authControllerSendSms } from '../fn/authentication/auth-controller-send
 import { AuthControllerSendSms$Params } from '../fn/authentication/auth-controller-send-sms';
 import { authControllerVerifyCode } from '../fn/authentication/auth-controller-verify-code';
 import { AuthControllerVerifyCode$Params } from '../fn/authentication/auth-controller-verify-code';
+import { LoginResponseDto } from '../models/login-response-dto';
 import { StatusResponseDto } from '../models/status-response-dto';
-import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends BaseService {
@@ -85,7 +85,7 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authControllerRegister$Response(params: AuthControllerRegister$Params, context?: HttpContext): Observable<StrictHttpResponse<User>> {
+  authControllerRegister$Response(params: AuthControllerRegister$Params, context?: HttpContext): Observable<StrictHttpResponse<LoginResponseDto>> {
     return authControllerRegister(this.http, this.rootUrl, params, context);
   }
 
@@ -95,9 +95,9 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authControllerRegister(params: AuthControllerRegister$Params, context?: HttpContext): Observable<User> {
+  authControllerRegister(params: AuthControllerRegister$Params, context?: HttpContext): Observable<LoginResponseDto> {
     return this.authControllerRegister$Response(params, context).pipe(
-      map((r: StrictHttpResponse<User>): User => r.body)
+      map((r: StrictHttpResponse<LoginResponseDto>): LoginResponseDto => r.body)
     );
   }
 

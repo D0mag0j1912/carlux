@@ -22,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             where: { Email: payload.email },
         });
         if (!user) {
-            throw new UnauthorizedException('common.errors.not_authenticated');
+            throw new UnauthorizedException('Not authenticated');
         }
         return !!user.length;
     }
