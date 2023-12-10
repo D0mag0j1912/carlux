@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 import { User } from '../../../api/models/user';
+import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 
 export const sendSMS = createAction('[Authentication] Send SMS');
 
@@ -33,4 +34,7 @@ export const setEmailExists = createAction(
 
 export const registerUser = createAction('[Authentication] Register user', props<{ user: User }>());
 
-export const registerUserSuccess = createAction('[Authentication] Register user success');
+export const registerUserSuccess = createAction(
+    '[Authentication] Register user success',
+    props<{ userData: UserData }>(),
+);

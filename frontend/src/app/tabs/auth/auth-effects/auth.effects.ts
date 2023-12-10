@@ -8,6 +8,7 @@ import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { SharedFacadeService } from '../../shared/shared-facade.service';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 import { AuthenticationEventEmitterService } from '../event-emitter/auth-event-emitter.service';
+import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 
 @Injectable()
 export class AuthEffects {
@@ -101,10 +102,10 @@ export class AuthEffects {
                         );
                         return EMPTY;
                     }),
-                    map((_) => {
+                    map((userData: UserData) => {
                         this._sharedFacadeService.dismissLoadingIndicator();
                         this._authenticationEventEmitterService.emitRegistrationSuccess();
-                        return AuthActions.registerUserSuccess();
+                        return AuthActions.registerUserSuccess({ userData });
                     }),
                 ),
             ),

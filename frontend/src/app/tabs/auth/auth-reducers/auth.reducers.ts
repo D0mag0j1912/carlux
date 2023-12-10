@@ -1,12 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from '../auth-actions/auth.actions';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
+import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 
 export interface AuthState {
     isLoading: boolean;
     smsResponse: StatusResponse | undefined;
     verifyCodeResponse: StatusResponse | undefined;
     emailExists: boolean;
+    userData: UserData | undefined;
 }
 
 export const initialAuthState: AuthState = {
@@ -14,6 +16,7 @@ export const initialAuthState: AuthState = {
     smsResponse: undefined,
     verifyCodeResponse: undefined,
     emailExists: true,
+    userData: undefined,
 };
 
 export const authReducers = createReducer(
@@ -33,5 +36,9 @@ export const authReducers = createReducer(
     on(AuthActions.setEmailExists, (state, { emailExists }) => ({
         ...state,
         emailExists,
+    })),
+    on(AuthActions.registerUserSuccess, (state, { userData }) => ({
+        ...state,
+        userData: { ...userData },
     })),
 );
