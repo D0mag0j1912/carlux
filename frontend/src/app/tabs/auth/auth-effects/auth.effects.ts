@@ -79,6 +79,9 @@ export class AuthEffects {
                         return EMPTY;
                     }),
                     map((emailExists: boolean) => AuthActions.setEmailExists({ emailExists })),
+                    tap((_) => {
+                        this._authenticationEventEmitterService.emitEmailExistsSuccess();
+                    }),
                 ),
             ),
         ),
