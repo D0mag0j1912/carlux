@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Platforms } from '@ionic/core';
 import { PlatformFacadeService } from './tabs/platform/platform-facade/platform-facade.service';
@@ -9,10 +9,8 @@ import { PlatformFacadeService } from './tabs/platform/platform-facade/platform-
     styleUrls: ['root.component.scss'],
 })
 export class RootComponent implements OnInit {
-    constructor(
-        private _platform: Platform,
-        private _platformFacadeService: PlatformFacadeService,
-    ) {}
+    private _platform = inject(Platform);
+    private _platformFacadeService = inject(PlatformFacadeService);
 
     ngOnInit(): void {
         const currentPlatforms = this._platform.platforms() as Platforms[];
