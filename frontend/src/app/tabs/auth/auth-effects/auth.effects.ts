@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, catchError, concatMap, finalize, map, switchMap, tap } from 'rxjs';
+import { Storage } from '@capacitor/storage';
 import * as AuthActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
@@ -9,6 +10,7 @@ import { SharedFacadeService } from '../../shared/shared-facade.service';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 import { AuthenticationEventEmitterService } from '../event-emitter/auth-event-emitter.service';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
+import { FeatureKeys } from '../../../constants/feature-keys';
 
 @Injectable()
 export class AuthEffects {
@@ -102,11 +104,18 @@ export class AuthEffects {
                         );
                         return EMPTY;
                     }),
+                    tap(async (userData: UserData) => {
+                        await Storage.set({
+                            key: FeatureKeys.AUTH,
+                            value: JSON.stringify(userData),
+                        });
+                    }),
                     map((userData: UserData) => {
                         this._sharedFacadeService.dismissLoadingIndicator();
                         this._authenticationEventEmitterService.emitRegistrationSuccess();
                         return AuthActions.registerUserSuccess({ userData });
                     }),
+                    finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
                 ),
             ),
         ),
