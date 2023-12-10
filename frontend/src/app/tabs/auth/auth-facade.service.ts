@@ -5,6 +5,7 @@ import { AppState } from '../..';
 import { FeatureKeys } from '../../constants/feature-keys';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
 import { User } from '../../api/models/user';
+import { LoginResponseDto as UserData } from '../../api/models/login-response-dto';
 import * as AuthActions from './auth-actions/auth.actions';
 import * as GetCandidatesSelectors from './auth-selectors/auth.selectors';
 
@@ -19,6 +20,8 @@ export class AuthenticationFacadeService {
     );
 
     private _selectEmailExists$ = this._store.select(GetCandidatesSelectors.selectEmailExists);
+
+    private _selectUserData$ = this._store.select(GetCandidatesSelectors.selectUserData);
 
     constructor(private _store: Store<AppState[FeatureKeys.AUTH]>) {}
 
@@ -37,6 +40,10 @@ export class AuthenticationFacadeService {
 
     selectEmailExists(): Observable<boolean> {
         return this._selectEmailExists$;
+    }
+
+    selectUserData(): Observable<UserData | undefined> {
+        return this._selectUserData$;
     }
     //Selectors END ---------------------------
 
