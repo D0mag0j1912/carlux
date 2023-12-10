@@ -5,8 +5,8 @@ import { PlatformFacadeService } from './tabs/platform/platform-facade/platform-
 
 @Component({
     selector: 'yac-root',
-    templateUrl: 'app.component.html',
-    styleUrls: ['app.component.scss'],
+    templateUrl: 'root.component.html',
+    styleUrls: ['root.component.scss'],
 })
 export class RootComponent implements OnInit {
     constructor(
