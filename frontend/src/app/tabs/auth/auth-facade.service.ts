@@ -6,22 +6,22 @@ import { FeatureKeys } from '../../constants/feature-keys';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
 import { User } from '../../api/models/user';
 import { LoginResponseDto as UserData } from '../../api/models/login-response-dto';
-import * as AuthActions from './auth-actions/auth.actions';
-import * as GetCandidatesSelectors from './auth-selectors/auth.selectors';
+import * as AuthenticationActions from './auth-actions/auth.actions';
+import * as AuthenticationSelectors from './auth-selectors/auth.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationFacadeService {
-    private _selectLoading$ = this._store.select(GetCandidatesSelectors.selectLoading);
+    private _selectLoading$ = this._store.select(AuthenticationSelectors.selectLoading);
 
-    private _selectSMSResponse$ = this._store.select(GetCandidatesSelectors.selectSMSResponse);
+    private _selectSMSResponse$ = this._store.select(AuthenticationSelectors.selectSMSResponse);
 
     private _selectVerifyCodeResponse$ = this._store.select(
-        GetCandidatesSelectors.selectVerifyCodeResponse,
+        AuthenticationSelectors.selectVerifyCodeResponse,
     );
 
-    private _selectEmailExists$ = this._store.select(GetCandidatesSelectors.selectEmailExists);
+    private _selectEmailExists$ = this._store.select(AuthenticationSelectors.selectEmailExists);
 
-    private _selectUserData$ = this._store.select(GetCandidatesSelectors.selectUserData);
+    private _selectUserData$ = this._store.select(AuthenticationSelectors.selectUserData);
 
     constructor(private _store: Store<AppState[FeatureKeys.AUTH]>) {}
 
@@ -49,23 +49,23 @@ export class AuthenticationFacadeService {
 
     //Actions BEGIN ---------------------------
     sendSMS(): void {
-        this._store.dispatch(AuthActions.sendSMS());
+        this._store.dispatch(AuthenticationActions.sendSMS());
     }
 
     setLoading(isLoading: boolean): void {
-        this._store.dispatch(AuthActions.setLoading({ isLoading: isLoading }));
+        this._store.dispatch(AuthenticationActions.setLoading({ isLoading: isLoading }));
     }
 
     verifyCode(code: string): void {
-        this._store.dispatch(AuthActions.verifyCode({ code }));
+        this._store.dispatch(AuthenticationActions.verifyCode({ code }));
     }
 
     getEmailExists(email: string): void {
-        this._store.dispatch(AuthActions.getEmailExists({ email }));
+        this._store.dispatch(AuthenticationActions.getEmailExists({ email }));
     }
 
     registerUser(user: User): void {
-        this._store.dispatch(AuthActions.registerUser({ user }));
+        this._store.dispatch(AuthenticationActions.registerUser({ user }));
     }
     //Actions END ---------------------------
 }

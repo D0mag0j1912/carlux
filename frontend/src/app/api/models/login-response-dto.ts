@@ -1,7 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface LoginResponseDto {
-  expiresIn: number;
+  expirationDate?: string;
+  expiresIn?: number;
   token: string;
   userId: number;
 }

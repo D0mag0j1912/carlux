@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class LoginResponseDto {
@@ -16,13 +16,19 @@ export class LoginResponseDto {
     })
     @IsNumber()
     @IsNotEmpty()
-    expiresIn: number;
+    userId: number;
 
-    @ApiProperty({
+    @ApiPropertyOptional({
         type: Number,
-        required: true,
+        required: false,
     })
     @IsNumber()
-    @IsNotEmpty()
-    userId: number;
+    expiresIn?: number;
+
+    @ApiPropertyOptional({
+        type: String,
+        required: false,
+    })
+    @IsString()
+    expirationDate?: string;
 }

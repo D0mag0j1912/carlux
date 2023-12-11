@@ -208,14 +208,17 @@
                     "token": {
                         "type": "string"
                     },
+                    "userId": {
+                        "type": "number"
+                    },
                     "expiresIn": {
                         "type": "number"
                     },
-                    "userId": {
-                        "type": "number"
+                    "expirationDate": {
+                        "type": "string"
                     }
                 },
-                "required": ["token", "expiresIn", "userId"]
+                "required": ["token", "userId"]
             }
         }
     }
