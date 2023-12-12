@@ -17,6 +17,7 @@ export const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) =
             take(1),
             switchMap((userData: UserData | undefined) => {
                 if (!userData) {
+                    //TODO: Emit autologin
                     return of(false);
                 } else {
                     return of(true);

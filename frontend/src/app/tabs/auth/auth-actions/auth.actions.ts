@@ -34,8 +34,8 @@ export const setEmailExists = createAction(
 
 export const registerUser = createAction('[Authentication] Register User', props<{ user: User }>());
 
-export const registerUserSuccess = createAction(
-    '[Authentication] Register User Success',
+export const loginUserSuccess = createAction(
+    '[Authentication] Login User Success',
     props<{ userData: UserData }>(),
 );
 

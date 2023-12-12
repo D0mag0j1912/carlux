@@ -37,7 +37,7 @@ export const authReducers = createReducer(
         ...state,
         emailExists,
     })),
-    on(AuthActions.registerUserSuccess, (state, { userData }) => ({
+    on(AuthActions.loginUserSuccess, (state, { userData }) => ({
         ...state,
         userData: { ...userData },
     })),

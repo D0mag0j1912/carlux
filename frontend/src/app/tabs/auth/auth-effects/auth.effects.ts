@@ -127,7 +127,7 @@ export class AuthEffects {
                     map((userData: UserData) => {
                         this._sharedFacadeService.dismissLoadingIndicator();
                         this._authenticationEventEmitterService.emitRegistrationSuccess();
-                        return AuthenticationActions.registerUserSuccess({ userData });
+                        return AuthenticationActions.loginUserSuccess({ userData });
                     }),
                     finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
                 ),
@@ -159,7 +159,7 @@ export class AuthEffects {
                                 new Date(authData.expirationDate).getTime() - now.getTime();
                             if (expiresIn > 0) {
                                 this._authenticationHelperService.setAuthTimer(expiresIn / 1000);
-                                return AuthenticationActions.registerUserSuccess({ userData });
+                                return AuthenticationActions.loginUserSuccess({ userData });
                             } else {
                                 return AuthenticationActions.startAutologinError();
                             }
