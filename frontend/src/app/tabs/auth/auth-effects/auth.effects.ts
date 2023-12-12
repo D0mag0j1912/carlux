@@ -1,7 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, catchError, concatMap, finalize, from, map, switchMap, tap } from 'rxjs';
-import { GetResult, Storage } from '@capacitor/storage';
+import { EMPTY, catchError, concatMap, finalize, map, switchMap, tap } from 'rxjs';
+import { Storage } from '@capacitor/storage';
 import * as AuthenticationActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
@@ -15,12 +15,6 @@ import { AuthenticationHelperService } from '../helpers/auth-helper.service';
 
 @Injectable()
 export class AuthEffects {
-    private _actions$ = inject(Actions);
-    private _sharedFacadeService = inject(SharedFacadeService);
-    private _authenticationService = inject(AuthenticationService);
-    private _authenticationFacadeService = inject(AuthenticationFacadeService);
-    private _authenticationEventEmitterService = inject(AuthenticationEventEmitterService);
-
     sendSMS$ = createEffect(() =>
         this._actions$.pipe(
             ofType(AuthenticationActions.sendSMS),
@@ -135,41 +129,12 @@ export class AuthEffects {
         ),
     );
 
-    startAutologin$ = createEffect(() =>
-        this._actions$.pipe(
-            ofType(AuthenticationActions.startAutologin),
-            switchMap((_) =>
-                from(Storage.get({ key: FeatureKeys.AUTH })).pipe(
-                    map((storedData: GetResult) => {
-                        if (!storedData || !storedData?.value) {
-                            return AuthenticationActions.startAutologinError();
-                        }
-                        const userData: UserData = JSON.parse(storedData.value);
-                        if (!userData.token || !userData.expirationDate) {
-                            return AuthenticationActions.startAutologinError();
-                        }
-                        const authData: UserData = {
-                            token: userData.token,
-                            expirationDate: new Date(userData.expirationDate).toISOString(),
-                            userId: userData.userId,
-                        };
-                        const now = new Date();
-                        if (authData.expirationDate) {
-                            const expiresIn =
-                                new Date(authData.expirationDate).getTime() - now.getTime();
-                            if (expiresIn > 0) {
-                                this._authenticationHelperService.setAuthTimer(expiresIn / 1000);
-                                return AuthenticationActions.loginUserSuccess({ userData });
-                            } else {
-                                return AuthenticationActions.startAutologinError();
-                            }
-                        }
-                        return AuthenticationActions.startAutologinError();
-                    }),
-                ),
-            ),
-        ),
-    );
-
-    constructor(private _authenticationHelperService: AuthenticationHelperService) {}
+    constructor(
+        private _actions$: Actions,
+        private _sharedFacadeService: SharedFacadeService,
+        private _authenticationService: AuthenticationService,
+        private _authenticationFacadeService: AuthenticationFacadeService,
+        private _authenticationEventEmitterService: AuthenticationEventEmitterService,
+        private _authenticationHelperService: AuthenticationHelperService,
+    ) {}
 }

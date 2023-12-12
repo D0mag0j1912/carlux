@@ -9,27 +9,29 @@ import { TabsComponent } from './tabs.component';
 import * as AuthReducers from './auth/auth-reducers/auth.reducers';
 import { AuthEffects } from './auth/auth-effects/auth.effects';
 import { AuthenticationFacadeService } from './auth/auth-facade.service';
+import { AuthenticationHelperService } from './auth/helpers/auth-helper.service';
 
-export const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) =>
-    inject(AuthenticationFacadeService)
-        .selectUserData()
-        .pipe(
-            take(1),
-            switchMap((userData: UserData | undefined) => {
-                if (!userData) {
-                    //TODO: Emit autologin
-                    return of(false);
-                } else {
-                    return of(true);
-                }
-            }),
-            map((isAuthenticated: boolean) => {
-                if (!isAuthenticated) {
-                    return inject(Router).createUrlTree(['/tabs/auth']);
-                }
-                return true;
-            }),
-        );
+export const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
+    const authenticationFacadeService = inject(AuthenticationFacadeService);
+    const authenticationHelperService = inject(AuthenticationHelperService);
+    const router = inject(Router);
+    return authenticationFacadeService.selectUserData().pipe(
+        take(1),
+        switchMap((userData: UserData | undefined) => {
+            if (!userData) {
+                return authenticationHelperService.autoLogin();
+            } else {
+                return of(true);
+            }
+        }),
+        map((isAuthenticated: boolean) => {
+            if (!isAuthenticated) {
+                return router.createUrlTree(['/tabs/auth']);
+            }
+            return true;
+        }),
+    );
+};
 
 const routes: Routes = [
     {
