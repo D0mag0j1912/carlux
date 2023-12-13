@@ -3,8 +3,6 @@ import { Observable, from, map } from 'rxjs';
 import { GetResult, Storage } from '@capacitor/storage';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
-import { AuthenticationFacadeService } from '../auth-facade.service';
-
 @Injectable({ providedIn: 'root' })
 export class AuthenticationHelperService {
     setAuthTimer(duration: number | undefined): void {
@@ -43,6 +41,4 @@ export class AuthenticationHelperService {
     }
 
     private _tokenTimer: NodeJS.Timeout | undefined;
-
-    constructor(private _authenticationFacadeService: AuthenticationFacadeService) {}
 }

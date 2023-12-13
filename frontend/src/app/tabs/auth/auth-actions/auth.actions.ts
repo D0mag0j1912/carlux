@@ -38,8 +38,3 @@ export const loginUserSuccess = createAction(
     '[Authentication] Login User Success',
     props<{ userData: UserData }>(),
 );
-
-//------------------ AUTOLOGIN ----------------------------
-export const startAutologin = createAction('[Authentication] Start Autologin');
-
-export const startAutologinError = createAction('[Authentication] Start Autologin Error');
