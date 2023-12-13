@@ -60,6 +60,15 @@ const routes: Routes = [
                 canMatch: [canMatchAuth],
             },
             {
+                path: 'settings',
+                // eslint-disable-next-line @typescript-eslint/promise-function-async
+                loadComponent: () =>
+                    import('./settings/settings.component').then(
+                        (component) => component.SettingsComponent,
+                    ),
+                canMatch: [canMatchAuth],
+            },
+            {
                 path: '',
                 redirectTo: '/tabs/auth',
                 pathMatch: 'full',

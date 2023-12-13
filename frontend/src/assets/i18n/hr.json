@@ -44,5 +44,10 @@
             "register": "Došlo je do greške pri registraciji. Molimo pokušajte ponovno.",
             "email_exists": "Email već postoji"
         }
+    },
+    "tabs": {
+        "auth": "Prijava",
+        "marina_list": "Marine",
+        "settings": "Postavke"
     }
 }
