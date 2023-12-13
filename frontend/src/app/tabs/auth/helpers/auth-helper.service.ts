@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, from, map } from 'rxjs';
 import { GetResult, Storage } from '@capacitor/storage';
+import { Router } from '@angular/router';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
+import { AuthenticationFacadeService } from '../auth-facade.service';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationHelperService {
     setAuthTimer(duration: number | undefined): void {
         if (duration) {
             this._tokenTimer = setTimeout(async () => {
-                //await this.logout();
+                await this.logout();
             }, duration * 1000);
         }
     }
@@ -43,6 +45,8 @@ export class AuthenticationHelperService {
     async logout(): Promise<void> {
         clearTimeout(this._tokenTimer);
         await this._clearLocalStorage();
+        this._authenticationFacadeService.logout();
+        await this._router.navigateByUrl('/tabs/auth');
     }
 
     private async _clearLocalStorage(): Promise<void> {
@@ -50,4 +54,9 @@ export class AuthenticationHelperService {
     }
 
     private _tokenTimer: NodeJS.Timeout | undefined;
+
+    constructor(
+        private _router: Router,
+        private _authenticationFacadeService: AuthenticationFacadeService,
+    ) {}
 }
