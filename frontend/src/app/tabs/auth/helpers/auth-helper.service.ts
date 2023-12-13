@@ -32,7 +32,6 @@ export class AuthenticationHelperService {
                         new Date(loginUserData.expirationDate).getTime() - now.getTime();
                     if (expiresIn > 0) {
                         this.setAuthTimer(expiresIn / 1000);
-                        this._authenticationFacadeService.loginUserSuccess(loginUserData);
                         return true;
                     } else {
                         return false;
