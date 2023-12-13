@@ -1,25 +1,23 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, catchError, concatMap, finalize, map, switchMap, tap } from 'rxjs';
-import * as AuthActions from '../auth-actions/auth.actions';
+import { Storage } from '@capacitor/storage';
+import * as AuthenticationActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
 import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { SharedFacadeService } from '../../shared/shared-facade.service';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 import { AuthenticationEventEmitterService } from '../event-emitter/auth-event-emitter.service';
+import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
+import { FeatureKeys } from '../../../constants/feature-keys';
+import { AuthenticationHelperService } from '../helpers/auth-helper.service';
 
 @Injectable()
 export class AuthEffects {
-    private _actions$ = inject(Actions);
-    private _sharedFacadeService = inject(SharedFacadeService);
-    private _authenticationService = inject(AuthenticationService);
-    private _authenticationFacadeService = inject(AuthenticationFacadeService);
-    private _authenticationEventEmitterService = inject(AuthenticationEventEmitterService);
-
     sendSMS$ = createEffect(() =>
         this._actions$.pipe(
-            ofType(AuthActions.sendSMS),
+            ofType(AuthenticationActions.sendSMS),
             tap((_) => this._authenticationFacadeService.setLoading(true)),
             switchMap((_) =>
                 this._authenticationService.authControllerSendSms({ body: '' }).pipe(
@@ -31,7 +29,9 @@ export class AuthEffects {
                         );
                         return EMPTY;
                     }),
-                    map((response: StatusResponse) => AuthActions.sendSMSSuccess({ response })),
+                    map((response: StatusResponse) =>
+                        AuthenticationActions.sendSMSSuccess({ response }),
+                    ),
                     finalize(() => this._authenticationFacadeService.setLoading(false)),
                 ),
             ),
@@ -40,7 +40,7 @@ export class AuthEffects {
 
     verifyCode$ = createEffect(() =>
         this._actions$.pipe(
-            ofType(AuthActions.verifyCode),
+            ofType(AuthenticationActions.verifyCode),
             tap((_) =>
                 this._sharedFacadeService.showLoadingIndicator('auth.loading.verifying_code'),
             ),
@@ -57,7 +57,7 @@ export class AuthEffects {
                             return EMPTY;
                         }),
                         map((response: StatusResponse) =>
-                            AuthActions.verifyCodeSuccess({ response }),
+                            AuthenticationActions.verifyCodeSuccess({ response }),
                         ),
                         finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
                     ),
@@ -67,7 +67,7 @@ export class AuthEffects {
 
     emailExists$ = createEffect(() =>
         this._actions$.pipe(
-            ofType(AuthActions.getEmailExists),
+            ofType(AuthenticationActions.getEmailExists),
             switchMap((action) =>
                 this._authenticationService.authControllerEmailExists({ email: action.email }).pipe(
                     catchError((_) => {
@@ -78,7 +78,9 @@ export class AuthEffects {
                         );
                         return EMPTY;
                     }),
-                    map((emailExists: boolean) => AuthActions.setEmailExists({ emailExists })),
+                    map((emailExists: boolean) =>
+                        AuthenticationActions.setEmailExists({ emailExists }),
+                    ),
                     tap((_) => {
                         this._authenticationEventEmitterService.emitEmailExistsSuccess();
                     }),
@@ -89,7 +91,7 @@ export class AuthEffects {
 
     registerUser$ = createEffect(() =>
         this._actions$.pipe(
-            ofType(AuthActions.registerUser),
+            ofType(AuthenticationActions.registerUser),
             tap((_) => this._sharedFacadeService.showLoadingIndicator('auth.loading.registering')),
             concatMap((action) =>
                 this._authenticationService.authControllerRegister({ body: action.user }).pipe(
@@ -101,13 +103,38 @@ export class AuthEffects {
                         );
                         return EMPTY;
                     }),
-                    map((_) => {
+                    tap(async (userData: UserData) => {
+                        this._authenticationHelperService.setAuthTimer(userData.expiresIn);
+                        const now = new Date();
+                        const expirationDate = new Date(
+                            now.getTime() + (userData?.expiresIn ?? 0) * 1000,
+                        ).toISOString();
+                        userData = {
+                            ...userData,
+                            expirationDate,
+                        };
+                        await Storage.set({
+                            key: FeatureKeys.AUTH,
+                            value: JSON.stringify(userData),
+                        });
+                    }),
+                    map((userData: UserData) => {
                         this._sharedFacadeService.dismissLoadingIndicator();
                         this._authenticationEventEmitterService.emitRegistrationSuccess();
-                        return AuthActions.registerUserSuccess();
+                        return AuthenticationActions.loginUserSuccess({ userData });
                     }),
+                    finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
                 ),
             ),
         ),
     );
+
+    constructor(
+        private _actions$: Actions,
+        private _sharedFacadeService: SharedFacadeService,
+        private _authenticationService: AuthenticationService,
+        private _authenticationFacadeService: AuthenticationFacadeService,
+        private _authenticationEventEmitterService: AuthenticationEventEmitterService,
+        private _authenticationHelperService: AuthenticationHelperService,
+    ) {}
 }

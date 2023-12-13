@@ -24,4 +24,9 @@ export const selectEmailExists = createSelector(
     selectAuthState,
     (authState: AuthState) => authState.emailExists,
 );
+
+export const selectUserData = createSelector(
+    selectAuthState,
+    (authState: AuthState) => authState?.userData,
+);
 //--------------SELECTORS END--------------

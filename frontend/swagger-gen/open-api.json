@@ -91,7 +91,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/User"
+                                    "$ref": "#/components/schemas/LoginResponseDto"
                                 }
                             }
                         }
@@ -201,6 +201,24 @@
                     }
                 },
                 "required": ["FirstName", "LastName", "BirthDate", "Email"]
+            },
+            "LoginResponseDto": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "number"
+                    },
+                    "expiresIn": {
+                        "type": "number"
+                    },
+                    "expirationDate": {
+                        "type": "string"
+                    }
+                },
+                "required": ["token", "userId"]
             }
         }
     }

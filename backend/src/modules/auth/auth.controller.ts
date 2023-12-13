@@ -13,6 +13,7 @@ import { VerifyCodeDto } from './models/verify-code.dto';
 import { StatusResponseDto } from './models/status-response.dto';
 import { User } from './entity/user.entity';
 import { EmailDto } from './models/email.dto';
+import { LoginResponseDto } from './models/login-response.dto';
 
 @ApiTags('Authentication')
 @Controller('api/auth')
@@ -69,7 +70,7 @@ export class AuthController {
     @ApiCreatedResponse({
         status: 201,
         description: RESPONSE_MESSAGE.CREATED,
-        type: User,
+        type: LoginResponseDto,
     })
     @ApiInternalServerErrorResponse({
         status: 500,
@@ -84,7 +85,7 @@ export class AuthController {
         isArray: false,
     })
     @Post('register')
-    async register(@Body() body: User): Promise<User> {
+    async register(@Body() body: User): Promise<LoginResponseDto> {
         return this._authService.register(body);
     }
 

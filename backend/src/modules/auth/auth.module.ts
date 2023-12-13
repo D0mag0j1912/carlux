@@ -2,16 +2,27 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TwilioModule } from 'nestjs-twilio';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from '../../middleware/jwt.strategy';
 import { User } from './entity/user.entity';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { EXPIRES_IN, JWT_TOKEN } from './constants/jwt.constants';
 
-const SERVICES = [AuthService];
+const SERVICES = [AuthService, JwtStrategy];
 
 const CONTROLLERS = [AuthController];
 
 @Module({
     imports: [
+        PassportModule.register({ defaultStrategy: 'jwt' }),
+        JwtModule.register({
+            secret: JWT_TOKEN,
+            signOptions: {
+                expiresIn: EXPIRES_IN,
+            },
+        }),
         TypeOrmModule.forFeature([User]),
         TwilioModule.forRootAsync({
             imports: [ConfigModule],
@@ -24,5 +35,6 @@ const CONTROLLERS = [AuthController];
     ],
     providers: [...SERVICES],
     controllers: [...CONTROLLERS],
+    exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}
