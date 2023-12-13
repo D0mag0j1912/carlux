@@ -40,5 +40,14 @@ export class AuthenticationHelperService {
         );
     }
 
+    async logout(): Promise<void> {
+        clearTimeout(this._tokenTimer);
+        await this._clearLocalStorage();
+    }
+
+    private async _clearLocalStorage(): Promise<void> {
+        await Storage.remove({ key: FeatureKeys.AUTH });
+    }
+
     private _tokenTimer: NodeJS.Timeout | undefined;
 }

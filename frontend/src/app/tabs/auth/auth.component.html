@@ -1,123 +1,125 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>{{ 'auth.sign_in' | transloco }}</ion-title>
-    </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
+<ng-container *transloco="let t">
+    <ion-header [translucent]="true">
         <ion-toolbar>
-            <ion-title size="large">{{ 'auth.sign_in' | transloco }}</ion-title>
+            <ion-title>{{ t('tabs.auth') }}</ion-title>
         </ion-toolbar>
     </ion-header>
 
-    <form [formGroup]="form">
-        <ion-grid [class.desktop-mode]="isDesktopMode$ | async">
-            <ion-row class="row">
-                <ion-col size-sm="4" offset-sm="4">
-                    <ion-button fill="outline" class="google-btn">
-                        <ion-icon name="logo-google" slot="start" class="google-icon"></ion-icon>
-                        <ion-text class="google-text">
-                            {{ 'auth.continue_with_google' | transloco }}
-                        </ion-text>
-                    </ion-button>
-                </ion-col>
-            </ion-row>
+    <ion-content [fullscreen]="true">
+        <ion-header collapse="condense">
+            <ion-toolbar>
+                <ion-title size="large">{{ t('tabs.auth') }}</ion-title>
+            </ion-toolbar>
+        </ion-header>
 
-            <ion-row class="row">
-                <ion-col size-sm="4" offset-sm="4">
-                    <ion-button fill="outline" class="apple-btn">
-                        <ion-icon name="logo-apple" slot="start" class="apple-icon"></ion-icon>
-                        <ion-text class="apple-text">
-                            {{ 'auth.continue_with_apple' | transloco }}
-                        </ion-text>
-                    </ion-button>
-                </ion-col>
-            </ion-row>
+        <form [formGroup]="form">
+            <ion-grid [class.desktop-mode]="isDesktopMode$ | async">
+                <ion-row class="row">
+                    <ion-col size-sm="4" offset-sm="4">
+                        <ion-button fill="outline" class="google-btn">
+                            <ion-icon name="logo-google" slot="start" class="google-icon"></ion-icon>
+                            <ion-text class="google-text">
+                                {{ t('auth.continue_with_google') }}
+                            </ion-text>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
 
-            <ion-row class="row">
-                <ion-col size-sm="4" offset-sm="4">
-                    <div class="or-wrapper">
-                        <hr class="horizontal-line" />
-                        <ion-text class="text">
-                            {{ 'common.or' | transloco }}
-                        </ion-text>
-                        <hr class="horizontal-line" />
-                    </div>
-                </ion-col>
-            </ion-row>
+                <ion-row class="row">
+                    <ion-col size-sm="4" offset-sm="4">
+                        <ion-button fill="outline" class="apple-btn">
+                            <ion-icon name="logo-apple" slot="start" class="apple-icon"></ion-icon>
+                            <ion-text class="apple-text">
+                                {{ t('auth.continue_with_apple') }}
+                            </ion-text>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
 
-            <ion-row class="row">
-                <ion-col size-sm="4" offset-sm="4">
-                    <input #phoneEl type="tel" class="phone-input" formControlName="phoneNumber" />
-                </ion-col>
-            </ion-row>
+                <ion-row class="row">
+                    <ion-col size-sm="4" offset-sm="4">
+                        <div class="or-wrapper">
+                            <hr class="horizontal-line" />
+                            <ion-text class="text">
+                                {{ t('common.or') }}
+                            </ion-text>
+                            <hr class="horizontal-line" />
+                        </div>
+                    </ion-col>
+                </ion-row>
 
-            <ion-row class="row">
-                <ion-col size-sm="4" offset-sm="4">
-                    <ion-button color="primary" class="sign-up-btn" (click)="continueWithPhoneNumber()">{{
-                        'common.continue' | transloco
-                    }}</ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </form>
+                <ion-row class="row">
+                    <ion-col size-sm="4" offset-sm="4">
+                        <input #phoneEl type="tel" class="phone-input" formControlName="phoneNumber" />
+                    </ion-col>
+                </ion-row>
 
-    <ion-modal [isOpen]="isVerificationModalOpened()" (didDismiss)="onModalDismiss()">
-        <ng-template>
-            <ion-header>
-                <ion-toolbar>
-                    <ion-title>{{ 'auth.phone_verification' | transloco }}</ion-title>
-                    <ion-buttons slot="end">
-                        <ion-button (click)="closeVerificationModal()">{{ 'common.cancel' | transloco }}</ion-button>
-                    </ion-buttons>
-                </ion-toolbar>
-            </ion-header>
-            <ion-content class="verification-content">
-                <ng-container *ngIf="isNotLoading$ | async; else loading">
-                    <ng-container *ngIf="smsResponse$ | async as smsResponse">
-                        <ng-container *ngIf="smsResponse?.status === 201 && !isVerificationSet()">
-                            <div class="verification-content--container">
+                <ion-row class="row">
+                    <ion-col size-sm="4" offset-sm="4">
+                        <ion-button color="primary" class="sign-up-btn" (click)="continueWithPhoneNumber()">{{
+                            t('common.continue')
+                        }}</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+
+        <ion-modal [isOpen]="isVerificationModalOpened()" (didDismiss)="onModalDismiss()">
+            <ng-template>
+                <ion-header>
+                    <ion-toolbar>
+                        <ion-title>{{ 'auth.phone_verification' | transloco }}</ion-title>
+                        <ion-buttons slot="end">
+                            <ion-button (click)="closeVerificationModal()">{{ t('common.cancel') }}</ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-header>
+                <ion-content class="verification-content">
+                    <ng-container *ngIf="isNotLoading$ | async; else loading">
+                        <ng-container *ngIf="smsResponse$ | async as smsResponse">
+                            <ng-container *ngIf="smsResponse?.status === 201 && !isVerificationSet()">
+                                <div class="verification-content--container">
+                                    <ion-text class="text">
+                                        {{ t('auth.enter_verification_code') }}
+                                    </ion-text>
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ng-container *ngFor="let codeValue of codeValues(); let i = index">
+                                                <ion-col>
+                                                    <ion-input
+                                                        #codeEl
+                                                        fill="outline"
+                                                        mode="md"
+                                                        type="text"
+                                                        maxlength="1"
+                                                        [(ngModel)]="codeValue.code"
+                                                        (input)="onCodeChange($event, i)"
+                                                    ></ion-input>
+                                                </ion-col>
+                                            </ng-container>
+                                        </ion-row>
+                                    </ion-grid>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="!isVerificationCodeValid() && isVerificationSet()">
+                            <div class="verification-code-error">
                                 <ion-text class="text">
-                                    {{ 'auth.enter_verification_code' | transloco }}
+                                    {{ t('auth.errors.invalid_verification_code') }}
                                 </ion-text>
-                                <ion-grid>
-                                    <ion-row>
-                                        <ng-container *ngFor="let codeValue of codeValues(); let i = index">
-                                            <ion-col>
-                                                <ion-input
-                                                    #codeEl
-                                                    fill="outline"
-                                                    mode="md"
-                                                    type="text"
-                                                    maxlength="1"
-                                                    [(ngModel)]="codeValue.code"
-                                                    (input)="onCodeChange($event, i)"
-                                                ></ion-input>
-                                            </ion-col>
-                                        </ng-container>
-                                    </ion-row>
-                                </ion-grid>
+                                <ion-button (click)="tryAgain()">
+                                    {{ t('common.try_again') }}
+                                </ion-button>
                             </div>
                         </ng-container>
                     </ng-container>
-                    <ng-container *ngIf="!isVerificationCodeValid() && isVerificationSet()">
-                        <div class="verification-code-error">
-                            <ion-text class="text">
-                                {{ 'auth.errors.invalid_verification_code' | transloco }}
-                            </ion-text>
-                            <ion-button (click)="tryAgain()">
-                                {{ 'common.try_again' | transloco }}
-                            </ion-button>
+                    <ng-template #loading>
+                        <div class="spinner-wrapper">
+                            <ion-spinner color="primary"></ion-spinner>
                         </div>
-                    </ng-container>
-                </ng-container>
-                <ng-template #loading>
-                    <div class="spinner-wrapper">
-                        <ion-spinner color="primary"></ion-spinner>
-                    </div>
-                </ng-template>
-            </ion-content>
-        </ng-template>
-    </ion-modal>
-</ion-content>
+                    </ng-template>
+                </ion-content>
+            </ng-template>
+        </ion-modal>
+    </ion-content>
+</ng-container>
