@@ -71,5 +71,9 @@ export class AuthenticationFacadeService {
     loginUserSuccess(userData: UserData): void {
         this._store.dispatch(AuthenticationActions.loginUserSuccess({ userData }));
     }
+
+    logout(): void {
+        this._store.dispatch(AuthenticationActions.logout());
+    }
     //Actions END ---------------------------
 }

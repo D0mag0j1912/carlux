@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, catchError, concatMap, finalize, map, switchMap, tap } from 'rxjs';
 import { Storage } from '@capacitor/storage';
+import { Router } from '@angular/router';
 import * as AuthenticationActions from '../auth-actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
 import { AuthenticationFacadeService } from '../auth-facade.service';
@@ -129,7 +130,21 @@ export class AuthEffects {
         ),
     );
 
+    logout$ = createEffect(
+        () =>
+            this._actions$.pipe(
+                ofType(AuthenticationActions.logout),
+                tap(async (_) => {
+                    this._authenticationHelperService.clearAuthenticationTimeout();
+                    await this._authenticationHelperService.clearLocalStorage();
+                    await this._router.navigateByUrl('/tabs/auth');
+                }),
+            ),
+        { dispatch: false },
+    );
+
     constructor(
+        private _router: Router,
         private _actions$: Actions,
         private _sharedFacadeService: SharedFacadeService,
         private _authenticationService: AuthenticationService,

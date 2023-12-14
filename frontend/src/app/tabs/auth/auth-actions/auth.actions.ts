@@ -38,3 +38,5 @@ export const loginUserSuccess = createAction(
     '[Authentication] Login User Success',
     props<{ userData: UserData }>(),
 );
+
+export const logout = createAction('[Authentication] Logout');

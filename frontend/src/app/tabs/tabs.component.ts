@@ -11,6 +11,8 @@ import { AuthenticationFacadeService } from './auth/auth-facade.service';
     styleUrls: ['tabs.component.scss'],
 })
 export class TabsComponent implements OnInit {
+    isAuthenticated$ = this._authenticationFacadeService.selectUserData();
+
     constructor(private _authenticationFacadeService: AuthenticationFacadeService) {}
 
     ngOnInit(): void {

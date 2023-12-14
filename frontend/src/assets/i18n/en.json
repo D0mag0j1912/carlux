@@ -16,7 +16,6 @@
         }
     },
     "auth": {
-        "sign_in": "Sign in",
         "continue_with_google": "Continue with Google",
         "continue_with_apple": "Continue with Apple",
         "phone_verification": "Phone verification",
@@ -44,5 +43,13 @@
             "register": "Could not register the user. Please try again.",
             "email_exists": "An email already exists"
         }
+    },
+    "settings": {
+        "logout": "Logout"
+    },
+    "tabs": {
+        "auth": "Sign in",
+        "marina_list": "Marinas",
+        "settings": "Settings"
     }
 }
