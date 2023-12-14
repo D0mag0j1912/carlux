@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule } from '@ngneat/transloco';
-import { AuthenticationHelperService } from '../auth/helpers/auth-helper.service';
+import { AuthenticationFacadeService } from '../auth/auth-facade.service';
 
 @Component({
     standalone: true,
@@ -12,9 +12,9 @@ import { AuthenticationHelperService } from '../auth/helpers/auth-helper.service
     styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent {
-    constructor(private _authenticationHelperService: AuthenticationHelperService) {}
+    constructor(private _authenticationFacadeService: AuthenticationFacadeService) {}
 
-    async logout(): Promise<void> {
-        await this._authenticationHelperService.logout();
+    logout(): void {
+        this._authenticationFacadeService.logout();
     }
 }
