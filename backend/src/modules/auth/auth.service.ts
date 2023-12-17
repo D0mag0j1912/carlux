@@ -57,7 +57,7 @@ export class AuthService {
                 userId: savedUser.Id,
             } as LoginResponseDto;
         } catch (error) {
-            throw new InternalServerErrorException('Server error');
+            throw new InternalServerErrorException();
         }
     }
 
@@ -73,7 +73,7 @@ export class AuthService {
             });
             return !!user.length;
         } catch (error) {
-            throw new InternalServerErrorException('Server error');
+            throw new InternalServerErrorException();
         }
     }
 
@@ -88,7 +88,7 @@ export class AuthService {
                 },
             });
             if (!user.length) {
-                throw new InternalServerErrorException('User not found');
+                throw new InternalServerErrorException();
             }
             const foundUser = user[0];
             const jwtPayload: JwtPayloadDto = {
@@ -102,7 +102,7 @@ export class AuthService {
                 userId: foundUser.Id,
             } as LoginResponseDto;
         } catch (error: unknown) {
-            throw new InternalServerErrorException('Server error');
+            throw new InternalServerErrorException();
         }
     }
 }

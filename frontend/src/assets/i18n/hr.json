@@ -41,7 +41,8 @@
             "verify_code_error": "Došlo je do greške pri verifikaciji koda. Molimo pokušajte ponovno.",
             "invalid_verification_code": "Neispravan verifikacijski kod",
             "register": "Došlo je do greške pri registraciji. Molimo pokušajte ponovno.",
-            "email_exists": "Email već postoji"
+            "email_exists": "Email već postoji",
+            "user_not_found": "Korisnik s ovom e-mail adresom nije pronađen"
         }
     },
     "settings": {

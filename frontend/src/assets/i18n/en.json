@@ -41,7 +41,8 @@
             "verify_code_error": "Could not verify code. Please try again.",
             "invalid_verification_code": "Invalid verification code",
             "register": "Could not register the user. Please try again.",
-            "email_exists": "An email already exists"
+            "email_exists": "An email already exists",
+            "user_not_found": "User with this e-mail address wasn't found"
         }
     },
     "settings": {

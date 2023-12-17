@@ -150,9 +150,9 @@ export class AuthEffects {
                 this._authenticationService
                     .authControllerSignIn({ body: { email: action.email } })
                     .pipe(
-                        catchError((error) => {
+                        catchError((_) => {
                             this._sharedFacadeService.showToastMessage(
-                                '',
+                                'auth.errors.user_not_found',
                                 POPUP_DURATIONS.ERROR,
                                 'warning',
                             );
