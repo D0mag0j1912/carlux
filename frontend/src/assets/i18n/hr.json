@@ -47,7 +47,10 @@
         }
     },
     "settings": {
-        "logout": "Odjava"
+        "title": "Postavke",
+        "profile": "Profil",
+        "logout": "Odjava",
+        "languages": "Jezici"
     },
     "tabs": {
         "auth": "Prijava",

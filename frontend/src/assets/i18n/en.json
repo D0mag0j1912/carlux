@@ -47,7 +47,10 @@
         }
     },
     "settings": {
-        "logout": "Logout"
+        "title": "Settings",
+        "profile": "Profile",
+        "logout": "Logout",
+        "languages": "Languages"
     },
     "tabs": {
         "auth": "Sign in",

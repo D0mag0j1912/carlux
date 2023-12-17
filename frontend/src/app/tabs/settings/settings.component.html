@@ -6,6 +6,24 @@
     </ion-header>
 
     <ion-content class="settings-content ion-padding" [fullscreen]="true">
+        <div class="profile">
+            {{ t('settings.profile') }}
+        </div>
+
+        <div class="title">
+            {{ t('settings.title') }}
+        </div>
+        <ion-list class="list" [inset]="true">
+            <ion-item class="item" [button]="true">
+                <ion-icon slot="start" name="language-sharp" size="large"></ion-icon>
+                <ion-label>
+                    {{ t('settings.languages') }}
+                </ion-label>
+                <ion-note slot="end">
+                    {{ LANGUAGES_COUNT }}
+                </ion-note>
+            </ion-item>
+        </ion-list>
         <a class="logout-text" (click)="logout()">
             {{ t('settings.logout') }}
         </a>

@@ -12,6 +12,8 @@ import { AuthenticationFacadeService } from '../auth/auth-facade.service';
     styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent {
+    readonly LANGUAGES_COUNT = 2;
+
     constructor(private _authenticationFacadeService: AuthenticationFacadeService) {}
 
     logout(): void {
