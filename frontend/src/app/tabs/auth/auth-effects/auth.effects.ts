@@ -122,7 +122,7 @@ export class AuthEffects {
                     map((userData: UserData) => {
                         this._sharedFacadeService.dismissLoadingIndicator();
                         this._authenticationEventEmitterService.emitRegistrationSuccess();
-                        return AuthenticationActions.loginUserSuccess({ userData });
+                        return AuthenticationActions.signInSuccess({ userData });
                     }),
                     finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
                 ),
@@ -141,6 +141,29 @@ export class AuthEffects {
                 }),
             ),
         { dispatch: false },
+    );
+
+    signIn$ = createEffect(() =>
+        this._actions$.pipe(
+            ofType(AuthenticationActions.signIn),
+            switchMap((action) =>
+                this._authenticationService
+                    .authControllerSignIn({ body: { email: action.email } })
+                    .pipe(
+                        catchError((error) => {
+                            this._sharedFacadeService.showToastMessage(
+                                '',
+                                POPUP_DURATIONS.ERROR,
+                                'warning',
+                            );
+                            return EMPTY;
+                        }),
+                        map((response: UserData) =>
+                            AuthenticationActions.signInSuccess({ userData: response }),
+                        ),
+                    ),
+            ),
+        ),
     );
 
     constructor(

@@ -24,7 +24,7 @@ export class TabsComponent implements OnInit {
                 }
                 const fetchedUserData: UserData = JSON.parse(storedData.value);
                 if (fetchedUserData.token && fetchedUserData.expirationDate) {
-                    this._authenticationFacadeService.loginUserSuccess(fetchedUserData);
+                    this._authenticationFacadeService.signInSuccess(fetchedUserData);
                 }
             });
     }

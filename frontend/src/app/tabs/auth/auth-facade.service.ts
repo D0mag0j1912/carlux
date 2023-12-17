@@ -68,12 +68,16 @@ export class AuthenticationFacadeService {
         this._store.dispatch(AuthenticationActions.registerUser({ user }));
     }
 
-    loginUserSuccess(userData: UserData): void {
-        this._store.dispatch(AuthenticationActions.loginUserSuccess({ userData }));
-    }
-
     logout(): void {
         this._store.dispatch(AuthenticationActions.logout());
+    }
+
+    signIn(email: string): void {
+        this._store.dispatch(AuthenticationActions.signIn({ email }));
+    }
+
+    signInSuccess(userData: UserData): void {
+        this._store.dispatch(AuthenticationActions.signInSuccess({ userData }));
     }
     //Actions END ---------------------------
 }

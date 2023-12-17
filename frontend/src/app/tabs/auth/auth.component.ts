@@ -7,7 +7,6 @@ import {
     QueryList,
     ViewChild,
     ViewChildren,
-    inject,
     signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -63,16 +62,11 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
     styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit, AfterViewInit {
-    private _authFacadeService = inject(AuthenticationFacadeService);
-    private _platformFacadeService = inject(PlatformFacadeService);
-    private _destroyRef = inject(DestroyRef);
-    private _modalController = inject(ModalController);
-
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
-    isNotLoading$ = this._authFacadeService
+    isNotLoading$ = this._authenticationFacadeService
         .selectLoading()
         .pipe(map((isLoading: boolean) => !isLoading));
-    smsResponse$ = this._authFacadeService.selectSMSResponse();
+    smsResponse$ = this._authenticationFacadeService.selectSMSResponse();
 
     isVerificationModalOpened = signal(false);
     codeValues = signal(INITIAL_CODE_VALUES);
@@ -91,8 +85,15 @@ export class AuthComponent implements OnInit, AfterViewInit {
     @ViewChildren('codeEl')
     codesEl: QueryList<IonInput> | undefined;
 
+    constructor(
+        private _authenticationFacadeService: AuthenticationFacadeService,
+        private _platformFacadeService: PlatformFacadeService,
+        private _modalController: ModalController,
+        private _destroyRef: DestroyRef,
+    ) {}
+
     ngOnInit(): void {
-        this._authFacadeService
+        this._authenticationFacadeService
             .selectVerifyCodeResponse()
             .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
             .subscribe(async (response: StatusResponse) => {
@@ -133,7 +134,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
             const code = this.codeValues()
                 .map((codeValue) => codeValue.code)
                 .join('');
-            this._authFacadeService.verifyCode(code);
+            this._authenticationFacadeService.verifyCode(code);
         } else {
             const value = (event.target as HTMLInputElement).value;
             if (this.codesEl && value) {
@@ -146,9 +147,14 @@ export class AuthComponent implements OnInit, AfterViewInit {
         this.closeVerificationModal();
     }
 
+    continueWithGoogle(): void {
+        const email = environment.signInEmail;
+        this._authenticationFacadeService.signIn(email);
+    }
+
     continueWithPhoneNumber(): void {
         this.isVerificationModalOpened.set(true);
-        this._authFacadeService.sendSMS();
+        this._authenticationFacadeService.sendSMS();
     }
 
     closeVerificationModal(): void {
