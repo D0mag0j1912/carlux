@@ -15,7 +15,7 @@
         <ion-grid [class.desktop-mode]="isDesktopMode$ | async">
             <ion-row class="row">
                 <ion-col size-sm="4" offset-sm="4">
-                    <ion-button fill="outline" class="google-btn">
+                    <ion-button fill="outline" class="google-btn" (click)="continueWithGoogle()">
                         <ion-icon name="logo-google" slot="start" class="google-icon"></ion-icon>
                         <ion-text class="google-text">
                             {{ 'auth.continue_with_google' | transloco }}

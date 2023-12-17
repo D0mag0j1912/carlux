@@ -7,7 +7,6 @@ import {
     QueryList,
     ViewChild,
     ViewChildren,
-    inject,
     signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -20,7 +19,7 @@ import {
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { filter, map, take } from 'rxjs';
-import { IonInput, IonicModule, ModalController } from '@ionic/angular';
+import { IonInput, IonicModule, ModalController, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
@@ -28,6 +27,7 @@ import { environment } from '../../../environments/environment';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
 import { AuthenticationFacadeService } from './auth-facade.service';
 import { PersonalInformationDialogComponent } from './components/personal-information-dialog/personal-information-dialog.component';
+import { AuthenticationEventEmitterService } from './event-emitter/auth-event-emitter.service';
 
 type VerificationCodeType = {
     code: number | null;
@@ -63,16 +63,11 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
     styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit, AfterViewInit {
-    private _authFacadeService = inject(AuthenticationFacadeService);
-    private _platformFacadeService = inject(PlatformFacadeService);
-    private _destroyRef = inject(DestroyRef);
-    private _modalController = inject(ModalController);
-
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
-    isNotLoading$ = this._authFacadeService
+    isNotLoading$ = this._authenticationFacadeService
         .selectLoading()
         .pipe(map((isLoading: boolean) => !isLoading));
-    smsResponse$ = this._authFacadeService.selectSMSResponse();
+    smsResponse$ = this._authenticationFacadeService.selectSMSResponse();
 
     isVerificationModalOpened = signal(false);
     codeValues = signal(INITIAL_CODE_VALUES);
@@ -91,8 +86,17 @@ export class AuthComponent implements OnInit, AfterViewInit {
     @ViewChildren('codeEl')
     codesEl: QueryList<IonInput> | undefined;
 
+    constructor(
+        private _authenticationFacadeService: AuthenticationFacadeService,
+        private _authenticationEventEmitterService: AuthenticationEventEmitterService,
+        private _platformFacadeService: PlatformFacadeService,
+        private _modalController: ModalController,
+        private _navController: NavController,
+        private _destroyRef: DestroyRef,
+    ) {}
+
     ngOnInit(): void {
-        this._authFacadeService
+        this._authenticationFacadeService
             .selectVerifyCodeResponse()
             .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
             .subscribe(async (response: StatusResponse) => {
@@ -107,6 +111,14 @@ export class AuthComponent implements OnInit, AfterViewInit {
                     await modal.present();
                 }
             });
+
+        this._authenticationEventEmitterService
+            .getAuthSuccess()
+            .pipe(
+                filter((data) => data.type === 'signIn'),
+                takeUntilDestroyed(this._destroyRef),
+            )
+            .subscribe(async (_) => await this._navController.navigateForward('tabs/marina-list'));
     }
 
     ngAfterViewInit(): void {
@@ -133,7 +145,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
             const code = this.codeValues()
                 .map((codeValue) => codeValue.code)
                 .join('');
-            this._authFacadeService.verifyCode(code);
+            this._authenticationFacadeService.verifyCode(code);
         } else {
             const value = (event.target as HTMLInputElement).value;
             if (this.codesEl && value) {
@@ -146,9 +158,14 @@ export class AuthComponent implements OnInit, AfterViewInit {
         this.closeVerificationModal();
     }
 
+    continueWithGoogle(): void {
+        const email = environment.signInEmail;
+        this._authenticationFacadeService.signIn(email);
+    }
+
     continueWithPhoneNumber(): void {
         this.isVerificationModalOpened.set(true);
-        this._authFacadeService.sendSMS();
+        this._authenticationFacadeService.sendSMS();
     }
 
     closeVerificationModal(): void {

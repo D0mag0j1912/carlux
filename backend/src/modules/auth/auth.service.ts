@@ -57,7 +57,7 @@ export class AuthService {
                 userId: savedUser.Id,
             } as LoginResponseDto;
         } catch (error) {
-            throw new InternalServerErrorException('Server error');
+            throw new InternalServerErrorException();
         }
     }
 
@@ -73,7 +73,36 @@ export class AuthService {
             });
             return !!user.length;
         } catch (error) {
-            throw new InternalServerErrorException('Server error');
+            throw new InternalServerErrorException();
+        }
+    }
+
+    async signIn(email: string): Promise<LoginResponseDto> {
+        try {
+            const user: User[] = await this._userRepository.find({
+                select: {
+                    Email: true,
+                },
+                where: {
+                    Email: email,
+                },
+            });
+            if (!user.length) {
+                throw new InternalServerErrorException();
+            }
+            const foundUser = user[0];
+            const jwtPayload: JwtPayloadDto = {
+                userId: foundUser.Id,
+                email: foundUser.Email,
+            };
+            const accessToken = this._jwtService.sign(jwtPayload);
+            return {
+                token: accessToken,
+                expiresIn: EXPIRES_IN,
+                userId: foundUser.Id,
+            } as LoginResponseDto;
+        } catch (error: unknown) {
+            throw new InternalServerErrorException();
         }
     }
 }

@@ -34,9 +34,11 @@ export const setEmailExists = createAction(
 
 export const registerUser = createAction('[Authentication] Register User', props<{ user: User }>());
 
-export const loginUserSuccess = createAction(
-    '[Authentication] Login User Success',
+export const logout = createAction('[Authentication] Logout');
+
+export const signIn = createAction('[Authentication] Sign In', props<{ email: string }>());
+
+export const signInSuccess = createAction(
+    '[Authentication] Sign In Success',
     props<{ userData: UserData }>(),
 );
-
-export const logout = createAction('[Authentication] Logout');

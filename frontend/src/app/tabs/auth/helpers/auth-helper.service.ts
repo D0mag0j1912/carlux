@@ -4,6 +4,7 @@ import { Observable, from, map } from 'rxjs';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import { AuthenticationFacadeService } from '../auth-facade.service';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
+
 @Injectable({ providedIn: 'root' })
 export class AuthenticationHelperService {
     setAuthTimer(duration: number | undefined): void {
@@ -24,11 +25,10 @@ export class AuthenticationHelperService {
                 if (!fetchedUserData.token || !fetchedUserData.expirationDate) {
                     return false;
                 }
-                const { expiresIn, ...loginUserData } = fetchedUserData;
+                const { expiresIn, ...signInData } = fetchedUserData;
                 const now = new Date();
-                if (loginUserData.expirationDate) {
-                    const expiresIn =
-                        new Date(loginUserData.expirationDate).getTime() - now.getTime();
+                if (signInData.expirationDate) {
+                    const expiresIn = new Date(signInData.expirationDate).getTime() - now.getTime();
                     if (expiresIn > 0) {
                         this.setAuthTimer(expiresIn / 1000);
                         return true;

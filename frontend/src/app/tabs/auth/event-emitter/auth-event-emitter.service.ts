@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
+type AuthenticationEventEmitterType = 'signIn' | 'signUp';
+
 @Injectable({ providedIn: 'root' })
 export class AuthenticationEventEmitterService {
-    private _registrationSuccess$ = new Subject<void>();
+    private _authSuccess$ = new Subject<{ type: AuthenticationEventEmitterType }>();
 
-    getRegistrationSuccess(): Observable<void> {
-        return this._registrationSuccess$;
+    getAuthSuccess(): Observable<{ type: AuthenticationEventEmitterType }> {
+        return this._authSuccess$;
     }
 
-    emitRegistrationSuccess(): void {
-        this._registrationSuccess$.next();
+    emitAuthSuccess(type: AuthenticationEventEmitterType): void {
+        this._authSuccess$.next({ type });
     }
 
+    //------------- Email exists ------------------------
     private _emailExistsSuccess$ = new Subject<void>();
 
     getEmailExistsSuccess(): Observable<void> {

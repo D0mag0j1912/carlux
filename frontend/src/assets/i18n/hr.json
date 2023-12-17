@@ -22,7 +22,8 @@
         "enter_verification_code": "Unesite verifikacijski kod",
         "loading": {
             "verifying_code": "Verificiramo kod...",
-            "registering": "Registriramo korisnika..."
+            "registering": "Registriramo korisnika...",
+            "signing_in": "Prijavljujemo korisnika..."
         },
         "personal_information": {
             "title": "Osobne informacije",
@@ -41,7 +42,8 @@
             "verify_code_error": "Došlo je do greške pri verifikaciji koda. Molimo pokušajte ponovno.",
             "invalid_verification_code": "Neispravan verifikacijski kod",
             "register": "Došlo je do greške pri registraciji. Molimo pokušajte ponovno.",
-            "email_exists": "Email već postoji"
+            "email_exists": "Email već postoji",
+            "user_not_found": "Korisnik s ovom e-mail adresom nije pronađen"
         }
     },
     "settings": {
