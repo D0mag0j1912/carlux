@@ -1,0 +1,13 @@
+
+.settings-content {
+    --padding-start: 10px;
+    --padding-end: 10px;
+
+    .logout-text {
+        text-decoration: underline;
+        font-size: 16px;
+        line-height: 20px;
+        position: absolute;
+        bottom: 20px;
+    }
+}

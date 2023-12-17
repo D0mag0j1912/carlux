@@ -5,9 +5,9 @@
         </ion-toolbar>
     </ion-header>
 
-    <ion-content [fullscreen]="true">
-        <ion-button (click)="logout()">
+    <ion-content class="settings-content ion-padding" [fullscreen]="true">
+        <a class="logout-text" (click)="logout()">
             {{ t('settings.logout') }}
-        </ion-button>
+        </a>
     </ion-content>
 </ng-container>
