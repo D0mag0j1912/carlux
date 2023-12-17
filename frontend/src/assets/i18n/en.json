@@ -22,7 +22,8 @@
         "enter_verification_code": "Enter verification code",
         "loading": {
             "verifying_code": "Verifying code...",
-            "registering": "Registering user..."
+            "registering": "Registering user...",
+            "signing_in": "Signing in..."
         },
         "personal_information": {
             "title": "Personal information",

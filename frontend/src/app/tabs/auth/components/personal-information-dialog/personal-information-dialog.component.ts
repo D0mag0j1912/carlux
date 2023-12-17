@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { IonicModule, ModalController, NavController } from '@ionic/angular';
 import { TranslocoModule } from '@ngneat/transloco';
 import { format, parseISO } from 'date-fns';
-import { from } from 'rxjs';
+import { filter, from } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
@@ -38,8 +38,11 @@ export class PersonalInformationDialogComponent implements OnInit {
 
     ngOnInit(): void {
         this._authenticationEventEmitterService
-            .getRegistrationSuccess()
-            .pipe(takeUntilDestroyed(this._destroyRef))
+            .getAuthSuccess()
+            .pipe(
+                filter((data) => data.type === 'signUp'),
+                takeUntilDestroyed(this._destroyRef),
+            )
             .subscribe(async (_) => {
                 await this._modalController.dismiss();
                 await this._navController.navigateForward('tabs/marina-list');

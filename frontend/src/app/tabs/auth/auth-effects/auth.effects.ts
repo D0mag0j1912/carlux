@@ -104,24 +104,9 @@ export class AuthEffects {
                         );
                         return EMPTY;
                     }),
-                    tap(async (userData: UserData) => {
-                        this._authenticationHelperService.setAuthTimer(userData.expiresIn);
-                        const now = new Date();
-                        const expirationDate = new Date(
-                            now.getTime() + (userData?.expiresIn ?? 0) * 1000,
-                        ).toISOString();
-                        userData = {
-                            ...userData,
-                            expirationDate,
-                        };
-                        await Storage.set({
-                            key: FeatureKeys.AUTH,
-                            value: JSON.stringify(userData),
-                        });
-                    }),
+                    tap(async (userData: UserData) => this._prepareAuthenticationState(userData)),
                     map((userData: UserData) => {
-                        this._sharedFacadeService.dismissLoadingIndicator();
-                        this._authenticationEventEmitterService.emitRegistrationSuccess();
+                        this._authenticationEventEmitterService.emitAuthSuccess('signUp');
                         return AuthenticationActions.signInSuccess({ userData });
                     }),
                     finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
@@ -146,6 +131,7 @@ export class AuthEffects {
     signIn$ = createEffect(() =>
         this._actions$.pipe(
             ofType(AuthenticationActions.signIn),
+            tap((_) => this._sharedFacadeService.showLoadingIndicator('auth.loading.signing_in')),
             switchMap((action) =>
                 this._authenticationService
                     .authControllerSignIn({ body: { email: action.email } })
@@ -158,9 +144,14 @@ export class AuthEffects {
                             );
                             return EMPTY;
                         }),
-                        map((response: UserData) =>
-                            AuthenticationActions.signInSuccess({ userData: response }),
+                        tap(async (userData: UserData) =>
+                            this._prepareAuthenticationState(userData),
                         ),
+                        map((response: UserData) => {
+                            this._authenticationEventEmitterService.emitAuthSuccess('signIn');
+                            return AuthenticationActions.signInSuccess({ userData: response });
+                        }),
+                        finalize(() => this._sharedFacadeService.dismissLoadingIndicator()),
                     ),
             ),
         ),
@@ -175,4 +166,20 @@ export class AuthEffects {
         private _authenticationEventEmitterService: AuthenticationEventEmitterService,
         private _authenticationHelperService: AuthenticationHelperService,
     ) {}
+
+    private async _prepareAuthenticationState(userData: UserData): Promise<void> {
+        this._authenticationHelperService.setAuthTimer(userData.expiresIn);
+        const now = new Date();
+        const expirationDate = new Date(
+            now.getTime() + (userData?.expiresIn ?? 0) * 1000,
+        ).toISOString();
+        userData = {
+            ...userData,
+            expirationDate,
+        };
+        await Storage.set({
+            key: FeatureKeys.AUTH,
+            value: JSON.stringify(userData),
+        });
+    }
 }

@@ -22,7 +22,8 @@
         "enter_verification_code": "Unesite verifikacijski kod",
         "loading": {
             "verifying_code": "Verificiramo kod...",
-            "registering": "Registriramo korisnika..."
+            "registering": "Registriramo korisnika...",
+            "signing_in": "Prijavljujemo korisnika..."
         },
         "personal_information": {
             "title": "Osobne informacije",

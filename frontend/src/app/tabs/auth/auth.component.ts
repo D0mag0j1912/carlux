@@ -19,7 +19,7 @@ import {
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { filter, map, take } from 'rxjs';
-import { IonInput, IonicModule, ModalController } from '@ionic/angular';
+import { IonInput, IonicModule, ModalController, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
@@ -27,6 +27,7 @@ import { environment } from '../../../environments/environment';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
 import { AuthenticationFacadeService } from './auth-facade.service';
 import { PersonalInformationDialogComponent } from './components/personal-information-dialog/personal-information-dialog.component';
+import { AuthenticationEventEmitterService } from './event-emitter/auth-event-emitter.service';
 
 type VerificationCodeType = {
     code: number | null;
@@ -87,8 +88,10 @@ export class AuthComponent implements OnInit, AfterViewInit {
 
     constructor(
         private _authenticationFacadeService: AuthenticationFacadeService,
+        private _authenticationEventEmitterService: AuthenticationEventEmitterService,
         private _platformFacadeService: PlatformFacadeService,
         private _modalController: ModalController,
+        private _navController: NavController,
         private _destroyRef: DestroyRef,
     ) {}
 
@@ -108,6 +111,14 @@ export class AuthComponent implements OnInit, AfterViewInit {
                     await modal.present();
                 }
             });
+
+        this._authenticationEventEmitterService
+            .getAuthSuccess()
+            .pipe(
+                filter((data) => data.type === 'signIn'),
+                takeUntilDestroyed(this._destroyRef),
+            )
+            .subscribe(async (_) => await this._navController.navigateForward('tabs/marina-list'));
     }
 
     ngAfterViewInit(): void {
