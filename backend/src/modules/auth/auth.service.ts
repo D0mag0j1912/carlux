@@ -76,4 +76,33 @@ export class AuthService {
             throw new InternalServerErrorException('Server error');
         }
     }
+
+    async signIn(email: string): Promise<LoginResponseDto> {
+        try {
+            const user: User[] = await this._userRepository.find({
+                select: {
+                    Email: true,
+                },
+                where: {
+                    Email: email,
+                },
+            });
+            if (!user.length) {
+                throw new InternalServerErrorException('User not found');
+            }
+            const foundUser = user[0];
+            const jwtPayload: JwtPayloadDto = {
+                userId: foundUser.Id,
+                email: foundUser.Email,
+            };
+            const accessToken = this._jwtService.sign(jwtPayload);
+            return {
+                token: accessToken,
+                expiresIn: EXPIRES_IN,
+                userId: foundUser.Id,
+            } as LoginResponseDto;
+        } catch (error: unknown) {
+            throw new InternalServerErrorException('Server error');
+        }
+    }
 }

@@ -15,6 +15,8 @@ import { authControllerRegister } from '../fn/authentication/auth-controller-reg
 import { AuthControllerRegister$Params } from '../fn/authentication/auth-controller-register';
 import { authControllerSendSms } from '../fn/authentication/auth-controller-send-sms';
 import { AuthControllerSendSms$Params } from '../fn/authentication/auth-controller-send-sms';
+import { authControllerSignIn } from '../fn/authentication/auth-controller-sign-in';
+import { AuthControllerSignIn$Params } from '../fn/authentication/auth-controller-sign-in';
 import { authControllerVerifyCode } from '../fn/authentication/auth-controller-verify-code';
 import { AuthControllerVerifyCode$Params } from '../fn/authentication/auth-controller-verify-code';
 import { LoginResponseDto } from '../models/login-response-dto';
@@ -123,6 +125,31 @@ export class AuthenticationService extends BaseService {
   authControllerEmailExists(params: AuthControllerEmailExists$Params, context?: HttpContext): Observable<boolean> {
     return this.authControllerEmailExists$Response(params, context).pipe(
       map((r: StrictHttpResponse<boolean>): boolean => r.body)
+    );
+  }
+
+  /** Path part for operation `authControllerSignIn()` */
+  static readonly AuthControllerSignInPath = '/api/auth/sign-in';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `authControllerSignIn()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authControllerSignIn$Response(params: AuthControllerSignIn$Params, context?: HttpContext): Observable<StrictHttpResponse<LoginResponseDto>> {
+    return authControllerSignIn(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `authControllerSignIn$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authControllerSignIn(params: AuthControllerSignIn$Params, context?: HttpContext): Observable<LoginResponseDto> {
+    return this.authControllerSignIn$Response(params, context).pipe(
+      map((r: StrictHttpResponse<LoginResponseDto>): LoginResponseDto => r.body)
     );
   }
 

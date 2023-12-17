@@ -106,4 +106,27 @@ export class AuthController {
     async emailExists(@Query() query: EmailDto): Promise<boolean> {
         return this._authService.emailExists(query.email);
     }
+
+    //---------------- SIGN IN ------------------
+    @ApiCreatedResponse({
+        status: 201,
+        description: RESPONSE_MESSAGE.CREATED,
+        type: LoginResponseDto,
+    })
+    @ApiInternalServerErrorResponse({
+        status: 500,
+        description: RESPONSE_MESSAGE.INTERNAL_SERVER_ERROR,
+    })
+    @ApiBadRequestResponse({
+        status: 404,
+        description: RESPONSE_MESSAGE.NOT_FOUND,
+    })
+    @ApiBody({
+        type: EmailDto,
+        isArray: false,
+    })
+    @Post('sign-in')
+    async signIn(@Body() body: EmailDto): Promise<LoginResponseDto> {
+        return this._authService.signIn(body.email);
+    }
 }
