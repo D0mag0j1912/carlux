@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
 import { NgModule, importProvidersFrom, inject } from '@angular/core';
 import { CanMatchFn, Route, Router, RouterModule, Routes, UrlSegment } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
@@ -40,7 +41,6 @@ const routes: Routes = [
         children: [
             {
                 path: 'auth',
-                // eslint-disable-next-line @typescript-eslint/promise-function-async
                 loadComponent: () =>
                     import('./auth/auth.component').then((component) => component.AuthComponent),
                 providers: [
@@ -52,7 +52,6 @@ const routes: Routes = [
             },
             {
                 path: 'marina-list',
-                // eslint-disable-next-line @typescript-eslint/promise-function-async
                 loadComponent: () =>
                     import('./marina-list/marina-list.component').then(
                         (component) => component.MarinaListComponent,
@@ -61,7 +60,6 @@ const routes: Routes = [
             },
             {
                 path: 'settings',
-                // eslint-disable-next-line @typescript-eslint/promise-function-async
                 loadComponent: () =>
                     import('./settings/settings.component').then(
                         (component) => component.SettingsComponent,
