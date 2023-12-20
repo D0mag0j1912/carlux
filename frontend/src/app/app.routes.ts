@@ -12,7 +12,7 @@ import { AuthEffects } from './tabs/auth/auth-effects/auth.effects';
 import { AuthenticationFacadeService } from './tabs/auth/auth-facade.service';
 import { AuthenticationHelperService } from './tabs/auth/helpers/auth-helper.service';
 
-export const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
+const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
     const authenticationFacadeService = inject(AuthenticationFacadeService);
     const authenticationHelperService = inject(AuthenticationHelperService);
     const router = inject(Router);
@@ -34,6 +34,11 @@ export const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) =
     );
 };
 
+const AUTH_ENVIRONMENT_PROVIDERS = importProvidersFrom([
+    StoreModule.forFeature(FeatureKeys.AUTH, AuthReducers.authReducers),
+    EffectsModule.forFeature(AuthEffects),
+]);
+
 export const routes: Routes = [
     {
         path: 'tabs',
@@ -45,12 +50,7 @@ export const routes: Routes = [
                     import('./tabs/auth/auth.component').then(
                         (component) => component.AuthComponent,
                     ),
-                providers: [
-                    importProvidersFrom([
-                        StoreModule.forFeature(FeatureKeys.AUTH, AuthReducers.authReducers),
-                        EffectsModule.forFeature(AuthEffects),
-                    ]),
-                ],
+                providers: [AUTH_ENVIRONMENT_PROVIDERS],
             },
             {
                 path: 'marina-list',
@@ -58,12 +58,7 @@ export const routes: Routes = [
                     import('./tabs/marina-list/marina-list.component').then(
                         (component) => component.MarinaListComponent,
                     ),
-                providers: [
-                    importProvidersFrom([
-                        StoreModule.forFeature(FeatureKeys.AUTH, AuthReducers.authReducers),
-                        EffectsModule.forFeature(AuthEffects),
-                    ]),
-                ],
+                providers: [AUTH_ENVIRONMENT_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
@@ -72,6 +67,7 @@ export const routes: Routes = [
                     import('./tabs/settings/settings.component').then(
                         (component) => component.SettingsComponent,
                     ),
+                providers: [AUTH_ENVIRONMENT_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
