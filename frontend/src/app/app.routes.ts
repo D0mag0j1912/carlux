@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/promise-function-async */
-import { NgModule, importProvidersFrom, inject } from '@angular/core';
-import { CanMatchFn, Route, Router, RouterModule, Routes, UrlSegment } from '@angular/router';
+import { importProvidersFrom, inject } from '@angular/core';
+import { CanMatchFn, Route, Router, Routes, UrlSegment } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { take, switchMap, of, map } from 'rxjs';
-import { FeatureKeys } from '../constants/feature-keys';
-import { LoginResponseDto as UserData } from '../api/models/login-response-dto';
-import { TabsComponent } from './tabs.component';
-import * as AuthReducers from './auth/auth-reducers/auth.reducers';
-import { AuthEffects } from './auth/auth-effects/auth.effects';
-import { AuthenticationFacadeService } from './auth/auth-facade.service';
-import { AuthenticationHelperService } from './auth/helpers/auth-helper.service';
+import { FeatureKeys } from './constants/feature-keys';
+import { LoginResponseDto as UserData } from './api/models/login-response-dto';
+import { TabsComponent } from './tabs/tabs.component';
+import * as AuthReducers from './tabs/auth/auth-reducers/auth.reducers';
+import { AuthEffects } from './tabs/auth/auth-effects/auth.effects';
+import { AuthenticationFacadeService } from './tabs/auth/auth-facade.service';
+import { AuthenticationHelperService } from './tabs/auth/helpers/auth-helper.service';
 
 export const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
     const authenticationFacadeService = inject(AuthenticationFacadeService);
@@ -34,7 +34,7 @@ export const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) =
     );
 };
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: 'tabs',
         component: TabsComponent,
@@ -42,7 +42,9 @@ const routes: Routes = [
             {
                 path: 'auth',
                 loadComponent: () =>
-                    import('./auth/auth.component').then((component) => component.AuthComponent),
+                    import('./tabs/auth/auth.component').then(
+                        (component) => component.AuthComponent,
+                    ),
                 providers: [
                     importProvidersFrom([
                         StoreModule.forFeature(FeatureKeys.AUTH, AuthReducers.authReducers),
@@ -53,15 +55,21 @@ const routes: Routes = [
             {
                 path: 'marina-list',
                 loadComponent: () =>
-                    import('./marina-list/marina-list.component').then(
+                    import('./tabs/marina-list/marina-list.component').then(
                         (component) => component.MarinaListComponent,
                     ),
+                providers: [
+                    importProvidersFrom([
+                        StoreModule.forFeature(FeatureKeys.AUTH, AuthReducers.authReducers),
+                        EffectsModule.forFeature(AuthEffects),
+                    ]),
+                ],
                 canMatch: [canMatchAuth],
             },
             {
                 path: 'settings',
                 loadComponent: () =>
-                    import('./settings/settings.component').then(
+                    import('./tabs/settings/settings.component').then(
                         (component) => component.SettingsComponent,
                     ),
                 canMatch: [canMatchAuth],
@@ -79,8 +87,3 @@ const routes: Routes = [
         pathMatch: 'full',
     },
 ];
-
-@NgModule({
-    imports: [RouterModule.forChild(routes)],
-})
-export class TabsRoutingModule {}

@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { GetResult, Storage } from '@capacitor/storage';
 import { from, take } from 'rxjs';
+import { IonicModule } from '@ionic/angular';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { TranslocoModule } from '@ngneat/transloco';
 import { FeatureKeys } from '../constants/feature-keys';
 import { LoginResponseDto as UserData } from '../api/models/login-response-dto';
 import { AuthenticationFacadeService } from './auth/auth-facade.service';
 
 @Component({
+    standalone: true,
+    imports: [IonicModule, NgIf, AsyncPipe, TranslocoModule],
     selector: 'yac-tabs',
     templateUrl: 'tabs.component.html',
     styleUrls: ['tabs.component.scss'],
