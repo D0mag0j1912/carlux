@@ -1,15 +1,54 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { AppModule } from './app/root.module';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { RouteReuseStrategy, provideRouter } from '@angular/router';
+import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { environment } from './environments/environment';
+import { RootComponent } from './app/root.component';
+import { routes } from './app/app.routes';
+import { appReducers } from './app';
+import { SharedEffects } from './app/tabs/shared/shared-effects/shared.effects';
+import { TranslocoRootModule } from './app/transloco-root.module';
+import { ApiModule } from './app/api';
+import { AuthInterceptor } from './app/interceptors/auth.interceptor';
+import { PlatformModule } from './app/tabs/platform/platform.module';
 
 if (environment.production) {
     enableProdMode();
 }
 
-platformBrowserDynamic()
-    .bootstrapModule(AppModule)
-    .catch((_) => {
-        throw new Error();
-    });
+void bootstrapApplication(RootComponent, {
+    providers: [
+        {
+            provide: RouteReuseStrategy,
+            useClass: IonicRouteStrategy,
+        },
+        importProvidersFrom([
+            BrowserModule,
+            IonicModule.forRoot({}),
+            StoreModule.forRoot(appReducers, {
+                runtimeChecks: {
+                    strictStateImmutability: true,
+                    strictActionImmutability: true,
+                    strictActionSerializability: true,
+                    strictStateSerializability: true,
+                },
+            }),
+            StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+            EffectsModule.forRoot([SharedEffects]),
+            HttpClientModule,
+            TranslocoRootModule,
+            PlatformModule,
+            ApiModule.forRoot({ rootUrl: environment.apiUrl }),
+        ]),
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },
+        provideRouter(routes),
+    ],
+});

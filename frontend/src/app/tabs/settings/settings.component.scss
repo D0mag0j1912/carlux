@@ -1,0 +1,34 @@
+
+.settings-content {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    position: relative;
+
+    .profile,
+    .title {
+        font-size: var(--ion-font-l);
+        line-height: 24px;
+        color: var(--ion-color-primary);
+    }
+
+    .title {
+        margin-top: 35px;
+    }
+
+    .list {
+        margin: 20px 0 0 0;
+
+        .item::part(native) {
+            padding-left: 0;
+        }
+    }
+
+    .logout-text {
+        display: block;
+        text-decoration: underline;
+        font-size: 16px;
+        line-height: var(--ion-font-l);
+        position: absolute;
+        bottom: 66px;
+    }
+}

@@ -81,6 +81,7 @@ export class AuthService {
         try {
             const user: User[] = await this._userRepository.find({
                 select: {
+                    Id: true,
                     Email: true,
                 },
                 where: {
