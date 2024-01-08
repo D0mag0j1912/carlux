@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule } from '@ngneat/transloco';
@@ -6,7 +6,7 @@ import { AuthenticationFacadeService } from '../auth/auth-facade.service';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, IonicModule, TranslocoModule],
+    imports: [IonicModule, TranslocoModule],
     selector: 'yac-settings',
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.scss'],

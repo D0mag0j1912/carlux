@@ -1,23 +1,21 @@
 <ion-tabs>
     <ng-container *transloco="let t">
         <ion-tab-bar slot="bottom">
-            <ng-container *ngIf="isAuthenticated$ | async; else notAuthenticated">
+            @if (isAuthenticated$ | async) {
                 <ion-tab-button tab="marina-list" href="/tabs/marina-list">
                     <ion-icon name="boat-sharp"></ion-icon>
                     <ion-label>{{ t('tabs.marina_list') }}</ion-label>
                 </ion-tab-button>
-
                 <ion-tab-button tab="settings" href="/tabs/settings">
                     <ion-icon name="settings-sharp"></ion-icon>
                     <ion-label>{{ t('tabs.settings') }}</ion-label>
                 </ion-tab-button>
-            </ng-container>
-            <ng-template #notAuthenticated>
+            } @else {
                 <ion-tab-button tab="auth" href="/tabs/auth">
                     <ion-icon name="log-in-sharp"></ion-icon>
                     <ion-label>{{ t('tabs.auth') }}</ion-label>
                 </ion-tab-button>
-            </ng-template>
+            }
         </ion-tab-bar>
     </ng-container>
 </ion-tabs>
