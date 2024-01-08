@@ -14,7 +14,7 @@
             {{ t('settings.title') }}
         </div>
         <ion-list class="list">
-            <ion-item class="item" [button]="true">
+            <ion-item button class="item" routerDirection="forward" [routerLink]="['/', 'tabs', 'languages']">
                 <ion-icon slot="start" name="language-sharp" size="large"></ion-icon>
                 <ion-label>
                     {{ t('settings.languages') }}

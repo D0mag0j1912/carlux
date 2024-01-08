@@ -71,6 +71,14 @@ export const routes: Routes = [
                 canMatch: [canMatchAuth],
             },
             {
+                path: 'languages',
+                loadComponent: () =>
+                    import('./tabs/settings/components/languages/languages.component').then(
+                        (component) => component.LanguagesComponent,
+                    ),
+                canMatch: [canMatchAuth],
+            },
+            {
                 path: '',
                 redirectTo: '/tabs/auth',
                 pathMatch: 'full',

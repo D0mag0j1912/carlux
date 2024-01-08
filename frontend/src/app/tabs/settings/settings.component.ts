@@ -13,12 +13,14 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { languageSharp } from 'ionicons/icons';
+import { RouterModule } from '@angular/router';
 import { AuthenticationFacadeService } from '../auth/auth-facade.service';
 
 @Component({
     standalone: true,
     imports: [
         TranslocoModule,
+        RouterModule,
         IonHeader,
         IonToolbar,
         IonTitle,
