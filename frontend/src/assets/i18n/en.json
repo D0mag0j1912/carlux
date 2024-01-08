@@ -56,5 +56,9 @@
         "auth": "Sign in",
         "marina_list": "Marinas",
         "settings": "Settings"
+    },
+    "languages": {
+        "croatian": "Croatian",
+        "english": "English"
     }
 }

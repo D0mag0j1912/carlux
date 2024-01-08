@@ -56,5 +56,9 @@
         "auth": "Prijava",
         "marina_list": "Marine",
         "settings": "Postavke"
+    },
+    "languages": {
+        "croatian": "Hrvatski",
+        "english": "Engleski"
     }
 }

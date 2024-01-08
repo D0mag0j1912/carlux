@@ -76,6 +76,7 @@ export const routes: Routes = [
                     import('./tabs/settings/components/languages/languages.component').then(
                         (component) => component.LanguagesComponent,
                     ),
+                providers: [AUTH_ENVIRONMENT_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
