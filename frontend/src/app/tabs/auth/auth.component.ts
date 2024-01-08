@@ -19,7 +19,7 @@ import {
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { filter, map, take } from 'rxjs';
-import { IonInput, ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 import {
@@ -30,6 +30,7 @@ import {
     IonGrid,
     IonHeader,
     IonIcon,
+    IonInput,
     IonModal,
     IonRow,
     IonSpinner,
@@ -86,6 +87,7 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
         IonModal,
         IonButtons,
         IonSpinner,
+        IonInput,
     ],
     selector: 'yac-auth',
     templateUrl: './auth.component.html',
