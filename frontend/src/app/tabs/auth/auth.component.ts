@@ -19,9 +19,27 @@ import {
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
 import { filter, map, take } from 'rxjs';
-import { IonInput, IonicModule, ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
+import {
+    IonButton,
+    IonButtons,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonHeader,
+    IonIcon,
+    IonInput,
+    IonModal,
+    IonRow,
+    IonSpinner,
+    IonText,
+    IonTitle,
+    IonToolbar,
+} from '@ionic/angular/standalone';
+import { logoGoogle, logoApple } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
 import { environment } from '../../../environments/environment';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
@@ -54,13 +72,27 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        IonicModule,
         TranslocoModule,
         PersonalInformationDialogComponent,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonContent,
+        IonGrid,
+        IonRow,
+        IonCol,
+        IonButton,
+        IonIcon,
+        IonText,
+        IonModal,
+        IonButtons,
+        IonSpinner,
+        IonInput,
     ],
     selector: 'yac-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
+    providers: [ModalController],
 })
 export class AuthComponent implements OnInit, AfterViewInit {
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
@@ -93,7 +125,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
         private _modalController: ModalController,
         private _navController: NavController,
         private _destroyRef: DestroyRef,
-    ) {}
+    ) {
+        addIcons({ logoGoogle, logoApple });
+    }
 
     ngOnInit(): void {
         this._authenticationFacadeService

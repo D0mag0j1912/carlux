@@ -28,7 +28,7 @@
     "@capacitor/keyboard": "5.0.6",
     "@capacitor/status-bar": "5.0.6",
     "@capacitor/storage": "^1.2.5",
-    "@ionic/angular": "^7.0.0",
+    "@ionic/angular": "^7.6.3",
     "@ngneat/transloco": "^6.0.0",
     "@ngrx/effects": "^16.3.0",
     "@ngrx/store": "^16.3.0",

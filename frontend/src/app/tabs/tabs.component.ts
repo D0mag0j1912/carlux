@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { GetResult, Storage } from '@capacitor/storage';
 import { from, take } from 'rxjs';
-import { IonicModule } from '@ionic/angular';
 import { AsyncPipe } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
+import { boatSharp, settingsSharp, logInSharp } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+import { IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs } from '@ionic/angular/standalone';
 import { FeatureKeys } from '../constants/feature-keys';
 import { LoginResponseDto as UserData } from '../api/models/login-response-dto';
 import { AuthenticationFacadeService } from './auth/auth-facade.service';
 
 @Component({
     standalone: true,
-    imports: [IonicModule, AsyncPipe, TranslocoModule],
+    imports: [AsyncPipe, TranslocoModule, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel],
     selector: 'yac-tabs',
     templateUrl: 'tabs.component.html',
     styleUrls: ['tabs.component.scss'],
@@ -18,7 +20,9 @@ import { AuthenticationFacadeService } from './auth/auth-facade.service';
 export class TabsComponent implements OnInit {
     isAuthenticated$ = this._authenticationFacadeService.selectUserData();
 
-    constructor(private _authenticationFacadeService: AuthenticationFacadeService) {}
+    constructor(private _authenticationFacadeService: AuthenticationFacadeService) {
+        addIcons({ boatSharp, settingsSharp, logInSharp });
+    }
 
     ngOnInit(): void {
         from(Storage.get({ key: FeatureKeys.AUTH }))

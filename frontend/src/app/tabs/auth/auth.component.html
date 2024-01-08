@@ -83,7 +83,7 @@
                                 </ion-text>
                                 <ion-grid>
                                     <ion-row>
-                                        @for (codeValue of codeValues(); track codeValue; let i = $index) {
+                                        @for (codeValue of codeValues(); track codeValue.code; let i = $index) {
                                             <ion-col>
                                                 <ion-input
                                                     #codeEl
