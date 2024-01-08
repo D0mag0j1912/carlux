@@ -1,12 +1,13 @@
 import { Component, Input, ViewChild, inject } from '@angular/core';
-import { IonDatetime, IonicModule, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { TranslocoModule } from '@ngneat/transloco';
+import { IonContent, IonDatetime, IonButtons, IonButton } from '@ionic/angular/standalone';
 import { DialogRoles } from '../../constants/dialog-roles';
 
 @Component({
     standalone: true,
-    imports: [IonicModule, TranslocoModule],
+    imports: [TranslocoModule, IonContent, IonDatetime, IonButtons, IonButton],
     templateUrl: './datetime-picker.component.html',
 })
 export class DateTimePickerComponent {

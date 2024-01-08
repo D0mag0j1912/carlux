@@ -1,11 +1,12 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicRouteStrategy } from '@ionic/angular';
 import { RouteReuseStrategy, provideRouter } from '@angular/router';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { provideIonicAngular } from '@ionic/angular/standalone';
 import { environment } from './environments/environment';
 import { RootComponent } from './app/root.component';
 import { routes } from './app/app.routes';
@@ -26,9 +27,9 @@ void bootstrapApplication(RootComponent, {
             provide: RouteReuseStrategy,
             useClass: IonicRouteStrategy,
         },
+        provideIonicAngular(),
         importProvidersFrom([
             BrowserModule,
-            IonicModule.forRoot({}),
             StoreModule.forRoot(appReducers, {
                 runtimeChecks: {
                     strictStateImmutability: true,

@@ -1,11 +1,22 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonicModule, ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { TranslocoModule } from '@ngneat/transloco';
 import { format, parseISO } from 'date-fns';
 import { filter, from } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+    IonButton,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonHeader,
+    IonInput,
+    IonRow,
+    IonTitle,
+    IonToolbar,
+} from '@ionic/angular/standalone';
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { DialogRoles } from '../../../../constants/dialog-roles';
 import { AuthenticationFacadeService } from '../../auth-facade.service';
@@ -15,7 +26,20 @@ import { emailExistsValidator } from '../../validators/email-exists.validator';
 
 @Component({
     standalone: true,
-    imports: [IonicModule, ReactiveFormsModule, TranslocoModule, DateTimePickerComponent],
+    imports: [
+        ReactiveFormsModule,
+        TranslocoModule,
+        DateTimePickerComponent,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonContent,
+        IonGrid,
+        IonRow,
+        IonCol,
+        IonInput,
+        IonButton,
+    ],
     templateUrl: './personal-information-dialog.component.html',
     styleUrls: ['./personal-information-dialog.component.scss'],
 })

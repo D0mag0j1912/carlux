@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { Platforms } from '@ionic/core';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { PlatformFacadeService } from './tabs/platform/platform-facade/platform-facade.service';
 
 @Component({
     standalone: true,
-    imports: [IonicModule],
+    imports: [IonApp, IonRouterOutlet],
     selector: 'yac-root',
     templateUrl: 'root.component.html',
     styleUrls: ['root.component.scss'],
