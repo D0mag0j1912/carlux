@@ -5,7 +5,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export class User {
     @ApiProperty({
         type: Number,
-        required: false,
+        required: true,
         description: 'Id of the user',
     })
     @PrimaryGeneratedColumn()
