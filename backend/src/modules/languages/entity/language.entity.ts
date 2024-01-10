@@ -9,7 +9,7 @@ export class Language {
         description: 'Language primary ID',
     })
     @PrimaryGeneratedColumn()
-    Id: number;
+    Id?: number;
 
     @ApiProperty({
         type: String,
