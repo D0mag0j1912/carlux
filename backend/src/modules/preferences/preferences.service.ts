@@ -56,7 +56,7 @@ export class PreferencesService {
                 await this._preferencesRepository.save(newPreference);
                 return language[0].LanguageCode as LanguageCode;
             }
-        } catch (_) {
+        } catch (error) {
             throw new InternalServerErrorException();
         }
     }

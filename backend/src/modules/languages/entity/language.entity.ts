@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'Language' })
+@Entity({ name: 'Languages' })
 export class Language {
     @ApiProperty({
         type: Number,
