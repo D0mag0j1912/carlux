@@ -14,6 +14,23 @@ export class PreferencesService {
         @InjectRepository(Language) private _languageRepository: Repository<Language>,
     ) {}
 
+    async getLanguage(userId: string): Promise<LanguageCode> {
+        try {
+            const language: Language = await this._languageRepository
+                .createQueryBuilder('Languages')
+                .leftJoinAndSelect(
+                    Preference,
+                    'Preferences',
+                    'Preferences.LanguageId = Languages.Id',
+                )
+                .where('Preferences.UserId = :userId', { userId })
+                .getOne();
+            return language.LanguageCode;
+        } catch (error) {
+            throw new InternalServerErrorException();
+        }
+    }
+
     async saveLanguage(languageCode: LanguageCode, userId: number): Promise<LanguageCode> {
         try {
             const preferences: Preference[] = await this._preferencesRepository.find({
