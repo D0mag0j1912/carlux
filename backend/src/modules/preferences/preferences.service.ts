@@ -16,6 +16,11 @@ export class PreferencesService {
 
     async getLanguage(userId: string): Promise<LanguageCode> {
         try {
+            /*
+            SELECT * FROM Languages
+            LEFT JOIN Preferences ON Languages.Id = Preferences.LanguageId
+            WHERE Preferences.UserId = <>
+            */
             const language: Language = await this._languageRepository
                 .createQueryBuilder('Languages')
                 .leftJoinAndSelect(
