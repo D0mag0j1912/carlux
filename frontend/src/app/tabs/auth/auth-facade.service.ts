@@ -23,6 +23,8 @@ export class AuthenticationFacadeService {
 
     private _selectUserData$ = this._store.select(AuthenticationSelectors.selectUserData);
 
+    private _selectUserId$ = this._store.select(AuthenticationSelectors.selectUserId);
+
     constructor(private _store: Store<AppState[FeatureKeys.AUTH]>) {}
 
     //Selectors BEGIN -------------------------
@@ -44,6 +46,10 @@ export class AuthenticationFacadeService {
 
     selectUserData(): Observable<UserData | undefined> {
         return this._selectUserData$;
+    }
+
+    selectUserId(): Observable<number | undefined> {
+        return this._selectUserId$;
     }
     //Selectors END ---------------------------
 

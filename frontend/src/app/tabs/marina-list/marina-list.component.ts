@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { filter, take } from 'rxjs';
+import { PreferencesFacadeService } from '../preferences/preferences-facade.service';
+import { AuthenticationFacadeService } from '../auth/auth-facade.service';
 
 @Component({
     standalone: true,
@@ -6,4 +9,14 @@ import { Component } from '@angular/core';
     templateUrl: './marina-list.component.html',
     styleUrls: ['./marina-list.component.scss'],
 })
-export class MarinaListComponent {}
+export class MarinaListComponent implements OnInit {
+    private _preferencesFacadeService = inject(PreferencesFacadeService);
+    private _authenticationFacadeService = inject(AuthenticationFacadeService);
+
+    ngOnInit(): void {
+        this._authenticationFacadeService
+            .selectUserId()
+            .pipe(take(1), filter(Boolean))
+            .subscribe((userId: number) => this._preferencesFacadeService.getPreferences(userId));
+    }
+}
