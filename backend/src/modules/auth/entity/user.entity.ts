@@ -9,7 +9,7 @@ export class User {
         description: 'Id of the user',
     })
     @PrimaryGeneratedColumn()
-    Id: number;
+    Id?: number;
 
     @ApiProperty({
         type: String,
