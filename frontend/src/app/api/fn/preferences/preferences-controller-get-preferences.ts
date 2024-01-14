@@ -8,12 +8,12 @@ import { RequestBuilder } from '../../request-builder';
 
 import { PreferencesDto } from '../../models/preferences-dto';
 
-export interface PreferencesControllerGetLanguage$Params {
+export interface PreferencesControllerGetPreferences$Params {
   userId: number;
 }
 
-export function preferencesControllerGetLanguage(http: HttpClient, rootUrl: string, params: PreferencesControllerGetLanguage$Params, context?: HttpContext): Observable<StrictHttpResponse<PreferencesDto>> {
-  const rb = new RequestBuilder(rootUrl, preferencesControllerGetLanguage.PATH, 'get');
+export function preferencesControllerGetPreferences(http: HttpClient, rootUrl: string, params: PreferencesControllerGetPreferences$Params, context?: HttpContext): Observable<StrictHttpResponse<PreferencesDto>> {
+  const rb = new RequestBuilder(rootUrl, preferencesControllerGetPreferences.PATH, 'get');
   if (params) {
     rb.query('userId', params.userId, {});
   }
@@ -28,4 +28,4 @@ export function preferencesControllerGetLanguage(http: HttpClient, rootUrl: stri
   );
 }
 
-preferencesControllerGetLanguage.PATH = '/api/preferences';
+preferencesControllerGetPreferences.PATH = '/api/preferences';

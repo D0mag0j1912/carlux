@@ -60,5 +60,10 @@
     "languages": {
         "croatian": "Hrvatski",
         "english": "Engleski"
+    },
+    "preferences": {
+        "errors": {
+            "get_preferences": "Greška prilikom dohvata preferenci. Molimo pokušajte ponovno."
+        }
     }
 }

@@ -60,5 +60,10 @@
     "languages": {
         "croatian": "Croatian",
         "english": "English"
+    },
+    "preferences": {
+        "errors": {
+            "get_preferences": "Unable to get preferences. Please try again."
+        }
     }
 }

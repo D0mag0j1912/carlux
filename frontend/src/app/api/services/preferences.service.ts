@@ -11,8 +11,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { preferencesControllerChangeLanguage } from '../fn/preferences/preferences-controller-change-language';
 import { PreferencesControllerChangeLanguage$Params } from '../fn/preferences/preferences-controller-change-language';
-import { preferencesControllerGetLanguage } from '../fn/preferences/preferences-controller-get-language';
-import { PreferencesControllerGetLanguage$Params } from '../fn/preferences/preferences-controller-get-language';
+import { preferencesControllerGetPreferences } from '../fn/preferences/preferences-controller-get-preferences';
+import { PreferencesControllerGetPreferences$Params } from '../fn/preferences/preferences-controller-get-preferences';
 import { PreferencesDto } from '../models/preferences-dto';
 
 @Injectable({ providedIn: 'root' })
@@ -46,27 +46,27 @@ export class PreferencesService extends BaseService {
     );
   }
 
-  /** Path part for operation `preferencesControllerGetLanguage()` */
-  static readonly PreferencesControllerGetLanguagePath = '/api/preferences';
+  /** Path part for operation `preferencesControllerGetPreferences()` */
+  static readonly PreferencesControllerGetPreferencesPath = '/api/preferences';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `preferencesControllerGetLanguage()` instead.
+   * To access only the response body, use `preferencesControllerGetPreferences()` instead.
    *
    * This method doesn't expect any request body.
    */
-  preferencesControllerGetLanguage$Response(params: PreferencesControllerGetLanguage$Params, context?: HttpContext): Observable<StrictHttpResponse<PreferencesDto>> {
-    return preferencesControllerGetLanguage(this.http, this.rootUrl, params, context);
+  preferencesControllerGetPreferences$Response(params: PreferencesControllerGetPreferences$Params, context?: HttpContext): Observable<StrictHttpResponse<PreferencesDto>> {
+    return preferencesControllerGetPreferences(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `preferencesControllerGetLanguage$Response()` instead.
+   * To access the full response (for headers, for example), `preferencesControllerGetPreferences$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  preferencesControllerGetLanguage(params: PreferencesControllerGetLanguage$Params, context?: HttpContext): Observable<PreferencesDto> {
-    return this.preferencesControllerGetLanguage$Response(params, context).pipe(
+  preferencesControllerGetPreferences(params: PreferencesControllerGetPreferences$Params, context?: HttpContext): Observable<PreferencesDto> {
+    return this.preferencesControllerGetPreferences$Response(params, context).pipe(
       map((r: StrictHttpResponse<PreferencesDto>): PreferencesDto => r.body)
     );
   }

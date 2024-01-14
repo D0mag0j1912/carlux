@@ -212,7 +212,7 @@
         },
         "/api/preferences": {
             "get": {
-                "operationId": "PreferencesController_getLanguage",
+                "operationId": "PreferencesController_getPreferences",
                 "parameters": [
                     {
                         "name": "userId",

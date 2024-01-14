@@ -16,6 +16,7 @@ import { TranslocoRootModule } from './app/transloco-root.module';
 import { ApiModule } from './app/api';
 import { AuthInterceptor } from './app/interceptors/auth.interceptor';
 import { PlatformModule } from './app/tabs/platform/platform.module';
+import * as PreferencesEffects from './app/tabs/preferences/effects/preferences.effects';
 
 if (environment.production) {
     enableProdMode();
@@ -39,7 +40,7 @@ void bootstrapApplication(RootComponent, {
                 },
             }),
             StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-            EffectsModule.forRoot([SharedEffects]),
+            EffectsModule.forRoot([SharedEffects, PreferencesEffects]),
             HttpClientModule,
             TranslocoRootModule,
             PlatformModule,

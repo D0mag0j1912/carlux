@@ -55,7 +55,7 @@ export class PreferencesController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Get()
-    async getLanguage(@Query() data: GetPreferencesDto): Promise<PreferencesDto> {
+    async getPreferences(@Query() data: GetPreferencesDto): Promise<PreferencesDto> {
         return this._preferencesService.getPreferences(data.userId);
     }
 }
