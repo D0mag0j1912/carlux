@@ -302,7 +302,7 @@
                         "description": "Date when the user was created"
                     }
                 },
-                "required": ["Id", "FirstName", "LastName", "BirthDate", "Email"]
+                "required": ["FirstName", "LastName", "BirthDate", "Email"]
             },
             "LoginResponseDto": {
                 "type": "object",
