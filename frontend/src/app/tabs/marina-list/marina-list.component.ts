@@ -16,7 +16,9 @@ export class MarinaListComponent implements OnInit {
     ngOnInit(): void {
         this._authenticationFacadeService
             .selectUserId()
-            .pipe(take(1), filter(Boolean))
-            .subscribe((userId: number) => this._preferencesFacadeService.getPreferences(userId));
+            .pipe(take(2), filter(Boolean))
+            .subscribe((userId: number) => {
+                this._preferencesFacadeService.getPreferences(userId);
+            });
     }
 }
