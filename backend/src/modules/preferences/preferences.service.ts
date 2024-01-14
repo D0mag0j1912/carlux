@@ -3,12 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { LanguageCode } from '../languages/enums/language-code';
 import { Language } from '../languages/entity/language.entity';
+import { INITIAL_LANGUAGE } from '../auth/constants/initial-language';
 import { Preference } from './entity/preferences.entity';
 
 @Injectable()
 export class PreferencesService {
-    readonly INITIAL_LANGUAGE = LanguageCode.EN;
-
     constructor(
         @InjectRepository(Preference) private _preferencesRepository: Repository<Preference>,
         @InjectRepository(Language) private _languageRepository: Repository<Language>,
@@ -68,7 +67,7 @@ export class PreferencesService {
                         Id: true,
                     },
                     where: {
-                        LanguageCode: this.INITIAL_LANGUAGE,
+                        LanguageCode: INITIAL_LANGUAGE,
                     },
                 });
                 const newPreference: Preference = {
