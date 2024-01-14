@@ -2,34 +2,36 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { LanguageCode } from '../languages/enums/language-code';
-import { Language } from '../languages/entity/language.entity';
+import { LanguageEntity } from '../languages/entity/language.entity';
 import { INITIAL_LANGUAGE } from '../auth/constants/initial-language';
-import { Preference } from './entity/preferences.entity';
+import { PreferenceEntity } from './entity/preferences.entity';
+import { PreferencesDto } from './models/preferences.dto';
 
 @Injectable()
 export class PreferencesService {
     constructor(
-        @InjectRepository(Preference) private _preferencesRepository: Repository<Preference>,
-        @InjectRepository(Language) private _languageRepository: Repository<Language>,
+        @InjectRepository(PreferenceEntity)
+        private _preferencesRepository: Repository<PreferenceEntity>,
+        @InjectRepository(LanguageEntity) private _languageRepository: Repository<LanguageEntity>,
     ) {}
 
-    async getLanguage(userId: string): Promise<LanguageCode> {
+    async getPreferences(userId: number): Promise<PreferencesDto> {
         try {
             /*
-            SELECT * FROM Languages
-            LEFT JOIN Preferences ON Languages.Id = Preferences.LanguageId
-            WHERE Preferences.UserId = <>
+            SELECT * FROM Languages L
+            LEFT JOIN Preferences P ON L.Id = P.LanguageId
+            WHERE P.UserId = <>
             */
-            const language: Language = await this._languageRepository
-                .createQueryBuilder('Languages')
-                .leftJoinAndSelect(
-                    Preference,
-                    'Preferences',
-                    'Preferences.LanguageId = Languages.Id',
-                )
-                .where('Preferences.UserId = :userId', { userId })
+            const language: LanguageEntity = await this._languageRepository
+                .createQueryBuilder('L')
+                .leftJoinAndSelect(PreferenceEntity, 'P', 'P.LanguageId = L.Id')
+                .where('P.UserId = :userId', { userId })
                 .getOne();
-            return language.LanguageCode;
+            const preferences: PreferencesDto = {
+                userId,
+                languageCode: language.LanguageCode,
+            };
+            return preferences;
         } catch (error) {
             throw new InternalServerErrorException();
         }
@@ -37,7 +39,7 @@ export class PreferencesService {
 
     async saveLanguage(languageCode: LanguageCode, userId: number): Promise<LanguageCode> {
         try {
-            const preferences: Preference[] = await this._preferencesRepository.find({
+            const preferences: PreferenceEntity[] = await this._preferencesRepository.find({
                 select: {
                     Id: true,
                     UserId: true,
@@ -49,7 +51,7 @@ export class PreferencesService {
             });
 
             if (preferences.length) {
-                const foundLanguages: Language[] = await this._languageRepository.find({
+                const foundLanguages: LanguageEntity[] = await this._languageRepository.find({
                     select: {
                         Id: true,
                     },
@@ -62,7 +64,7 @@ export class PreferencesService {
                 });
                 return languageCode;
             } else {
-                const language: Language[] = await this._languageRepository.find({
+                const language: LanguageEntity[] = await this._languageRepository.find({
                     select: {
                         Id: true,
                     },
@@ -70,7 +72,7 @@ export class PreferencesService {
                         LanguageCode: INITIAL_LANGUAGE,
                     },
                 });
-                const newPreference: Preference = {
+                const newPreference: PreferenceEntity = {
                     UserId: userId,
                     LanguageId: language[0].Id,
                 };

@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { LanguageCode } from '../enums/language-code';
 
 @Entity({ name: 'Languages' })
-export class Language {
+export class LanguageEntity {
     @ApiProperty({
         type: Number,
         required: true,

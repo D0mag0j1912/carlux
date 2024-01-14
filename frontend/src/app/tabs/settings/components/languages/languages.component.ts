@@ -47,4 +47,6 @@ export class LanguagesComponent {
             value: 'languages.english',
         },
     ];
+
+    onLanguageChange($event: unknown): void {}
 }

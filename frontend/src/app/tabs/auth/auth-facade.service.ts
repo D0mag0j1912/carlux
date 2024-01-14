@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../..';
 import { FeatureKeys } from '../../constants/feature-keys';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
-import { User } from '../../api/models/user';
+import { UserEntity as User } from '../../api/models/user-entity';
 import { LoginResponseDto as UserData } from '../../api/models/login-response-dto';
 import * as AuthenticationActions from './auth-actions/auth.actions';
 import * as AuthenticationSelectors from './auth-selectors/auth.selectors';

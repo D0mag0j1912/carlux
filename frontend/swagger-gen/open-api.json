@@ -80,7 +80,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/UserEntity"
                             }
                         }
                     }
@@ -208,7 +208,9 @@
                     }
                 },
                 "tags": ["Preferences"]
-            },
+            }
+        },
+        "/api/preferences": {
             "get": {
                 "operationId": "PreferencesController_getLanguage",
                 "parameters": [
@@ -217,7 +219,7 @@
                         "required": true,
                         "in": "query",
                         "schema": {
-                            "type": "string"
+                            "type": "number"
                         }
                     }
                 ],
@@ -227,7 +229,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/PreferencesDto"
                                 }
                             }
                         }
@@ -274,7 +276,7 @@
                 },
                 "required": ["code"]
             },
-            "User": {
+            "UserEntity": {
                 "type": "object",
                 "properties": {
                     "Id": {
@@ -342,6 +344,21 @@
                         "type": "string",
                         "enum": ["en", "hr"],
                         "description": "Language code"
+                    }
+                },
+                "required": ["userId", "languageCode"]
+            },
+            "PreferencesDto": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "number",
+                        "description": "User ID"
+                    },
+                    "languageCode": {
+                        "type": "string",
+                        "enum": ["en", "hr"],
+                        "description": "Code of the language"
                     }
                 },
                 "required": ["userId", "languageCode"]

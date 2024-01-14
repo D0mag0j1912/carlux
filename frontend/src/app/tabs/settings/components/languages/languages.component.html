@@ -13,9 +13,9 @@
     <ng-container *transloco="let t">
         <ion-list>
             @for (language of LANGUAGES_DATA; track language.key) {
-                <ion-radio-group>
+                <ion-radio-group (ionChange)="onLanguageChange($event)">
                     <ion-item>
-                        <ion-radio>
+                        <ion-radio [value]="language.key">
                             {{ t(language.value) }}
                         </ion-radio>
                     </ion-item>

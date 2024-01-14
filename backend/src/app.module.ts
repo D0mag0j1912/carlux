@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from './modules/auth/entity/user.entity';
+import { UserEntity } from './modules/auth/entity/user.entity';
 import { AuthModule } from './modules/auth/auth.module';
 import { PreferencesModule } from './modules/preferences/preferences.module';
-import { Preference } from './modules/preferences/entity/preferences.entity';
-import { Language } from './modules/languages/entity/language.entity';
+import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
+import { LanguageEntity } from './modules/languages/entity/language.entity';
 
 const IMPORTS = [AuthModule, PreferencesModule];
 
@@ -23,7 +23,7 @@ const IMPORTS = [AuthModule, PreferencesModule];
                 username: configService.get('DATABASE_USER'),
                 password: configService.get('DATABASE_PASSWORD'),
                 database: configService.get('DATABASE_NAME'),
-                entities: [User, Preference, Language],
+                entities: [UserEntity, PreferenceEntity, LanguageEntity],
             }),
             inject: [ConfigService],
         }),

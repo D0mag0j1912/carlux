@@ -11,7 +11,8 @@ import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { LanguageCode } from '../languages/enums/language-code';
 import { PreferencesService } from './preferences.service';
 import { LanguageChangeDto } from './models/language-change';
-import { GetLanguageDto } from './models/get-language.dto';
+import { GetPreferencesDto } from './models/get-language.dto';
+import { PreferencesDto } from './models/preferences.dto';
 
 @ApiTags('Preferences')
 @Controller('api/preferences')
@@ -43,7 +44,7 @@ export class PreferencesController {
     }
 
     @ApiOkResponse({
-        type: String,
+        type: PreferencesDto,
     })
     @ApiInternalServerErrorResponse({
         status: 500,
@@ -53,8 +54,8 @@ export class PreferencesController {
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
-    @Get('language')
-    async getLanguage(@Query() data: GetLanguageDto): Promise<LanguageCode> {
-        return this._preferencesService.getLanguage(data.userId);
+    @Get()
+    async getLanguage(@Query() data: GetPreferencesDto): Promise<PreferencesDto> {
+        return this._preferencesService.getPreferences(data.userId);
     }
 }

@@ -5,10 +5,10 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { MOCK_PHONE_VERIFICATION_CODE } from '../../mock/phone-verification-code';
-import { Preference } from '../preferences/entity/preferences.entity';
-import { Language } from '../languages/entity/language.entity';
+import { PreferenceEntity } from '../preferences/entity/preferences.entity';
+import { LanguageEntity } from '../languages/entity/language.entity';
 import { StatusResponseDto } from './models/status-response.dto';
-import { User } from './entity/user.entity';
+import { UserEntity } from './entity/user.entity';
 import { LoginResponseDto } from './models/login-response.dto';
 import { JwtPayloadDto } from './models/jwt-payload.dto';
 import { EXPIRES_IN } from './constants/jwt.constants';
@@ -17,9 +17,10 @@ import { INITIAL_LANGUAGE } from './constants/initial-language';
 @Injectable()
 export class AuthService {
     constructor(
-        @InjectRepository(User) private _userRepository: Repository<User>,
-        @InjectRepository(Preference) private _preferencesRepository: Repository<Preference>,
-        @InjectRepository(Language) private _languagesRepository: Repository<Language>,
+        @InjectRepository(UserEntity) private _userRepository: Repository<UserEntity>,
+        @InjectRepository(PreferenceEntity)
+        private _preferencesRepository: Repository<PreferenceEntity>,
+        @InjectRepository(LanguageEntity) private _languagesRepository: Repository<LanguageEntity>,
         private _jwtService: JwtService, //private _twilioService: TwilioService,
     ) {}
 
@@ -44,16 +45,16 @@ export class AuthService {
         }
     }
 
-    async register(user: User): Promise<LoginResponseDto> {
+    async register(user: UserEntity): Promise<LoginResponseDto> {
         try {
             //Save User
             const newUser = this._userRepository.create({
                 ...user,
                 CreatedAt: new Date().toISOString(),
             });
-            const savedUser: User = await this._userRepository.save(newUser);
+            const savedUser: UserEntity = await this._userRepository.save(newUser);
             //Save Preference
-            const language: Language[] = await this._languagesRepository.find({
+            const language: LanguageEntity[] = await this._languagesRepository.find({
                 select: {
                     Id: true,
                 },
@@ -61,7 +62,7 @@ export class AuthService {
                     LanguageCode: INITIAL_LANGUAGE,
                 },
             });
-            const newPreference: Preference = {
+            const newPreference: PreferenceEntity = {
                 UserId: savedUser.Id,
                 LanguageId: language[0].Id,
             };
@@ -84,7 +85,7 @@ export class AuthService {
 
     async emailExists(email: string): Promise<boolean> {
         try {
-            const user: User[] = await this._userRepository.find({
+            const user: UserEntity[] = await this._userRepository.find({
                 select: {
                     Email: true,
                 },
@@ -100,7 +101,7 @@ export class AuthService {
 
     async signIn(email: string): Promise<LoginResponseDto> {
         try {
-            const user: User[] = await this._userRepository.find({
+            const user: UserEntity[] = await this._userRepository.find({
                 select: {
                     Id: true,
                     Email: true,
