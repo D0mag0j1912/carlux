@@ -106,7 +106,9 @@ export class PersonalInformationDialogComponent implements OnInit {
         const user: User = {
             FirstName: this.form.value.firstName ?? '',
             LastName: this.form.value.lastName ?? '',
-            BirthDate: this.form.value.birthDate ?? new Date().toISOString(),
+            BirthDate: this.form.value.birthDate
+                ? new Date(this.form.value.birthDate).toISOString()
+                : new Date().toISOString(),
             Email: this.form.value.email ?? '',
         };
         this._authenticationFacadeService.registerUser(user);
