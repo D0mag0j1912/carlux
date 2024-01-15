@@ -12,6 +12,11 @@ export const selectUserPreferences = createSelector(
     (state: PreferencesState) => state.userPreferences,
 );
 
+export const selectUserId = createSelector(
+    selectPreferencesState,
+    (state: PreferencesState) => state.userPreferences?.userId,
+);
+
 export const selectLanguageCode = createSelector(
     selectUserPreferences,
     (userPreferences: Preferences | undefined) => userPreferences?.languageCode,

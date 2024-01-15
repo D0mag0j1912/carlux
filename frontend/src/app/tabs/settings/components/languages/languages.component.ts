@@ -14,6 +14,7 @@ import {
     IonToolbar,
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
+import { filter, take } from 'rxjs';
 import { LanguageCodeType, LanguageTranslationType } from '../../models/language.type';
 import { PreferencesFacadeService } from '../../../preferences/preferences-facade.service';
 
@@ -54,5 +55,14 @@ export class LanguagesComponent {
         },
     ];
 
-    onLanguageChange($event: unknown): void {}
+    onLanguageChange($event: CustomEvent): void {
+        const languageCode = ($event.detail as { value: LanguageCodeType; event: PointerEvent })
+            .value;
+        this._preferencesFacadeService
+            .selectUserId()
+            .pipe(take(1), filter(Boolean))
+            .subscribe((userId: number) =>
+                this._preferencesFacadeService.changeLanguage(userId, languageCode),
+            );
+    }
 }

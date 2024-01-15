@@ -16,4 +16,19 @@ export const preferencesReducers = createReducer(
         ...state,
         userPreferences: { ...preferences },
     })),
+    on(
+        PreferencesActions.changeLanguageSuccess,
+        (state: PreferencesState, { updatedLanguageCode }) => {
+            if (state.userPreferences) {
+                return {
+                    ...state,
+                    userPreferences: {
+                        ...state.userPreferences,
+                        languageCode: updatedLanguageCode,
+                    },
+                };
+            }
+            return { ...state };
+        },
+    ),
 );
