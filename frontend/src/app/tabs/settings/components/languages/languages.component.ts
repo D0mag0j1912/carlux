@@ -1,5 +1,5 @@
-import { KeyValue } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe, KeyValue } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import {
     IonBackButton,
     IonButtons,
@@ -15,6 +15,7 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
 import { LanguageCodeType, LanguageTranslationType } from '../../models/language.type';
+import { PreferencesFacadeService } from '../../../preferences/preferences-facade.service';
 
 @Component({
     standalone: true,
@@ -31,12 +32,17 @@ import { LanguageCodeType, LanguageTranslationType } from '../../models/language
         IonLabel,
         IonRadio,
         IonRadioGroup,
+        AsyncPipe,
     ],
     selector: 'yac-languages',
     templateUrl: './languages.component.html',
     styleUrls: ['./languages.component.scss'],
 })
 export class LanguagesComponent {
+    private _preferencesFacadeService = inject(PreferencesFacadeService);
+
+    languageCode$ = this._preferencesFacadeService.selectLanguageCode();
+
     readonly LANGUAGES_DATA: KeyValue<LanguageCodeType, LanguageTranslationType>[] = [
         {
             key: 'hr',
