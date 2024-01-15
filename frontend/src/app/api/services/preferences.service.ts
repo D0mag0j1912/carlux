@@ -47,7 +47,7 @@ export class PreferencesService extends BaseService {
   }
 
   /** Path part for operation `preferencesControllerGetPreferences()` */
-  static readonly PreferencesControllerGetPreferencesPath = '/api/preferences';
+  static readonly PreferencesControllerGetPreferencesPath = '/api/preferences/{userId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

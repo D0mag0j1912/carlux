@@ -210,14 +210,14 @@
                 "tags": ["Preferences"]
             }
         },
-        "/api/preferences": {
+        "/api/preferences/{userId}": {
             "get": {
                 "operationId": "PreferencesController_getPreferences",
                 "parameters": [
                     {
                         "name": "userId",
                         "required": true,
-                        "in": "query",
+                        "in": "path",
                         "schema": {
                             "type": "number"
                         }

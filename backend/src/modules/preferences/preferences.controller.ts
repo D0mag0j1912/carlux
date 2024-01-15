@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiBody,
@@ -11,7 +11,6 @@ import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { LanguageCode } from '../languages/enums/language-code';
 import { PreferencesService } from './preferences.service';
 import { LanguageChangeDto } from './models/language-change';
-import { GetPreferencesDto } from './models/get-language.dto';
 import { PreferencesDto } from './models/preferences.dto';
 
 @ApiTags('Preferences')
@@ -54,8 +53,8 @@ export class PreferencesController {
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
-    @Get()
-    async getPreferences(@Query() data: GetPreferencesDto): Promise<PreferencesDto> {
-        return this._preferencesService.getPreferences(data.userId);
+    @Get(':userId')
+    async getPreferences(@Param('userId', ParseIntPipe) userId: number): Promise<PreferencesDto> {
+        return this._preferencesService.getPreferences(userId);
     }
 }

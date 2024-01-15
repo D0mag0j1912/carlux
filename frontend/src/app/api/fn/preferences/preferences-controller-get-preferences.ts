@@ -15,7 +15,7 @@ export interface PreferencesControllerGetPreferences$Params {
 export function preferencesControllerGetPreferences(http: HttpClient, rootUrl: string, params: PreferencesControllerGetPreferences$Params, context?: HttpContext): Observable<StrictHttpResponse<PreferencesDto>> {
   const rb = new RequestBuilder(rootUrl, preferencesControllerGetPreferences.PATH, 'get');
   if (params) {
-    rb.query('userId', params.userId, {});
+    rb.path('userId', params.userId, {});
   }
 
   return http.request(
@@ -28,4 +28,4 @@ export function preferencesControllerGetPreferences(http: HttpClient, rootUrl: s
   );
 }
 
-preferencesControllerGetPreferences.PATH = '/api/preferences';
+preferencesControllerGetPreferences.PATH = '/api/preferences/{userId}';
