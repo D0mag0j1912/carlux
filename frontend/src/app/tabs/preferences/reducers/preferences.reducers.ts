@@ -3,17 +3,17 @@ import { PreferencesDto as Preferences } from '../../../api/models/preferences-d
 import * as PreferencesActions from '../actions/preferences.actions';
 
 export interface PreferencesState {
-    preferences: Preferences | undefined;
+    userPreferences: Preferences | undefined;
 }
 
 export const initialState: PreferencesState = {
-    preferences: undefined,
+    userPreferences: undefined,
 };
 
 export const preferencesReducers = createReducer(
     initialState,
     on(PreferencesActions.setPreferences, (state: PreferencesState, { preferences }) => ({
         ...state,
-        preferences: { ...preferences },
+        userPreferences: { ...preferences },
     })),
 );
