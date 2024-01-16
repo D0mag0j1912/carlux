@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
-import { User } from '../../../api/models/user';
+import { UserEntity as User } from '../../../api/models/user-entity';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 
 export const sendSMS = createAction('[Authentication] Send SMS');

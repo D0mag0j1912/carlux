@@ -5,9 +5,9 @@ import { TwilioModule } from 'nestjs-twilio';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from '../../middleware/jwt.strategy';
-import { Language } from '../languages/entity/language.entity';
-import { Preference } from '../preferences/entity/preferences.entity';
-import { User } from './entity/user.entity';
+import { LanguageEntity } from '../languages/entity/language.entity';
+import { PreferenceEntity } from '../preferences/entity/preferences.entity';
+import { UserEntity } from './entity/user.entity';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { EXPIRES_IN, JWT_TOKEN } from './constants/jwt.constants';
@@ -25,7 +25,7 @@ const CONTROLLERS = [AuthController];
                 expiresIn: EXPIRES_IN,
             },
         }),
-        TypeOrmModule.forFeature([User, Preference, Language]),
+        TypeOrmModule.forFeature([UserEntity, PreferenceEntity, LanguageEntity]),
         TwilioModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: (configService: ConfigService) => ({

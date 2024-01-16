@@ -3,6 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
+import { addIcons } from 'ionicons';
+import { warning } from 'ionicons/icons';
 import * as SharedActions from '../shared-actions/shared.actions';
 
 @Injectable()
@@ -56,4 +58,8 @@ export class SharedEffects {
             ),
         { dispatch: false },
     );
+
+    constructor() {
+        addIcons({ warning });
+    }
 }

@@ -12,7 +12,7 @@ export interface PreferencesControllerChangeLanguage$Params {
       body: LanguageChangeDto
 }
 
-export function preferencesControllerChangeLanguage(http: HttpClient, rootUrl: string, params: PreferencesControllerChangeLanguage$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+export function preferencesControllerChangeLanguage(http: HttpClient, rootUrl: string, params: PreferencesControllerChangeLanguage$Params, context?: HttpContext): Observable<StrictHttpResponse<LanguageChangeDto>> {
   const rb = new RequestBuilder(rootUrl, preferencesControllerChangeLanguage.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
@@ -23,7 +23,7 @@ export function preferencesControllerChangeLanguage(http: HttpClient, rootUrl: s
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<string>;
+      return r as StrictHttpResponse<LanguageChangeDto>;
     })
   );
 }

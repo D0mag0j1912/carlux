@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiBody,
@@ -8,10 +8,9 @@ import {
     ApiTags,
 } from '@nestjs/swagger';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
-import { LanguageCode } from '../languages/enums/language-code';
 import { PreferencesService } from './preferences.service';
 import { LanguageChangeDto } from './models/language-change';
-import { GetLanguageDto } from './models/get-language.dto';
+import { PreferencesDto } from './models/preferences.dto';
 
 @ApiTags('Preferences')
 @Controller('api/preferences')
@@ -22,7 +21,7 @@ export class PreferencesController {
     @ApiCreatedResponse({
         status: 201,
         description: RESPONSE_MESSAGE.CREATED,
-        type: String,
+        type: LanguageChangeDto,
     })
     @ApiInternalServerErrorResponse({
         status: 500,
@@ -38,12 +37,12 @@ export class PreferencesController {
         required: true,
     })
     @Post('language')
-    async changeLanguage(@Body() body: LanguageChangeDto): Promise<LanguageCode> {
+    async changeLanguage(@Body() body: LanguageChangeDto): Promise<LanguageChangeDto> {
         return this._preferencesService.saveLanguage(body.languageCode, body.userId);
     }
 
     @ApiOkResponse({
-        type: String,
+        type: PreferencesDto,
     })
     @ApiInternalServerErrorResponse({
         status: 500,
@@ -53,8 +52,8 @@ export class PreferencesController {
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
-    @Get('language')
-    async getLanguage(@Query() data: GetLanguageDto): Promise<LanguageCode> {
-        return this._preferencesService.getLanguage(data.userId);
+    @Get(':userId')
+    async getPreferences(@Param('userId', ParseIntPipe) userId: number): Promise<PreferencesDto> {
+        return this._preferencesService.getPreferences(userId);
     }
 }

@@ -20,7 +20,7 @@ import {
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { DialogRoles } from '../../../../constants/dialog-roles';
 import { AuthenticationFacadeService } from '../../auth-facade.service';
-import { User } from '../../../../api/models/user';
+import { UserEntity as User } from '../../../../api/models/user-entity';
 import { AuthenticationEventEmitterService } from '../../event-emitter/auth-event-emitter.service';
 import { emailExistsValidator } from '../../validators/email-exists.validator';
 

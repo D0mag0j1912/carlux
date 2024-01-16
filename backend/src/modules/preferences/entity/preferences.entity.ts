@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Language } from '../../languages/entity/language.entity';
+import { LanguageEntity } from '../../languages/entity/language.entity';
 
 @Entity({ name: 'Preferences' })
-export class Preference {
+export class PreferenceEntity {
     @ApiProperty({
         type: Number,
         required: true,
@@ -28,7 +28,7 @@ export class Preference {
     @Column({ type: 'int' })
     LanguageId: number;
 
-    @ManyToOne(() => Language, (language) => language.Id)
+    @ManyToOne(() => LanguageEntity, (language) => language.Id)
     @JoinColumn({ name: 'LanguageId' })
-    language?: Language;
+    language?: LanguageEntity;
 }

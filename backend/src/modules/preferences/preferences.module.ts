@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Language } from '../languages/entity/language.entity';
+import { LanguageEntity } from '../languages/entity/language.entity';
 import { PreferencesService } from './preferences.service';
 import { PreferencesController } from './preferences.controller';
-import { Preference } from './entity/preferences.entity';
+import { PreferenceEntity } from './entity/preferences.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Preference, Language])],
+    imports: [TypeOrmModule.forFeature([PreferenceEntity, LanguageEntity])],
     controllers: [PreferencesController],
     providers: [PreferencesService],
 })

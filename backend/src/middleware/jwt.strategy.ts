@@ -5,11 +5,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JWT_TOKEN } from '../modules/auth/constants/jwt.constants';
 import { JwtPayloadDto } from '../modules/auth/models/jwt-payload.dto';
-import { User } from '../modules/auth/entity/user.entity';
+import { UserEntity } from '../modules/auth/entity/user.entity';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-    constructor(@InjectRepository(User) private _userRepository: Repository<User>) {
+    constructor(@InjectRepository(UserEntity) private _userRepository: Repository<UserEntity>) {
         super({
             secretOrKey: JWT_TOKEN,
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

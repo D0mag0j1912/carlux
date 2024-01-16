@@ -11,6 +11,8 @@ import * as AuthReducers from './tabs/auth/auth-reducers/auth.reducers';
 import { AuthEffects } from './tabs/auth/auth-effects/auth.effects';
 import { AuthenticationFacadeService } from './tabs/auth/auth-facade.service';
 import { AuthenticationHelperService } from './tabs/auth/helpers/auth-helper.service';
+import * as PreferencesReducers from './tabs/preferences/reducers/preferences.reducers';
+import * as PreferencesEffects from './tabs/preferences/effects/preferences.effects';
 
 const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
     const authenticationFacadeService = inject(AuthenticationFacadeService);
@@ -39,6 +41,11 @@ const AUTH_ENVIRONMENT_PROVIDERS = importProvidersFrom([
     EffectsModule.forFeature(AuthEffects),
 ]);
 
+const PREFERENCES_PROVIDERS = importProvidersFrom([
+    StoreModule.forFeature(FeatureKeys.PREFERENCES, PreferencesReducers.preferencesReducers),
+    EffectsModule.forFeature(PreferencesEffects),
+]);
+
 export const routes: Routes = [
     {
         path: 'tabs',
@@ -58,7 +65,7 @@ export const routes: Routes = [
                     import('./tabs/marina-list/marina-list.component').then(
                         (component) => component.MarinaListComponent,
                     ),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS],
+                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
@@ -67,7 +74,16 @@ export const routes: Routes = [
                     import('./tabs/settings/settings.component').then(
                         (component) => component.SettingsComponent,
                     ),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS],
+                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS],
+                canMatch: [canMatchAuth],
+            },
+            {
+                path: 'languages',
+                loadComponent: () =>
+                    import('./tabs/settings/components/languages/languages.component').then(
+                        (component) => component.LanguagesComponent,
+                    ),
+                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {

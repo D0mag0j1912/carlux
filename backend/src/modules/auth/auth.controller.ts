@@ -11,7 +11,7 @@ import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { AuthService } from './auth.service';
 import { VerifyCodeDto } from './models/verify-code.dto';
 import { StatusResponseDto } from './models/status-response.dto';
-import { User } from './entity/user.entity';
+import { UserEntity } from './entity/user.entity';
 import { EmailDto } from './models/email.dto';
 import { LoginResponseDto } from './models/login-response.dto';
 
@@ -81,11 +81,11 @@ export class AuthController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @ApiBody({
-        type: User,
+        type: UserEntity,
         isArray: false,
     })
     @Post('register')
-    async register(@Body() body: User): Promise<LoginResponseDto> {
+    async register(@Body() body: UserEntity): Promise<LoginResponseDto> {
         return this._authService.register(body);
     }
 
