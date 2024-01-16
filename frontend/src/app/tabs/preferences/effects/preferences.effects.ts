@@ -6,7 +6,7 @@ import * as PreferencesActions from '../actions/preferences.actions';
 import { PreferencesDto as Preferences } from '../../../api/models/preferences-dto';
 import { SharedFacadeService } from '../../shared/shared-facade.service';
 import { POPUP_DURATIONS } from '../../../constants/popup-durations';
-import { LanguageCodeType } from '../../settings/models/language.type';
+import { LanguageChangeDto as ChangeLanguageResponse } from '../../../api/models/language-change-dto';
 
 export const getPreferences$ = createEffect(
     (
@@ -59,9 +59,9 @@ export const changeLanguage$ = createEffect(
                             );
                             return EMPTY;
                         }),
-                        map((updatedLanguageCode: string) =>
+                        map((response: ChangeLanguageResponse) =>
                             PreferencesActions.changeLanguageSuccess({
-                                updatedLanguageCode: updatedLanguageCode as LanguageCodeType,
+                                updatedLanguageCode: response.languageCode,
                             }),
                         ),
                     ),

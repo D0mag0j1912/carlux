@@ -8,7 +8,6 @@ import {
     ApiTags,
 } from '@nestjs/swagger';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
-import { LanguageCode } from '../languages/enums/language-code';
 import { PreferencesService } from './preferences.service';
 import { LanguageChangeDto } from './models/language-change';
 import { PreferencesDto } from './models/preferences.dto';
@@ -22,7 +21,7 @@ export class PreferencesController {
     @ApiCreatedResponse({
         status: 201,
         description: RESPONSE_MESSAGE.CREATED,
-        type: String,
+        type: LanguageChangeDto,
     })
     @ApiInternalServerErrorResponse({
         status: 500,
@@ -38,7 +37,7 @@ export class PreferencesController {
         required: true,
     })
     @Post('language')
-    async changeLanguage(@Body() body: LanguageChangeDto): Promise<LanguageCode> {
+    async changeLanguage(@Body() body: LanguageChangeDto): Promise<LanguageChangeDto> {
         return this._preferencesService.saveLanguage(body.languageCode, body.userId);
     }
 

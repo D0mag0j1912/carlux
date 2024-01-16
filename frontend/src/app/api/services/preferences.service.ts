@@ -9,6 +9,7 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { LanguageChangeDto } from '../models/language-change-dto';
 import { preferencesControllerChangeLanguage } from '../fn/preferences/preferences-controller-change-language';
 import { PreferencesControllerChangeLanguage$Params } from '../fn/preferences/preferences-controller-change-language';
 import { preferencesControllerGetPreferences } from '../fn/preferences/preferences-controller-get-preferences';
@@ -30,7 +31,7 @@ export class PreferencesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  preferencesControllerChangeLanguage$Response(params: PreferencesControllerChangeLanguage$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+  preferencesControllerChangeLanguage$Response(params: PreferencesControllerChangeLanguage$Params, context?: HttpContext): Observable<StrictHttpResponse<LanguageChangeDto>> {
     return preferencesControllerChangeLanguage(this.http, this.rootUrl, params, context);
   }
 
@@ -40,9 +41,9 @@ export class PreferencesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  preferencesControllerChangeLanguage(params: PreferencesControllerChangeLanguage$Params, context?: HttpContext): Observable<string> {
+  preferencesControllerChangeLanguage(params: PreferencesControllerChangeLanguage$Params, context?: HttpContext): Observable<LanguageChangeDto> {
     return this.preferencesControllerChangeLanguage$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
+      map((r: StrictHttpResponse<LanguageChangeDto>): LanguageChangeDto => r.body)
     );
   }
 

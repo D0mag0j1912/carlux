@@ -6,6 +6,7 @@ import { LanguageEntity } from '../languages/entity/language.entity';
 import { INITIAL_LANGUAGE } from '../auth/constants/initial-language';
 import { PreferenceEntity } from './entity/preferences.entity';
 import { PreferencesDto } from './models/preferences.dto';
+import { LanguageChangeDto } from './models/language-change';
 
 @Injectable()
 export class PreferencesService {
@@ -37,7 +38,7 @@ export class PreferencesService {
         }
     }
 
-    async saveLanguage(languageCode: LanguageCode, userId: number): Promise<LanguageCode> {
+    async saveLanguage(languageCode: LanguageCode, userId: number): Promise<LanguageChangeDto> {
         try {
             const preferences: PreferenceEntity[] = await this._preferencesRepository.find({
                 select: {
@@ -59,10 +60,17 @@ export class PreferencesService {
                         LanguageCode: languageCode,
                     },
                 });
-                await this._preferencesRepository.update(userId, {
+                const preference = await this._preferencesRepository.findOne({
+                    where: { UserId: userId },
+                });
+                await this._preferencesRepository.save({
+                    ...preference,
                     LanguageId: foundLanguages[0].Id,
                 });
-                return languageCode;
+                return {
+                    userId,
+                    languageCode,
+                };
             } else {
                 const language: LanguageEntity[] = await this._languageRepository.find({
                     select: {
@@ -77,7 +85,10 @@ export class PreferencesService {
                     LanguageId: language[0].Id,
                 };
                 await this._preferencesRepository.save(newPreference);
-                return language[0].LanguageCode as LanguageCode;
+                return {
+                    userId,
+                    languageCode: language[0].LanguageCode,
+                };
             }
         } catch (error) {
             throw new InternalServerErrorException();
