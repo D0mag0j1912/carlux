@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { GetResult, Storage } from '@capacitor/storage';
-import { from, take } from 'rxjs';
+import { filter, from, take } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { boatSharp, settingsSharp, logInSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs } from '@ionic/angular/standalone';
 import { FeatureKeys } from '../constants/feature-keys';
 import { LoginResponseDto as UserData } from '../api/models/login-response-dto';
 import { AuthenticationFacadeService } from './auth/auth-facade.service';
+import { PreferencesFacadeService } from './preferences/preferences-facade.service';
+import { LanguageCodeType } from './settings/models/language.type';
 
 @Component({
     standalone: true,
@@ -18,9 +20,13 @@ import { AuthenticationFacadeService } from './auth/auth-facade.service';
     styleUrls: ['tabs.component.scss'],
 })
 export class TabsComponent implements OnInit {
+    private _authenticationFacadeService = inject(AuthenticationFacadeService);
+    private _preferencesFacadeService = inject(PreferencesFacadeService);
+    private _translocoService = inject(TranslocoService);
+
     isAuthenticated$ = this._authenticationFacadeService.selectUserData();
 
-    constructor(private _authenticationFacadeService: AuthenticationFacadeService) {
+    constructor() {
         addIcons({ boatSharp, settingsSharp, logInSharp });
     }
 
@@ -36,5 +42,12 @@ export class TabsComponent implements OnInit {
                     this._authenticationFacadeService.signInSuccess(fetchedUserData);
                 }
             });
+
+        this._preferencesFacadeService
+            .selectLanguageCode()
+            .pipe(take(2), filter(Boolean))
+            .subscribe((languageCode: LanguageCodeType) =>
+                this._translocoService.setActiveLang(languageCode),
+            );
     }
 }
