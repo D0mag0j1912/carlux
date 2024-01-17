@@ -13,7 +13,8 @@
         "actions": {
             "close": "Close",
             "confirm": "Confirm"
-        }
+        },
+        "back": "Back"
     },
     "auth": {
         "continue_with_google": "Continue with Google",

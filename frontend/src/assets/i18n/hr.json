@@ -13,7 +13,8 @@
         "actions": {
             "close": "Izađi",
             "confirm": "Potvrdi"
-        }
+        },
+        "back": "Nazad"
     },
     "auth": {
         "continue_with_google": "Nastavi s Google",

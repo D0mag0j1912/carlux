@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, catchError, map, switchMap } from 'rxjs';
+import { EMPTY, catchError, map, switchMap, tap } from 'rxjs';
+import { TranslocoService } from '@ngneat/transloco';
 import { PreferencesService } from '../../../api/services/preferences.service';
 import * as PreferencesActions from '../actions/preferences.actions';
 import { PreferencesDto as Preferences } from '../../../api/models/preferences-dto';
@@ -68,4 +69,16 @@ export const changeLanguage$ = createEffect(
             ),
         ),
     { functional: true },
+);
+
+export const listenToLanguageChange$ = createEffect(
+    (actions$ = inject(Actions), translocoService = inject(TranslocoService)) =>
+        actions$.pipe(
+            ofType(PreferencesActions.changeLanguageSuccess),
+            tap((action) => {
+                const updatedLanguageCode = action.updatedLanguageCode;
+                translocoService.setActiveLang(updatedLanguageCode);
+            }),
+        ),
+    { functional: true, dispatch: false },
 );
