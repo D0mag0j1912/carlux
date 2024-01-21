@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../..';
@@ -11,6 +11,8 @@ import * as AuthenticationSelectors from './auth-selectors/auth.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationFacadeService {
+    private _store = inject(Store<AppState[FeatureKeys.AUTH]>);
+
     private _selectLoading$ = this._store.select(AuthenticationSelectors.selectLoading);
 
     private _selectSMSResponse$ = this._store.select(AuthenticationSelectors.selectSMSResponse);
@@ -24,8 +26,6 @@ export class AuthenticationFacadeService {
     private _selectUserData$ = this._store.select(AuthenticationSelectors.selectUserData);
 
     private _selectUserId$ = this._store.select(AuthenticationSelectors.selectUserId);
-
-    constructor(private _store: Store<AppState[FeatureKeys.AUTH]>) {}
 
     //Selectors BEGIN -------------------------
     selectLoading(): Observable<boolean> {
