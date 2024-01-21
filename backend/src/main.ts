@@ -15,7 +15,7 @@ async function bootstrap(): Promise<void> {
     /*Swagger documentation */
     const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
         .setTitle('NestJS API')
-        .setDescription('API of the yacht application')
+        .setDescription('API of the luxury cars sales application')
         .setVersion('1.0')
         .build();
     const document: OpenAPIObject = SwaggerModule.createDocument(app, config);
