@@ -1,0 +1,12 @@
+<ng-container *transloco="let t">
+    <ion-header [translucent]="true">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button defaultHref="/tabs/settings" [text]="t('common.back')"></ion-back-button>
+            </ion-buttons>
+            <ion-title>{{ t('settings.profile_details') }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content></ion-content>
+</ng-container>
