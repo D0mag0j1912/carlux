@@ -87,6 +87,15 @@ export const routes: Routes = [
                 canMatch: [canMatchAuth],
             },
             {
+                path: 'profile-details',
+                loadComponent: () =>
+                    import(
+                        './tabs/settings/components/profile-details/profile-details.component'
+                    ).then((component) => component.ProfileDetailsComponent),
+                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS],
+                canMatch: [canMatchAuth],
+            },
+            {
                 path: '',
                 redirectTo: '/tabs/auth',
                 pathMatch: 'full',

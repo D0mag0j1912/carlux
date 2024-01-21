@@ -89,7 +89,7 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
         IonSpinner,
         IonInput,
     ],
-    selector: 'yac-auth',
+    selector: 'car-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
     providers: [ModalController],

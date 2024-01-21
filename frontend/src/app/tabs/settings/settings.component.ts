@@ -12,7 +12,7 @@ import {
     IonToolbar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { languageSharp } from 'ionicons/icons';
+import { languageSharp, personCircleOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
 import { AuthenticationFacadeService } from '../auth/auth-facade.service';
 
@@ -31,7 +31,7 @@ import { AuthenticationFacadeService } from '../auth/auth-facade.service';
         IonLabel,
         IonNote,
     ],
-    selector: 'yac-settings',
+    selector: 'car-settings',
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.scss'],
 })
@@ -41,7 +41,7 @@ export class SettingsComponent {
     readonly LANGUAGES_COUNT = 2;
 
     constructor() {
-        addIcons({ languageSharp });
+        addIcons({ languageSharp, personCircleOutline });
     }
 
     logout(): void {

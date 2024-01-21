@@ -51,7 +51,8 @@
         "title": "Settings",
         "profile": "Profile",
         "logout": "Logout",
-        "languages": "Languages"
+        "languages": "Languages",
+        "profile_details": "Profile details"
     },
     "tabs": {
         "auth": "Sign in",

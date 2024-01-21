@@ -51,7 +51,8 @@
         "title": "Postavke",
         "profile": "Profil",
         "logout": "Odjava",
-        "languages": "Jezici"
+        "languages": "Jezici",
+        "profile_details": "Detalji profila"
     },
     "tabs": {
         "auth": "Prijava",
