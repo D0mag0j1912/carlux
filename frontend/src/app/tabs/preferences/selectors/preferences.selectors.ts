@@ -7,14 +7,14 @@ export const selectPreferencesState = createFeatureSelector<PreferencesState>(
     FeatureKeys.PREFERENCES,
 );
 
-export const selectUserPreferences = createSelector(
+const selectUserPreferences = createSelector(
     selectPreferencesState,
-    (state: PreferencesState) => state.userPreferences,
+    (state: PreferencesState) => state?.userPreferences,
 );
 
 export const selectUserId = createSelector(
-    selectPreferencesState,
-    (state: PreferencesState) => state.userPreferences?.userId,
+    selectUserPreferences,
+    (state: Preferences | undefined) => state?.userId,
 );
 
 export const selectLanguageCode = createSelector(
