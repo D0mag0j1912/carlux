@@ -13,7 +13,9 @@ import { DialogRoles } from '../../constants/dialog-roles';
 export class DateTimePickerComponent {
     private _modalController = inject(ModalController);
 
-    maxDate = format(new Date(), 'yyyy-MM-dd');
+    readonly DATE_FORMAT = 'yyyy-MM-dd';
+
+    maxDate = format(new Date(), this.DATE_FORMAT);
 
     @Input()
     dateValue: string | undefined;

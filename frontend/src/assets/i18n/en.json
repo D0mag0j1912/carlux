@@ -12,9 +12,11 @@
         },
         "actions": {
             "close": "Close",
-            "confirm": "Confirm"
+            "confirm": "Confirm",
+            "save": "Save",
+            "back": "Back"
         },
-        "back": "Back"
+        "date": "Date"
     },
     "auth": {
         "continue_with_google": "Continue with Google",
@@ -52,7 +54,7 @@
         "profile": "Profile",
         "logout": "Logout",
         "languages": "Languages",
-        "profile_details": "Profile details"
+        "profile_details": "Personal information"
     },
     "tabs": {
         "auth": "Sign in",

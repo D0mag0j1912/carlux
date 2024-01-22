@@ -12,9 +12,11 @@
         },
         "actions": {
             "close": "Izađi",
-            "confirm": "Potvrdi"
+            "confirm": "Potvrdi",
+            "save": "Spremi",
+            "back": "Nazad"
         },
-        "back": "Nazad"
+        "date": "Datum"
     },
     "auth": {
         "continue_with_google": "Nastavi s Google",
@@ -52,7 +54,7 @@
         "profile": "Profil",
         "logout": "Odjava",
         "languages": "Jezici",
-        "profile_details": "Detalji profila"
+        "profile_details": "Osobni podatci"
     },
     "tabs": {
         "auth": "Prijava",

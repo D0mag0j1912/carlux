@@ -2,11 +2,61 @@
     <ion-header [translucent]="true">
         <ion-toolbar>
             <ion-buttons slot="start">
-                <ion-back-button defaultHref="/tabs/settings" [text]="t('common.back')"></ion-back-button>
+                <ion-back-button defaultHref="/tabs/settings" [text]="t('common.actions.back')"></ion-back-button>
             </ion-buttons>
             <ion-title>{{ t('settings.profile_details') }}</ion-title>
+            <ion-buttons slot="end">
+                <ion-button class="save-btn">
+                    {{ t('common.actions.save') }}
+                </ion-button>
+            </ion-buttons>
         </ion-toolbar>
     </ion-header>
 
-    <ion-content></ion-content>
+    <ion-content>
+        <form #form="ngForm" class="form">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-input
+                            required
+                            type="text"
+                            fill="outline"
+                            labelPlacement="floating"
+                            [placeholder]="t('auth.personal_information.enter_first_name')"
+                            [label]="t('auth.personal_information.first_name')"
+                        ></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-input
+                            required
+                            type="text"
+                            fill="outline"
+                            labelPlacement="floating"
+                            [placeholder]="t('auth.personal_information.enter_last_name')"
+                            [label]="t('auth.personal_information.last_name')"
+                        ></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-item class="datetime-item" lines="none" (click)="openDateTimePicker()">
+                            <ion-icon
+                                class="datetime-icon"
+                                slot="start"
+                                color="primary"
+                                name="calendar-outline"
+                            ></ion-icon>
+                            <ion-label>{{ t('common.date') }}</ion-label>
+                            <ion-text color="primary">{{ formattedTodayDate() }}</ion-text>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+    </ion-content>
 </ng-container>
