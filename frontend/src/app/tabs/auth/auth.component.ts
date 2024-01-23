@@ -18,9 +18,8 @@ import {
     Validators,
 } from '@angular/forms';
 import * as intlTelInput from 'intl-tel-input';
-import { filter, map, take } from 'rxjs';
+import { filter, take } from 'rxjs';
 import { ModalController, NavController } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 import {
     IonButton,
@@ -40,6 +39,7 @@ import {
 } from '@ionic/angular/standalone';
 import { logoGoogle, logoApple } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { AsyncPipe } from '@angular/common';
 import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
 import { environment } from '../../../environments/environment';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
@@ -69,7 +69,6 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
 @Component({
     standalone: true,
     imports: [
-        CommonModule,
         ReactiveFormsModule,
         FormsModule,
         TranslocoModule,
@@ -88,6 +87,7 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
         IonButtons,
         IonSpinner,
         IonInput,
+        AsyncPipe,
     ],
     selector: 'car-auth',
     templateUrl: './auth.component.html',
@@ -96,9 +96,7 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
 })
 export class AuthComponent implements OnInit, AfterViewInit {
     isDesktopMode$ = this._platformFacadeService.selectIsDesktopMode();
-    isNotLoading$ = this._authenticationFacadeService
-        .selectLoading()
-        .pipe(map((isLoading: boolean) => !isLoading));
+    isNotLoading$ = this._authenticationFacadeService.selectIsNotLoading();
     smsResponse$ = this._authenticationFacadeService.selectSMSResponse();
 
     isVerificationModalOpened = signal(false);

@@ -6,9 +6,9 @@ import { LoginResponseDto as UserData } from '../../../api/models/login-response
 export const selectAuthState = createFeatureSelector<AuthState>(FeatureKeys.AUTH);
 
 //--------------SELECTORS START--------------
-export const selectLoading = createSelector(
+export const selectIsNotLoading = createSelector(
     selectAuthState,
-    (authState: AuthState) => authState.isLoading,
+    (authState: AuthState) => !authState.isLoading,
 );
 
 export const selectSMSResponse = createSelector(
