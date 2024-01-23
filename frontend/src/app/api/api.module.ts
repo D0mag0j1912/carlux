@@ -6,6 +6,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AuthenticationService } from './services/authentication.service';
 import { PreferencesService } from './services/preferences.service';
+import { UserProfileDetailsService } from './services/user-profile-details.service';
 
 /**
  * Module that provides all services and configuration.
@@ -17,6 +18,7 @@ import { PreferencesService } from './services/preferences.service';
   providers: [
     AuthenticationService,
     PreferencesService,
+    UserProfileDetailsService,
     ApiConfiguration
   ],
 })
