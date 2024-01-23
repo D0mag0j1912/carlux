@@ -17,7 +17,7 @@ export class DateTimePickerComponent {
 
     maxDate = format(new Date(), this.DATE_FORMAT);
 
-    @Input()
+    @Input({ required: true })
     dateValue: string | undefined;
 
     @ViewChild('datetime', { read: IonDatetime })

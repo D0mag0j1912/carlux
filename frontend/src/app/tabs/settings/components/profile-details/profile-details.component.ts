@@ -52,6 +52,7 @@ import { DATETIME_PICKER_INPUT_FORMAT } from '../../../../constants/datetime-pic
     selector: 'car-profile-details',
     templateUrl: './profile-details.component.html',
     styleUrls: ['./profile-details.component.scss'],
+    providers: [ModalController],
 })
 export class ProfileDetailsComponent {
     private _modalController = inject(ModalController);
