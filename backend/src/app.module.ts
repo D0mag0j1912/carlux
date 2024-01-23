@@ -6,8 +6,9 @@ import { AuthModule } from './modules/auth/auth.module';
 import { PreferencesModule } from './modules/preferences/preferences.module';
 import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
 import { LanguageEntity } from './modules/languages/entity/language.entity';
+import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
 
-const IMPORTS = [AuthModule, PreferencesModule];
+const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule];
 
 @Module({
     imports: [
