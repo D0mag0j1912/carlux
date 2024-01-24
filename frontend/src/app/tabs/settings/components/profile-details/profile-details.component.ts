@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
@@ -20,12 +20,15 @@ import {
     IonText,
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
-import { from } from 'rxjs';
-import { format } from 'date-fns';
+import { filter, from, take } from 'rxjs';
+import { format, parseISO } from 'date-fns';
 import { addIcons } from 'ionicons';
 import { calendarOutline } from 'ionicons/icons';
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { DATETIME_PICKER_INPUT_FORMAT } from '../../../../constants/datetime-picker-input-format';
+import { SettingsFacadeService } from '../../../../store/settings/facades/settings-facade.service';
+import { AuthenticationFacadeService } from '../../../auth/auth-facade.service';
+import { UserDto as User } from '../../../../api/models/user-dto';
 
 @Component({
     standalone: true,
@@ -54,25 +57,45 @@ import { DATETIME_PICKER_INPUT_FORMAT } from '../../../../constants/datetime-pic
     styleUrls: ['./profile-details.component.scss'],
     providers: [ModalController],
 })
-export class ProfileDetailsComponent {
+export class ProfileDetailsComponent implements OnInit {
     private _modalController = inject(ModalController);
     private _destroyRef = inject(DestroyRef);
+    private _settingsFacadeService = inject(SettingsFacadeService);
+    private _authenticationFacadeService = inject(AuthenticationFacadeService);
 
     formattedTodayDate = signal<string>('');
+    profileDetails = signal<User | undefined>(undefined);
 
     constructor() {
         addIcons({ calendarOutline });
     }
 
+    ngOnInit(): void {
+        this._authenticationFacadeService
+            .selectUserId()
+            .pipe(take(1), filter(Boolean))
+            .subscribe((userId: number) => this._settingsFacadeService.getProfileDetails(userId));
+
+        this._settingsFacadeService
+            .selectProfileDetails()
+            .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
+            .subscribe((profileDetails: User | undefined) => {
+                this.profileDetails.set(profileDetails);
+                if (this.profileDetails()) {
+                    this._setFormattedDate(this.profileDetails()?.birthDate);
+                }
+            });
+    }
+
+    setFirstName(firstName: string): void {}
+
+    setLastName(lastName: string): void {}
+
     async openDateTimePicker(): Promise<void> {
         const modal = await this._modalController.create({
             component: DateTimePickerComponent,
             componentProps: {
-                dateValue: format(
-                    //TODO: Provide value
-                    new Date(),
-                    DATETIME_PICKER_INPUT_FORMAT,
-                ),
+                dateValue: format(new Date(), DATETIME_PICKER_INPUT_FORMAT),
             },
             cssClass: 'datetime-picker',
         });
@@ -81,5 +104,14 @@ export class ProfileDetailsComponent {
         from(modal.onDidDismiss<string | undefined>())
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe();
+    }
+
+    private _setFormattedDate(dateValue: string | undefined): void {
+        if (dateValue) {
+            const [date, time] = dateValue.split('T');
+            this.formattedTodayDate.set(
+                format(parseISO(format(new Date(date), 'yyyy-MM-dd') + `T${time}`), 'MMM d, yyyy'),
+            );
+        }
     }
 }

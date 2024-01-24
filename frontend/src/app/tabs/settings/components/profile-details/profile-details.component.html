@@ -21,10 +21,13 @@
                         <ion-input
                             required
                             type="text"
+                            name="first-name"
                             fill="outline"
                             labelPlacement="floating"
                             [placeholder]="t('auth.personal_information.enter_first_name')"
                             [label]="t('auth.personal_information.first_name')"
+                            [ngModel]="profileDetails()?.firstName"
+                            (ngModelChange)="setFirstName($event)"
                         ></ion-input>
                     </ion-col>
                 </ion-row>
@@ -34,10 +37,13 @@
                         <ion-input
                             required
                             type="text"
+                            name="last-name"
                             fill="outline"
                             labelPlacement="floating"
                             [placeholder]="t('auth.personal_information.enter_last_name')"
                             [label]="t('auth.personal_information.last_name')"
+                            [ngModel]="profileDetails()?.lastName"
+                            (ngModelChange)="setLastName($event)"
                         ></ion-input>
                     </ion-col>
                 </ion-row>
