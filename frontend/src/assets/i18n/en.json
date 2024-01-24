@@ -54,7 +54,10 @@
         "profile": "Profile",
         "logout": "Logout",
         "languages": "Languages",
-        "profile_details": "Personal information"
+        "profile_details": "Personal information",
+        "errors": {
+            "get_profile_details": "Unable to get profile details. Please try again."
+        }
     },
     "tabs": {
         "auth": "Sign in",
