@@ -14,51 +14,53 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-        <form #form="ngForm" class="form">
+        <form #form="ngForm">
             <ion-grid>
                 <ion-row>
                     <ion-col>
-                        <ion-input
-                            required
-                            type="text"
-                            name="first-name"
-                            fill="outline"
-                            labelPlacement="floating"
-                            [placeholder]="t('auth.personal_information.enter_first_name')"
-                            [label]="t('auth.personal_information.first_name')"
-                            [ngModel]="profileDetails()?.firstName"
-                            (ngModelChange)="setFirstName($event)"
-                        ></ion-input>
+                        <ion-item>
+                            <ion-input
+                                required
+                                type="text"
+                                name="first-name"
+                                labelPlacement="floating"
+                                [placeholder]="t('auth.personal_information.enter_first_name')"
+                                [label]="t('auth.personal_information.first_name')"
+                                [ngModel]="profileDetails()?.firstName"
+                                (ngModelChange)="setFirstName($event)"
+                            ></ion-input>
+                        </ion-item>
                     </ion-col>
                 </ion-row>
 
                 <ion-row>
                     <ion-col>
-                        <ion-input
-                            required
-                            type="text"
-                            name="last-name"
-                            fill="outline"
-                            labelPlacement="floating"
-                            [placeholder]="t('auth.personal_information.enter_last_name')"
-                            [label]="t('auth.personal_information.last_name')"
-                            [ngModel]="profileDetails()?.lastName"
-                            (ngModelChange)="setLastName($event)"
-                        ></ion-input>
+                        <ion-item>
+                            <ion-input
+                                required
+                                type="text"
+                                name="last-name"
+                                labelPlacement="floating"
+                                [placeholder]="t('auth.personal_information.enter_last_name')"
+                                [label]="t('auth.personal_information.last_name')"
+                                [ngModel]="profileDetails()?.lastName"
+                                (ngModelChange)="setLastName($event)"
+                            ></ion-input>
+                        </ion-item>
                     </ion-col>
                 </ion-row>
 
                 <ion-row>
                     <ion-col>
-                        <ion-item class="datetime-item" lines="none" (click)="openDateTimePicker()">
+                        <ion-item class="datetime-item" (click)="openDateTimePicker()">
+                            <ion-label>{{ t('common.date') }}</ion-label>
+                            <ion-text color="primary" class="date-value">{{ formattedTodayDate() }}</ion-text>
                             <ion-icon
                                 class="datetime-icon"
-                                slot="start"
+                                slot="end"
                                 color="primary"
                                 name="calendar-outline"
                             ></ion-icon>
-                            <ion-label>{{ t('common.date') }}</ion-label>
-                            <ion-text color="primary">{{ formattedTodayDate() }}</ion-text>
                         </ion-item>
                     </ion-col>
                 </ion-row>

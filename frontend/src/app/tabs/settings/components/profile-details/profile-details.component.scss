@@ -1,13 +1,17 @@
 
+ion-item {
+    margin-top: 10px;
+}
+
 .save-btn {
     text-decoration: underline;
 }
 
-.form {
-    margin-top: 25px;
-}
-
 .datetime-item {
+    .date-value {
+        margin-right: 10px;
+    }
+
     .datetime-icon {
         width: 24px;
         height: 24px;
