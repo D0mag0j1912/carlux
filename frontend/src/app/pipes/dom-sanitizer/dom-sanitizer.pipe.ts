@@ -11,11 +11,12 @@ import { isNeverCheck } from '../../helpers/is-never-check';
 
 type DomSanitizerInputType = 'html' | 'style' | 'script' | 'url' | 'resourceUrl';
 
-@Pipe({ name: 'yacDomSanitizer' })
+@Pipe({ name: 'carDomSanitizer' })
 export class DomSanitizerPipe implements PipeTransform {
     constructor(private _domSanitizer: DomSanitizer) {}
 
     transform(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         value: any,
         type: DomSanitizerInputType,
     ): SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl {

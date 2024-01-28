@@ -12,6 +12,8 @@ import { AuthEffects } from './tabs/auth/auth-effects/auth.effects';
 import { AuthenticationFacadeService } from './tabs/auth/auth-facade.service';
 import { AuthenticationHelperService } from './tabs/auth/helpers/auth-helper.service';
 import * as PreferencesReducers from './tabs/preferences/reducers/preferences.reducers';
+import * as SettingsReducers from './store/settings/reducers/settings.reducer';
+import * as SettingsEffects from './store/settings/effects/settings.effects';
 import * as PreferencesEffects from './tabs/preferences/effects/preferences.effects';
 
 const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
@@ -46,6 +48,11 @@ const PREFERENCES_PROVIDERS = importProvidersFrom([
     EffectsModule.forFeature(PreferencesEffects),
 ]);
 
+const SETTINGS_PROVIDERS = importProvidersFrom([
+    StoreModule.forFeature(FeatureKeys.SETTINGS, SettingsReducers.settingsReducer),
+    EffectsModule.forFeature(SettingsEffects),
+]);
+
 export const routes: Routes = [
     {
         path: 'tabs',
@@ -74,7 +81,7 @@ export const routes: Routes = [
                     import('./tabs/settings/settings.component').then(
                         (component) => component.SettingsComponent,
                     ),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS],
+                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS, SETTINGS_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
@@ -83,7 +90,16 @@ export const routes: Routes = [
                     import('./tabs/settings/components/languages/languages.component').then(
                         (component) => component.LanguagesComponent,
                     ),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS],
+                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS, SETTINGS_PROVIDERS],
+                canMatch: [canMatchAuth],
+            },
+            {
+                path: 'profile-details',
+                loadComponent: () =>
+                    import(
+                        './tabs/settings/components/profile-details/profile-details.component'
+                    ).then((component) => component.ProfileDetailsComponent),
+                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS, SETTINGS_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {

@@ -243,11 +243,80 @@
                 },
                 "tags": ["Preferences"]
             }
+        },
+        "/api/profile-details/{userId}": {
+            "get": {
+                "operationId": "ProfileDetailsController_getProfileDetails",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["User profile details"]
+            }
+        },
+        "/api/profile-details": {
+            "put": {
+                "operationId": "ProfileDetailsController_saveProfileDetails",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Server returns successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["User profile details"]
+            }
         }
     },
     "info": {
         "title": "NestJS API",
-        "description": "API of the yacht application",
+        "description": "API of the luxury cars sales application",
         "version": "1.0",
         "contact": {}
     },
@@ -362,6 +431,36 @@
                     }
                 },
                 "required": ["userId", "languageCode"]
+            },
+            "UserDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "User's ID"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "description": "User's first name"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "User's last name"
+                    },
+                    "birthDate": {
+                        "type": "string",
+                        "description": "User's birth date"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "User's email"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Date and time when the user was created"
+                    }
+                },
+                "required": ["id", "firstName", "lastName", "birthDate", "email", "createdAt"]
             }
         }
     }

@@ -23,6 +23,13 @@
                     {{ LANGUAGES_COUNT }}
                 </ion-note>
             </ion-item>
+
+            <ion-item button class="item" routerDirection="forward" [routerLink]="['/', 'tabs', 'profile-details']">
+                <ion-icon slot="start" name="person-circle-outline" size="large"></ion-icon>
+                <ion-label>
+                    {{ t('settings.profile_details') }}
+                </ion-label>
+            </ion-item>
         </ion-list>
         <a class="logout-text" (click)="logout()">
             {{ t('settings.logout') }}

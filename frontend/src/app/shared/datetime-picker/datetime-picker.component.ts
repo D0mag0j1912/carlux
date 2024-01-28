@@ -13,9 +13,11 @@ import { DialogRoles } from '../../constants/dialog-roles';
 export class DateTimePickerComponent {
     private _modalController = inject(ModalController);
 
-    maxDate = format(new Date(), 'yyyy-MM-dd');
+    readonly DATE_FORMAT = 'yyyy-MM-dd';
 
-    @Input()
+    maxDate = format(new Date(), this.DATE_FORMAT);
+
+    @Input({ required: true })
     dateValue: string | undefined;
 
     @ViewChild('datetime', { read: IonDatetime })

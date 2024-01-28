@@ -8,16 +8,18 @@ import {
     ApiTags,
 } from '@nestjs/swagger';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
+import { BASE_URL } from '../../constants/base-url';
 import { PreferencesService } from './preferences.service';
 import { LanguageChangeDto } from './models/language-change';
 import { PreferencesDto } from './models/preferences.dto';
 
+const PREFERENCES_FEATURE_KEY = 'preferences';
+
 @ApiTags('Preferences')
-@Controller('api/preferences')
+@Controller(`${BASE_URL}${PREFERENCES_FEATURE_KEY}`)
 export class PreferencesController {
     constructor(private _preferencesService: PreferencesService) {}
 
-    //--------------------- CHANGE LANGUAGE ------------------
     @ApiCreatedResponse({
         status: 201,
         description: RESPONSE_MESSAGE.CREATED,

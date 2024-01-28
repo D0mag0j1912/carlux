@@ -13,7 +13,7 @@ import * as AuthenticationSelectors from './auth-selectors/auth.selectors';
 export class AuthenticationFacadeService {
     private _store = inject(Store<AppState[FeatureKeys.AUTH]>);
 
-    private _selectLoading$ = this._store.select(AuthenticationSelectors.selectLoading);
+    private _selectIsNotLoading$ = this._store.select(AuthenticationSelectors.selectIsNotLoading);
 
     private _selectSMSResponse$ = this._store.select(AuthenticationSelectors.selectSMSResponse);
 
@@ -28,8 +28,8 @@ export class AuthenticationFacadeService {
     private _selectUserId$ = this._store.select(AuthenticationSelectors.selectUserId);
 
     //Selectors BEGIN -------------------------
-    selectLoading(): Observable<boolean> {
-        return this._selectLoading$;
+    selectIsNotLoading(): Observable<boolean> {
+        return this._selectIsNotLoading$;
     }
 
     selectSMSResponse(): Observable<StatusResponse | undefined> {

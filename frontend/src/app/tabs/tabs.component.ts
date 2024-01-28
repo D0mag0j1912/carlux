@@ -9,7 +9,7 @@ import { AuthenticationFacadeService } from './auth/auth-facade.service';
 @Component({
     standalone: true,
     imports: [AsyncPipe, TranslocoModule, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel],
-    selector: 'yac-tabs',
+    selector: 'car-tabs',
     templateUrl: 'tabs.component.html',
     styleUrls: ['tabs.component.scss'],
 })

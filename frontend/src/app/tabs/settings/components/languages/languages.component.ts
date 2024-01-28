@@ -35,7 +35,7 @@ import { PreferencesFacadeService } from '../../../preferences/preferences-facad
         IonRadioGroup,
         AsyncPipe,
     ],
-    selector: 'yac-languages',
+    selector: 'car-languages',
     templateUrl: './languages.component.html',
     styleUrls: ['./languages.component.scss'],
 })

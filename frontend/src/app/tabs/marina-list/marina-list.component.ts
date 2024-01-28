@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     standalone: true,
-    selector: 'yac-marina-list',
+    selector: 'car-marina-list',
     templateUrl: './marina-list.component.html',
     styleUrls: ['./marina-list.component.scss'],
 })

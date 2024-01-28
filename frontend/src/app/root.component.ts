@@ -16,7 +16,7 @@ import { LoginResponseDto as UserData } from './api/models/login-response-dto';
 @Component({
     standalone: true,
     imports: [IonApp, IonRouterOutlet],
-    selector: 'yac-root',
+    selector: 'car-root',
     templateUrl: 'root.component.html',
     styleUrls: ['root.component.scss'],
 })

@@ -23,6 +23,7 @@ import { AuthenticationFacadeService } from '../../auth-facade.service';
 import { UserEntity as User } from '../../../../api/models/user-entity';
 import { AuthenticationEventEmitterService } from '../../event-emitter/auth-event-emitter.service';
 import { emailExistsValidator } from '../../validators/email-exists.validator';
+import { DATETIME_PICKER_INPUT_FORMAT } from '../../../../constants/datetime-picker-input-format';
 
 @Component({
     standalone: true,
@@ -51,7 +52,6 @@ export class PersonalInformationDialogComponent implements OnInit {
     private _navController = inject(NavController);
 
     readonly MAX_CHARACTERS = 100;
-    readonly DATE_FORMAT = `yyyy-MM-dd'T'HH:mm:ss'Z'`;
 
     form = new FormGroup({
         firstName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
@@ -77,7 +77,7 @@ export class PersonalInformationDialogComponent implements OnInit {
         const modal = await this._modalController.create({
             component: DateTimePickerComponent,
             componentProps: {
-                dateValue: format(new Date(), this.DATE_FORMAT),
+                dateValue: format(new Date(), DATETIME_PICKER_INPUT_FORMAT),
             },
             cssClass: 'datetime-picker',
         });

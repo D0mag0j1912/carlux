@@ -2,15 +2,13 @@
     <ion-header [translucent]="true">
         <ion-toolbar>
             <ion-buttons slot="start">
-                <ion-back-button defaultHref="/tabs/settings" [text]="t('common.back')"></ion-back-button>
+                <ion-back-button defaultHref="/tabs/settings" [text]="t('common.actions.back')"></ion-back-button>
             </ion-buttons>
             <ion-title>{{ t('settings.languages') }}</ion-title>
         </ion-toolbar>
     </ion-header>
-</ng-container>
 
-<ion-content>
-    <ng-container *transloco="let t">
+    <ion-content>
         <ion-list>
             @for (language of LANGUAGES_DATA; track language.key) {
                 <ion-radio-group [value]="languageCode$ | async" (ionChange)="onLanguageChange($event)">
@@ -22,5 +20,5 @@
                 </ion-radio-group>
             }
         </ion-list>
-    </ng-container>
-</ion-content>
+    </ion-content>
+</ng-container>

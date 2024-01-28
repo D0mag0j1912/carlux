@@ -12,9 +12,10 @@
         },
         "actions": {
             "close": "Izađi",
-            "confirm": "Potvrdi"
-        },
-        "back": "Nazad"
+            "confirm": "Potvrdi",
+            "save": "Spremi",
+            "back": "Nazad"
+        }
     },
     "auth": {
         "continue_with_google": "Nastavi s Google",
@@ -51,7 +52,12 @@
         "title": "Postavke",
         "profile": "Profil",
         "logout": "Odjava",
-        "languages": "Jezici"
+        "languages": "Jezici",
+        "profile_details": "Osobni podatci",
+        "errors": {
+            "get_profile_details": "Greška prilikom dohvata podataka korisnika. Molimo pokušajte ponovno.",
+            "save_profile_details": "Greška prilikom spremanja podataka korisnika. Molimo pokušajte ponovno."
+        }
     },
     "tabs": {
         "auth": "Prijava",

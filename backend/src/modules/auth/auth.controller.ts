@@ -8,6 +8,7 @@ import {
     ApiTags,
 } from '@nestjs/swagger';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
+import { BASE_URL } from '../../constants/base-url';
 import { AuthService } from './auth.service';
 import { VerifyCodeDto } from './models/verify-code.dto';
 import { StatusResponseDto } from './models/status-response.dto';
@@ -15,8 +16,10 @@ import { UserEntity } from './entity/user.entity';
 import { EmailDto } from './models/email.dto';
 import { LoginResponseDto } from './models/login-response.dto';
 
+const AUTH_FEATURE_KEY = 'auth';
+
 @ApiTags('Authentication')
-@Controller('api/auth')
+@Controller(`${BASE_URL}${AUTH_FEATURE_KEY}`)
 export class AuthController {
     constructor(private _authService: AuthService) {}
 
