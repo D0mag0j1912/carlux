@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../index';
-import { PopupDurationsValuesType } from './models/popup-durations.type';
-import * as SharedActions from './shared-actions/shared.actions';
+import { AppState } from '../../../index';
+import { PopupDurationsValuesType } from '../../../models/popup-durations.type';
+import * as SharedActions from '../actions/shared.actions';
 
 @Injectable({ providedIn: 'root' })
 export class SharedFacadeService {

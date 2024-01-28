@@ -3,16 +3,16 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, catchError, concatMap, finalize, map, switchMap, tap } from 'rxjs';
 import { Storage } from '@capacitor/storage';
 import { Router } from '@angular/router';
-import * as AuthenticationActions from '../auth-actions/auth.actions';
+import * as AuthenticationActions from '../actions/auth.actions';
 import { AuthenticationService } from '../../../api/services';
-import { AuthenticationFacadeService } from '../auth-facade.service';
+import { AuthenticationFacadeService } from '../facades/auth-facade.service';
 import { POPUP_DURATIONS } from '../../../constants/popup-durations';
-import { SharedFacadeService } from '../../shared/shared-facade.service';
+import { SharedFacadeService } from '../../shared/facades/shared-facade.service';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
-import { AuthenticationEventEmitterService } from '../event-emitter/auth-event-emitter.service';
+import { AuthenticationEventEmitterService } from '../../../tabs/auth/event-emitter/auth-event-emitter.service';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 import { FeatureKeys } from '../../../constants/feature-keys';
-import { AuthenticationHelperService } from '../helpers/auth-helper.service';
+import { AuthenticationHelperService } from '../../../tabs/auth/helpers/auth-helper.service';
 
 @Injectable()
 export class AuthEffects {

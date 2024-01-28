@@ -16,7 +16,7 @@ import {
 import { TranslocoModule } from '@ngneat/transloco';
 import { filter, take } from 'rxjs';
 import { LanguageCodeType, LanguageTranslationType } from '../../models/language.type';
-import { PreferencesFacadeService } from '../../../preferences/preferences-facade.service';
+import { PreferencesFacadeService } from '../../../../store/preferences/facades/preferences-facade.service';
 
 @Component({
     standalone: true,

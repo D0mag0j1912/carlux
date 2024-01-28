@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, catchError, concatMap, map, switchMap } from 'rxjs';
 import * as SettingsActions from '../actions/settings.actions';
-import { SharedFacadeService } from '../../../tabs/shared/shared-facade.service';
+import { SharedFacadeService } from '../../shared/facades/shared-facade.service';
 import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { UserProfileDetailsService } from '../../../api/services/user-profile-details.service';
 import { UserDto as User } from '../../../api/models/user-dto';

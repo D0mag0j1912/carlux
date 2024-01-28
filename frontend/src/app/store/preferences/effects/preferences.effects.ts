@@ -5,7 +5,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { PreferencesService } from '../../../api/services/preferences.service';
 import * as PreferencesActions from '../actions/preferences.actions';
 import { PreferencesDto as Preferences } from '../../../api/models/preferences-dto';
-import { SharedFacadeService } from '../../shared/shared-facade.service';
+import { SharedFacadeService } from '../../shared/facades/shared-facade.service';
 import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { LanguageChangeDto as ChangeLanguageResponse } from '../../../api/models/language-change-dto';
 

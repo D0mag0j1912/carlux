@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { PreferencesDto as Preferences } from '../../../api/models/preferences-dto';
-import { LanguageCodeType } from '../../settings/models/language.type';
+import { LanguageCodeType } from '../../../tabs/settings/models/language.type';
 
 export const getPreferences = createAction(
     '[Preferences] Get Preferences',

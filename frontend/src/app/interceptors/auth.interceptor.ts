@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, switchMap, take } from 'rxjs';
-import { AuthenticationFacadeService } from '../tabs/auth/auth-facade.service';
+import { AuthenticationFacadeService } from '../store/auth/facades/auth-facade.service';
 import { LoginResponseDto as UserData } from '../api/models/login-response-dto';
 
 @Injectable()

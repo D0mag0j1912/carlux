@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PlatformState } from '../reducers/platform-reducers';
+import { PlatformState } from '../reducers/platform.reducers';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import {
     ANDROID_MODE,

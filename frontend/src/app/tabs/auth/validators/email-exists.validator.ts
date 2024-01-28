@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { delay, map, switchMap, take, tap, timer, withLatestFrom } from 'rxjs';
-import { AuthenticationFacadeService } from '../auth-facade.service';
+import { AuthenticationFacadeService } from '../../../store/auth/facades/auth-facade.service';
 import { AuthenticationEventEmitterService } from '../event-emitter/auth-event-emitter.service';
 
 export function emailExistsValidator(): AsyncValidatorFn {

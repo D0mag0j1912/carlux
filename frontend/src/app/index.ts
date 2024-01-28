@@ -1,11 +1,11 @@
 import { combineReducers } from '@ngrx/store';
 import { FeatureKeys } from './constants/feature-keys';
-import { AuthState } from './tabs/auth/auth-reducers/auth.reducers';
-import * as AuthReducers from './tabs/auth/auth-reducers/auth.reducers';
-import * as PlatformReducers from './tabs/platform/reducers/platform-reducers';
-import * as PreferencesReducers from './tabs/preferences/reducers/preferences.reducers';
-import { PreferencesState } from './tabs/preferences/reducers/preferences.reducers';
-import { PlatformState } from './tabs/platform/reducers/platform-reducers';
+import { AuthState } from './store/auth/reducers/auth.reducers';
+import * as AuthReducers from './store/auth/reducers/auth.reducers';
+import * as PlatformReducers from './store/platform/reducers/platform.reducers';
+import * as PreferencesReducers from './store/preferences/reducers/preferences.reducers';
+import { PreferencesState } from './store/preferences/reducers/preferences.reducers';
+import { PlatformState } from './store/platform/reducers/platform.reducers';
 import { SettingsState } from './store/settings/reducers/settings.reducer';
 import * as SettingsReducers from './store/settings/reducers/settings.reducer';
 

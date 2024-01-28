@@ -14,7 +14,7 @@ import {
 import { addIcons } from 'ionicons';
 import { languageSharp, personCircleOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
-import { AuthenticationFacadeService } from '../auth/auth-facade.service';
+import { AuthenticationFacadeService } from '../../store/auth/facades/auth-facade.service';
 
 @Component({
     standalone: true,

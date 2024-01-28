@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Platforms } from '@ionic/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AppState } from '../../..';
 import { FeatureKeys } from '../../../constants/feature-keys';
-import * as PlatformActions from '../platform-actions/platform-actions';
-import { selectIsDesktopMode } from '../platform-selectors/platform.selectors';
-import { Observable } from 'rxjs';
+import * as PlatformActions from '../actions/platform.actions';
+import { selectIsDesktopMode } from '../selectors/platform.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class PlatformFacadeService {

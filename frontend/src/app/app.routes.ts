@@ -7,14 +7,15 @@ import { take, switchMap, of, map } from 'rxjs';
 import { FeatureKeys } from './constants/feature-keys';
 import { LoginResponseDto as UserData } from './api/models/login-response-dto';
 import { TabsComponent } from './tabs/tabs.component';
-import * as AuthReducers from './tabs/auth/auth-reducers/auth.reducers';
-import { AuthEffects } from './tabs/auth/auth-effects/auth.effects';
-import { AuthenticationFacadeService } from './tabs/auth/auth-facade.service';
+import * as AuthReducers from './store/auth/reducers/auth.reducers';
+import { AuthEffects } from './store/auth/effects/auth.effects';
+import { AuthenticationFacadeService } from './store/auth/facades/auth-facade.service';
 import { AuthenticationHelperService } from './tabs/auth/helpers/auth-helper.service';
-import * as PreferencesReducers from './tabs/preferences/reducers/preferences.reducers';
+import * as PreferencesReducers from './store/preferences/reducers/preferences.reducers';
 import * as SettingsReducers from './store/settings/reducers/settings.reducer';
 import * as SettingsEffects from './store/settings/effects/settings.effects';
-import * as PreferencesEffects from './tabs/preferences/effects/preferences.effects';
+import * as PreferencesEffects from './store/preferences/effects/preferences.effects';
+import * as PlatformReducers from './store/platform/reducers/platform.reducers';
 
 const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
     const authenticationFacadeService = inject(AuthenticationFacadeService);
