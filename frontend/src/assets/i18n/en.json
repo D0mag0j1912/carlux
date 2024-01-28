@@ -15,8 +15,7 @@
             "confirm": "Confirm",
             "save": "Save",
             "back": "Back"
-        },
-        "date": "Date"
+        }
     },
     "auth": {
         "continue_with_google": "Continue with Google",

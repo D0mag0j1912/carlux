@@ -15,8 +15,7 @@
             "confirm": "Potvrdi",
             "save": "Spremi",
             "back": "Nazad"
-        },
-        "date": "Datum"
+        }
     },
     "auth": {
         "continue_with_google": "Nastavi s Google",
