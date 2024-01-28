@@ -10,18 +10,8 @@ export class ProfileDetailsService {
 
     async getProfileDetails(userId: number): Promise<UserDto> {
         try {
-            const user: UserEntity = await this._usersRepository.findOne({
-                where: { Id: userId },
-            });
-            const userData: UserDto = {
-                id: user.Id,
-                firstName: user.FirstName,
-                lastName: user.LastName,
-                birthDate: user.BirthDate,
-                email: user.Email,
-                createdAt: user.CreatedAt,
-            };
-            return userData;
+            const user = await this._getProfileDetails(userId);
+            return user;
         } catch (error) {
             throw new InternalServerErrorException();
         }
@@ -34,6 +24,21 @@ export class ProfileDetailsService {
         } catch (error) {
             throw new InternalServerErrorException();
         }
+    }
+
+    private async _getProfileDetails(userId: number): Promise<UserDto> {
+        const user: UserEntity = await this._usersRepository.findOne({
+            where: { Id: userId },
+        });
+        const userData: UserDto = {
+            id: user.Id,
+            firstName: user.FirstName,
+            lastName: user.LastName,
+            birthDate: user.BirthDate,
+            email: user.Email,
+            createdAt: user.CreatedAt,
+        };
+        return userData;
     }
 
     private async _saveProfileDetails(profileDetails: UserDto): Promise<UserDto> {
