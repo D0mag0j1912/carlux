@@ -8,6 +8,11 @@ export interface UserDto {
   birthDate: string;
 
   /**
+   * Date and time when the user was created
+   */
+  createdAt: string;
+
+  /**
    * User's email
    */
   email: string;

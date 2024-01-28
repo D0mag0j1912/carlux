@@ -23,5 +23,9 @@ export class SettingsFacadeService {
     getProfileDetails(userId: number): void {
         this._store.dispatch(SettingsActions.getProfileDetails({ userId }));
     }
+
+    saveProfileDetails(profileDetails: User): void {
+        this._store.dispatch(SettingsActions.saveProfileDetails({ profileDetails }));
+    }
     //Actions END -------------------------
 }

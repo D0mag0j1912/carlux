@@ -30,6 +30,10 @@ import { SettingsFacadeService } from '../../../../store/settings/facades/settin
 import { AuthenticationFacadeService } from '../../../auth/auth-facade.service';
 import { UserDto as User } from '../../../../api/models/user-dto';
 
+const DATE_FORMAT = 'yyyy-MM-dd';
+const PRESENTATION_DATE = 'MMM d, yyyy';
+const DATETIME_PICKER_CUSTOM_CLASS = 'datetime-picker';
+
 @Component({
     standalone: true,
     imports: [
@@ -87,9 +91,31 @@ export class ProfileDetailsComponent implements OnInit {
             });
     }
 
-    setFirstName(firstName: string): void {}
+    saveProfileDetails(): void {
+        const profileDetails = this.profileDetails() as User;
+        this._settingsFacadeService.saveProfileDetails(profileDetails);
+    }
 
-    setLastName(lastName: string): void {}
+    setFirstName(firstName: string): void {
+        this.profileDetails.update((user: User | undefined) => {
+            if (user) {
+                return {
+                    ...user,
+                    firstName,
+                };
+            }
+            return undefined;
+        });
+    }
+
+    setLastName(lastName: string): void {
+        this.profileDetails.update((user: User | undefined) => {
+            if (user) {
+                return { ...user, lastName };
+            }
+            return undefined;
+        });
+    }
 
     async openDateTimePicker(): Promise<void> {
         const modal = await this._modalController.create({
@@ -97,7 +123,7 @@ export class ProfileDetailsComponent implements OnInit {
             componentProps: {
                 dateValue: format(new Date(), DATETIME_PICKER_INPUT_FORMAT),
             },
-            cssClass: 'datetime-picker',
+            cssClass: DATETIME_PICKER_CUSTOM_CLASS,
         });
         await modal.present();
 
@@ -110,7 +136,10 @@ export class ProfileDetailsComponent implements OnInit {
         if (dateValue) {
             const [date, time] = dateValue.split('T');
             this.formattedTodayDate.set(
-                format(parseISO(format(new Date(date), 'yyyy-MM-dd') + `T${time}`), 'MMM d, yyyy'),
+                format(
+                    parseISO(format(new Date(date), DATE_FORMAT) + `T${time}`),
+                    PRESENTATION_DATE,
+                ),
             );
         }
     }

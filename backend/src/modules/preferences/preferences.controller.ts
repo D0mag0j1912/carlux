@@ -20,7 +20,6 @@ const PREFERENCES_FEATURE_KEY = 'preferences';
 export class PreferencesController {
     constructor(private _preferencesService: PreferencesService) {}
 
-    //--------------------- CHANGE LANGUAGE ------------------
     @ApiCreatedResponse({
         status: 201,
         description: RESPONSE_MESSAGE.CREATED,

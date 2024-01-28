@@ -277,6 +277,41 @@
                 },
                 "tags": ["User profile details"]
             }
+        },
+        "/api/profile-details": {
+            "put": {
+                "operationId": "ProfileDetailsController_saveProfileDetails",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Server returns successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["User profile details"]
+            }
         }
     },
     "info": {
@@ -419,9 +454,13 @@
                     "email": {
                         "type": "string",
                         "description": "User's email"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Date and time when the user was created"
                     }
                 },
-                "required": ["id", "firstName", "lastName", "birthDate", "email"]
+                "required": ["id", "firstName", "lastName", "birthDate", "email", "createdAt"]
             }
         }
     }

@@ -35,4 +35,11 @@ export class UserDto {
         description: 'User\'s email',
     })
     email: string;
+
+    @ApiProperty({
+        type: String,
+        required: true,
+        description: 'Date and time when the user was created',
+    })
+    createdAt: string;
 }

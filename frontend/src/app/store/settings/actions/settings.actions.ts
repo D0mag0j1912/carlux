@@ -10,3 +10,8 @@ export const setProfileDetails = createAction(
     '[Settings] Set Profile Details',
     props<{ profileDetails: User }>(),
 );
+
+export const saveProfileDetails = createAction(
+    '[Settings] Save Profile Details',
+    props<{ profileDetails: User }>(),
+);
