@@ -5,7 +5,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { addIcons } from 'ionicons';
 import { warning } from 'ionicons/icons';
-import * as SharedActions from '../shared-actions/shared.actions';
+import * as SharedActions from '../actions/shared.actions';
 
 @Injectable()
 export class SharedEffects {

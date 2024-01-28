@@ -40,10 +40,10 @@ import {
 import { logoGoogle, logoApple } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { AsyncPipe } from '@angular/common';
-import { PlatformFacadeService } from '../platform/platform-facade/platform-facade.service';
+import { PlatformFacadeService } from '../../store/platform/facades/platform-facade.service';
 import { environment } from '../../../environments/environment';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
-import { AuthenticationFacadeService } from './auth-facade.service';
+import { AuthenticationFacadeService } from '../../store/auth/facades/auth-facade.service';
 import { PersonalInformationDialogComponent } from './components/personal-information-dialog/personal-information-dialog.component';
 import { AuthenticationEventEmitterService } from './event-emitter/auth-event-emitter.service';
 

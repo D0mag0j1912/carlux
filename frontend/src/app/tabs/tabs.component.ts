@@ -4,7 +4,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { boatSharp, settingsSharp, logInSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs } from '@ionic/angular/standalone';
-import { AuthenticationFacadeService } from './auth/auth-facade.service';
+import { AuthenticationFacadeService } from '../store/auth/facades/auth-facade.service';
 
 @Component({
     standalone: true,

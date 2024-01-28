@@ -22,7 +22,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { filter, take } from 'rxjs';
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { SettingsFacadeService } from '../../../../store/settings/facades/settings-facade.service';
-import { AuthenticationFacadeService } from '../../../auth/auth-facade.service';
+import { AuthenticationFacadeService } from '../../../../store/auth/facades/auth-facade.service';
 import { UserDto as User } from '../../../../api/models/user-dto';
 
 @Component({

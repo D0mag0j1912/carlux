@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AuthState } from '../auth-reducers/auth.reducers';
+import { AuthState } from '../reducers/auth.reducers';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 
