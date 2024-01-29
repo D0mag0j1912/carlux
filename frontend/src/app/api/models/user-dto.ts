@@ -3,6 +3,11 @@
 export interface UserDto {
 
   /**
+   * User's profile picture
+   */
+  avatar?: string;
+
+  /**
    * User's birth date
    */
   birthDate: string;
@@ -10,7 +15,7 @@ export interface UserDto {
   /**
    * Date and time when the user was created
    */
-  createdAt: string;
+  createdAt?: string;
 
   /**
    * User's email
@@ -25,7 +30,7 @@ export interface UserDto {
   /**
    * User's ID
    */
-  id: number;
+  id?: number;
 
   /**
    * User's last name

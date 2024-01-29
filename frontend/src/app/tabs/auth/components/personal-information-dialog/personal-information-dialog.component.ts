@@ -20,7 +20,7 @@ import {
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { DialogRoles } from '../../../../constants/dialog-roles';
 import { AuthenticationFacadeService } from '../../../../store/auth/facades/auth-facade.service';
-import { UserEntity as User } from '../../../../api/models/user-entity';
+import { UserDto as User } from '../../../../api/models/user-dto';
 import { AuthenticationEventEmitterService } from '../../event-emitter/auth-event-emitter.service';
 import { emailExistsValidator } from '../../validators/email-exists.validator';
 import { DATETIME_PICKER_INPUT_FORMAT } from '../../../../constants/datetime-picker-input-format';
@@ -104,12 +104,12 @@ export class PersonalInformationDialogComponent implements OnInit {
             return;
         }
         const user: User = {
-            FirstName: this.form.value.firstName ?? '',
-            LastName: this.form.value.lastName ?? '',
-            BirthDate: this.form.value.birthDate
+            firstName: this.form.value.firstName ?? '',
+            lastName: this.form.value.lastName ?? '',
+            birthDate: this.form.value.birthDate
                 ? new Date(this.form.value.birthDate).toISOString()
                 : new Date().toISOString(),
-            Email: this.form.value.email ?? '',
+            email: this.form.value.email ?? '',
         };
         this._authenticationFacadeService.registerUser(user);
     }

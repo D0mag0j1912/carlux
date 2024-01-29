@@ -80,7 +80,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UserEntity"
+                                "$ref": "#/components/schemas/UserDto"
                             }
                         }
                     }
@@ -345,35 +345,39 @@
                 },
                 "required": ["code"]
             },
-            "UserEntity": {
+            "UserDto": {
                 "type": "object",
                 "properties": {
-                    "Id": {
+                    "id": {
                         "type": "number",
-                        "description": "Id of the user"
+                        "description": "User's ID"
                     },
-                    "FirstName": {
+                    "firstName": {
                         "type": "string",
-                        "description": "Users first name"
+                        "description": "User's first name"
                     },
-                    "LastName": {
+                    "lastName": {
                         "type": "string",
-                        "description": "Users last name"
+                        "description": "User's last name"
                     },
-                    "BirthDate": {
+                    "avatar": {
                         "type": "string",
-                        "description": "Users birth date"
+                        "description": "User's profile picture"
                     },
-                    "Email": {
+                    "birthDate": {
                         "type": "string",
-                        "description": "Users email"
+                        "description": "User's birth date"
                     },
-                    "CreatedAt": {
+                    "email": {
                         "type": "string",
-                        "description": "Date when the user was created"
+                        "description": "User's email"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Date and time when the user was created"
                     }
                 },
-                "required": ["FirstName", "LastName", "BirthDate", "Email"]
+                "required": ["firstName", "lastName", "birthDate", "email"]
             },
             "LoginResponseDto": {
                 "type": "object",
@@ -431,36 +435,6 @@
                     }
                 },
                 "required": ["userId", "languageCode"]
-            },
-            "UserDto": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "number",
-                        "description": "User's ID"
-                    },
-                    "firstName": {
-                        "type": "string",
-                        "description": "User's first name"
-                    },
-                    "lastName": {
-                        "type": "string",
-                        "description": "User's last name"
-                    },
-                    "birthDate": {
-                        "type": "string",
-                        "description": "User's birth date"
-                    },
-                    "email": {
-                        "type": "string",
-                        "description": "User's email"
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "description": "Date and time when the user was created"
-                    }
-                },
-                "required": ["id", "firstName", "lastName", "birthDate", "email", "createdAt"]
             }
         }
     }

@@ -6,5 +6,4 @@ export { LoginResponseDto } from './models/login-response-dto';
 export { PreferencesDto } from './models/preferences-dto';
 export { StatusResponseDto } from './models/status-response-dto';
 export { UserDto } from './models/user-dto';
-export { UserEntity } from './models/user-entity';
 export { VerifyCodeDto } from './models/verify-code-dto';
