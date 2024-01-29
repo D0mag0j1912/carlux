@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { MOCK_PHONE_VERIFICATION_CODE } from '../../mock/phone-verification-code';
 import { PreferenceEntity } from '../preferences/entity/preferences.entity';
 import { LanguageEntity } from '../languages/entity/language.entity';
+import { UserDto } from '../profile-details/models/user.dto';
 import { StatusResponseDto } from './models/status-response.dto';
 import { UserEntity } from './entity/user.entity';
 import { LoginResponseDto } from './models/login-response.dto';
@@ -45,11 +46,17 @@ export class AuthService {
         }
     }
 
-    async register(user: UserEntity): Promise<LoginResponseDto> {
+    async register(user: UserDto): Promise<LoginResponseDto> {
         try {
             //Save User
+            const userEntity: Partial<UserEntity> = {
+                BirthDate: user.birthDate,
+                Email: user.email,
+                FirstName: user.firstName,
+                LastName: user.lastName,
+            };
             const newUser = this._userRepository.create({
-                ...user,
+                ...userEntity,
                 CreatedAt: new Date().toISOString(),
             });
             const savedUser: UserEntity = await this._userRepository.save(newUser);

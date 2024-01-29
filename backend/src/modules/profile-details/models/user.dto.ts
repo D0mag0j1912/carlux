@@ -24,6 +24,13 @@ export class UserDto {
 
     @ApiProperty({
         type: String,
+        required: false,
+        description: 'User\'s profile picture',
+    })
+    avatar?: string;
+
+    @ApiProperty({
+        type: String,
         required: true,
         description: 'User\'s birth date',
     })

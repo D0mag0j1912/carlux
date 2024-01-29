@@ -49,6 +49,7 @@ export class ProfileDetailsService {
             Id: profileDetails.id,
             LastName: profileDetails.lastName,
             CreatedAt: profileDetails.createdAt,
+            Avatar: profileDetails.avatar,
         };
         const savedUser = await this._usersRepository.save(userEntity);
         return {
