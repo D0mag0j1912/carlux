@@ -65,7 +65,7 @@ export const routes: Routes = [
                     import('./tabs/auth/auth.component').then(
                         (component) => component.AuthComponent,
                     ),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS],
+                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS],
             },
             {
                 path: 'marina-list',
