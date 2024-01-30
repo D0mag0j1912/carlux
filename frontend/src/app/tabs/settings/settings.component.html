@@ -10,6 +10,16 @@
             {{ t('settings.profile') }}
         </div>
 
+        <div class="avatar-wrapper">
+            @if (userAvatar(); as avatar) {
+                <img class="user-image" [src]="avatar" />
+            } @else {
+                <div class="initials">
+                    {{ initials() }}
+                </div>
+            }
+        </div>
+
         <div class="title">
             {{ t('settings.title') }}
         </div>

@@ -19,10 +19,9 @@ import {
     IonText,
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
-import { filter, take } from 'rxjs';
+import { filter } from 'rxjs';
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { SettingsFacadeService } from '../../../../store/settings/facades/settings-facade.service';
-import { AuthenticationFacadeService } from '../../../../store/auth/facades/auth-facade.service';
 import { UserDto as User } from '../../../../api/models/user-dto';
 
 @Component({
@@ -54,16 +53,10 @@ import { UserDto as User } from '../../../../api/models/user-dto';
 export class ProfileDetailsComponent implements OnInit {
     private _destroyRef = inject(DestroyRef);
     private _settingsFacadeService = inject(SettingsFacadeService);
-    private _authenticationFacadeService = inject(AuthenticationFacadeService);
 
     profileDetails = signal<User | undefined>(undefined);
 
     ngOnInit(): void {
-        this._authenticationFacadeService
-            .selectUserId()
-            .pipe(take(1), filter(Boolean))
-            .subscribe((userId: number) => this._settingsFacadeService.getProfileDetails(userId));
-
         this._settingsFacadeService
             .selectProfileDetails()
             .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
