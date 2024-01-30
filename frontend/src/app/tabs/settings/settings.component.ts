@@ -13,7 +13,7 @@ import {
     IonAvatar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { languageSharp, personCircleOutline } from 'ionicons/icons';
+import { languageSharp, personCircleOutline, pencil, trash } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, take } from 'rxjs';
@@ -52,7 +52,7 @@ export class SettingsComponent implements OnInit {
     userAvatar = signal<string>('');
 
     constructor() {
-        addIcons({ languageSharp, personCircleOutline });
+        addIcons({ languageSharp, personCircleOutline, pencil, trash });
     }
 
     ngOnInit(): void {

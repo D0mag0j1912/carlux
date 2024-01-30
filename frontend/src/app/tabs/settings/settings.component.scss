@@ -4,23 +4,34 @@
     --padding-end: 10px;
     position: relative;
 
-    .avatar-wrapper {
+    .avatar-container {
         width: 100%;
         display: flex;
         justify-content: center;
 
-        .initials {
-            background-color: #3498db;
-            width: 100px;
-            height: 100px;
+        .avatar-wrapper {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 40px;
-            font-weight: bold;
-            border-radius: 50%;
-            overflow: hidden;
+            flex-direction: column;
+            row-gap: 15px;
+
+            .initials {
+                background-color: var(--ion-color-primary);
+                width: 100px;
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #ffffff;
+                font-size: 40px;
+                font-weight: bold;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+
+            .actions {
+                display: flex;
+                justify-content: space-around;
+            }
         }
     }
 
