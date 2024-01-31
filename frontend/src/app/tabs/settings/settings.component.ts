@@ -77,6 +77,14 @@ export class SettingsComponent implements OnInit {
         this._authenticationFacadeService.logout();
     }
 
+    onFilePickerChange($event: Event): void {
+        const target = $event.target as HTMLInputElement;
+        const fileList: FileList | null = target.files;
+        if (fileList?.length) {
+            this.userAvatar.set(`../../../assets/images/${fileList[0].name}`);
+        }
+    }
+
     private _generateInitials(firstName: string, lastName: string): void {
         const fullName = firstName + ' ' + lastName;
         const names = fullName.split(' ');

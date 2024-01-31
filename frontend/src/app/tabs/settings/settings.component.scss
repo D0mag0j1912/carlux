@@ -14,6 +14,15 @@
             flex-direction: column;
             row-gap: 15px;
 
+            .img-wrapper {
+                width: 100px;
+                height: 100px;
+
+                .user-image {
+                    border-radius: 50%;
+                }
+            }
+
             .initials {
                 background-color: var(--ion-color-primary);
                 width: 100px;
@@ -31,6 +40,10 @@
             .actions {
                 display: flex;
                 justify-content: space-around;
+            }
+
+            .file-input {
+                display: none;
             }
         }
     }
