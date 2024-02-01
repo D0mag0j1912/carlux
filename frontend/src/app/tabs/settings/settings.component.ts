@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslocoModule } from '@ngneat/transloco';
 import {
     IonContent,
@@ -15,9 +15,7 @@ import {
 import { addIcons } from 'ionicons';
 import { languageSharp, personCircleOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
-import { filter, take } from 'rxjs';
 import { AuthenticationFacadeService } from '../../store/auth/facades/auth-facade.service';
-import { SettingsFacadeService } from '../../store/settings/facades/settings-facade.service';
 
 @Component({
     standalone: true,
@@ -39,20 +37,12 @@ import { SettingsFacadeService } from '../../store/settings/facades/settings-fac
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
     private _authenticationFacadeService = inject(AuthenticationFacadeService);
-    private _settingsFacadeService = inject(SettingsFacadeService);
     readonly LANGUAGES_COUNT = 2;
 
     constructor() {
         addIcons({ languageSharp, personCircleOutline });
-    }
-
-    ngOnInit(): void {
-        this._authenticationFacadeService
-            .selectUserId()
-            .pipe(filter(Boolean), take(1))
-            .subscribe((userId: number) => this._settingsFacadeService.getProfileDetails(userId));
     }
 
     logout(): void {
