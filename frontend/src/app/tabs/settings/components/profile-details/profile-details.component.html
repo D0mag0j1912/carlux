@@ -17,7 +17,7 @@
         <form #form="ngForm">
             <div class="avatar-container">
                 <div class="avatar-wrapper">
-                    @if (userAvatar(); as avatar) {
+                    @if (profileDetails()?.avatar; as avatar) {
                         <div class="img-wrapper">
                             <img class="user-image" [src]="avatar" />
                         </div>

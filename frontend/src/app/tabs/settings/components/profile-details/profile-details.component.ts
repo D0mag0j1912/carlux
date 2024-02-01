@@ -20,6 +20,8 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
 import { filter } from 'rxjs';
+import { addIcons } from 'ionicons';
+import { pencil, trash } from 'ionicons/icons';
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { SettingsFacadeService } from '../../../../store/settings/facades/settings-facade.service';
 import { UserDto as User } from '../../../../api/models/user-dto';
@@ -56,7 +58,10 @@ export class ProfileDetailsComponent implements OnInit {
 
     profileDetails = signal<User | undefined>(undefined);
     initials = signal('');
-    userAvatar = signal<string>('');
+
+    constructor() {
+        addIcons({ pencil, trash });
+    }
 
     ngOnInit(): void {
         this._settingsFacadeService
@@ -72,8 +77,6 @@ export class ProfileDetailsComponent implements OnInit {
             .subscribe((profileDetails: User) => {
                 if (!profileDetails.avatar) {
                     this._generateInitials(profileDetails.firstName, profileDetails.lastName);
-                } else {
-                    this.userAvatar.set(profileDetails.avatar);
                 }
             });
     }
@@ -108,7 +111,16 @@ export class ProfileDetailsComponent implements OnInit {
         const target = $event.target as HTMLInputElement;
         const fileList: FileList | null = target.files;
         if (fileList?.length) {
-            this.userAvatar.set(`../../../assets/images/${fileList[0].name}`);
+            const avatar = `../../../assets/images/${fileList[0].name}`;
+            this.profileDetails.update((user: User | undefined) => {
+                if (user) {
+                    return {
+                        ...user,
+                        avatar,
+                    };
+                }
+                return undefined;
+            });
         }
     }
 

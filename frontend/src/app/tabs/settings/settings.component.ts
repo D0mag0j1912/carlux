@@ -13,7 +13,7 @@ import {
     IonAvatar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { languageSharp, personCircleOutline, pencil, trash } from 'ionicons/icons';
+import { languageSharp, personCircleOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
 import { filter, take } from 'rxjs';
 import { AuthenticationFacadeService } from '../../store/auth/facades/auth-facade.service';
@@ -45,7 +45,7 @@ export class SettingsComponent implements OnInit {
     readonly LANGUAGES_COUNT = 2;
 
     constructor() {
-        addIcons({ languageSharp, personCircleOutline, pencil, trash });
+        addIcons({ languageSharp, personCircleOutline });
     }
 
     ngOnInit(): void {
