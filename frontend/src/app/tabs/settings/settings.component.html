@@ -6,30 +6,6 @@
     </ion-header>
 
     <ion-content class="settings-content ion-padding" [fullscreen]="true">
-        <div class="profile">
-            {{ t('settings.profile') }}
-        </div>
-
-        <div class="avatar-container">
-            <div class="avatar-wrapper">
-                @if (userAvatar(); as avatar) {
-                    <div class="img-wrapper">
-                        <img class="user-image" [src]="avatar" />
-                    </div>
-                } @else {
-                    <div class="initials">
-                        {{ initials() }}
-                    </div>
-                }
-                <div class="actions">
-                    <ion-icon name="pencil" color="primary" (click)="fileInput.click()"></ion-icon>
-                    <ion-icon name="trash" color="primary"></ion-icon>
-                </div>
-
-                <input #fileInput type="file" class="file-input" (change)="onFilePickerChange($event)" />
-            </div>
-        </div>
-
         <div class="title">
             {{ t('settings.title') }}
         </div>

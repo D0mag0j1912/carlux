@@ -55,6 +55,8 @@ export class ProfileDetailsComponent implements OnInit {
     private _settingsFacadeService = inject(SettingsFacadeService);
 
     profileDetails = signal<User | undefined>(undefined);
+    initials = signal('');
+    userAvatar = signal<string>('');
 
     ngOnInit(): void {
         this._settingsFacadeService
@@ -62,6 +64,17 @@ export class ProfileDetailsComponent implements OnInit {
             .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
             .subscribe((profileDetails: User | undefined) => {
                 this.profileDetails.set(profileDetails);
+            });
+
+        this._settingsFacadeService
+            .selectProfileDetails()
+            .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
+            .subscribe((profileDetails: User) => {
+                if (!profileDetails.avatar) {
+                    this._generateInitials(profileDetails.firstName, profileDetails.lastName);
+                } else {
+                    this.userAvatar.set(profileDetails.avatar);
+                }
             });
     }
 
@@ -89,5 +102,19 @@ export class ProfileDetailsComponent implements OnInit {
             }
             return undefined;
         });
+    }
+
+    onFilePickerChange($event: Event): void {
+        const target = $event.target as HTMLInputElement;
+        const fileList: FileList | null = target.files;
+        if (fileList?.length) {
+            this.userAvatar.set(`../../../assets/images/${fileList[0].name}`);
+        }
+    }
+
+    private _generateInitials(firstName: string, lastName: string): void {
+        const fullName = firstName + ' ' + lastName;
+        const names = fullName.split(' ');
+        this.initials.set(names.map((name: string) => name[0].toUpperCase()).join(''));
     }
 }
