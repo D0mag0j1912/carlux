@@ -124,7 +124,20 @@ export class ProfileDetailsComponent implements OnInit {
         }
     }
 
-    private _generateInitials(firstName: string, lastName: string): void {
+    resetProfilePicture(): void {
+        this.profileDetails.update((user: User | undefined) => {
+            if (user) {
+                return {
+                    ...user,
+                    avatar: undefined,
+                };
+            }
+            return undefined;
+        });
+        this._generateInitials(this.profileDetails()?.firstName, this.profileDetails()?.lastName);
+    }
+
+    private _generateInitials(firstName: string | undefined, lastName: string | undefined): void {
         const fullName = firstName + ' ' + lastName;
         const names = fullName.split(' ');
         this.initials.set(names.map((name: string) => name[0].toUpperCase()).join(''));

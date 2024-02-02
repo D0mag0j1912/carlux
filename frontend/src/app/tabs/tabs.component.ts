@@ -29,6 +29,8 @@ export class TabsComponent implements OnInit {
         this._authenticationFacadeService
             .selectUserId()
             .pipe(filter(Boolean), take(1))
-            .subscribe((userId: number) => this._settingsFacadeService.getProfileDetails(userId));
+            .subscribe((userId: number) => {
+                this._settingsFacadeService.getProfileDetails(userId);
+            });
     }
 }
