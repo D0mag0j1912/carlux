@@ -17,6 +17,8 @@ import {
     IonIcon,
     IonLabel,
     IonText,
+    IonThumbnail,
+    IonSkeletonText,
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
 import { filter } from 'rxjs';
@@ -45,6 +47,8 @@ import { UserDto as User } from '../../../../api/models/user-dto';
         IonIcon,
         IonLabel,
         IonText,
+        IonThumbnail,
+        IonSkeletonText,
         TranslocoModule,
         FormsModule,
         DateTimePickerComponent,

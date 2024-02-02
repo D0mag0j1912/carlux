@@ -74,7 +74,17 @@
                 </form>
             }
         } @else {
-            <!--Loading spinner-->
+            <div class="skeleton-container">
+                <ion-thumbnail class="thumbnail">
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-thumbnail>
+                <div class="skeleton-actions">
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </div>
+                <ion-skeleton-text class="first-name-skeleton-text" [animated]="true"></ion-skeleton-text>
+                <ion-skeleton-text class="last-name-skeleton-text" [animated]="true"></ion-skeleton-text>
+            </div>
         }
     </ion-content>
 </ng-container>
