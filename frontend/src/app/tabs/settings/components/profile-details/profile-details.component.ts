@@ -22,6 +22,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { filter } from 'rxjs';
 import { addIcons } from 'ionicons';
 import { pencil, trash } from 'ionicons/icons';
+import { AsyncPipe } from '@angular/common';
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { SettingsFacadeService } from '../../../../store/settings/facades/settings-facade.service';
 import { UserDto as User } from '../../../../api/models/user-dto';
@@ -47,6 +48,7 @@ import { UserDto as User } from '../../../../api/models/user-dto';
         TranslocoModule,
         FormsModule,
         DateTimePickerComponent,
+        AsyncPipe,
     ],
     selector: 'car-profile-details',
     templateUrl: './profile-details.component.html',
@@ -55,6 +57,8 @@ import { UserDto as User } from '../../../../api/models/user-dto';
 export class ProfileDetailsComponent implements OnInit {
     private _destroyRef = inject(DestroyRef);
     private _settingsFacadeService = inject(SettingsFacadeService);
+
+    areSettingsNotLoading$ = this._settingsFacadeService.selectIsNotLoading();
 
     profileDetails = signal<User | undefined>(undefined);
     initials = signal('');
@@ -67,14 +71,8 @@ export class ProfileDetailsComponent implements OnInit {
         this._settingsFacadeService
             .selectProfileDetails()
             .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
-            .subscribe((profileDetails: User | undefined) => {
-                this.profileDetails.set(profileDetails);
-            });
-
-        this._settingsFacadeService
-            .selectProfileDetails()
-            .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
             .subscribe((profileDetails: User) => {
+                this.profileDetails.set(profileDetails);
                 if (!profileDetails.avatar) {
                     this._generateInitials(profileDetails.firstName, profileDetails.lastName);
                 }

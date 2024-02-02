@@ -14,61 +14,67 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-        <form #form="ngForm">
-            <div class="avatar-container">
-                <div class="avatar-wrapper">
-                    @if (profileDetails()?.avatar; as avatar) {
-                        <div class="img-wrapper">
-                            <img class="user-image" [src]="avatar" />
+        @if (areSettingsNotLoading$ | async) {
+            @if (profileDetails(); as profileDetails) {
+                <form #form="ngForm">
+                    <div class="avatar-container">
+                        <div class="avatar-wrapper">
+                            @if (profileDetails.avatar) {
+                                <div class="img-wrapper">
+                                    <img class="user-image" [src]="profileDetails.avatar" />
+                                </div>
+                            } @else {
+                                <div class="initials">
+                                    {{ initials() }}
+                                </div>
+                            }
+                            <div class="actions">
+                                <ion-icon name="pencil" color="primary" (click)="fileInput.click()"></ion-icon>
+                                <ion-icon name="trash" color="primary" (click)="resetProfilePicture()"></ion-icon>
+                            </div>
+
+                            <input #fileInput type="file" class="file-input" (change)="onFilePickerChange($event)" />
                         </div>
-                    } @else {
-                        <div class="initials">
-                            {{ initials() }}
-                        </div>
-                    }
-                    <div class="actions">
-                        <ion-icon name="pencil" color="primary" (click)="fileInput.click()"></ion-icon>
-                        <ion-icon name="trash" color="primary" (click)="resetProfilePicture()"></ion-icon>
                     </div>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <ion-item>
+                                    <ion-input
+                                        required
+                                        type="text"
+                                        name="first-name"
+                                        labelPlacement="floating"
+                                        [placeholder]="t('auth.personal_information.enter_first_name')"
+                                        [label]="t('auth.personal_information.first_name')"
+                                        [ngModel]="profileDetails.firstName"
+                                        (ngModelChange)="setFirstName($event)"
+                                    ></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
 
-                    <input #fileInput type="file" class="file-input" (change)="onFilePickerChange($event)" />
-                </div>
-            </div>
-            <ion-grid>
-                <ion-row>
-                    <ion-col>
-                        <ion-item>
-                            <ion-input
-                                required
-                                type="text"
-                                name="first-name"
-                                labelPlacement="floating"
-                                [placeholder]="t('auth.personal_information.enter_first_name')"
-                                [label]="t('auth.personal_information.first_name')"
-                                [ngModel]="profileDetails()?.firstName"
-                                (ngModelChange)="setFirstName($event)"
-                            ></ion-input>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-
-                <ion-row>
-                    <ion-col>
-                        <ion-item>
-                            <ion-input
-                                required
-                                type="text"
-                                name="last-name"
-                                labelPlacement="floating"
-                                [placeholder]="t('auth.personal_information.enter_last_name')"
-                                [label]="t('auth.personal_information.last_name')"
-                                [ngModel]="profileDetails()?.lastName"
-                                (ngModelChange)="setLastName($event)"
-                            ></ion-input>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </form>
+                        <ion-row>
+                            <ion-col>
+                                <ion-item>
+                                    <ion-input
+                                        required
+                                        type="text"
+                                        name="last-name"
+                                        labelPlacement="floating"
+                                        [placeholder]="t('auth.personal_information.enter_last_name')"
+                                        [label]="t('auth.personal_information.last_name')"
+                                        [ngModel]="profileDetails.lastName"
+                                        (ngModelChange)="setLastName($event)"
+                                    ></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </form>
+            }
+        } @else {
+            <!--Loading spinner-->
+        }
     </ion-content>
 </ng-container>

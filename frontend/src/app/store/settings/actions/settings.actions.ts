@@ -15,3 +15,5 @@ export const saveProfileDetails = createAction(
     '[Settings] Save Profile Details',
     props<{ profileDetails: User }>(),
 );
+
+export const setLoading = createAction('[Settings] Set Loading', props<{ isLoading: boolean }>());
