@@ -17,12 +17,15 @@ import {
     IonIcon,
     IonLabel,
     IonText,
+    IonThumbnail,
+    IonSkeletonText,
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
-import { filter, take } from 'rxjs';
+import { filter } from 'rxjs';
+import { addIcons } from 'ionicons';
+import { pencil, trash } from 'ionicons/icons';
 import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
 import { SettingsFacadeService } from '../../../../store/settings/facades/settings-facade.service';
-import { AuthenticationFacadeService } from '../../../../store/auth/facades/auth-facade.service';
 import { UserDto as User } from '../../../../api/models/user-dto';
 
 @Component({
@@ -43,6 +46,8 @@ import { UserDto as User } from '../../../../api/models/user-dto';
         IonIcon,
         IonLabel,
         IonText,
+        IonThumbnail,
+        IonSkeletonText,
         TranslocoModule,
         FormsModule,
         DateTimePickerComponent,
@@ -54,21 +59,25 @@ import { UserDto as User } from '../../../../api/models/user-dto';
 export class ProfileDetailsComponent implements OnInit {
     private _destroyRef = inject(DestroyRef);
     private _settingsFacadeService = inject(SettingsFacadeService);
-    private _authenticationFacadeService = inject(AuthenticationFacadeService);
+
+    areSettingsNotLoading = this._settingsFacadeService.selectIsNotLoading();
 
     profileDetails = signal<User | undefined>(undefined);
+    initials = signal('');
+
+    constructor() {
+        addIcons({ pencil, trash });
+    }
 
     ngOnInit(): void {
-        this._authenticationFacadeService
-            .selectUserId()
-            .pipe(take(1), filter(Boolean))
-            .subscribe((userId: number) => this._settingsFacadeService.getProfileDetails(userId));
-
         this._settingsFacadeService
             .selectProfileDetails()
             .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
-            .subscribe((profileDetails: User | undefined) => {
+            .subscribe((profileDetails: User) => {
                 this.profileDetails.set(profileDetails);
+                if (!profileDetails.avatar) {
+                    this._generateInitials(profileDetails.firstName, profileDetails.lastName);
+                }
             });
     }
 
@@ -96,5 +105,41 @@ export class ProfileDetailsComponent implements OnInit {
             }
             return undefined;
         });
+    }
+
+    onFilePickerChange($event: Event): void {
+        const target = $event.target as HTMLInputElement;
+        const fileList: FileList | null = target.files;
+        if (fileList?.length) {
+            const avatar = `../../../assets/images/${fileList[0].name}`;
+            this.profileDetails.update((user: User | undefined) => {
+                if (user) {
+                    return {
+                        ...user,
+                        avatar,
+                    };
+                }
+                return undefined;
+            });
+        }
+    }
+
+    resetProfilePicture(): void {
+        this.profileDetails.update((user: User | undefined) => {
+            if (user) {
+                return {
+                    ...user,
+                    avatar: undefined,
+                };
+            }
+            return undefined;
+        });
+        this._generateInitials(this.profileDetails()?.firstName, this.profileDetails()?.lastName);
+    }
+
+    private _generateInitials(firstName: string | undefined, lastName: string | undefined): void {
+        const fullName = firstName + ' ' + lastName;
+        const names = fullName.split(' ');
+        this.initials.set(names.map((name: string) => name[0].toUpperCase()).join(''));
     }
 }

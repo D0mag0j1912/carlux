@@ -3,10 +3,10 @@ import { ApiProperty } from '@nestjs/swagger';
 export class UserDto {
     @ApiProperty({
         type: Number,
-        required: true,
+        required: false,
         description: 'User\'s ID',
     })
-    id: number;
+    id?: number;
 
     @ApiProperty({
         type: String,
@@ -24,6 +24,13 @@ export class UserDto {
 
     @ApiProperty({
         type: String,
+        required: false,
+        description: 'User\'s profile picture',
+    })
+    avatar?: string;
+
+    @ApiProperty({
+        type: String,
         required: true,
         description: 'User\'s birth date',
     })
@@ -38,8 +45,8 @@ export class UserDto {
 
     @ApiProperty({
         type: String,
-        required: true,
+        required: false,
         description: 'Date and time when the user was created',
     })
-    createdAt: string;
+    createdAt?: string;
 }

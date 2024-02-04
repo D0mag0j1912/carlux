@@ -10,6 +10,7 @@ import {
     IonNote,
     IonTitle,
     IonToolbar,
+    IonAvatar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { languageSharp, personCircleOutline } from 'ionicons/icons';
@@ -30,6 +31,7 @@ import { AuthenticationFacadeService } from '../../store/auth/facades/auth-facad
         IonIcon,
         IonLabel,
         IonNote,
+        IonAvatar,
     ],
     selector: 'car-settings',
     templateUrl: './settings.component.html',
@@ -37,7 +39,6 @@ import { AuthenticationFacadeService } from '../../store/auth/facades/auth-facad
 })
 export class SettingsComponent {
     private _authenticationFacadeService = inject(AuthenticationFacadeService);
-
     readonly LANGUAGES_COUNT = 2;
 
     constructor() {

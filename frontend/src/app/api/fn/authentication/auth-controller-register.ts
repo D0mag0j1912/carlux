@@ -7,10 +7,10 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 import { LoginResponseDto } from '../../models/login-response-dto';
-import { UserEntity } from '../../models/user-entity';
+import { UserDto } from '../../models/user-dto';
 
 export interface AuthControllerRegister$Params {
-      body: UserEntity
+      body: UserDto
 }
 
 export function authControllerRegister(http: HttpClient, rootUrl: string, params: AuthControllerRegister$Params, context?: HttpContext): Observable<StrictHttpResponse<LoginResponseDto>> {

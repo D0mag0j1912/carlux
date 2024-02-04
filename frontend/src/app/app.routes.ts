@@ -15,7 +15,6 @@ import * as PreferencesReducers from './store/preferences/reducers/preferences.r
 import * as SettingsReducers from './store/settings/reducers/settings.reducer';
 import * as SettingsEffects from './store/settings/effects/settings.effects';
 import * as PreferencesEffects from './store/preferences/effects/preferences.effects';
-import * as PlatformReducers from './store/platform/reducers/platform.reducers';
 
 const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
     const authenticationFacadeService = inject(AuthenticationFacadeService);
@@ -58,6 +57,7 @@ export const routes: Routes = [
     {
         path: 'tabs',
         component: TabsComponent,
+        providers: [SETTINGS_PROVIDERS, PREFERENCES_PROVIDERS, AUTH_ENVIRONMENT_PROVIDERS],
         children: [
             {
                 path: 'auth',
@@ -65,7 +65,6 @@ export const routes: Routes = [
                     import('./tabs/auth/auth.component').then(
                         (component) => component.AuthComponent,
                     ),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS],
             },
             {
                 path: 'marina-list',
@@ -73,7 +72,6 @@ export const routes: Routes = [
                     import('./tabs/marina-list/marina-list.component').then(
                         (component) => component.MarinaListComponent,
                     ),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
@@ -82,7 +80,6 @@ export const routes: Routes = [
                     import('./tabs/settings/settings.component').then(
                         (component) => component.SettingsComponent,
                     ),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS, SETTINGS_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
@@ -91,7 +88,6 @@ export const routes: Routes = [
                     import('./tabs/settings/components/languages/languages.component').then(
                         (component) => component.LanguagesComponent,
                     ),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS, SETTINGS_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
@@ -100,7 +96,6 @@ export const routes: Routes = [
                     import(
                         './tabs/settings/components/profile-details/profile-details.component'
                     ).then((component) => component.ProfileDetailsComponent),
-                providers: [AUTH_ENVIRONMENT_PROVIDERS, PREFERENCES_PROVIDERS, SETTINGS_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {

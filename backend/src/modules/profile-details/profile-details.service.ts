@@ -37,6 +37,7 @@ export class ProfileDetailsService {
             birthDate: user.BirthDate,
             email: user.Email,
             createdAt: user.CreatedAt,
+            avatar: user.Avatar,
         };
         return userData;
     }
@@ -49,6 +50,7 @@ export class ProfileDetailsService {
             Id: profileDetails.id,
             LastName: profileDetails.lastName,
             CreatedAt: profileDetails.createdAt,
+            Avatar: profileDetails.avatar ? profileDetails.avatar : null,
         };
         const savedUser = await this._usersRepository.save(userEntity);
         return {
@@ -57,6 +59,7 @@ export class ProfileDetailsService {
             firstName: savedUser.FirstName,
             id: savedUser.Id,
             lastName: savedUser.LastName,
+            avatar: savedUser.Avatar,
         } as UserDto;
     }
 }

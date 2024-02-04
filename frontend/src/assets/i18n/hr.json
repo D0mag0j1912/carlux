@@ -50,7 +50,6 @@
     },
     "settings": {
         "title": "Postavke",
-        "profile": "Profil",
         "logout": "Odjava",
         "languages": "Jezici",
         "profile_details": "Osobni podatci",
@@ -61,7 +60,7 @@
     },
     "tabs": {
         "auth": "Prijava",
-        "marina_list": "Marine",
+        "car_list": "Auti",
         "settings": "Postavke"
     },
     "languages": {
