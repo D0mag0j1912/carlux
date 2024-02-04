@@ -6,7 +6,7 @@
             </ion-buttons>
             <ion-title>{{ t('settings.profile_details') }}</ion-title>
             <ion-buttons slot="end">
-                <ion-button class="save-btn" (click)="saveProfileDetails()">
+                <ion-button class="save-btn" [disabled]="!areSettingsNotLoading()" (click)="saveProfileDetails()">
                     {{ t('common.actions.save') }}
                 </ion-button>
             </ion-buttons>
@@ -14,7 +14,7 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-        @if (areSettingsNotLoading$ | async) {
+        @if (areSettingsNotLoading()) {
             @if (profileDetails(); as profileDetails) {
                 <form #form="ngForm">
                     <div class="avatar-container">

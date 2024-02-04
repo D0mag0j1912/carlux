@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, Signal, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../../..';
@@ -13,15 +13,15 @@ export class SettingsFacadeService {
 
     private _selectProfileDetails$ = this._store.select(SettingsSelectors.selectProfileDetails);
 
-    private _selectIsNotLoading$ = this._store.select(SettingsSelectors.selectIsNotLoading);
+    private _selectIsNotLoading = this._store.selectSignal(SettingsSelectors.selectIsNotLoading);
 
     //Selectors BEGIN -------------------------
     selectProfileDetails(): Observable<User | undefined> {
         return this._selectProfileDetails$;
     }
 
-    selectIsNotLoading(): Observable<boolean> {
-        return this._selectIsNotLoading$;
+    selectIsNotLoading(): Signal<boolean> {
+        return this._selectIsNotLoading;
     }
     //Selectors END -------------------------
 
