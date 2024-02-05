@@ -8,6 +8,8 @@ import { PreferenceEntity } from './modules/preferences/entity/preferences.entit
 import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
 import { CarEntity } from './modules/cars/entity/car.entity';
+import { WheelDriveTypes } from './modules/wheel-drive-types/entity/wheel-drive-types.entity';
+import { BodyStyles } from './modules/body-styles/entity/body-style.entity';
 
 const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule];
 
@@ -25,7 +27,14 @@ const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule];
                 username: configService.get('DATABASE_USER'),
                 password: configService.get('DATABASE_PASSWORD'),
                 database: configService.get('DATABASE_NAME'),
-                entities: [UserEntity, PreferenceEntity, LanguageEntity, CarEntity],
+                entities: [
+                    UserEntity,
+                    PreferenceEntity,
+                    LanguageEntity,
+                    CarEntity,
+                    WheelDriveTypes,
+                    BodyStyles,
+                ],
             }),
             inject: [ConfigService],
         }),
