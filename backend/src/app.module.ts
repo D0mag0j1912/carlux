@@ -7,6 +7,7 @@ import { PreferencesModule } from './modules/preferences/preferences.module';
 import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
 import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
+import { CarEntity } from './modules/cars/entity/car.entity';
 
 const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule];
 
@@ -24,7 +25,7 @@ const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule];
                 username: configService.get('DATABASE_USER'),
                 password: configService.get('DATABASE_PASSWORD'),
                 database: configService.get('DATABASE_NAME'),
-                entities: [UserEntity, PreferenceEntity, LanguageEntity],
+                entities: [UserEntity, PreferenceEntity, LanguageEntity, CarEntity],
             }),
             inject: [ConfigService],
         }),
