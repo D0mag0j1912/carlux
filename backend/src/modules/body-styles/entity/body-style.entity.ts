@@ -5,6 +5,6 @@ export class BodyStyles {
     @PrimaryGeneratedColumn()
     Id?: number;
 
-    @Column({ type: 'string' })
+    @Column()
     Name: string;
 }

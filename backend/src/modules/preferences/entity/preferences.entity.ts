@@ -6,10 +6,10 @@ export class PreferenceEntity {
     @PrimaryGeneratedColumn()
     Id?: number;
 
-    @Column({ type: 'int' })
+    @Column()
     UserId: number;
 
-    @Column({ type: 'int' })
+    @Column()
     LanguageId: number;
 
     @ManyToOne(() => LanguageEntity, (language) => language.Id)

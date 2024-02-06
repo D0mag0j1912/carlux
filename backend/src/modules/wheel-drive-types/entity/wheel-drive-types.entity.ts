@@ -5,6 +5,6 @@ export class WheelDriveTypes {
     @PrimaryGeneratedColumn()
     Id?: number;
 
-    @Column({ type: 'string' })
+    @Column()
     Type: string;
 }

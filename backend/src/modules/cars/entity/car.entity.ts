@@ -5,54 +5,54 @@ export class CarEntity {
     @PrimaryGeneratedColumn()
     Id?: number;
 
-    @Column({ type: 'string' })
+    @Column()
     CarBrand: string;
 
-    @Column({ type: 'float' })
+    @Column()
     Price: number;
 
-    @Column({ type: 'string' })
+    @Column()
     FirstRegistrationDate: string;
 
-    @Column({ type: 'string' })
+    @Column()
     ReleaseDate: string;
 
-    @Column({ type: 'string' })
+    @Column()
     ModelName: string;
 
-    @Column({ type: 'string' })
+    @Column()
     CountryOrigin: string;
 
-    @Column({ type: 'int' })
+    @Column()
     NoOfPreviousOwners: number;
 
-    @Column({ type: 'string' })
+    @Column()
     Color: string;
 
-    @Column({ type: 'string' })
+    @Column()
     BodyKit: string;
 
-    @Column({ type: 'int' })
+    @Column()
     HorsePower: number;
 
-    @Column({ type: 'float' })
+    @Column()
     Kilowats: number;
 
-    @Column({ type: 'float' })
+    @Column()
     FuelConsumption: number;
 
-    @Column({ type: 'float' })
+    @Column()
     CO2Emissions: number;
 
-    @Column({ type: 'int' })
+    @Column()
     NumberOfCylinders: number;
 
-    @Column({ type: 'int' })
+    @Column()
     RimSize: number;
 
-    @Column({ type: 'int' })
+    @Column()
     BodyStyleId: number;
 
-    @Column({ type: 'int' })
+    @Column()
     WheelDriveTypeId: number;
 }
