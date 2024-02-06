@@ -8,8 +8,8 @@ import { PreferenceEntity } from './modules/preferences/entity/preferences.entit
 import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
 import { CarEntity } from './modules/cars/entity/car.entity';
-import { WheelDriveTypes } from './modules/wheel-drive-types/entity/wheel-drive-types.entity';
-import { BodyStyles } from './modules/body-styles/entity/body-style.entity';
+import { WheelDriveTypeEntity } from './modules/wheel-drive-types/entity/wheel-drive-types.entity';
+import { BodyStyleEntity } from './modules/body-styles/entity/body-style.entity';
 
 const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule];
 
@@ -32,8 +32,8 @@ const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule];
                     PreferenceEntity,
                     LanguageEntity,
                     CarEntity,
-                    WheelDriveTypes,
-                    BodyStyles,
+                    WheelDriveTypeEntity,
+                    BodyStyleEntity,
                 ],
             }),
             inject: [ConfigService],

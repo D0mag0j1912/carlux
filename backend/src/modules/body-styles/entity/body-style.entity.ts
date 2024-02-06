@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'BodyStyles' })
-export class BodyStyles {
+export class BodyStyleEntity {
     @PrimaryGeneratedColumn()
     Id?: number;
 

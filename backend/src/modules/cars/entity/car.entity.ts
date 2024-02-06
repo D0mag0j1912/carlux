@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BodyStyleEntity } from '../../body-styles/entity/body-style.entity';
+import { WheelDriveTypeEntity } from '../../wheel-drive-types/entity/wheel-drive-types.entity';
 
 @Entity({ name: 'Cars' })
 export class CarEntity {
@@ -55,4 +57,12 @@ export class CarEntity {
 
     @Column()
     WheelDriveTypeId: number;
+
+    @ManyToOne(() => BodyStyleEntity, (bodyStyle) => bodyStyle.Id)
+    @JoinColumn({ name: 'BodyStyleId' })
+    bodyStyle?: BodyStyleEntity;
+
+    @ManyToOne(() => WheelDriveTypeEntity, (wheelDriveType) => wheelDriveType.Id)
+    @JoinColumn({ name: 'WheelDriveTypeId' })
+    wheelDriveType?: WheelDriveTypeEntity;
 }
