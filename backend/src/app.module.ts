@@ -10,8 +10,9 @@ import { ProfileDetailsModule } from './modules/profile-details/profile-details.
 import { CarEntity } from './modules/cars/entity/car.entity';
 import { WheelDriveTypeEntity } from './modules/wheel-drive-types/entity/wheel-drive-types.entity';
 import { BodyStyleEntity } from './modules/body-styles/entity/body-style.entity';
+import { CarsModule } from './modules/cars/cars.module';
 
-const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule];
+const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule, CarsModule];
 
 @Module({
     imports: [
