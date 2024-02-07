@@ -8,8 +8,8 @@ import { PreferenceEntity } from './modules/preferences/entity/preferences.entit
 import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
 import { CarEntity } from './modules/cars/entity/car.entity';
-import { WheelDriveTypeEntity } from './modules/wheel-drive-types/entity/wheel-drive-types.entity';
-import { BodyStyleEntity } from './modules/body-styles/entity/body-style.entity';
+import { WheelDriveTypeEntity } from './modules/cars/entity/wheel-drive-types.entity';
+import { BodyStyleEntity } from './modules/cars/entity/body-style.entity';
 import { CarsModule } from './modules/cars/cars.module';
 
 const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule, CarsModule];

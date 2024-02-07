@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { BodyStyleEntity } from '../../body-styles/entity/body-style.entity';
-import { WheelDriveTypeEntity } from '../../wheel-drive-types/entity/wheel-drive-types.entity';
 import { UserEntity } from '../../auth/entity/user.entity';
+import { BodyStyleEntity } from './body-style.entity';
+import { WheelDriveTypeEntity } from './wheel-drive-types.entity';
 
 @Entity({ name: 'Cars' })
 export class CarEntity {
