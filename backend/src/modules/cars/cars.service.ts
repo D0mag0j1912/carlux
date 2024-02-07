@@ -17,9 +17,6 @@ export class CarsService {
     private async _getRecommendedCars(userId: number): Promise<void> {
         const cars = await this._carsRepository.find({
             select: {},
-            where: {
-                UserId: userId,
-            },
         });
     }
 }
