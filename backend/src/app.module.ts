@@ -11,6 +11,7 @@ import { CarEntity } from './modules/cars/entity/car.entity';
 import { WheelDriveTypeEntity } from './modules/cars/entity/wheel-drive-types.entity';
 import { BodyStyleEntity } from './modules/cars/entity/body-style.entity';
 import { CarsModule } from './modules/cars/cars.module';
+import { ImageEntity } from './modules/cars/entity/image.entity';
 
 const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule, CarsModule];
 
@@ -35,6 +36,7 @@ const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule, CarsModule
                     CarEntity,
                     WheelDriveTypeEntity,
                     BodyStyleEntity,
+                    ImageEntity,
                 ],
             }),
             inject: [ConfigService],
