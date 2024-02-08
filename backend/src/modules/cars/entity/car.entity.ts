@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { BodyStyleEntity } from './body-style.entity';
 import { WheelDriveTypeEntity } from './wheel-drive-types.entity';
 
