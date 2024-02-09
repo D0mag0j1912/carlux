@@ -9,7 +9,10 @@ export class CarEntity {
     Id?: number;
 
     @Column()
-    CarBrand: string;
+    Brand: string;
+
+    @Column()
+    KilometersTravelled: number;
 
     @Column()
     Price: number;
