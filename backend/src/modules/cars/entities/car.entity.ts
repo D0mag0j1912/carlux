@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { BodyStyleEntity } from './body-style.entity';
 import { WheelDriveTypeEntity } from './wheel-drive-types.entity';
+import { CurrencyEntity } from './currency.entity';
 
 @Entity({ name: 'Cars' })
 export class CarEntity {
@@ -58,6 +59,9 @@ export class CarEntity {
     @Column()
     WheelDriveTypeId: number;
 
+    @Column()
+    CurrencyCode: string;
+
     @OneToOne(() => BodyStyleEntity, (bodyStyle) => bodyStyle.Id)
     @JoinColumn({ name: 'BodyStyleId' })
     bodyStyle?: BodyStyleEntity;
@@ -65,4 +69,8 @@ export class CarEntity {
     @OneToOne(() => WheelDriveTypeEntity, (wheelDriveType) => wheelDriveType.Id)
     @JoinColumn({ name: 'WheelDriveTypeId' })
     wheelDriveType?: WheelDriveTypeEntity;
+
+    @OneToOne(() => CurrencyEntity, (currency) => currency.Code)
+    @JoinColumn({ name: 'CurrencyCode' })
+    currency?: CurrencyEntity;
 }

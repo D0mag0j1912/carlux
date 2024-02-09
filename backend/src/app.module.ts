@@ -7,11 +7,12 @@ import { PreferencesModule } from './modules/preferences/preferences.module';
 import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
 import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
-import { CarEntity } from './modules/cars/entity/car.entity';
-import { WheelDriveTypeEntity } from './modules/cars/entity/wheel-drive-types.entity';
-import { BodyStyleEntity } from './modules/cars/entity/body-style.entity';
+import { CarEntity } from './modules/cars/entities/car.entity';
+import { WheelDriveTypeEntity } from './modules/cars/entities/wheel-drive-types.entity';
+import { BodyStyleEntity } from './modules/cars/entities/body-style.entity';
 import { CarsModule } from './modules/cars/cars.module';
-import { ImageEntity } from './modules/cars/entity/image.entity';
+import { ImageEntity } from './modules/cars/entities/image.entity';
+import { CurrencyEntity } from './modules/cars/entities/currency.entity';
 
 const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule, CarsModule];
 
@@ -37,6 +38,7 @@ const IMPORTS = [AuthModule, PreferencesModule, ProfileDetailsModule, CarsModule
                     WheelDriveTypeEntity,
                     BodyStyleEntity,
                     ImageEntity,
+                    CurrencyEntity,
                 ],
             }),
             inject: [ConfigService],

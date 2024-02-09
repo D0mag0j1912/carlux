@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CarEntity } from './entity/car.entity';
+import { CarEntity } from './entities/car.entity';
 
 @Injectable()
 export class CarsService {
