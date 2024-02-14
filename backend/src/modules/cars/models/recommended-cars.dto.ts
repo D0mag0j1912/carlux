@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CarDto {
+export class RecommendedCarsDto {
     @ApiProperty({
         type: Number,
         required: true,
@@ -39,13 +39,6 @@ export class CarDto {
     @ApiProperty({
         type: String,
         required: true,
-        description: 'Date on which the model of the car first came out',
-    })
-    releaseDate: string;
-
-    @ApiProperty({
-        type: String,
-        required: true,
         description: 'Car model name',
     })
     modelName: string;
@@ -67,56 +60,7 @@ export class CarDto {
     @ApiProperty({
         type: String,
         required: true,
-        description: 'Car color',
+        description: 'Currency symbol',
     })
-    color: string;
-
-    @ApiProperty({
-        type: String,
-        required: true,
-        description: 'Car body kit',
-    })
-    bodyKit: string;
-
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'How much horse power the car has',
-    })
-    horsePower: number;
-
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'How much kilowats the car has',
-    })
-    kilowats: number;
-
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'Car fuel consumption',
-    })
-    fuelConsumption: number;
-
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'Car CO2 emissions',
-    })
-    co2Emissions: number;
-
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'Number of the car cylinders',
-    })
-    numberOfCylinders: number;
-
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'Car rim size',
-    })
-    rimSize: number;
+    symbol: string;
 }

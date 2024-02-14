@@ -8,7 +8,7 @@ import {
 import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { CarsService } from './cars.service';
-import { CarDto } from './models/car.dto';
+import { RecommendedCarsDto } from './models/recommended-cars.dto';
 
 const CARS_FEATURE_KEY = 'cars';
 
@@ -18,7 +18,7 @@ export class CarsController {
     constructor(private _carsService: CarsService) {}
 
     @ApiOkResponse({
-        type: Array<CarDto>,
+        type: Array<RecommendedCarsDto>,
     })
     @ApiInternalServerErrorResponse({
         status: 500,
@@ -29,7 +29,7 @@ export class CarsController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Get('recommended-cars')
-    async getRecommendedCars(): Promise<CarDto[]> {
+    async getRecommendedCars(): Promise<RecommendedCarsDto[]> {
         return this._carsService.getRecommendedCars();
     }
 }

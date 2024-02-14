@@ -2,13 +2,13 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CarEntity } from './entities/car.entity';
-import { CarDto } from './models/car.dto';
+import { RecommendedCarsDto } from './models/recommended-cars.dto';
 
 @Injectable()
 export class CarsService {
     constructor(@InjectRepository(CarEntity) private _carsRepository: Repository<CarEntity>) {}
 
-    async getRecommendedCars(): Promise<CarDto[]> {
+    async getRecommendedCars(): Promise<RecommendedCarsDto[]> {
         try {
             return this._getRecommendedCars();
         } catch (error: unknown) {
@@ -16,25 +16,33 @@ export class CarsService {
         }
     }
 
-    private async _getRecommendedCars(): Promise<CarDto[]> {
-        /**
-         * SELECT car.Brand, car.ModelName, car.Price, cur.Symbol, car.KilometersTravelled, car.FirstRegistrationDate, car.CountryOrigin FROM Cars car
-         * JOIN Currencies cur ON cur.Code = car.CurrencyCode;
-         */
-        const cars = await this._carsRepository
+    private async _getRecommendedCars(): Promise<RecommendedCarsDto[]> {
+        const cars: CarEntity[] = await this._carsRepository
             .createQueryBuilder('car')
             .leftJoin('car.currency', 'currency')
             .select([
+                'car.Id',
                 'car.Brand',
-                'car.ModelName',
-                'car.Price',
-                'currency.Symbol',
                 'car.KilometersTravelled',
+                'car.Price',
                 'car.FirstRegistrationDate',
+                'car.ModelName',
                 'car.CountryOrigin',
+                'car.NoOfPreviousOwners',
+                'currency.Symbol',
             ])
-            .execute();
-        console.log(cars);
-        return cars;
+            .getMany();
+        const carData: RecommendedCarsDto[] = cars.map((car: CarEntity) => ({
+            id: car.Id,
+            brand: car.Brand,
+            kilometersTravelled: car.KilometersTravelled,
+            price: car.Price,
+            firstRegistrationDate: car.FirstRegistrationDate,
+            modelName: car.ModelName,
+            countryOrigin: car.CountryOrigin,
+            noOfPreviousOwners: car.NoOfPreviousOwners,
+            symbol: car.currency.Symbol,
+        }));
+        return carData;
     }
 }
