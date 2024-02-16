@@ -57,6 +57,9 @@ export class CarEntity {
     RimSize: number;
 
     @Column()
+    UploadedDate: string;
+
+    @Column()
     BodyStyleId: number;
 
     @Column()
