@@ -18,7 +18,8 @@ export class CarsController {
     constructor(private _carsService: CarsService) {}
 
     @ApiOkResponse({
-        type: Array<RecommendedCarsDto>,
+        type: RecommendedCarsDto,
+        isArray: true,
     })
     @ApiInternalServerErrorResponse({
         status: 500,

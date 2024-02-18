@@ -7,7 +7,7 @@ import { ImageEntity } from './image.entity';
 @Entity({ name: 'Cars' })
 export class CarEntity {
     @PrimaryGeneratedColumn()
-    Id?: number;
+    Id: number;
 
     @Column()
     Brand: string;
