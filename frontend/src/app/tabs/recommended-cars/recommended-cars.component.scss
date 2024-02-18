@@ -1,4 +1,16 @@
 
+.search-cars-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+
+    .search-btn {
+        width: 100%;
+        margin: 0 20px;
+    }
+}
+
 .spinner-wrapper {
     display: flex;
     justify-content: center;

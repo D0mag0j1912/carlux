@@ -1,6 +1,13 @@
-<ion-content>
+<ion-content *transloco="let t">
     @if (areRecommendedCarsNotLoading$ | async) {
-        @if (recommendedCars$ | async; as recommendedCars) {}
+        @if (recommendedCars$ | async; as recommendedCars) {
+            <div class="search-cars-wrapper">
+                <ion-button class="search-btn">
+                    <ion-icon name="search-sharp" slot="start"></ion-icon>
+                    {{ t('recommended_cars.search_cars') }}
+                </ion-button>
+            </div>
+        }
     } @else {
         <div class="spinner-wrapper">
             <ion-spinner color="primary"></ion-spinner>

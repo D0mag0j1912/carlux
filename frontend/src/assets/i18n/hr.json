@@ -74,6 +74,7 @@
         }
     },
     "recommended_cars": {
+        "search_cars": "Pretraži automobile",
         "errors": {
             "get_recommended_cars": "Greška prilikom dohvata preporučenih vozila. Molimo pokušajte ponovno."
         }

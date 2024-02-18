@@ -1,14 +1,19 @@
 import { Component, OnInit, inject } from '@angular/core';
 import {
+    IonButton,
     IonCard,
     IonCardContent,
     IonCardHeader,
     IonCardSubtitle,
     IonCardTitle,
     IonContent,
+    IonIcon,
     IonSpinner,
 } from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
+import { TranslocoModule } from '@ngneat/transloco';
+import { addIcons } from 'ionicons';
+import { searchSharp } from 'ionicons/icons';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 
 @Component({
@@ -21,7 +26,10 @@ import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service'
         IonCardSubtitle,
         IonCardContent,
         IonSpinner,
+        IonButton,
+        IonIcon,
         AsyncPipe,
+        TranslocoModule,
     ],
     selector: 'car-recommended-cars',
     templateUrl: './recommended-cars.component.html',
@@ -32,6 +40,10 @@ export class RecommendedCarsComponent implements OnInit {
 
     areRecommendedCarsNotLoading$ = this._carsFacadeService.selectAreRecommendedCarsNotLoading();
     recommendedCars$ = this._carsFacadeService.selectRecommendedCars();
+
+    constructor() {
+        addIcons({ searchSharp });
+    }
 
     ngOnInit(): void {
         this._carsFacadeService.getRecommendedCars();
