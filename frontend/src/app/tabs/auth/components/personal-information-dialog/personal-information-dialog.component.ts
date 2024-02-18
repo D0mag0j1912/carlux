@@ -69,7 +69,7 @@ export class PersonalInformationDialogComponent implements OnInit {
             )
             .subscribe(async (_) => {
                 await this._modalController.dismiss();
-                await this._navController.navigateForward('tabs/marina-list');
+                await this._navController.navigateForward('tabs/recommended-cars');
             });
     }
 

@@ -67,10 +67,10 @@ export const routes: Routes = [
                     ),
             },
             {
-                path: 'marina-list',
+                path: 'recommended-cars',
                 loadComponent: () =>
-                    import('./tabs/marina-list/marina-list.component').then(
-                        (component) => component.MarinaListComponent,
+                    import('./tabs/recommended-cars/recommended-cars.component').then(
+                        (component) => component.RecommendedCarsComponent,
                     ),
                 canMatch: [canMatchAuth],
             },

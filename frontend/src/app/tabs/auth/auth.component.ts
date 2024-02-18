@@ -150,7 +150,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
                 filter((data) => data.type === 'signIn'),
                 takeUntilDestroyed(this._destroyRef),
             )
-            .subscribe(async (_) => await this._navController.navigateForward('tabs/marina-list'));
+            .subscribe(
+                async (_) => await this._navController.navigateForward('tabs/recommended-cars'),
+            );
     }
 
     ngAfterViewInit(): void {
