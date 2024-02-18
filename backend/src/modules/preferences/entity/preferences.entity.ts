@@ -1,32 +1,21 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { LanguageEntity } from '../../languages/entity/language.entity';
+import { UserEntity } from '../../auth/entity/user.entity';
 
 @Entity({ name: 'Preferences' })
 export class PreferenceEntity {
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'Preference primary ID',
-    })
     @PrimaryGeneratedColumn()
     Id?: number;
 
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'User ID',
-    })
-    @Column({ type: 'int' })
+    @Column()
     UserId: number;
 
-    @ApiProperty({
-        type: Number,
-        required: false,
-        description: 'Language ID',
-    })
-    @Column({ type: 'int' })
+    @Column()
     LanguageId: number;
+
+    @ManyToOne(() => UserEntity, (user) => user.Id)
+    @JoinColumn({ name: 'UserId' })
+    user?: UserEntity;
 
     @ManyToOne(() => LanguageEntity, (language) => language.Id)
     @JoinColumn({ name: 'LanguageId' })
