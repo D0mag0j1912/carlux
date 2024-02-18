@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CarEntity } from './entities/car.entity';
 import { RecommendedCarsDto } from './models/recommended-cars.dto';
+import { ImageEntity } from './entities/image.entity';
 
 @Injectable()
 export class CarsService {
@@ -20,6 +21,7 @@ export class CarsService {
         const cars: CarEntity[] = await this._carsRepository
             .createQueryBuilder('car')
             .leftJoin('car.currency', 'currency')
+            .leftJoin('car.images', 'image')
             .select([
                 'car.Id',
                 'car.Brand',
@@ -30,19 +32,21 @@ export class CarsService {
                 'car.CountryOrigin',
                 'car.NoOfPreviousOwners',
                 'currency.Symbol',
+                'image.Image',
             ])
             .getMany();
-        const carData: RecommendedCarsDto[] = cars.map((car: CarEntity) => ({
-            id: car.Id,
-            brand: car.Brand,
-            kilometersTravelled: car.KilometersTravelled,
-            price: car.Price,
-            firstRegistrationDate: car.FirstRegistrationDate,
-            modelName: car.ModelName,
-            countryOrigin: car.CountryOrigin,
-            noOfPreviousOwners: car.NoOfPreviousOwners,
-            symbol: car.currency.Symbol,
+        const recommendedCars: RecommendedCarsDto[] = cars.map((carEntity: CarEntity) => ({
+            id: carEntity.Id,
+            brand: carEntity.Brand,
+            kilometersTravelled: carEntity.KilometersTravelled,
+            price: carEntity.Price,
+            firstRegistrationDate: carEntity.FirstRegistrationDate,
+            modelName: carEntity.ModelName,
+            countryOrigin: carEntity.CountryOrigin,
+            noOfPreviousOwners: carEntity.NoOfPreviousOwners,
+            currencySymbol: carEntity.currency.Symbol,
+            images: carEntity.images.map((imageEntity: ImageEntity) => imageEntity.Image),
         }));
-        return carData;
+        return recommendedCars;
     }
 }

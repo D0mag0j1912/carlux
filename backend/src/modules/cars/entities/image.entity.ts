@@ -14,5 +14,5 @@ export class ImageEntity {
 
     @ManyToOne(() => CarEntity, (car) => car.Id)
     @JoinColumn({ name: 'CarId' })
-    car?: CarEntity;
+    car: CarEntity;
 }

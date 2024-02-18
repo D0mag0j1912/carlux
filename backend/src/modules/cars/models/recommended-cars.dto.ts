@@ -62,5 +62,13 @@ export class RecommendedCarsDto {
         required: true,
         description: 'Currency symbol',
     })
-    symbol: string;
+    currencySymbol: string;
+
+    @ApiProperty({
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        type: Array<String>,
+        required: true,
+        description: 'Car images',
+    })
+    images: string[];
 }
