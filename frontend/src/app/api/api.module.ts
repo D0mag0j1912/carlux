@@ -7,6 +7,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { AuthenticationService } from './services/authentication.service';
 import { PreferencesService } from './services/preferences.service';
 import { UserProfileDetailsService } from './services/user-profile-details.service';
+import { CarListService } from './services/car-list.service';
 
 /**
  * Module that provides all services and configuration.
@@ -19,6 +20,7 @@ import { UserProfileDetailsService } from './services/user-profile-details.servi
     AuthenticationService,
     PreferencesService,
     UserProfileDetailsService,
+    CarListService,
     ApiConfiguration
   ],
 })
