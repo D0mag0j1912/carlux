@@ -8,12 +8,15 @@ import { PreferencesState } from './store/preferences/reducers/preferences.reduc
 import { PlatformState } from './store/platform/reducers/platform.reducers';
 import { SettingsState } from './store/settings/reducers/settings.reducer';
 import * as SettingsReducers from './store/settings/reducers/settings.reducer';
+import { CarsState } from './store/cars/reducers/cars.reducers';
+import * as CarsReducers from './store/cars/reducers/cars.reducers';
 
 export interface AppState {
     [FeatureKeys.PLATFORM]: PlatformState;
     [FeatureKeys.AUTH]: AuthState;
     [FeatureKeys.PREFERENCES]: PreferencesState;
     [FeatureKeys.SETTINGS]: SettingsState;
+    [FeatureKeys.CARS]: CarsState;
 }
 
 export const appReducers = combineReducers({
@@ -21,4 +24,5 @@ export const appReducers = combineReducers({
     ...AuthReducers.authReducers,
     ...PreferencesReducers.preferencesReducers,
     ...SettingsReducers.settingsReducer,
+    ...CarsReducers.carsReducers,
 });
