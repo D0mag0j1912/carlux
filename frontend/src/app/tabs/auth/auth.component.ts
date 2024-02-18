@@ -91,7 +91,7 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
     ],
     selector: 'car-auth',
     templateUrl: './auth.component.html',
-    styleUrls: ['./auth.component.scss'],
+    styleUrl: './auth.component.scss',
     providers: [ModalController],
 })
 export class AuthComponent implements OnInit, AfterViewInit {

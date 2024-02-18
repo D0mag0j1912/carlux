@@ -17,7 +17,7 @@ import {
     IonTitle,
     IonToolbar,
 } from '@ionic/angular/standalone';
-import { DateTimePickerComponent } from '../../../../shared/datetime-picker/datetime-picker.component';
+import { DateTimePickerComponent } from '../../../../shared/components/datetime-picker/datetime-picker.component';
 import { DialogRoles } from '../../../../constants/dialog-roles';
 import { AuthenticationFacadeService } from '../../../../store/auth/facades/auth-facade.service';
 import { UserDto as User } from '../../../../api/models/user-dto';
@@ -42,7 +42,7 @@ import { DATETIME_PICKER_INPUT_FORMAT } from '../../../../constants/datetime-pic
         IonButton,
     ],
     templateUrl: './personal-information-dialog.component.html',
-    styleUrls: ['./personal-information-dialog.component.scss'],
+    styleUrl: './personal-information-dialog.component.scss',
 })
 export class PersonalInformationDialogComponent implements OnInit {
     private _authenticationEventEmitterService = inject(AuthenticationEventEmitterService);

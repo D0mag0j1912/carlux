@@ -18,7 +18,7 @@ import { LoginResponseDto as UserData } from './api/models/login-response-dto';
     imports: [IonApp, IonRouterOutlet],
     selector: 'car-root',
     templateUrl: 'root.component.html',
-    styleUrls: ['root.component.scss'],
+    styleUrl: 'root.component.scss',
 })
 export class RootComponent implements OnInit {
     private _platform = inject(Platform);

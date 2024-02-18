@@ -35,7 +35,7 @@ import { AuthenticationFacadeService } from '../../store/auth/facades/auth-facad
     ],
     selector: 'car-settings',
     templateUrl: './settings.component.html',
-    styleUrls: ['./settings.component.scss'],
+    styleUrl: './settings.component.scss',
 })
 export class SettingsComponent {
     private _authenticationFacadeService = inject(AuthenticationFacadeService);

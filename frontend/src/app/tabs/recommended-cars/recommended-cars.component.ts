@@ -1,39 +1,27 @@
 import { Component, OnInit, inject } from '@angular/core';
-import {
-    IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonContent,
-    IonIcon,
-    IonSpinner,
-} from '@ionic/angular/standalone';
+import { IonButton, IonContent, IonIcon, IonSpinner, IonText } from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 import { addIcons } from 'ionicons';
 import { searchSharp } from 'ionicons/icons';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
+import { CarItemComponent } from '../../shared/components/car-item/car-item.component';
 
 @Component({
     standalone: true,
     imports: [
         IonContent,
-        IonCard,
-        IonCardHeader,
-        IonCardTitle,
-        IonCardSubtitle,
-        IonCardContent,
         IonSpinner,
         IonButton,
         IonIcon,
+        IonText,
         AsyncPipe,
         TranslocoModule,
+        CarItemComponent,
     ],
     selector: 'car-recommended-cars',
     templateUrl: './recommended-cars.component.html',
-    styleUrls: ['./recommended-cars.component.scss'],
+    styleUrl: './recommended-cars.component.scss',
 })
 export class RecommendedCarsComponent implements OnInit {
     private _carsFacadeService = inject(CarsFacadeService);
