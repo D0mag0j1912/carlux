@@ -312,6 +312,34 @@
                 },
                 "tags": ["User profile details"]
             }
+        },
+        "/api/cars/recommended-cars": {
+            "get": {
+                "operationId": "CarsController_getRecommendedCars",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RecommendedCarsDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Car list"]
+            }
         }
     },
     "info": {
@@ -435,6 +463,66 @@
                     }
                 },
                 "required": ["userId", "languageCode"]
+            },
+            "RecommendedCarsDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "Car ID"
+                    },
+                    "brand": {
+                        "type": "string",
+                        "description": "Car brand"
+                    },
+                    "kilometersTravelled": {
+                        "type": "number",
+                        "description": "Kilometers travelled since the first registration date"
+                    },
+                    "price": {
+                        "type": "number",
+                        "description": "Car suggested price"
+                    },
+                    "firstRegistrationDate": {
+                        "type": "string",
+                        "description": "Date on which the car is registered for the first time"
+                    },
+                    "modelName": {
+                        "type": "string",
+                        "description": "Car model name"
+                    },
+                    "countryOrigin": {
+                        "type": "string",
+                        "description": "Country from which the car originates"
+                    },
+                    "noOfPreviousOwners": {
+                        "type": "number",
+                        "description": "Number of previous owners"
+                    },
+                    "currencySymbol": {
+                        "type": "string",
+                        "description": "Currency symbol"
+                    },
+                    "images": {
+                        "description": "Car images",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "brand",
+                    "kilometersTravelled",
+                    "price",
+                    "firstRegistrationDate",
+                    "modelName",
+                    "countryOrigin",
+                    "noOfPreviousOwners",
+                    "currencySymbol",
+                    "images"
+                ]
             }
         }
     }
