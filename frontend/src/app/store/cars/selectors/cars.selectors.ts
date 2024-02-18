@@ -6,7 +6,7 @@ export const selectCarsState = createFeatureSelector<CarsState>(FeatureKeys.CARS
 
 export const selectAreRecommendedCarsNotLoading = createSelector(
     selectCarsState,
-    (state: CarsState) => state.areRecommendedCarsLoading,
+    (state: CarsState) => !state.areRecommendedCarsLoading,
 );
 
 export const selectRecommendedCars = createSelector(

@@ -1,5 +1,6 @@
-import { createReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { RecommendedCarsDto as RecommendedCars } from '../../../api/models/recommended-cars-dto';
+import * as CarsActions from '../actions/cars.actions';
 
 export interface CarsState {
     areRecommendedCarsLoading: boolean;
@@ -11,4 +12,13 @@ export const initialState: CarsState = {
     recommendedCars: [],
 };
 
-export const carsReducers = createReducer(initialState);
+export const carsReducers = createReducer(
+    initialState,
+    on(
+        CarsActions.setRecommendedCarsLoading,
+        (state: CarsState, { areRecommendedCarsLoading }) => ({
+            ...state,
+            areRecommendedCarsLoading,
+        }),
+    ),
+);

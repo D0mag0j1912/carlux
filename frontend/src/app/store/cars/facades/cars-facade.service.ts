@@ -11,15 +11,15 @@ import { RecommendedCarsDto as RecommendedCars } from '../../../api/models/recom
 export class CarsFacadeService {
     private _store = inject(Store<AppState[FeatureKeys.CARS]>);
 
-    private _selectAreRecommendedCarsLoading$ = this._store.select(
+    private _selectAreRecommendedCarsNotLoading$ = this._store.select(
         CarsSelectors.selectAreRecommendedCarsNotLoading,
     );
 
     private _selectRecommendedCars$ = this._store.select(CarsSelectors.selectRecommendedCars);
 
     //Selectors BEGIN -------------------------
-    selectAreRecommendedCarsLoading(): Observable<boolean> {
-        return this._selectAreRecommendedCarsLoading$;
+    selectAreRecommendedCarsNotLoading(): Observable<boolean> {
+        return this._selectAreRecommendedCarsNotLoading$;
     }
 
     selectRecommendedCars(): Observable<RecommendedCars[]> {

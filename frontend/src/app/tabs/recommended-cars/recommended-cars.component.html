@@ -1,0 +1,9 @@
+<ion-content>
+    @if (areRecommendedCarsNotLoading$ | async) {
+        @if (recommendedCars$ | async; as recommendedCars) {}
+    } @else {
+        <div class="spinner-wrapper">
+            <ion-spinner color="primary"></ion-spinner>
+        </div>
+    }
+</ion-content>
