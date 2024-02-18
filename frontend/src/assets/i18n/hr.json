@@ -72,5 +72,10 @@
             "get_preferences": "Greška prilikom dohvata preferenci. Molimo pokušajte ponovno.",
             "change_language": "Greška prilikom promjene jezika. Molimo pokušajte ponovno."
         }
+    },
+    "recommended_cars": {
+        "errors": {
+            "get_recommended_cars": "Greška prilikom dohvata preporučenih vozila. Molimo pokušajte ponovno."
+        }
     }
 }

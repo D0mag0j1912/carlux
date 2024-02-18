@@ -72,5 +72,10 @@
             "get_preferences": "Unable to get preferences. Please try again.",
             "change_language": "Error while trying to change the language. Please try again."
         }
+    },
+    "recommended_cars": {
+        "errors": {
+            "get_recommended_cars": "Unable to get recommended cars. Please try again."
+        }
     }
 }
