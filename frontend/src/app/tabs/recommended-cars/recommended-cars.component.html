@@ -11,7 +11,11 @@
                 <ion-text class="title">
                     {{ t('recommended_cars.title') }}
                 </ion-text>
-                <div class="content"></div>
+                <div class="content">
+                    @for (car of recommendedCars; track car.id) {
+                        <car-item [car]="car"></car-item>
+                    }
+                </div>
             </div>
         }
     } @else {

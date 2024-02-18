@@ -21,4 +21,8 @@ export const carsReducers = createReducer(
             areRecommendedCarsLoading,
         }),
     ),
+    on(CarsActions.setRecommendedCars, (state: CarsState, { recommendedCars }) => ({
+        ...state,
+        recommendedCars: [...recommendedCars],
+    })),
 );

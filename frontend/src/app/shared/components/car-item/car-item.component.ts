@@ -6,6 +6,7 @@ import {
     IonCardSubtitle,
     IonCardTitle,
 } from '@ionic/angular/standalone';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RecommendedCarsDto as RecommendedCars } from '../../../api/models/recommended-cars-dto';
 
 @Component({
@@ -15,6 +16,7 @@ import { RecommendedCarsDto as RecommendedCars } from '../../../api/models/recom
     templateUrl: './car-item.component.html',
     styleUrl: './car-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CarItemComponent {
     @Input()

@@ -6,6 +6,7 @@ import { filter, from, take } from 'rxjs';
 import { GetResult, Storage } from '@capacitor/storage';
 import { TranslocoService } from '@ngneat/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { register } from 'swiper/element/bundle';
 import { PlatformFacadeService } from './store/platform/facades/platform-facade.service';
 import { AuthenticationFacadeService } from './store/auth/facades/auth-facade.service';
 import { PreferencesFacadeService } from './store/preferences/facades/preferences-facade.service';
@@ -13,6 +14,7 @@ import { FeatureKeys } from './constants/feature-keys';
 import { LanguageCodeType } from './tabs/settings/models/language.type';
 import { LoginResponseDto as UserData } from './api/models/login-response-dto';
 
+register();
 @Component({
     standalone: true,
     imports: [IonApp, IonRouterOutlet],
