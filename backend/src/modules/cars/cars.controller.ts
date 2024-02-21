@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiInternalServerErrorResponse,
@@ -7,6 +7,7 @@ import {
 } from '@nestjs/swagger';
 import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
+import { PaginationParamsDto } from '../../models/pagination-params.dto';
 import { CarsService } from './cars.service';
 import { RecommendedCarsDto } from './models/recommended-cars.dto';
 
@@ -30,7 +31,9 @@ export class CarsController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Get('recommended-cars')
-    async getRecommendedCars(): Promise<RecommendedCarsDto[]> {
-        return this._carsService.getRecommendedCars();
+    async getRecommendedCars(
+        @Query() paginationParams: PaginationParamsDto,
+    ): Promise<RecommendedCarsDto[]> {
+        return this._carsService.getRecommendedCars(paginationParams);
     }
 }
