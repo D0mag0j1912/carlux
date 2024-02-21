@@ -56,11 +56,12 @@ export class CarsService {
             currencySymbol: carEntity.currency.Symbol,
             images: carEntity.images.map((imageEntity: ImageEntity) => imageEntity.Image),
         }));
+        const recommendedCarsTotalCount = await this._carsRepository.count();
         const response: PaginationDto<RecommendedCarsDto> = {
             page: paginationParams.page,
             perPage: paginationParams.perPage,
             results: recommendedCars,
-            count: 0,
+            count: recommendedCarsTotalCount,
         };
         return response;
     }
