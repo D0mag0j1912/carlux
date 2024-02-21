@@ -7,21 +7,21 @@ export class PaginationDto<T> {
         title: 'Current page',
     })
     @IsNumber()
-    Page: number;
+    page: number;
 
     @ApiProperty({
         type: Number,
         title: 'Per page',
     })
     @IsNumber()
-    PerPage: number;
+    perPage: number;
 
     @ApiProperty({
         type: Number,
         title: 'Total count of results',
     })
     @IsNumber()
-    Count: number;
+    count: number;
 
-    Results: T;
+    results: T[];
 }

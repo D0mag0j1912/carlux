@@ -2,6 +2,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PaginationParamsDto } from '../../models/pagination-params.dto';
+import { PaginationDto } from '../../models/pagination.dto';
 import { CarEntity } from './entities/car.entity';
 import { RecommendedCarsDto } from './models/recommended-cars.dto';
 import { ImageEntity } from './entities/image.entity';
@@ -10,7 +11,9 @@ import { ImageEntity } from './entities/image.entity';
 export class CarsService {
     constructor(@InjectRepository(CarEntity) private _carsRepository: Repository<CarEntity>) {}
 
-    async getRecommendedCars(paginationParams: PaginationParamsDto): Promise<RecommendedCarsDto[]> {
+    async getRecommendedCars(
+        paginationParams: PaginationParamsDto,
+    ): Promise<PaginationDto<RecommendedCarsDto>> {
         try {
             return this._getRecommendedCars(paginationParams);
         } catch (error: unknown) {
@@ -20,7 +23,7 @@ export class CarsService {
 
     private async _getRecommendedCars(
         paginationParams: PaginationParamsDto,
-    ): Promise<RecommendedCarsDto[]> {
+    ): Promise<PaginationDto<RecommendedCarsDto>> {
         const cars: CarEntity[] = await this._carsRepository
             .createQueryBuilder('car')
             .leftJoin('car.currency', 'currency')
@@ -53,6 +56,12 @@ export class CarsService {
             currencySymbol: carEntity.currency.Symbol,
             images: carEntity.images.map((imageEntity: ImageEntity) => imageEntity.Image),
         }));
-        return recommendedCars;
+        const response: PaginationDto<RecommendedCarsDto> = {
+            page: paginationParams.page,
+            perPage: paginationParams.perPage,
+            results: recommendedCars,
+            count: 0,
+        };
+        return response;
     }
 }
