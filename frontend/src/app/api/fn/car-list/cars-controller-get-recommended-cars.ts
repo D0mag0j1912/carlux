@@ -26,7 +26,7 @@ export function carsControllerGetRecommendedCars(http: HttpClient, rootUrl: stri
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'Results'?: Array<RecommendedCarsDto>;
+'results'?: Array<RecommendedCarsDto>;
 }>> {
   const rb = new RequestBuilder(rootUrl, carsControllerGetRecommendedCars.PATH, 'get');
   if (params) {
@@ -43,7 +43,7 @@ export function carsControllerGetRecommendedCars(http: HttpClient, rootUrl: stri
       'page'?: number;
       'perPage'?: number;
       'count'?: number;
-      'Results'?: Array<RecommendedCarsDto>;
+      'results'?: Array<RecommendedCarsDto>;
       }>;
     })
   );

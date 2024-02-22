@@ -11,7 +11,6 @@ export const PaginationDocs = <T extends Type<unknown>>(model: T) =>
                 allOf: [
                     { $ref: getSchemaPath(PaginationDto) },
                     {
-                        type: 'object',
                         properties: {
                             page: {
                                 type: 'number',
@@ -22,7 +21,7 @@ export const PaginationDocs = <T extends Type<unknown>>(model: T) =>
                             count: {
                                 type: 'number',
                             },
-                            Results: {
+                            results: {
                                 type: 'array',
                                 items: { $ref: getSchemaPath(model) },
                             },

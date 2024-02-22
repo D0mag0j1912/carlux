@@ -33,7 +33,7 @@ export class CarListService extends BaseService {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'Results'?: Array<RecommendedCarsDto>;
+'results'?: Array<RecommendedCarsDto>;
 }>> {
     return carsControllerGetRecommendedCars(this.http, this.rootUrl, params, context);
   }
@@ -48,19 +48,19 @@ export class CarListService extends BaseService {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'Results'?: Array<RecommendedCarsDto>;
+'results'?: Array<RecommendedCarsDto>;
 }> {
     return this.carsControllerGetRecommendedCars$Response(params, context).pipe(
       map((r: StrictHttpResponse<PaginationDto & {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'Results'?: Array<RecommendedCarsDto>;
+'results'?: Array<RecommendedCarsDto>;
 }>): PaginationDto & {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'Results'?: Array<RecommendedCarsDto>;
+'results'?: Array<RecommendedCarsDto>;
 } => r.body)
     );
   }
