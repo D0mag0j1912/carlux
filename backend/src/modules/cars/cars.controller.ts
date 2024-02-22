@@ -1,8 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
+    ApiExtraModels,
     ApiInternalServerErrorResponse,
-    ApiOkResponse,
     ApiTags,
 } from '@nestjs/swagger';
 import { BASE_URL } from '../../constants/base-url';
@@ -20,10 +20,6 @@ const CARS_FEATURE_KEY = 'cars';
 export class CarsController {
     constructor(private _carsService: CarsService) {}
 
-    @ApiOkResponse({
-        type: RecommendedCarsDto,
-        isArray: true,
-    })
     @ApiInternalServerErrorResponse({
         status: 500,
         description: RESPONSE_MESSAGE.INTERNAL_SERVER_ERROR,
@@ -33,6 +29,7 @@ export class CarsController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @PaginationDocs(RecommendedCarsDto)
+    @ApiExtraModels(RecommendedCarsDto)
     @Get('recommended-cars')
     async getRecommendedCars(
         @Query() paginationParams: PaginationParamsDto,

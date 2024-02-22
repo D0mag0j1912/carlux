@@ -23,8 +23,8 @@ export const PaginationDocs = <T extends Type<unknown>>(model: T) =>
                                 type: 'number',
                             },
                             Results: {
-                                type: 'object',
-                                $ref: getSchemaPath(model),
+                                type: 'array',
+                                items: { $ref: getSchemaPath(model) },
                             },
                         },
                     },
