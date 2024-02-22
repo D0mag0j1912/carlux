@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import { ITEMS_PER_PAGE } from '../constants/items-per-page';
 
 export class PaginationParamsDto {
@@ -7,6 +8,7 @@ export class PaginationParamsDto {
         required: true,
         description: 'Current page',
     })
+    @Type(() => Number)
     page: number;
 
     @ApiProperty({
@@ -15,5 +17,6 @@ export class PaginationParamsDto {
         description: 'Per page',
         default: ITEMS_PER_PAGE,
     })
+    @Type(() => Number)
     perPage: number;
 }
