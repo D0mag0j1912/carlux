@@ -6,6 +6,7 @@ export { ApiModule } from './api.module';
 export { EmailDto } from './models/email-dto';
 export { LanguageChangeDto } from './models/language-change-dto';
 export { LoginResponseDto } from './models/login-response-dto';
+export { PaginationDto } from './models/pagination-dto';
 export { PreferencesDto } from './models/preferences-dto';
 export { RecommendedCarsDto } from './models/recommended-cars-dto';
 export { StatusResponseDto } from './models/status-response-dto';

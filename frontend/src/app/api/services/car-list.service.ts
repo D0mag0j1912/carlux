@@ -11,6 +11,7 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { carsControllerGetRecommendedCars } from '../fn/car-list/cars-controller-get-recommended-cars';
 import { CarsControllerGetRecommendedCars$Params } from '../fn/car-list/cars-controller-get-recommended-cars';
+import { PaginationDto } from '../models/pagination-dto';
 import { RecommendedCarsDto } from '../models/recommended-cars-dto';
 
 @Injectable({ providedIn: 'root' })
@@ -28,7 +29,12 @@ export class CarListService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  carsControllerGetRecommendedCars$Response(params?: CarsControllerGetRecommendedCars$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<RecommendedCarsDto>>> {
+  carsControllerGetRecommendedCars$Response(params: CarsControllerGetRecommendedCars$Params, context?: HttpContext): Observable<StrictHttpResponse<PaginationDto & {
+'page'?: number;
+'perPage'?: number;
+'count'?: number;
+'Results'?: Array<RecommendedCarsDto>;
+}>> {
     return carsControllerGetRecommendedCars(this.http, this.rootUrl, params, context);
   }
 
@@ -38,9 +44,24 @@ export class CarListService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  carsControllerGetRecommendedCars(params?: CarsControllerGetRecommendedCars$Params, context?: HttpContext): Observable<Array<RecommendedCarsDto>> {
+  carsControllerGetRecommendedCars(params: CarsControllerGetRecommendedCars$Params, context?: HttpContext): Observable<PaginationDto & {
+'page'?: number;
+'perPage'?: number;
+'count'?: number;
+'Results'?: Array<RecommendedCarsDto>;
+}> {
     return this.carsControllerGetRecommendedCars$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<RecommendedCarsDto>>): Array<RecommendedCarsDto> => r.body)
+      map((r: StrictHttpResponse<PaginationDto & {
+'page'?: number;
+'perPage'?: number;
+'count'?: number;
+'Results'?: Array<RecommendedCarsDto>;
+}>): PaginationDto & {
+'page'?: number;
+'perPage'?: number;
+'count'?: number;
+'Results'?: Array<RecommendedCarsDto>;
+} => r.body)
     );
   }
 

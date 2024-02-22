@@ -29,7 +29,7 @@ export class CarsController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @PaginationDocs(RecommendedCarsDto)
-    @ApiExtraModels(RecommendedCarsDto)
+    @ApiExtraModels(RecommendedCarsDto, PaginationDto)
     @Get('recommended-cars')
     async getRecommendedCars(
         @Query() paginationParams: PaginationParamsDto,
