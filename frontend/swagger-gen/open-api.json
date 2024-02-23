@@ -349,7 +349,6 @@
                                             "$ref": "#/components/schemas/PaginationDto"
                                         },
                                         {
-                                            "type": "object",
                                             "properties": {
                                                 "page": {
                                                     "type": "number"
@@ -360,7 +359,7 @@
                                                 "count": {
                                                     "type": "number"
                                                 },
-                                                "Results": {
+                                                "results": {
                                                     "type": "array",
                                                     "items": {
                                                         "$ref": "#/components/schemas/RecommendedCarsDto"
@@ -583,6 +582,21 @@
                     }
                 },
                 "required": ["page", "perPage", "count"]
+            },
+            "PaginationParamsDto": {
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "number",
+                        "description": "Current page"
+                    },
+                    "perPage": {
+                        "type": "number",
+                        "description": "Per page",
+                        "default": 20
+                    }
+                },
+                "required": ["page", "perPage"]
             }
         }
     }

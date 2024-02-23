@@ -11,5 +11,5 @@ export const selectAreRecommendedCarsNotLoading = createSelector(
 
 export const selectRecommendedCars = createSelector(
     selectCarsState,
-    (state: CarsState) => state.recommendedCars,
+    (state: CarsState) => state.recommendedCars?.results ?? [],
 );

@@ -1,15 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
-import { RecommendedCarsDto as RecommendedCars } from '../../../api/models/recommended-cars-dto';
 import * as CarsActions from '../actions/cars.actions';
+import { RecommendedCarsPagination } from '../../../tabs/recommended-cars/models/recommended-cars-pagination';
 
 export interface CarsState {
     areRecommendedCarsLoading: boolean;
-    recommendedCars: RecommendedCars[];
+    recommendedCars: RecommendedCarsPagination | undefined;
 }
 
 export const initialState: CarsState = {
     areRecommendedCarsLoading: false,
-    recommendedCars: [],
+    recommendedCars: undefined,
 };
 
 export const carsReducers = createReducer(
@@ -23,6 +23,6 @@ export const carsReducers = createReducer(
     ),
     on(CarsActions.setRecommendedCars, (state: CarsState, { recommendedCars }) => ({
         ...state,
-        recommendedCars: [...recommendedCars],
+        recommendedCars: { ...recommendedCars },
     })),
 );

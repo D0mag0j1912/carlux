@@ -28,8 +28,8 @@ export class CarsFacadeService {
     //Selectors END ---------------------------
 
     //Actions BEGIN ---------------------------
-    getRecommendedCars(): void {
-        this._store.dispatch(CarsActions.getRecommendedCars());
+    getRecommendedCars(page: number, perPage: number): void {
+        this._store.dispatch(CarsActions.getRecommendedCars({ page, perPage }));
     }
 
     setRecommendedCarsLoading(areRecommendedCarsLoading: boolean): void {
