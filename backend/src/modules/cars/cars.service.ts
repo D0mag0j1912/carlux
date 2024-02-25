@@ -24,7 +24,7 @@ export class CarsService {
     private async _getRecommendedCars(
         paginationParams: PaginationParamsDto,
     ): Promise<PaginationDto<RecommendedCarsDto>> {
-        const cars: CarEntity[] = await this._carsRepository
+        const carEntities: CarEntity[] = await this._carsRepository
             .createQueryBuilder('car')
             .leftJoin('car.currency', 'currency')
             .leftJoin('car.images', 'image')
@@ -37,14 +37,15 @@ export class CarsService {
                 'car.ModelName',
                 'car.CountryOrigin',
                 'car.NoOfPreviousOwners',
+                'car.UploadedDate',
                 'currency.Symbol',
                 'image.Image',
             ])
-            .limit(paginationParams.perPage)
-            .offset((paginationParams.page - 1) * paginationParams.perPage)
+            .take(paginationParams.perPage)
+            .skip((paginationParams.page - 1) * paginationParams.perPage)
             .orderBy('car.UploadedDate', 'DESC')
             .getMany();
-        const recommendedCars: RecommendedCarsDto[] = cars.map((carEntity: CarEntity) => ({
+        const recommendedCars: RecommendedCarsDto[] = carEntities.map((carEntity: CarEntity) => ({
             id: carEntity.Id,
             brand: carEntity.Brand,
             kilometersTravelled: carEntity.KilometersTravelled,
