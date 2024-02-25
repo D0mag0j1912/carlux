@@ -24,40 +24,42 @@ export class CarsService {
     private async _getRecommendedCars(
         paginationParams: PaginationParamsDto,
     ): Promise<PaginationDto<RecommendedCarsDto>> {
-        const carEntities: CarEntity[] = await this._carsRepository
-            .createQueryBuilder('car')
-            .leftJoin('car.currency', 'currency')
-            .leftJoin('car.images', 'image')
-            .select([
-                'car.Id',
-                'car.Brand',
-                'car.KilometersTravelled',
-                'car.Price',
-                'car.FirstRegistrationDate',
-                'car.ModelName',
-                'car.CountryOrigin',
-                'car.NoOfPreviousOwners',
-                'car.UploadedDate',
-                'currency.Symbol',
-                'image.Image',
-            ])
-            .take(paginationParams.perPage)
-            .skip((paginationParams.page - 1) * paginationParams.perPage)
-            .orderBy('car.UploadedDate', 'DESC')
-            .getMany();
-        const recommendedCars: RecommendedCarsDto[] = carEntities.map((carEntity: CarEntity) => ({
-            id: carEntity.Id,
-            brand: carEntity.Brand,
-            kilometersTravelled: carEntity.KilometersTravelled,
-            price: carEntity.Price,
-            firstRegistrationDate: carEntity.FirstRegistrationDate,
-            modelName: carEntity.ModelName,
-            countryOrigin: carEntity.CountryOrigin,
-            noOfPreviousOwners: carEntity.NoOfPreviousOwners,
-            currencySymbol: carEntity.currency.Symbol,
-            images: carEntity.images.map((imageEntity: ImageEntity) => imageEntity.Image),
-        }));
-        const recommendedCarsTotalCount = await this._carsRepository.count();
+        const [recommendedCarsEntities, recommendedCarsTotalCount]: [CarEntity[], number] =
+            await this._carsRepository
+                .createQueryBuilder('car')
+                .leftJoin('car.currency', 'currency')
+                .leftJoin('car.images', 'image')
+                .select([
+                    'car.Id',
+                    'car.Brand',
+                    'car.KilometersTravelled',
+                    'car.Price',
+                    'car.FirstRegistrationDate',
+                    'car.ModelName',
+                    'car.CountryOrigin',
+                    'car.NoOfPreviousOwners',
+                    'car.UploadedDate',
+                    'currency.Symbol',
+                    'image.Image',
+                ])
+                .skip((paginationParams.page - 1) * paginationParams.perPage)
+                .take(paginationParams.perPage)
+                .orderBy('car.UploadedDate', 'DESC')
+                .getManyAndCount();
+        const recommendedCars: RecommendedCarsDto[] = recommendedCarsEntities.map(
+            (carEntity: CarEntity) => ({
+                id: carEntity.Id,
+                brand: carEntity.Brand,
+                kilometersTravelled: carEntity.KilometersTravelled,
+                price: carEntity.Price,
+                firstRegistrationDate: carEntity.FirstRegistrationDate,
+                modelName: carEntity.ModelName,
+                countryOrigin: carEntity.CountryOrigin,
+                noOfPreviousOwners: carEntity.NoOfPreviousOwners,
+                currencySymbol: carEntity.currency.Symbol,
+                images: carEntity.images.map((imageEntity: ImageEntity) => imageEntity.Image),
+            }),
+        );
         const response: PaginationDto<RecommendedCarsDto> = {
             page: paginationParams.page,
             perPage: paginationParams.perPage,
