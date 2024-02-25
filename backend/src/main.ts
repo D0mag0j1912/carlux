@@ -3,7 +3,6 @@ import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { PaginationDto } from './models/pagination.dto';
-import { PaginationParamsDto } from './models/pagination-params.dto';
 
 async function bootstrap(): Promise<void> {
     const app = await NestFactory.create(AppModule);
@@ -21,7 +20,7 @@ async function bootstrap(): Promise<void> {
         .setVersion('1.0')
         .build();
     const document: OpenAPIObject = SwaggerModule.createDocument(app, config, {
-        extraModels: [PaginationDto, PaginationParamsDto],
+        extraModels: [PaginationDto],
     });
     SwaggerModule.setup('api', app, document);
 

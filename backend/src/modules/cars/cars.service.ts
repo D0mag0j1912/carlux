@@ -1,7 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PaginationParamsDto } from '../../models/pagination-params.dto';
 import { PaginationDto } from '../../models/pagination.dto';
 import { CarEntity } from './entities/car.entity';
 import { RecommendedCarsDto } from './models/recommended-cars.dto';
@@ -12,17 +11,19 @@ export class CarsService {
     constructor(@InjectRepository(CarEntity) private _carsRepository: Repository<CarEntity>) {}
 
     async getRecommendedCars(
-        paginationParams: PaginationParamsDto,
+        page: number,
+        perPage: number,
     ): Promise<PaginationDto<RecommendedCarsDto>> {
         try {
-            return this._getRecommendedCars(paginationParams);
+            return this._getRecommendedCars(page, perPage);
         } catch (error: unknown) {
             throw new InternalServerErrorException();
         }
     }
 
     private async _getRecommendedCars(
-        paginationParams: PaginationParamsDto,
+        page: number,
+        perPage: number,
     ): Promise<PaginationDto<RecommendedCarsDto>> {
         const [recommendedCarsEntities, recommendedCarsTotalCount]: [CarEntity[], number] =
             await this._carsRepository
@@ -42,8 +43,8 @@ export class CarsService {
                     'currency.Symbol',
                     'image.Image',
                 ])
-                .skip((paginationParams.page - 1) * paginationParams.perPage)
-                .take(paginationParams.perPage)
+                .skip((page - 1) * perPage)
+                .take(perPage)
                 .orderBy('car.UploadedDate', 'DESC')
                 .getManyAndCount();
         const recommendedCars: RecommendedCarsDto[] = recommendedCarsEntities.map(
@@ -61,8 +62,8 @@ export class CarsService {
             }),
         );
         const response: PaginationDto<RecommendedCarsDto> = {
-            page: paginationParams.page,
-            perPage: paginationParams.perPage,
+            page: page,
+            perPage: perPage,
             results: recommendedCars,
             count: recommendedCarsTotalCount,
         };
