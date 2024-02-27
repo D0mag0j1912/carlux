@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { CarEntity } from './car.entity';
 
 @Entity({ name: 'Images' })
@@ -12,7 +12,6 @@ export class ImageEntity {
     @Column()
     CarId: number;
 
-    @ManyToOne(() => CarEntity, (car) => car.Id)
-    @JoinColumn({ name: 'CarId' })
+    @ManyToOne(() => CarEntity, (car) => car.images)
     car: CarEntity;
 }
