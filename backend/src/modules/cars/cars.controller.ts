@@ -1,4 +1,4 @@
-import { Controller, DefaultValuePipe, Get, ParseIntPipe, Query } from '@nestjs/common';
+import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiExtraModels,
@@ -9,7 +9,6 @@ import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { PaginationDto } from '../../models/pagination.dto';
 import { PaginationDocs } from '../../decorators/pagination-docs.decorator';
-import { ITEMS_PER_PAGE } from '../../constants/items-per-page';
 import { CarsService } from './cars.service';
 import { RecommendedCarsDto } from './models/recommended-cars.dto';
 
@@ -32,9 +31,9 @@ export class CarsController {
     @ApiExtraModels(RecommendedCarsDto)
     @Get('recommended-cars')
     async getRecommendedCars(
-        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
-        @Query('perPage', new DefaultValuePipe(ITEMS_PER_PAGE), ParseIntPipe)
-        perPage = ITEMS_PER_PAGE,
+        @Query('page', ParseIntPipe) page: number,
+        @Query('perPage', ParseIntPipe)
+        perPage: number,
     ): Promise<PaginationDto<RecommendedCarsDto>> {
         return this._carsService.getRecommendedCars(page, perPage);
     }
