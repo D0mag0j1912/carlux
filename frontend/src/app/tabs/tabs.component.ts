@@ -13,7 +13,7 @@ import { SettingsFacadeService } from '../store/settings/facades/settings-facade
     imports: [AsyncPipe, TranslocoModule, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel],
     selector: 'car-tabs',
     templateUrl: 'tabs.component.html',
-    styleUrls: ['tabs.component.scss'],
+    styleUrl: 'tabs.component.scss',
 })
 export class TabsComponent implements OnInit {
     private _authenticationFacadeService = inject(AuthenticationFacadeService);

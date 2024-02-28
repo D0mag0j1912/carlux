@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
+    ApiExtraModels,
     ApiInternalServerErrorResponse,
-    ApiOkResponse,
     ApiTags,
 } from '@nestjs/swagger';
 import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
+import { PaginationDto } from '../../models/pagination.dto';
+import { PaginationDocs } from '../../decorators/pagination-docs.decorator';
 import { CarsService } from './cars.service';
 import { RecommendedCarsDto } from './models/recommended-cars.dto';
 
@@ -17,10 +19,6 @@ const CARS_FEATURE_KEY = 'cars';
 export class CarsController {
     constructor(private _carsService: CarsService) {}
 
-    @ApiOkResponse({
-        type: RecommendedCarsDto,
-        isArray: true,
-    })
     @ApiInternalServerErrorResponse({
         status: 500,
         description: RESPONSE_MESSAGE.INTERNAL_SERVER_ERROR,
@@ -29,8 +27,14 @@ export class CarsController {
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
+    @PaginationDocs(RecommendedCarsDto)
+    @ApiExtraModels(RecommendedCarsDto)
     @Get('recommended-cars')
-    async getRecommendedCars(): Promise<RecommendedCarsDto[]> {
-        return this._carsService.getRecommendedCars();
+    async getRecommendedCars(
+        @Query('page', ParseIntPipe) page: number,
+        @Query('perPage', ParseIntPipe)
+        perPage: number,
+    ): Promise<PaginationDto<RecommendedCarsDto>> {
+        return this._carsService.getRecommendedCars(page, perPage);
     }
 }

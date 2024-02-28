@@ -43,7 +43,7 @@ export class CarEntity {
     HorsePower: number;
 
     @Column()
-    Kilowats: number;
+    Kilowatts: number;
 
     @Column()
     FuelConsumption: number;

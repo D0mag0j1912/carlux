@@ -1,0 +1,7 @@
+
+@mixin single-line($maximumWidth) {
+    max-width: $maximumWidth;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

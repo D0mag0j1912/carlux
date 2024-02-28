@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
+import { PaginationDto } from './models/pagination.dto';
 
 async function bootstrap(): Promise<void> {
     const app = await NestFactory.create(AppModule);
@@ -18,7 +19,9 @@ async function bootstrap(): Promise<void> {
         .setDescription('API of the luxury cars sales application')
         .setVersion('1.0')
         .build();
-    const document: OpenAPIObject = SwaggerModule.createDocument(app, config);
+    const document: OpenAPIObject = SwaggerModule.createDocument(app, config, {
+        extraModels: [PaginationDto],
+    });
     SwaggerModule.setup('api', app, document);
 
     await app.listen(3000);

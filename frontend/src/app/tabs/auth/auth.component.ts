@@ -91,7 +91,7 @@ const INITIAL_CODE_VALUES: VerificationCodeType[] = [
     ],
     selector: 'car-auth',
     templateUrl: './auth.component.html',
-    styleUrls: ['./auth.component.scss'],
+    styleUrl: './auth.component.scss',
     providers: [ModalController],
 })
 export class AuthComponent implements OnInit, AfterViewInit {
@@ -150,7 +150,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
                 filter((data) => data.type === 'signIn'),
                 takeUntilDestroyed(this._destroyRef),
             )
-            .subscribe(async (_) => await this._navController.navigateForward('tabs/marina-list'));
+            .subscribe(
+                async (_) => await this._navController.navigateForward('tabs/recommended-cars'),
+            );
     }
 
     ngAfterViewInit(): void {

@@ -1,0 +1,31 @@
+@if (car) {
+    <ion-card class="item">
+        <swiper-container [pagination]="true">
+            @for (image of car.images; track car.id) {
+                <swiper-slide>
+                    <img class="image" [alt]="image" [src]="image" />
+                </swiper-slide>
+            }
+        </swiper-container>
+        <ion-card-content class="item-content">
+            <div class="title">
+                {{ car.brand + ' ' + car.modelName }}
+            </div>
+            <div class="meta">
+                <div class="price">
+                    {{ car.price + car.currencySymbol }}
+                </div>
+                <div class="info">
+                    {{ car.kilometersTravelled + KILOMETERS }} •
+                    {{ car.firstRegistrationDate | date: 'mediumDate' }}
+                </div>
+            </div>
+            <div class="location">
+                <ion-icon name="location-sharp" color="primary" class="icon"></ion-icon>
+                <div class="name">
+                    {{ car.countryOrigin }}
+                </div>
+            </div>
+        </ion-card-content>
+    </ion-card>
+}

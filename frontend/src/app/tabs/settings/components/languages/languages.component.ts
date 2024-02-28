@@ -37,7 +37,7 @@ import { PreferencesFacadeService } from '../../../../store/preferences/facades/
     ],
     selector: 'car-languages',
     templateUrl: './languages.component.html',
-    styleUrls: ['./languages.component.scss'],
+    styleUrl: './languages.component.scss',
 })
 export class LanguagesComponent {
     private _preferencesFacadeService = inject(PreferencesFacadeService);
