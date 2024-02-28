@@ -8,7 +8,10 @@ import { ImageEntity } from './entities/image.entity';
 
 @Injectable()
 export class CarsService {
-    constructor(@InjectRepository(CarEntity) private _carsRepository: Repository<CarEntity>) {}
+    constructor(
+        @InjectRepository(CarEntity) private _carsRepository: Repository<CarEntity>,
+        @InjectRepository(ImageEntity) private _imageRepository: Repository<ImageEntity>,
+    ) {}
 
     async getRecommendedCars(
         page: number,
@@ -38,14 +41,13 @@ export class CarsService {
                 'car.NoOfPreviousOwners',
                 'car.UploadedDate',
                 'currency.Symbol',
-                'image.Image',
             ])
             .leftJoin('car.currency', 'currency')
-            .leftJoin('car.images', 'image')
             .skip((page - 1) * perPage)
             .take(perPage)
             .orderBy('car.UploadedDate', 'DESC')
             .getManyAndCount();
+        const imageEntities = await this._imageRepository.createQueryBuilder('image').getMany();
         const recommendedCars: RecommendedCarsDto[] = recommendedCarsEntities.map(
             (carEntity: CarEntity) => ({
                 id: carEntity.Id,
@@ -57,7 +59,9 @@ export class CarsService {
                 countryOrigin: carEntity.CountryOrigin,
                 noOfPreviousOwners: carEntity.NoOfPreviousOwners,
                 currencySymbol: carEntity.currency.Symbol,
-                images: carEntity.images.map((imageEntity: ImageEntity) => imageEntity.Image),
+                images: imageEntities
+                    .filter((imageEntity: ImageEntity) => imageEntity.CarId === carEntity.Id)
+                    .map((imageEntity: ImageEntity) => imageEntity.Image),
             }),
         );
         const response: PaginationDto<RecommendedCarsDto> = {
