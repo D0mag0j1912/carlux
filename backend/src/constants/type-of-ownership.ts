@@ -1,4 +1,4 @@
-export enum TypeOfOwnership {
+export enum SellerType {
     DEALER = 'Dealer',
     PRIVATE = 'Private',
 }

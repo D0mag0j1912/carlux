@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { TypeOfOwnership } from '../../../constants/type-of-ownership';
+import { SellerType } from '../../../constants/type-of-ownership';
 
 export class RecommendedCarsDto {
     @ApiProperty({
@@ -63,7 +63,7 @@ export class RecommendedCarsDto {
         required: true,
         description: 'Type of ownership',
     })
-    typeOfOwnership: TypeOfOwnership;
+    sellerType: SellerType;
 
     @ApiProperty({
         type: String,
