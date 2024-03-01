@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { TypeOfOwnership } from '../../../constants/type-of-ownership';
 import { BodyStyleEntity } from './body-style.entity';
 import { WheelDriveTypeEntity } from './wheel-drive-types.entity';
 import { CurrencyEntity } from './currency.entity';
@@ -56,6 +57,9 @@ export class CarEntity {
 
     @Column()
     RimSize: number;
+
+    @Column()
+    TypeOfOwnership: TypeOfOwnership;
 
     @Column()
     UploadedDate: string;
