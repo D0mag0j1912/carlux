@@ -51,4 +51,9 @@ export interface RecommendedCarsDto {
    * Car suggested price
    */
   price: number;
+
+  /**
+   * Type of ownership
+   */
+  sellerType: 'Dealer' | 'Private';
 }

@@ -10,15 +10,7 @@ import { PaginationDto } from '../../models/pagination-dto';
 import { RecommendedCarsDto } from '../../models/recommended-cars-dto';
 
 export interface CarsControllerGetRecommendedCars$Params {
-
-/**
- * Current page
- */
   page: number;
-
-/**
- * Per page
- */
   perPage: number;
 }
 

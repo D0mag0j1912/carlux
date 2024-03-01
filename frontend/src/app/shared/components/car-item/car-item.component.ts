@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IonCard, IonCardContent } from '@ionic/angular/standalone';
+import { IonCard, IonCardContent, IonChip } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { locationSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -10,7 +10,7 @@ import { KILOMETERS_TRAVELLED } from '../../../constants/kilometers-travelled';
 @Component({
     selector: 'car-item',
     standalone: true,
-    imports: [IonCard, IonCardContent, DatePipe],
+    imports: [IonCard, IonCardContent, IonChip, DatePipe],
     templateUrl: './car-item.component.html',
     styleUrl: './car-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

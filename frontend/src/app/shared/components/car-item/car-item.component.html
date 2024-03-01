@@ -20,6 +20,9 @@
                     {{ car.firstRegistrationDate | date: 'mediumDate' }}
                 </div>
             </div>
+            <div class="seller-type">
+                <ion-chip class="chip" color="primary">{{ car.sellerType }}</ion-chip>
+            </div>
             <div class="location">
                 <ion-icon name="location-sharp" color="primary" class="icon"></ion-icon>
                 <div class="name">
