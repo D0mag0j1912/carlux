@@ -76,6 +76,11 @@
     "recommended_cars": {
         "search_cars": "Pretraži automobile",
         "title": "Preporučeni automobili za tebe",
+        "seller_type": {
+            "dealer": "Autokuća",
+            "private": "Privatno",
+            "company_vehicle": "Poslovni automobil"
+        },
         "errors": {
             "get_recommended_cars": "Greška prilikom dohvata preporučenih vozila. Molimo pokušajte ponovno."
         }

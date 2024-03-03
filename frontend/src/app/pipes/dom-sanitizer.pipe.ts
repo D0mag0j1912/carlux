@@ -7,11 +7,11 @@ import {
     SafeStyle,
     SafeUrl,
 } from '@angular/platform-browser';
-import { isNeverCheck } from '../../helpers/is-never-check';
+import { isNeverCheck } from '../helpers/is-never-check';
 
 type DomSanitizerInputType = 'html' | 'style' | 'script' | 'url' | 'resourceUrl';
 
-@Pipe({ name: 'carDomSanitizer' })
+@Pipe({ name: 'carDomSanitizer', standalone: true })
 export class DomSanitizerPipe implements PipeTransform {
     constructor(private _domSanitizer: DomSanitizer) {}
 
