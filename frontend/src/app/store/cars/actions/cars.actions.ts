@@ -14,6 +14,11 @@ export const getRecommendedCars = createAction(
 export const setRecommendedCars = createAction(
     '[Cars] Set Recommended Cars',
     props<{
-        recommendedCars: RecommendedCarsPagination;
+        response: RecommendedCarsPagination;
     }>(),
+);
+
+export const setHasInfiniteEventCompleted = createAction(
+    '[Cars] Set Has Infinite Event Completed',
+    props<{ hasInfiniteEventCompleted: boolean }>(),
 );
