@@ -34,7 +34,9 @@ export const carsReducers = createReducer(
                     page: response.page,
                     results: [...state.recommendedCars.results, ...response.results],
                 },
-                hasNoMoreRecommendedCars: state.recommendedCars.results?.length >= response.count,
+                hasNoMoreRecommendedCars:
+                    [...state.recommendedCars.results, ...response.results].length >=
+                    response.count,
             };
         }
         return {
