@@ -17,6 +17,9 @@
                     }
                 </div>
             </div>
+            <ion-infinite-scroll [disabled]="hasNoMoreRecommendedCars$ | async" (ionInfinite)="onScrollDown($event)">
+                <ion-infinite-scroll-content></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
         }
     } @else {
         <div class="spinner-wrapper">

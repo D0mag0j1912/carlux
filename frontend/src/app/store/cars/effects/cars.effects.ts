@@ -16,7 +16,13 @@ export const getRecommendedCars$ = createEffect(
     ) =>
         actions$.pipe(
             ofType(CarsActions.getRecommendedCars),
-            tap(() => carsFacadeService.setRecommendedCarsLoading(true)),
+            tap((action) => {
+                if (action.page === 1) {
+                    carsFacadeService.setRecommendedCarsLoading(true);
+                } else {
+                    carsFacadeService.setHasInfiniteEventCompleted(false);
+                }
+            }),
             switchMap((action) =>
                 carsService
                     .carsControllerGetRecommendedCars({
@@ -32,9 +38,12 @@ export const getRecommendedCars$ = createEffect(
                             );
                             return EMPTY;
                         }),
-                        map((recommendedCars) =>
-                            CarsActions.setRecommendedCars({ recommendedCars }),
-                        ),
+                        map((recommendedCars) => {
+                            if (action.page > 1) {
+                                carsFacadeService.setHasInfiniteEventCompleted(true);
+                            }
+                            return CarsActions.setRecommendedCars({ response: recommendedCars });
+                        }),
                         finalize(() => carsFacadeService.setRecommendedCarsLoading(false)),
                     ),
             ),

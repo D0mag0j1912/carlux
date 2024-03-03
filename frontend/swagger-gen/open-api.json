@@ -321,7 +321,6 @@
                         "name": "page",
                         "required": true,
                         "in": "query",
-                        "description": "Current page",
                         "schema": {
                             "type": "number"
                         }
@@ -330,9 +329,7 @@
                         "name": "perPage",
                         "required": true,
                         "in": "query",
-                        "description": "Per page",
                         "schema": {
-                            "default": 20,
                             "type": "number"
                         }
                     }
@@ -540,6 +537,11 @@
                         "type": "number",
                         "description": "Number of previous owners"
                     },
+                    "sellerType": {
+                        "type": "string",
+                        "enum": ["Dealer", "Private", "CompanyVehicle"],
+                        "description": "Seller type"
+                    },
                     "currencySymbol": {
                         "type": "string",
                         "description": "Currency symbol"
@@ -561,6 +563,7 @@
                     "modelName",
                     "countryOrigin",
                     "noOfPreviousOwners",
+                    "sellerType",
                     "currencySymbol",
                     "images"
                 ]
@@ -582,21 +585,6 @@
                     }
                 },
                 "required": ["page", "perPage", "count"]
-            },
-            "PaginationParamsDto": {
-                "type": "object",
-                "properties": {
-                    "page": {
-                        "type": "number",
-                        "description": "Current page"
-                    },
-                    "perPage": {
-                        "type": "number",
-                        "description": "Per page",
-                        "default": 20
-                    }
-                },
-                "required": ["page", "perPage"]
             }
         }
     }

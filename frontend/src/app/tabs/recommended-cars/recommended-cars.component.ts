@@ -1,9 +1,20 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { IonButton, IonContent, IonIcon, IonSpinner, IonText } from '@ionic/angular/standalone';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import {
+    InfiniteScrollCustomEvent,
+    IonButton,
+    IonContent,
+    IonIcon,
+    IonInfiniteScroll,
+    IonInfiniteScrollContent,
+    IonSpinner,
+    IonText,
+} from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 import { addIcons } from 'ionicons';
 import { searchSharp } from 'ionicons/icons';
+import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 import { CarItemComponent } from '../../shared/components/car-item/car-item.component';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
@@ -16,6 +27,8 @@ import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
         IonButton,
         IonIcon,
         IonText,
+        IonInfiniteScroll,
+        IonInfiniteScrollContent,
         AsyncPipe,
         TranslocoModule,
         CarItemComponent,
@@ -26,12 +39,16 @@ import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
 })
 export class RecommendedCarsComponent implements OnInit {
     private _carsFacadeService = inject(CarsFacadeService);
+    private _destroyRef = inject(DestroyRef);
 
     areRecommendedCarsNotLoading$ = this._carsFacadeService.selectAreRecommendedCarsNotLoading();
     recommendedCars$ = this._carsFacadeService.selectRecommendedCars();
+    hasNoMoreRecommendedCars$ = this._carsFacadeService.selectHasNoMoreRecommendedCars();
 
     page = signal(1);
     perPage = signal(DEFAULT_ITEMS_PER_PAGE);
+
+    readonly INFINITE_EVENT_COMPLETE_DURATION = 500;
 
     constructor() {
         addIcons({ searchSharp });
@@ -39,5 +56,18 @@ export class RecommendedCarsComponent implements OnInit {
 
     ngOnInit(): void {
         this._carsFacadeService.getRecommendedCars(this.page(), this.perPage());
+    }
+
+    onScrollDown(event: CustomEvent): void {
+        this.page.set(this.page() + 1);
+        this._carsFacadeService.getRecommendedCars(this.page(), this.perPage());
+        this._carsFacadeService
+            .selectHasInfiniteEventCompleted()
+            .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))
+            .subscribe((_) => {
+                setTimeout(async () => {
+                    await (event as InfiniteScrollCustomEvent).target.complete();
+                }, this.INFINITE_EVENT_COMPLETE_DURATION);
+            });
     }
 }

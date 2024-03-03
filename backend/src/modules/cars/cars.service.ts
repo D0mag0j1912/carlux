@@ -39,6 +39,7 @@ export class CarsService {
                 'car.ModelName',
                 'car.CountryOrigin',
                 'car.NoOfPreviousOwners',
+                'car.SellerType',
                 'car.UploadedDate',
                 'currency.Symbol',
             ])
@@ -58,6 +59,7 @@ export class CarsService {
                 modelName: carEntity.ModelName,
                 countryOrigin: carEntity.CountryOrigin,
                 noOfPreviousOwners: carEntity.NoOfPreviousOwners,
+                sellerType: carEntity.SellerType,
                 currencySymbol: carEntity.currency.Symbol,
                 images: imageEntities
                     .filter((imageEntity: ImageEntity) => imageEntity.CarId === carEntity.Id)

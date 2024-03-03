@@ -76,6 +76,11 @@
     "recommended_cars": {
         "search_cars": "Search cars",
         "title": "Recommended cars for you",
+        "seller_type": {
+            "dealer": "Dealer",
+            "private": "Private",
+            "company_vehicle": "Company vehicle"
+        },
         "errors": {
             "get_recommended_cars": "Unable to get recommended cars. Please try again."
         }

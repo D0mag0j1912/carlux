@@ -13,3 +13,13 @@ export const selectRecommendedCars = createSelector(
     selectCarsState,
     (state: CarsState) => state.recommendedCars?.results ?? [],
 );
+
+export const selectHasNoMoreRecommendedCars = createSelector(
+    selectCarsState,
+    (state: CarsState) => state.hasNoMoreRecommendedCars,
+);
+
+export const selectHasInfiniteEventCompleted = createSelector(
+    selectCarsState,
+    (state: CarsState) => state.hasInfiniteEventCompleted,
+);

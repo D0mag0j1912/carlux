@@ -17,6 +17,14 @@ export class CarsFacadeService {
 
     private _selectRecommendedCars$ = this._store.select(CarsSelectors.selectRecommendedCars);
 
+    private _selectHasNoMoreRecommendedCars$ = this._store.select(
+        CarsSelectors.selectHasNoMoreRecommendedCars,
+    );
+
+    private _selectHasInfiniteEventCompleted$ = this._store.select(
+        CarsSelectors.selectHasInfiniteEventCompleted,
+    );
+
     //Selectors BEGIN -------------------------
     selectAreRecommendedCarsNotLoading(): Observable<boolean> {
         return this._selectAreRecommendedCarsNotLoading$;
@@ -24,6 +32,14 @@ export class CarsFacadeService {
 
     selectRecommendedCars(): Observable<RecommendedCars[]> {
         return this._selectRecommendedCars$;
+    }
+
+    selectHasNoMoreRecommendedCars(): Observable<boolean> {
+        return this._selectHasNoMoreRecommendedCars$;
+    }
+
+    selectHasInfiniteEventCompleted(): Observable<boolean> {
+        return this._selectHasInfiniteEventCompleted$;
     }
     //Selectors END ---------------------------
 
@@ -34,6 +50,12 @@ export class CarsFacadeService {
 
     setRecommendedCarsLoading(areRecommendedCarsLoading: boolean): void {
         this._store.dispatch(CarsActions.setRecommendedCarsLoading({ areRecommendedCarsLoading }));
+    }
+
+    setHasInfiniteEventCompleted(hasInfiniteEventCompleted: boolean): void {
+        this._store.dispatch(
+            CarsActions.setHasInfiniteEventCompleted({ hasInfiniteEventCompleted }),
+        );
     }
     //Actions END ---------------------------
 }
