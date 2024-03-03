@@ -539,8 +539,8 @@
                     },
                     "sellerType": {
                         "type": "string",
-                        "enum": ["Dealer", "Private"],
-                        "description": "Type of ownership"
+                        "enum": ["Dealer", "Private", "CompanyVehicle"],
+                        "description": "Seller type"
                     },
                     "currencySymbol": {
                         "type": "string",

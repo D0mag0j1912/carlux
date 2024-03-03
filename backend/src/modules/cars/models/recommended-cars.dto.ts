@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { SellerType } from '../../../constants/type-of-ownership';
+import { SellerType } from '../../../constants/seller-type';
 
 export class RecommendedCarsDto {
     @ApiProperty({
@@ -59,9 +59,9 @@ export class RecommendedCarsDto {
     noOfPreviousOwners: number;
 
     @ApiProperty({
-        enum: ['Dealer', 'Private'],
+        enum: ['Dealer', 'Private', 'CompanyVehicle'],
         required: true,
-        description: 'Type of ownership',
+        description: 'Seller type',
     })
     sellerType: SellerType;
 
