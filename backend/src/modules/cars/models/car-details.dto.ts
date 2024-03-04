@@ -156,7 +156,7 @@ export class CarDetailsDto {
         required: true,
         description: 'Currency code',
     })
-    currencyCode: string;
+    currencySymbol: string;
 
     @ApiProperty({
         type: String,

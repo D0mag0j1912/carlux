@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { WheelDrivesType } from '../../../constants/wheel-drive';
 
 @Entity({ name: 'WheelDriveTypes' })
 export class WheelDriveTypeEntity {
@@ -6,5 +7,5 @@ export class WheelDriveTypeEntity {
     Id?: number;
 
     @Column()
-    Type: string;
+    Type: WheelDrivesType;
 }

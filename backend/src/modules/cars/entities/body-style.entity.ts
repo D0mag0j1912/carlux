@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BodyStyles } from '../../../constants/body-style';
 
 @Entity({ name: 'BodyStyles' })
 export class BodyStyleEntity {
@@ -6,5 +7,5 @@ export class BodyStyleEntity {
     Id?: number;
 
     @Column()
-    Name: string;
+    Name: BodyStyles;
 }

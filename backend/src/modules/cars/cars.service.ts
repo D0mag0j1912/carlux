@@ -5,6 +5,7 @@ import { PaginationDto } from '../../models/pagination.dto';
 import { CarEntity } from './entities/car.entity';
 import { RecommendedCarsDto } from './models/recommended-cars.dto';
 import { ImageEntity } from './entities/image.entity';
+import { CarDetailsDto } from './models/car-details.dto';
 
 @Injectable()
 export class CarsService {
@@ -73,5 +74,73 @@ export class CarsService {
             count: recommendedCarsTotalCount,
         };
         return response;
+    }
+
+    async getCarDetails(carId: number): Promise<CarDetailsDto> {
+        try {
+            return this._getCarDetails(carId);
+        } catch (error: unknown) {
+            throw new InternalServerErrorException();
+        }
+    }
+
+    private async _getCarDetails(carId: number): Promise<CarDetailsDto> {
+        const car = await this._carsRepository
+            .createQueryBuilder('car')
+            .select([
+                'car.Id',
+                'car.Brand',
+                'car.KilometersTravelled',
+                'car.Price',
+                'car.FirstRegistrationDate',
+                'car.ReleaseDate',
+                'car.ModelName',
+                'car.CountryOrigin',
+                'car.NoOfPreviousOwners',
+                'car.Color',
+                'car.BodyKit',
+                'car.HorsePower',
+                'car.Kilowatts',
+                'car.FuelConsumption',
+                'car.CO2Emissions',
+                'car.NumberOfCylinders',
+                'car.RimSize',
+                'car.SellerType',
+                'car.UploadedDate',
+                'bs.Name',
+                'wdt.Type',
+                'cur.Symbol',
+            ])
+            .innerJoin('car.bodyStyle', 'bs')
+            .innerJoin('car.wheelDriveType', 'wdt')
+            .innerJoin('car.currency', 'cur')
+            .where('car.Id = :carId', { carId })
+            .getOne();
+        const carDto: CarDetailsDto = {
+            id: car.Id,
+            brand: car.Brand,
+            kilometersTravelled: car.KilometersTravelled,
+            price: car.Price,
+            firstRegistrationDate: car.FirstRegistrationDate,
+            releaseDate: car.ReleaseDate,
+            modelName: car.ModelName,
+            countryOrigin: car.CountryOrigin,
+            noOfPreviousOwners: car.NoOfPreviousOwners,
+            color: car.Color,
+            bodyKit: car.BodyKit,
+            horsePower: car.HorsePower,
+            kilowatts: car.Kilowatts,
+            fuelConsumption: car.FuelConsumption,
+            co2Emissions: car.CO2Emissions,
+            numberOfCylinders: car.NumberOfCylinders,
+            rimSize: car.RimSize,
+            sellerType: car.SellerType,
+            uploadedDate: car.UploadedDate,
+            bodyStyle: car.bodyStyle.Name,
+            wheelDriveType: car.wheelDriveType.Type,
+            currencySymbol: car.currency.Symbol,
+            images: [],
+        };
+        return carDto;
     }
 }
