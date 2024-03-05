@@ -3,6 +3,7 @@ export { BaseService } from './base-service';
 export { RequestBuilder } from './request-builder';
 export { StrictHttpResponse } from './strict-http-response';
 export { ApiModule } from './api.module';
+export { CarDetailsDto } from './models/car-details-dto';
 export { EmailDto } from './models/email-dto';
 export { LanguageChangeDto } from './models/language-change-dto';
 export { LoginResponseDto } from './models/login-response-dto';
