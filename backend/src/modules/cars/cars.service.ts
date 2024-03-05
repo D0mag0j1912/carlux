@@ -116,6 +116,14 @@ export class CarsService {
             .innerJoin('car.currency', 'cur')
             .where('car.Id = :carId', { carId })
             .getOne();
+        const imageEntities: ImageEntity[] = await this._imageRepository.find({
+            select: {
+                Image: true,
+            },
+            where: {
+                CarId: carId,
+            },
+        });
         const carDto: CarDetailsDto = {
             id: car.Id,
             brand: car.Brand,
@@ -139,7 +147,7 @@ export class CarsService {
             bodyStyle: car.bodyStyle.Name,
             wheelDriveType: car.wheelDriveType.Type,
             currencySymbol: car.currency.Symbol,
-            images: [],
+            images: imageEntities.map((imageEntity: ImageEntity) => imageEntity.Image),
         };
         return carDto;
     }
