@@ -378,6 +378,40 @@
                 },
                 "tags": ["Car list"]
             }
+        },
+        "/api/cars/{carId}": {
+            "get": {
+                "operationId": "CarsController_getCarDetails",
+                "parameters": [
+                    {
+                        "name": "carId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CarDetailsDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Car list"]
+            }
         }
     },
     "info": {
@@ -564,6 +598,139 @@
                     "countryOrigin",
                     "noOfPreviousOwners",
                     "sellerType",
+                    "currencySymbol",
+                    "images"
+                ]
+            },
+            "CarDetailsDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "ID"
+                    },
+                    "brand": {
+                        "type": "string",
+                        "description": "Brand"
+                    },
+                    "kilometersTravelled": {
+                        "type": "number",
+                        "description": "How many kilometers travelled"
+                    },
+                    "price": {
+                        "type": "number",
+                        "description": "Price"
+                    },
+                    "firstRegistrationDate": {
+                        "type": "string",
+                        "description": "First registration date"
+                    },
+                    "releaseDate": {
+                        "type": "string",
+                        "description": "Date on which the model has been released to the public"
+                    },
+                    "modelName": {
+                        "type": "string",
+                        "description": "Model name"
+                    },
+                    "countryOrigin": {
+                        "type": "string",
+                        "description": "Country origin"
+                    },
+                    "noOfPreviousOwners": {
+                        "type": "number",
+                        "description": "Number of previous car owners"
+                    },
+                    "color": {
+                        "type": "string",
+                        "description": "Color"
+                    },
+                    "bodyKit": {
+                        "type": "string",
+                        "description": "Bodykit"
+                    },
+                    "horsePower": {
+                        "type": "number",
+                        "description": "How many horse power does the car have"
+                    },
+                    "kilowatts": {
+                        "type": "number",
+                        "description": "How many kilowatts does the car have"
+                    },
+                    "fuelConsumption": {
+                        "type": "number",
+                        "description": "How much fuel does the car consumes"
+                    },
+                    "co2Emissions": {
+                        "type": "number",
+                        "description": "How many C02 emissions does the car have"
+                    },
+                    "numberOfCylinders": {
+                        "type": "number",
+                        "description": "How many cylinders does the car have"
+                    },
+                    "rimSize": {
+                        "type": "number",
+                        "description": "How much the car rim size is"
+                    },
+                    "sellerType": {
+                        "type": "string",
+                        "enum": ["Dealer", "Private", "CompanyVehicle"],
+                        "description": "Seller type"
+                    },
+                    "uploadedDate": {
+                        "type": "string",
+                        "description": "Uploaded date"
+                    },
+                    "bodyStyle": {
+                        "type": "string",
+                        "enum": ["Convertible", "Coupe", "Sedan", "SUV", "Hatchback"],
+                        "description": "Body style"
+                    },
+                    "wheelDriveType": {
+                        "type": "string",
+                        "enum": [
+                            "AllWheelDrive",
+                            "FrontWheelDrive",
+                            "RearWheelDrive",
+                            "FourWheelDrive"
+                        ],
+                        "description": "Wheel drive type"
+                    },
+                    "currencySymbol": {
+                        "type": "string",
+                        "description": "Currency code"
+                    },
+                    "images": {
+                        "description": "Images",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "brand",
+                    "kilometersTravelled",
+                    "price",
+                    "firstRegistrationDate",
+                    "releaseDate",
+                    "modelName",
+                    "countryOrigin",
+                    "noOfPreviousOwners",
+                    "color",
+                    "bodyKit",
+                    "horsePower",
+                    "kilowatts",
+                    "fuelConsumption",
+                    "co2Emissions",
+                    "numberOfCylinders",
+                    "rimSize",
+                    "sellerType",
+                    "uploadedDate",
+                    "bodyStyle",
+                    "wheelDriveType",
                     "currencySymbol",
                     "images"
                 ]
