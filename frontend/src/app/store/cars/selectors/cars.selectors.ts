@@ -6,20 +6,31 @@ export const selectCarsState = createFeatureSelector<CarsState>(FeatureKeys.CARS
 
 export const selectAreRecommendedCarsNotLoading = createSelector(
     selectCarsState,
-    (state: CarsState) => !state.areRecommendedCarsLoading,
+    (state: CarsState) => !state.recommendedCars.areRecommendedCarsLoading,
 );
 
 export const selectRecommendedCars = createSelector(
     selectCarsState,
-    (state: CarsState) => state.recommendedCars?.results ?? [],
+    (state: CarsState) => state.recommendedCars?.recommendedCarsData?.results ?? [],
 );
 
 export const selectHasNoMoreRecommendedCars = createSelector(
     selectCarsState,
-    (state: CarsState) => state.hasNoMoreRecommendedCars,
+    (state: CarsState) => state.recommendedCars.hasNoMoreRecommendedCars,
 );
 
 export const selectHasInfiniteEventCompleted = createSelector(
     selectCarsState,
-    (state: CarsState) => state.hasInfiniteEventCompleted,
+    (state: CarsState) => state.recommendedCars.hasInfiniteEventCompleted,
+);
+
+// ------ CAR DETAILS ------
+export const selectAreCarDetailsNotLoading = createSelector(
+    selectCarsState,
+    (state: CarsState) => !state.carDetails.areCarDetailsLoading,
+);
+
+export const selectCarDetails = createSelector(
+    selectCarsState,
+    (state: CarsState) => state.carDetails.carDetailsData,
 );

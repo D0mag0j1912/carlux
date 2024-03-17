@@ -82,7 +82,8 @@
             "company_vehicle": "Poslovni automobil"
         },
         "errors": {
-            "get_recommended_cars": "Greška prilikom dohvata preporučenih vozila. Molimo pokušajte ponovno."
+            "get_recommended_cars": "Greška prilikom dohvata preporučenih automobila. Molimo pokušajte ponovno.",
+            "car_details": "Greška prilikom dohvata detalja automobila. Molimo pokušajte ponovno."
         }
     }
 }

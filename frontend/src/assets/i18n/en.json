@@ -82,7 +82,8 @@
             "company_vehicle": "Company vehicle"
         },
         "errors": {
-            "get_recommended_cars": "Unable to get recommended cars. Please try again."
+            "get_recommended_cars": "Unable to get recommended cars. Please try again.",
+            "car_details": "Unable to get car details. Please try again."
         }
     }
 }

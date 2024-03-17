@@ -1,19 +1,24 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CarsActions from '../actions/cars.actions';
-import { RecommendedCarsPagination } from '../../../tabs/recommended-cars/models/recommended-cars-pagination';
+import { RecommendedCarsState } from '../../../tabs/recommended-cars/models/recommended-cars-state';
+import { CarDetailsState } from '../../../tabs/car-details/models/car-details-state';
 
 export interface CarsState {
-    areRecommendedCarsLoading: boolean;
-    recommendedCars: RecommendedCarsPagination | undefined;
-    hasNoMoreRecommendedCars: boolean;
-    hasInfiniteEventCompleted: boolean;
+    recommendedCars: RecommendedCarsState;
+    carDetails: CarDetailsState;
 }
 
 export const initialState: CarsState = {
-    areRecommendedCarsLoading: false,
-    recommendedCars: undefined,
-    hasNoMoreRecommendedCars: false,
-    hasInfiniteEventCompleted: false,
+    recommendedCars: {
+        areRecommendedCarsLoading: false,
+        recommendedCarsData: undefined,
+        hasNoMoreRecommendedCars: false,
+        hasInfiniteEventCompleted: false,
+    },
+    carDetails: {
+        areCarDetailsLoading: false,
+        carDetailsData: undefined,
+    },
 };
 
 export const carsReducers = createReducer(
@@ -22,33 +27,59 @@ export const carsReducers = createReducer(
         CarsActions.setRecommendedCarsLoading,
         (state: CarsState, { areRecommendedCarsLoading }) => ({
             ...state,
-            areRecommendedCarsLoading,
+            recommendedCars: {
+                ...state.recommendedCars,
+                areRecommendedCarsLoading,
+            },
         }),
     ),
     on(CarsActions.setRecommendedCars, (state: CarsState, { response }) => {
-        if (state.recommendedCars && state.recommendedCars.results && response.results) {
+        if (
+            state.recommendedCars &&
+            state.recommendedCars?.recommendedCarsData?.results &&
+            response.results
+        ) {
             return {
                 ...state,
                 recommendedCars: {
                     ...state.recommendedCars,
-                    page: response.page,
-                    results: [...state.recommendedCars.results, ...response.results],
+                    recommendedCarsData: {
+                        ...state.recommendedCars.recommendedCarsData,
+                        page: response.page,
+                        results: [
+                            ...state.recommendedCars.recommendedCarsData.results,
+                            ...response.results,
+                        ],
+                    },
+                    hasNoMoreRecommendedCars:
+                        [...state.recommendedCars.recommendedCarsData.results, ...response.results]
+                            .length >= response.count,
                 },
-                hasNoMoreRecommendedCars:
-                    [...state.recommendedCars.results, ...response.results].length >=
-                    response.count,
             };
         }
         return {
             ...state,
-            recommendedCars: { ...response },
+            recommendedCars: {
+                ...state.recommendedCars,
+                recommendedCarsData: { ...response },
+            },
         };
     }),
     on(
         CarsActions.setHasInfiniteEventCompleted,
         (state: CarsState, { hasInfiniteEventCompleted }) => ({
             ...state,
-            hasInfiniteEventCompleted,
+            recommendedCars: {
+                ...state.recommendedCars,
+                hasInfiniteEventCompleted,
+            },
         }),
     ),
+    on(CarsActions.setCarDetails, (state: CarsState, { carDetails }) => ({
+        ...state,
+        carDetails: {
+            ...state.carDetails,
+            carDetailsData: { ...carDetails },
+        },
+    })),
 );
