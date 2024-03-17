@@ -83,6 +83,15 @@ export const routes: Routes = [
                 canMatch: [canMatchAuth],
             },
             {
+                path: 'car/:id',
+                loadComponent: () =>
+                    import('./tabs/car-details/car-details.component').then(
+                        (component) => component.CarDetailsComponent,
+                    ),
+                providers: [CARS_PROVIDERS],
+                canMatch: [canMatchAuth],
+            },
+            {
                 path: 'settings',
                 loadComponent: () =>
                     import('./tabs/settings/settings.component').then(

@@ -15,6 +15,7 @@ import { addIcons } from 'ionicons';
 import { searchSharp } from 'ionicons/icons';
 import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterModule } from '@angular/router';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 import { CarItemComponent } from '../../shared/components/car-item/car-item.component';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
@@ -32,6 +33,7 @@ import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
         AsyncPipe,
         TranslocoModule,
         CarItemComponent,
+        RouterModule,
     ],
     selector: 'car-recommended-cars',
     templateUrl: './recommended-cars.component.html',
