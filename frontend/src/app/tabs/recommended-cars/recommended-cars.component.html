@@ -14,6 +14,15 @@
                 <div class="content">
                     @for (car of recommendedCars; track car.id) {
                         <car-item [car]="car" [routerLink]="['/', 'tabs', 'car', car.id]"></car-item>
+                    } @empty {
+                        <img src="../../../assets/images/common/icons8-search-50.png" class="empty-image" />
+                        <div
+                            class="ion-text-center"
+                            [innerHTML]="
+                                t('recommended_cars.empty_recommended_cars')
+                                    | carDomSanitizer: DOM_SANITIZER_INPUT_VALUE
+                            "
+                        ></div>
                     }
                 </div>
             </div>

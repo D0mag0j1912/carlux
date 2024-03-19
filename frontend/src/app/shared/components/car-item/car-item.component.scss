@@ -25,13 +25,13 @@
         }
 
         .info {
-            font-size: var(--ion-font-s);
+            font-size: var(--ion-font-sm);
             margin-bottom: 5px;
         }
 
         .seller-type {
             .chip {
-                font-size: var(--ion-font-s);
+                font-size: var(--ion-font-sm);
                 margin-left: 0;
             }
         }
@@ -47,7 +47,7 @@
             }
 
             .name {
-                font-size: var(--ion-font-s);
+                font-size: var(--ion-font-sm);
                 @include single-line(150px);
             }
         }

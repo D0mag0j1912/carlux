@@ -20,6 +20,7 @@ import { CamelToSnakeCasePipe } from '../../../pipes/camel-to-snake-case.pipe';
 })
 export class CarItemComponent {
     readonly KILOMETERS = KILOMETERS_TRAVELLED;
+    readonly DATE_FORMAT = 'mediumDate';
 
     @Input({ required: true })
     car: RecommendedCars | undefined;

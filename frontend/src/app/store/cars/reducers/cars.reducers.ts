@@ -82,4 +82,11 @@ export const carsReducers = createReducer(
             carDetailsData: { ...carDetails },
         },
     })),
+    on(CarsActions.setCarDetailsLoading, (state: CarsState, { areCarDetailsLoading }) => ({
+        ...state,
+        carDetails: {
+            ...state.carDetails,
+            areCarDetailsLoading,
+        },
+    })),
 );

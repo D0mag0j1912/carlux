@@ -76,6 +76,7 @@
     "recommended_cars": {
         "search_cars": "Pretraži automobile",
         "title": "Preporučeni automobili za tebe",
+        "empty_recommended_cars": "Nismo pronašli preporučene automobile. Pokušajte suziti Vašu pretragu klikom na <b>Pretraži automobile</b>.",
         "seller_type": {
             "dealer": "Autokuća",
             "private": "Privatno",
@@ -85,5 +86,12 @@
             "get_recommended_cars": "Greška prilikom dohvata preporučenih automobila. Molimo pokušajte ponovno.",
             "car_details": "Greška prilikom dohvata detalja automobila. Molimo pokušajte ponovno."
         }
+    },
+    "car_details": {
+        "title": "Detalji automobila",
+        "first_registration_date": "Prvi datum registracije",
+        "number_of_previous_owners": "Broj prethodnih vlasnika",
+        "kilometers_travelled": "Kilometara prešao",
+        "horse_power": "Konjske snage"
     }
 }

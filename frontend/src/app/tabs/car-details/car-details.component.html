@@ -1,0 +1,78 @@
+<ng-container *transloco="let t">
+    <ion-header [translucent]="true">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button
+                    defaultHref="/tabs/recommended-cars"
+                    [text]="t('common.actions.back')"
+                ></ion-back-button>
+            </ion-buttons>
+            <ion-title>{{ t('car_details.title') }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        @if (areCarDetailsNotLoading$ | async) {
+            @if (carDetails$ | async; as carDetails) {
+                <swiper-container [pagination]="true">
+                    @for (image of carDetails.images; track image) {
+                        <swiper-slide>
+                            <img class="image" [alt]="image" [src]="image" />
+                        </swiper-slide>
+                    }
+                </swiper-container>
+                <div class="car-details-container">
+                    <div class="title">
+                        {{ carDetails.brand + ' ' + carDetails.modelName }}
+                    </div>
+                    <div class="meta">
+                        <div class="section">
+                            <div class="key">
+                                {{ t('car_details.first_registration_date') }}
+                            </div>
+                            <div class="value">
+                                {{ carDetails.firstRegistrationDate | date: DATE_FORMAT }}
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="key">
+                                {{ t('car_details.number_of_previous_owners') }}
+                            </div>
+                            <div class="value">
+                                {{ carDetails.noOfPreviousOwners }}
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="key">
+                                {{ t('car_details.kilometers_travelled') }}
+                            </div>
+                            <div class="value">
+                                {{ carDetails.kilometersTravelled + KILOMETERS_TRAVELLED_SHORT }}
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="key">
+                                {{ t('car_details.horse_power') }}
+                            </div>
+                            @if (selectedLanguage$ | async; as selectedLanguage) {
+                                <div class="value">
+                                    {{
+                                        carDetails.horsePower +
+                                            HORSE_POWER_TRANSLATION[selectedLanguage] +
+                                            ' (' +
+                                            carDetails.kilowatts +
+                                            'kW)'
+                                    }}
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        } @else {
+            <div class="spinner-wrapper">
+                <ion-spinner color="primary"></ion-spinner>
+            </div>
+        }
+    </ion-content>
+</ng-container>

@@ -9,7 +9,7 @@ import {
 } from '@angular/platform-browser';
 import { isNeverCheck } from '../helpers/is-never-check';
 
-type DomSanitizerInputType = 'html' | 'style' | 'script' | 'url' | 'resourceUrl';
+export type DomSanitizerInputType = 'html' | 'style' | 'script' | 'url' | 'resourceUrl';
 
 @Pipe({ name: 'carDomSanitizer', standalone: true })
 export class DomSanitizerPipe implements PipeTransform {

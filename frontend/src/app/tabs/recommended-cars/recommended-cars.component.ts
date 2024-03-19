@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 import { CarItemComponent } from '../../shared/components/car-item/car-item.component';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
+import { DomSanitizerInputType, DomSanitizerPipe } from '../../pipes/dom-sanitizer.pipe';
 
 @Component({
     standalone: true,
@@ -34,6 +35,7 @@ import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
         TranslocoModule,
         CarItemComponent,
         RouterModule,
+        DomSanitizerPipe,
     ],
     selector: 'car-recommended-cars',
     templateUrl: './recommended-cars.component.html',
@@ -51,6 +53,7 @@ export class RecommendedCarsComponent implements OnInit {
     perPage = signal(DEFAULT_ITEMS_PER_PAGE);
 
     readonly INFINITE_EVENT_COMPLETE_DURATION = 500;
+    readonly DOM_SANITIZER_INPUT_VALUE: DomSanitizerInputType = 'html';
 
     constructor() {
         addIcons({ searchSharp });

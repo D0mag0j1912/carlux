@@ -76,6 +76,7 @@
     "recommended_cars": {
         "search_cars": "Search cars",
         "title": "Recommended cars for you",
+        "empty_recommended_cars": "There are no recommended cars. Try narrowing your search by clicking <b>Search cars</b>.",
         "seller_type": {
             "dealer": "Dealer",
             "private": "Private",
@@ -85,5 +86,12 @@
             "get_recommended_cars": "Unable to get recommended cars. Please try again.",
             "car_details": "Unable to get car details. Please try again."
         }
+    },
+    "car_details": {
+        "title": "Car details",
+        "first_registration_date": "First registration date",
+        "number_of_previous_owners": "Number of previous owners",
+        "kilometers_travelled": "Kilometers travelled",
+        "horse_power": "Horse power"
     }
 }
