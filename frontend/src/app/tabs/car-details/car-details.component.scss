@@ -19,7 +19,7 @@
         display: flex;
         flex-wrap: wrap;
         row-gap: 20px;
-        justify-content: space-between;
+        justify-content: space-around;
         margin: 10px 15px 0 15px;
 
         .section {
@@ -36,5 +36,12 @@
                 text-align: center;
             }
         }
+    }
+
+    .divider {
+        width: 100%;
+        height: 1px;
+        background-color: var(--ion-color-light);
+        margin: 20px 0;
     }
 }
