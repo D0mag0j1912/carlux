@@ -25,6 +25,11 @@
                     <div class="title">
                         {{ carDetails.brand + ' ' + carDetails.modelName }}
                     </div>
+                    <div class="small-divider"></div>
+                    <div class="price">
+                        {{ carDetails.price + carDetails.currencySymbol }}
+                    </div>
+                    <div class="small-divider"></div>
                     <div class="meta">
                         <div class="section">
                             <div class="key">
@@ -61,7 +66,8 @@
                                             HORSE_POWER_TRANSLATION[selectedLanguage] +
                                             ' (' +
                                             carDetails.kilowatts +
-                                            'kW)'
+                                            KILOWATTS +
+                                            ')'
                                     }}
                                 </div>
                             }

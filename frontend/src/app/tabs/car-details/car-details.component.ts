@@ -39,6 +39,7 @@ export class CarDetailsComponent {
     selectedLanguage$ = this._translocoService.langChanges$;
 
     readonly DATE_FORMAT = 'mediumDate';
+    readonly KILOWATTS = 'kW';
     readonly KILOMETERS_TRAVELLED_SHORT = KILOMETERS_TRAVELLED;
     readonly HORSE_POWER_TRANSLATION: { [key: string]: string } = {
         en: 'HP',
