@@ -9,6 +9,8 @@ import {
     IonToolbar,
 } from '@ionic/angular/standalone';
 import { AsyncPipe, DatePipe } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { calendarOutline, peopleOutline, barChartOutline, timerOutline } from 'ionicons/icons';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
 
@@ -51,5 +53,9 @@ export class CarDetailsComponent {
         if (carId) {
             this._carsFacadeService.getCarDetails(carId);
         }
+    }
+
+    constructor() {
+        addIcons({ calendarOutline, peopleOutline, barChartOutline, timerOutline });
     }
 }
