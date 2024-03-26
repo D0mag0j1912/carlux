@@ -10,7 +10,13 @@ import {
 } from '@ionic/angular/standalone';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { calendarOutline, peopleOutline, barChartOutline, timerOutline } from 'ionicons/icons';
+import {
+    calendarOutline,
+    peopleOutline,
+    barChartOutline,
+    timerOutline,
+    locationOutline,
+} from 'ionicons/icons';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
 
@@ -56,6 +62,12 @@ export class CarDetailsComponent {
     }
 
     constructor() {
-        addIcons({ calendarOutline, peopleOutline, barChartOutline, timerOutline });
+        addIcons({
+            calendarOutline,
+            peopleOutline,
+            barChartOutline,
+            timerOutline,
+            locationOutline,
+        });
     }
 }

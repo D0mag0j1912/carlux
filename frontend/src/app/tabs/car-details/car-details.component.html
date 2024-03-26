@@ -26,55 +26,71 @@
                         {{ carDetails.brand + ' ' + carDetails.modelName }}
                     </div>
                     <div class="small-divider"></div>
-                    <div class="price">
-                        {{ carDetails.price + carDetails.currencySymbol }}
+                    <div class="base-info">
+                        <div class="price">
+                            {{ carDetails.price + carDetails.currencySymbol }}
+                        </div>
+                        <div class="location">
+                            <ion-icon name="location-outline" color="primary"></ion-icon>
+                            <div class="value">
+                                {{ carDetails.countryOrigin }}
+                            </div>
+                        </div>
                     </div>
                     <div class="small-divider"></div>
                     <div class="meta">
                         <div class="section">
-                            <div class="key">
-                                <ion-icon name="calendar-outline" color="primary"></ion-icon>
-                                {{ t('car_details.first_registration_date') }}
-                            </div>
-                            <div class="value">
-                                {{ carDetails.firstRegistrationDate | date: DATE_FORMAT }}
-                            </div>
-                        </div>
-                        <div class="section">
-                            <div class="key">
-                                <ion-icon name="people-outline" color="primary"></ion-icon>
-                                {{ t('car_details.number_of_previous_owners') }}
-                            </div>
-                            <div class="value">
-                                {{ carDetails.noOfPreviousOwners }}
-                            </div>
-                        </div>
-                        <div class="section">
-                            <div class="key">
-                                <ion-icon name="bar-chart-outline" color="primary"></ion-icon>
-                                {{ t('car_details.kilometers_travelled') }}
-                            </div>
-                            <div class="value">
-                                {{ carDetails.kilometersTravelled + KILOMETERS_TRAVELLED_SHORT }}
-                            </div>
-                        </div>
-                        <div class="section">
-                            <div class="key">
-                                <ion-icon name="timer-outline" color="primary"></ion-icon>
-                                {{ t('car_details.horse_power') }}
-                            </div>
-                            @if (selectedLanguage$ | async; as selectedLanguage) {
-                                <div class="value">
-                                    {{
-                                        carDetails.horsePower +
-                                            HORSE_POWER_TRANSLATION[selectedLanguage] +
-                                            ' (' +
-                                            carDetails.kilowatts +
-                                            KILOWATTS +
-                                            ')'
-                                    }}
+                            <ion-icon name="calendar-outline" color="primary"></ion-icon>
+                            <div class="meta-data-wrapper">
+                                <div class="key">
+                                    {{ t('car_details.first_registration_date') }}
                                 </div>
-                            }
+                                <div class="value">
+                                    {{ carDetails.firstRegistrationDate | date: DATE_FORMAT }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <ion-icon name="people-outline" color="primary"></ion-icon>
+                            <div class="meta-data-wrapper">
+                                <div class="key">
+                                    {{ t('car_details.number_of_previous_owners') }}
+                                </div>
+                                <div class="value">
+                                    {{ carDetails.noOfPreviousOwners }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <ion-icon name="bar-chart-outline" color="primary"></ion-icon>
+                            <div class="meta-data-wrapper">
+                                <div class="key">
+                                    {{ t('car_details.kilometers_travelled') }}
+                                </div>
+                                <div class="value">
+                                    {{ carDetails.kilometersTravelled + KILOMETERS_TRAVELLED_SHORT }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <ion-icon name="timer-outline" color="primary"></ion-icon>
+                            <div class="meta-data-wrapper">
+                                <div class="key">
+                                    {{ t('car_details.horse_power') }}
+                                </div>
+                                @if (selectedLanguage$ | async; as selectedLanguage) {
+                                    <div class="value">
+                                        {{
+                                            carDetails.horsePower +
+                                                HORSE_POWER_TRANSLATION[selectedLanguage] +
+                                                ' (' +
+                                                carDetails.kilowatts +
+                                                KILOWATTS +
+                                                ')'
+                                        }}
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
                     <div class="divider"></div>
