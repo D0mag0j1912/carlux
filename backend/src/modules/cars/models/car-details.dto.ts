@@ -3,6 +3,7 @@ import { SellerType } from '../../../constants/seller-type';
 import { BodyStyles } from '../../../constants/body-style';
 import { WheelDrivesType } from '../../../constants/wheel-drive';
 import { Gearbox } from '../../../constants/gearbox';
+import { FuelType } from '../../../constants/fuel-type';
 
 export class CarDetailsDto {
     @ApiProperty({
@@ -74,6 +75,13 @@ export class CarDetailsDto {
         description: 'Type of gearbox',
     })
     gearbox: Gearbox;
+
+    @ApiProperty({
+        enum: ['Gasoline', 'Diesel'],
+        required: true,
+        description: 'Fuel type',
+    })
+    fuelType: FuelType;
 
     @ApiProperty({
         type: String,
