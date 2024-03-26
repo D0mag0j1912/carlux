@@ -641,6 +641,16 @@
                         "type": "number",
                         "description": "Number of previous car owners"
                     },
+                    "gearbox": {
+                        "type": "string",
+                        "enum": ["Manual", "Automatic"],
+                        "description": "Type of gearbox"
+                    },
+                    "fuelType": {
+                        "type": "string",
+                        "enum": ["Gasoline", "Diesel"],
+                        "description": "Fuel type"
+                    },
                     "color": {
                         "type": "string",
                         "description": "Color"
@@ -719,6 +729,8 @@
                     "modelName",
                     "countryOrigin",
                     "noOfPreviousOwners",
+                    "gearbox",
+                    "fuelType",
                     "color",
                     "bodyKit",
                     "horsePower",

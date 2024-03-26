@@ -48,6 +48,16 @@ export interface CarDetailsDto {
   fuelConsumption: number;
 
   /**
+   * Fuel type
+   */
+  fuelType: 'Gasoline' | 'Diesel';
+
+  /**
+   * Type of gearbox
+   */
+  gearbox: 'Manual' | 'Automatic';
+
+  /**
    * How many horse power does the car have
    */
   horsePower: number;
