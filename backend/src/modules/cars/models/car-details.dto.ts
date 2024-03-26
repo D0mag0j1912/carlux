@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { SellerType } from '../../../constants/seller-type';
 import { BodyStyles } from '../../../constants/body-style';
 import { WheelDrivesType } from '../../../constants/wheel-drive';
+import { Gearbox } from '../../../constants/gearbox';
 
 export class CarDetailsDto {
     @ApiProperty({
@@ -66,6 +67,13 @@ export class CarDetailsDto {
         description: 'Number of previous car owners',
     })
     noOfPreviousOwners: number;
+
+    @ApiProperty({
+        enum: ['Manual', 'Automatic'],
+        required: true,
+        description: 'Type of gearbox',
+    })
+    gearbox: Gearbox;
 
     @ApiProperty({
         type: String,
