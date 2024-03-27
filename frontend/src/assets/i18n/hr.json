@@ -15,6 +15,11 @@
             "confirm": "Potvrdi",
             "save": "Spremi",
             "back": "Nazad"
+        },
+        "seller_type": {
+            "dealer": "Autokuća",
+            "private": "Privatno",
+            "company_vehicle": "Poslovni automobil"
         }
     },
     "auth": {
@@ -77,11 +82,6 @@
         "search_cars": "Pretraži automobile",
         "title": "Preporučeni automobili za tebe",
         "empty_recommended_cars": "Nismo pronašli preporučene automobile. Pokušajte suziti Vašu pretragu klikom na <b>Pretraži automobile</b>.",
-        "seller_type": {
-            "dealer": "Autokuća",
-            "private": "Privatno",
-            "company_vehicle": "Poslovni automobil"
-        },
         "errors": {
             "get_recommended_cars": "Greška prilikom dohvata preporučenih automobila. Molimo pokušajte ponovno.",
             "car_details": "Greška prilikom dohvata detalja automobila. Molimo pokušajte ponovno."
@@ -92,6 +92,18 @@
         "first_registration_date": "Prvi datum registracije",
         "number_of_previous_owners": "Broj prethodnih vlasnika",
         "kilometers_travelled": "Kilometara prešao",
-        "horse_power": "Konjske snage"
+        "horse_power": "Konjske snage",
+        "basic_information": {
+            "title": "Osnovne informacije"
+        },
+        "car_history": {
+            "title": "Povijest automobila"
+        },
+        "technical_information": {
+            "title": "Tehničke informacije"
+        },
+        "energy_consumption": {
+            "title": "Potrošnja energije"
+        }
     }
 }

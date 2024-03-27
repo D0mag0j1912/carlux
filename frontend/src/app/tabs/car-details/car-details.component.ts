@@ -5,6 +5,9 @@ import {
     IonButtons,
     IonContent,
     IonHeader,
+    IonItem,
+    IonLabel,
+    IonList,
     IonTitle,
     IonToolbar,
 } from '@ionic/angular/standalone';
@@ -16,9 +19,11 @@ import {
     barChartOutline,
     timerOutline,
     locationOutline,
+    cashOutline,
 } from 'ionicons/icons';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
+import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
 
 @Component({
     standalone: true,
@@ -30,8 +35,12 @@ import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
         IonButtons,
         IonBackButton,
         IonContent,
+        IonList,
+        IonItem,
+        IonLabel,
         AsyncPipe,
         DatePipe,
+        CamelToSnakeCasePipe,
     ],
     selector: 'car-details',
     templateUrl: './car-details.component.html',
@@ -68,6 +77,7 @@ export class CarDetailsComponent {
             barChartOutline,
             timerOutline,
             locationOutline,
+            cashOutline,
         });
     }
 }

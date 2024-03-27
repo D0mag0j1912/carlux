@@ -28,7 +28,10 @@
                     <div class="small-divider"></div>
                     <div class="base-info">
                         <div class="price">
-                            {{ carDetails.price + carDetails.currencySymbol }}
+                            <ion-icon name="cash-outline" color="primary"></ion-icon>
+                            <div class="value">
+                                {{ carDetails.price + carDetails.currencySymbol }}
+                            </div>
                         </div>
                         <div class="location">
                             <ion-icon name="location-outline" color="primary"></ion-icon>
@@ -94,6 +97,18 @@
                         </div>
                     </div>
                     <div class="divider"></div>
+                    <div class="basic-information">
+                        <div class="title">
+                            {{ t('car_details.basic_information.title') }}
+                        </div>
+                        <ion-list lines="none">
+                            <ion-item>
+                                <ion-label>
+                                    {{ t('common.seller_type.' + (carDetails.sellerType | camelToSnakeCase)) }}
+                                </ion-label>
+                            </ion-item>
+                        </ion-list>
+                    </div>
                 </div>
             }
         } @else {
