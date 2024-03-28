@@ -99,15 +99,59 @@
                     <div class="divider"></div>
                     <div class="basic-information">
                         <div class="title">
+                            <ion-icon name="car-sport-outline" color="primary"></ion-icon>
                             {{ t('car_details.basic_information.title') }}
                         </div>
-                        <ion-list lines="none">
-                            <ion-item>
-                                <ion-label>
+                        <ion-grid class="info-grid">
+                            <ion-row>
+                                <ion-col class="seller-type">
+                                    {{ t('car_details.basic_information.seller_type') }}
+                                </ion-col>
+                                <ion-col>
                                     {{ t('common.seller_type.' + (carDetails.sellerType | camelToSnakeCase)) }}
-                                </ion-label>
-                            </ion-item>
-                        </ion-list>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="fuel-type">
+                                    {{ t('car_details.basic_information.fuel_type') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.fuelType }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="release-date">
+                                    {{ t('car_details.basic_information.release_date') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.releaseDate | date: DATE_FORMAT }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="body-style">
+                                    {{ t('car_details.basic_information.body_style') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.bodyStyle }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="color">
+                                    {{ t('car_details.basic_information.color') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.color }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="wheel-drive-type">
+                                    {{ t('car_details.basic_information.wheel_drive_type') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.wheelDriveType }}
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
                     </div>
                 </div>
             }

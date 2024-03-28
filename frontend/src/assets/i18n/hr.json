@@ -94,7 +94,13 @@
         "kilometers_travelled": "Kilometara prešao",
         "horse_power": "Konjske snage",
         "basic_information": {
-            "title": "Osnovne informacije"
+            "title": "Osnovne informacije",
+            "seller_type": "Tip prodavača",
+            "fuel_type": "Gorivo",
+            "release_date": "Datum modela",
+            "body_style": "Vrsta karoserije",
+            "color": "Boja",
+            "wheel_drive_type": "Vrsta pogona"
         },
         "car_history": {
             "title": "Povijest automobila"

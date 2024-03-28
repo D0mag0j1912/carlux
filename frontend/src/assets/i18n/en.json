@@ -94,7 +94,13 @@
         "kilometers_travelled": "Kilometers travelled",
         "horse_power": "Horse power",
         "basic_information": {
-            "title": "Basic information"
+            "title": "Basic information",
+            "seller_type": "Seller type",
+            "fuel_type": "Fuel type",
+            "release_date": "Release date",
+            "body_style": "Body style",
+            "color": "Color",
+            "wheel_drive_type": "Wheel drive type"
         },
         "car_history": {
             "title": "Car history"

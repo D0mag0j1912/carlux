@@ -3,11 +3,11 @@ import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import {
     IonBackButton,
     IonButtons,
+    IonCol,
     IonContent,
+    IonGrid,
     IonHeader,
-    IonItem,
-    IonLabel,
-    IonList,
+    IonRow,
     IonTitle,
     IonToolbar,
 } from '@ionic/angular/standalone';
@@ -20,10 +20,12 @@ import {
     timerOutline,
     locationOutline,
     cashOutline,
+    carSportOutline,
 } from 'ionicons/icons';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
 import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
+import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
 
 @Component({
     standalone: true,
@@ -35,9 +37,9 @@ import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
         IonButtons,
         IonBackButton,
         IonContent,
-        IonList,
-        IonItem,
-        IonLabel,
+        IonGrid,
+        IonRow,
+        IonCol,
         AsyncPipe,
         DatePipe,
         CamelToSnakeCasePipe,
@@ -55,7 +57,7 @@ export class CarDetailsComponent {
     carDetails$ = this._carsFacadeService.selectCarDetails();
     selectedLanguage$ = this._translocoService.langChanges$;
 
-    readonly DATE_FORMAT = 'mediumDate';
+    readonly DATE_FORMAT = MEDIUM_DATE_FORMAT;
     readonly KILOWATTS = 'kW';
     readonly KILOMETERS_TRAVELLED_SHORT = KILOMETERS_TRAVELLED;
     readonly HORSE_POWER_TRANSLATION: { [key: string]: string } = {
@@ -78,6 +80,7 @@ export class CarDetailsComponent {
             timerOutline,
             locationOutline,
             cashOutline,
+            carSportOutline,
         });
     }
 }

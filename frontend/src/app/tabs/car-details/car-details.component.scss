@@ -22,7 +22,7 @@
         .price {
             display: flex;
             align-items: center;
-            column-gap: 5px;
+            column-gap: 10px;
 
             .value {
                 @include large;
@@ -75,7 +75,24 @@
     .basic-information {
         .title {
             @include large;
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
         }
+
+        .seller-type,
+        .fuel-type,
+        .release-date,
+        .body-style,
+        .color,
+        .wheel-drive-type {
+            @include medium;
+            color: var(--ion-color-medium);
+        }
+    }
+
+    .info-grid {
+        padding: 10px;
     }
 }
 
