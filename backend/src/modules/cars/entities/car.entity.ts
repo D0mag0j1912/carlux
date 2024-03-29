@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { SellerType as SellerType } from '../../../constants/seller-type';
-import { Gearbox } from '../../../constants/gearbox';
+import { Transmission } from '../../../constants/transmission';
 import { FuelType } from '../../../constants/fuel-type';
 import { BodyStyleEntity } from './body-style.entity';
 import { WheelDriveTypeEntity } from './wheel-drive-types.entity';
@@ -37,7 +37,7 @@ export class CarEntity {
     NoOfPreviousOwners: number;
 
     @Column()
-    Gearbox: Gearbox;
+    Transmission: Transmission;
 
     @Column()
     FuelType: FuelType;

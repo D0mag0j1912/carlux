@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { SellerType } from '../../../constants/seller-type';
 import { BodyStyles } from '../../../constants/body-style';
 import { WheelDrivesType } from '../../../constants/wheel-drive';
-import { Gearbox } from '../../../constants/gearbox';
+import { Transmission } from '../../../constants/transmission';
 import { FuelType } from '../../../constants/fuel-type';
 
 export class CarDetailsDto {
@@ -72,9 +72,9 @@ export class CarDetailsDto {
     @ApiProperty({
         enum: ['Manual', 'Automatic'],
         required: true,
-        description: 'Type of gearbox',
+        description: 'Type of transmission',
     })
-    gearbox: Gearbox;
+    transmission: Transmission;
 
     @ApiProperty({
         enum: ['Gasoline', 'Diesel'],
