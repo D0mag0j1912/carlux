@@ -53,11 +53,6 @@ export interface CarDetailsDto {
   fuelType: 'Gasoline' | 'Diesel';
 
   /**
-   * Type of gearbox
-   */
-  gearbox: 'Manual' | 'Automatic';
-
-  /**
    * How many horse power does the car have
    */
   horsePower: number;
@@ -116,6 +111,11 @@ export interface CarDetailsDto {
    * Seller type
    */
   sellerType: 'Dealer' | 'Private' | 'CompanyVehicle';
+
+  /**
+   * Type of transmission
+   */
+  transmission: 'Manual' | 'Automatic';
 
   /**
    * Uploaded date
