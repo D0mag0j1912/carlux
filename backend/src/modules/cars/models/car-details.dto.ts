@@ -93,9 +93,16 @@ export class CarDetailsDto {
     @ApiProperty({
         type: String,
         required: true,
-        description: 'Color',
+        description: 'Exterior color',
     })
-    color: string;
+    exteriorColor: string;
+
+    @ApiProperty({
+        type: String,
+        required: true,
+        description: 'Interior color',
+    })
+    interiorColor: string;
 
     @ApiProperty({
         type: String,

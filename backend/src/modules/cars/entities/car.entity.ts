@@ -46,7 +46,10 @@ export class CarEntity {
     FuelType: FuelType;
 
     @Column()
-    Color: string;
+    ExteriorColor: string;
+
+    @Column()
+    InteriorColor: string;
 
     @Column()
     BodyKit: string;
