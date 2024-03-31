@@ -102,11 +102,13 @@
             "color": "Color",
             "wheel_drive_type": "Wheel drive type"
         },
-        "car_history": {
-            "title": "Car history"
-        },
         "technical_information": {
-            "title": "Technical information"
+            "title": "Technical information",
+            "power": "Power",
+            "transmission": "Transmission",
+            "number_of_cylinders": "Number of cylinders",
+            "body_kit": "Body kit",
+            "rim_size": "Rim size"
         },
         "energy_consumption": {
             "title": "Energy consumption"

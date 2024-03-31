@@ -81,7 +81,7 @@
                                 <div class="key">
                                     {{ t('car_details.horse_power') }}
                                 </div>
-                                @if (selectedLanguage$ | async; as selectedLanguage) {
+                                @if (selectedLanguage(); as selectedLanguage) {
                                     <div class="value">
                                         {{
                                             carDetails.horsePower +
@@ -97,14 +97,14 @@
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <div class="basic-information">
+                    <div class="section">
                         <div class="title">
                             <ion-icon name="car-sport-outline" color="primary"></ion-icon>
                             {{ t('car_details.basic_information.title') }}
                         </div>
                         <ion-grid class="info-grid">
                             <ion-row>
-                                <ion-col class="seller-type">
+                                <ion-col class="column-title">
                                     {{ t('car_details.basic_information.seller_type') }}
                                 </ion-col>
                                 <ion-col>
@@ -112,7 +112,7 @@
                                 </ion-col>
                             </ion-row>
                             <ion-row>
-                                <ion-col class="fuel-type">
+                                <ion-col class="column-title">
                                     {{ t('car_details.basic_information.fuel_type') }}
                                 </ion-col>
                                 <ion-col>
@@ -120,7 +120,7 @@
                                 </ion-col>
                             </ion-row>
                             <ion-row>
-                                <ion-col class="release-date">
+                                <ion-col class="column-title">
                                     {{ t('car_details.basic_information.release_date') }}
                                 </ion-col>
                                 <ion-col>
@@ -128,7 +128,7 @@
                                 </ion-col>
                             </ion-row>
                             <ion-row>
-                                <ion-col class="body-style">
+                                <ion-col class="column-title">
                                     {{ t('car_details.basic_information.body_style') }}
                                 </ion-col>
                                 <ion-col>
@@ -136,7 +136,7 @@
                                 </ion-col>
                             </ion-row>
                             <ion-row>
-                                <ion-col class="color">
+                                <ion-col class="column-title">
                                     {{ t('car_details.basic_information.color') }}
                                 </ion-col>
                                 <ion-col>
@@ -144,11 +144,68 @@
                                 </ion-col>
                             </ion-row>
                             <ion-row>
-                                <ion-col class="wheel-drive-type">
+                                <ion-col class="column-title">
                                     {{ t('car_details.basic_information.wheel_drive_type') }}
                                 </ion-col>
                                 <ion-col>
                                     {{ carDetails.wheelDriveType }}
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <div class="section">
+                        <div class="title">
+                            <ion-icon name="settings-outline" color="primary"></ion-icon>
+                            {{ t('car_details.technical_information.title') }}
+                        </div>
+                        <ion-grid class="info-grid">
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.power') }}
+                                </ion-col>
+                                <ion-col>
+                                    @if (selectedLanguage(); as selectedLanguage) {
+                                        {{
+                                            carDetails.horsePower +
+                                                HORSE_POWER_TRANSLATION[selectedLanguage] +
+                                                ' (' +
+                                                carDetails.kilowatts +
+                                                KILOWATTS +
+                                                ')'
+                                        }}
+                                    }
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.transmission') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.transmission }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.number_of_cylinders') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.numberOfCylinders }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.body_kit') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.bodyKit }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.rim_size') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.rimSize }}
                                 </ion-col>
                             </ion-row>
                         </ion-grid>

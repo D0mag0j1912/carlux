@@ -97,16 +97,18 @@
             "title": "Osnovne informacije",
             "seller_type": "Tip prodavača",
             "fuel_type": "Gorivo",
-            "release_date": "Datum modela",
+            "release_date": "Godina proizvodnje",
             "body_style": "Vrsta karoserije",
             "color": "Boja",
             "wheel_drive_type": "Vrsta pogona"
         },
-        "car_history": {
-            "title": "Povijest automobila"
-        },
         "technical_information": {
-            "title": "Tehničke informacije"
+            "title": "Tehničke informacije",
+            "power": "Snaga",
+            "transmission": "Mijenjač",
+            "number_of_cylinders": "Broj cilindara",
+            "body_kit": "Body kit",
+            "rim_size": "Promjer felgi"
         },
         "energy_consumption": {
             "title": "Potrošnja energije"

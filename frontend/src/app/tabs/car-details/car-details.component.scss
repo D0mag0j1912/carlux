@@ -72,7 +72,7 @@
         }
     }
 
-    .basic-information {
+    .section {
         .title {
             @include large;
             display: flex;
@@ -80,19 +80,14 @@
             column-gap: 10px;
         }
 
-        .seller-type,
-        .fuel-type,
-        .release-date,
-        .body-style,
-        .color,
-        .wheel-drive-type {
+        .column-title {
             @include medium;
             color: var(--ion-color-medium);
         }
     }
 
     .info-grid {
-        padding: 10px;
+        padding: 20px 10px;
     }
 }
 

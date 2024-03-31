@@ -21,7 +21,9 @@ import {
     locationOutline,
     cashOutline,
     carSportOutline,
+    settingsOutline,
 } from 'ionicons/icons';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
 import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
@@ -55,7 +57,7 @@ export class CarDetailsComponent {
 
     areCarDetailsNotLoading$ = this._carsFacadeService.selectAreCarDetailsNotLoading();
     carDetails$ = this._carsFacadeService.selectCarDetails();
-    selectedLanguage$ = this._translocoService.langChanges$;
+    selectedLanguage = toSignal(this._translocoService.langChanges$);
 
     readonly DATE_FORMAT = MEDIUM_DATE_FORMAT;
     readonly KILOWATTS = 'kW';
@@ -81,6 +83,7 @@ export class CarDetailsComponent {
             locationOutline,
             cashOutline,
             carSportOutline,
+            settingsOutline,
         });
     }
 }
