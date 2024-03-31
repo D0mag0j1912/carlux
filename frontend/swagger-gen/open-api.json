@@ -646,14 +646,22 @@
                         "enum": ["Manual", "Automatic"],
                         "description": "Type of transmission"
                     },
+                    "engineCodeName": {
+                        "type": "string",
+                        "description": "Engine code name"
+                    },
                     "fuelType": {
                         "type": "string",
                         "enum": ["Gasoline", "Diesel"],
                         "description": "Fuel type"
                     },
-                    "color": {
+                    "exteriorColor": {
                         "type": "string",
-                        "description": "Color"
+                        "description": "Exterior color"
+                    },
+                    "interiorColor": {
+                        "type": "string",
+                        "description": "Interior color"
                     },
                     "bodyKit": {
                         "type": "string",
@@ -730,8 +738,10 @@
                     "countryOrigin",
                     "noOfPreviousOwners",
                     "transmission",
+                    "engineCodeName",
                     "fuelType",
-                    "color",
+                    "exteriorColor",
+                    "interiorColor",
                     "bodyKit",
                     "horsePower",
                     "kilowatts",

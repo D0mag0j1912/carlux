@@ -137,14 +137,6 @@
                             </ion-row>
                             <ion-row>
                                 <ion-col class="column-title">
-                                    {{ t('car_details.basic_information.color') }}
-                                </ion-col>
-                                <ion-col>
-                                    {{ carDetails.color }}
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="column-title">
                                     {{ t('car_details.basic_information.wheel_drive_type') }}
                                 </ion-col>
                                 <ion-col>
@@ -206,6 +198,14 @@
                                 </ion-col>
                                 <ion-col>
                                     {{ carDetails.rimSize }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.engine') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.engineCodeName }}
                                 </ion-col>
                             </ion-row>
                         </ion-grid>

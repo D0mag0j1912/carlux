@@ -108,7 +108,8 @@
             "transmission": "Transmission",
             "number_of_cylinders": "Number of cylinders",
             "body_kit": "Body kit",
-            "rim_size": "Rim size"
+            "rim_size": "Rim size",
+            "engine": "Engine"
         },
         "energy_consumption": {
             "title": "Energy consumption"

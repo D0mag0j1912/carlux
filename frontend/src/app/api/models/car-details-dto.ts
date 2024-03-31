@@ -23,11 +23,6 @@ export interface CarDetailsDto {
   co2Emissions: number;
 
   /**
-   * Color
-   */
-  color: string;
-
-  /**
    * Country origin
    */
   countryOrigin: string;
@@ -36,6 +31,16 @@ export interface CarDetailsDto {
    * Currency code
    */
   currencySymbol: string;
+
+  /**
+   * Engine code name
+   */
+  engineCodeName: string;
+
+  /**
+   * Exterior color
+   */
+  exteriorColor: string;
 
   /**
    * First registration date
@@ -66,6 +71,11 @@ export interface CarDetailsDto {
    * Images
    */
   images: Array<string>;
+
+  /**
+   * Interior color
+   */
+  interiorColor: string;
 
   /**
    * How many kilometers travelled

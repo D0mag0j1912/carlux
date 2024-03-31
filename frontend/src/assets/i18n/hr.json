@@ -108,7 +108,8 @@
             "transmission": "Mijenjač",
             "number_of_cylinders": "Broj cilindara",
             "body_kit": "Body kit",
-            "rim_size": "Promjer felgi"
+            "rim_size": "Promjer felgi",
+            "engine": "Motor"
         },
         "energy_consumption": {
             "title": "Potrošnja energije"
