@@ -22,6 +22,7 @@ import {
     cashOutline,
     carSportOutline,
     settingsOutline,
+    analyticsOutline,
 } from 'ionicons/icons';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
@@ -66,6 +67,7 @@ export class CarDetailsComponent {
         en: 'HP',
         hr: 'KS',
     };
+    readonly FUEL_CONSUMPTION = 'l/100 km';
 
     @Input()
     set id(carId: number | undefined) {
@@ -84,6 +86,7 @@ export class CarDetailsComponent {
             cashOutline,
             carSportOutline,
             settingsOutline,
+            analyticsOutline,
         });
     }
 }

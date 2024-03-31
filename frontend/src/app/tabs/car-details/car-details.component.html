@@ -113,14 +113,6 @@
                             </ion-row>
                             <ion-row>
                                 <ion-col class="column-title">
-                                    {{ t('car_details.basic_information.fuel_type') }}
-                                </ion-col>
-                                <ion-col>
-                                    {{ carDetails.fuelType }}
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="column-title">
                                     {{ t('car_details.basic_information.release_date') }}
                                 </ion-col>
                                 <ion-col>
@@ -206,6 +198,30 @@
                                 </ion-col>
                                 <ion-col>
                                     {{ carDetails.engineCodeName }}
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <div class="section">
+                        <div class="title">
+                            <ion-icon name="analytics-outline" color="primary"></ion-icon>
+                            {{ t('car_details.energy_consumption.title') }}
+                        </div>
+                        <ion-grid class="info-grid">
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.fuel_type') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.fuelType }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.fuel_consumption') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.fuelConsumption + ' ' + FUEL_CONSUMPTION }}
                                 </ion-col>
                             </ion-row>
                         </ion-grid>

@@ -96,10 +96,8 @@
         "basic_information": {
             "title": "Basic information",
             "seller_type": "Seller type",
-            "fuel_type": "Fuel type",
             "release_date": "Release date",
             "body_style": "Body style",
-            "color": "Color",
             "wheel_drive_type": "Wheel drive type"
         },
         "technical_information": {
@@ -112,7 +110,9 @@
             "engine": "Engine"
         },
         "energy_consumption": {
-            "title": "Energy consumption"
+            "title": "Energy consumption",
+            "fuel_type": "Fuel type",
+            "fuel_consumption": "Fuel consumption"
         }
     }
 }
