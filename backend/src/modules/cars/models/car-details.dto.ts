@@ -77,6 +77,13 @@ export class CarDetailsDto {
     transmission: Transmission;
 
     @ApiProperty({
+        type: String,
+        required: true,
+        description: 'Engine code name',
+    })
+    engineCodeName: string;
+
+    @ApiProperty({
         enum: ['Gasoline', 'Diesel'],
         required: true,
         description: 'Fuel type',

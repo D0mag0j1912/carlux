@@ -40,6 +40,9 @@ export class CarEntity {
     Transmission: Transmission;
 
     @Column()
+    EngineCodeName: string;
+
+    @Column()
     FuelType: FuelType;
 
     @Column()
