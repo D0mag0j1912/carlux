@@ -114,5 +114,10 @@
             "fuel_type": "Fuel type",
             "fuel_consumption": "Fuel consumption"
         }
+    },
+    "wheel_drive_type": {
+        "front_wheel": "Front wheel drive",
+        "rear_wheel": "Rear wheel drive",
+        "four_wheel": "Four wheel drive"
     }
 }

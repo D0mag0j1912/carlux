@@ -29,6 +29,9 @@ import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service'
 import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
 import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
 import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
+import { WheelDrivesType } from '../../constants/wheel-drive-types';
+import { FourWheelDriveTypes } from '../../constants/four-wheel-drive-type';
+import { PremiumBrands } from '../../constants/premium-brands';
 
 @Component({
     standalone: true,
@@ -68,6 +71,9 @@ export class CarDetailsComponent {
         hr: 'KS',
     };
     readonly FUEL_CONSUMPTION = 'l/100 km';
+    readonly WHEEL_DRIVE_TYPES = WheelDrivesType;
+    readonly FOUR_WHEEL_DRIVE_TYPES = FourWheelDriveTypes;
+    readonly PREMIUM_BRANDS = PremiumBrands;
 
     @Input()
     set id(carId: number | undefined) {

@@ -114,5 +114,10 @@
             "fuel_type": "Tip goriva",
             "fuel_consumption": "Potrošnja goriva"
         }
+    },
+    "wheel_drive_type": {
+        "front_wheel": "Prednji pogon",
+        "rear_wheel": "Zadnji pogon",
+        "four_wheel": "Pogon na sva 4 kotača"
     }
 }

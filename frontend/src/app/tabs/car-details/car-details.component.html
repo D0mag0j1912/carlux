@@ -132,7 +132,24 @@
                                     {{ t('car_details.basic_information.wheel_drive_type') }}
                                 </ion-col>
                                 <ion-col>
-                                    {{ carDetails.wheelDriveType }}
+                                    @if (
+                                        carDetails.wheelDriveType === WHEEL_DRIVE_TYPES.FRONT_WHEEL_DRIVE ||
+                                        carDetails.wheelDriveType === WHEEL_DRIVE_TYPES.REAR_WHEEL_DRIVE
+                                    ) {
+                                        {{ t('wheel_drive_type.' + (carDetails.wheelDriveType | camelToSnakeCase)) }}
+                                    } @else {
+                                        @switch (carDetails.brand) {
+                                            @case (PREMIUM_BRANDS.BMW) {
+                                                {{ FOUR_WHEEL_DRIVE_TYPES.BMW }}
+                                            }
+                                            @case (PREMIUM_BRANDS.AUDI) {
+                                                {{ FOUR_WHEEL_DRIVE_TYPES.AUDI }}
+                                            }
+                                            @case (PREMIUM_BRANDS.MERCEDES) {
+                                                {{ FOUR_WHEEL_DRIVE_TYPES.MERCEDES }}
+                                            }
+                                        }
+                                    }
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
