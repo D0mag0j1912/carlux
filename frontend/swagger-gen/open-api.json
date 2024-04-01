@@ -707,12 +707,7 @@
                     },
                     "wheelDriveType": {
                         "type": "string",
-                        "enum": [
-                            "AllWheelDrive",
-                            "FrontWheelDrive",
-                            "RearWheelDrive",
-                            "FourWheelDrive"
-                        ],
+                        "enum": ["FrontWheel", "RearWheel", "FourWheel"],
                         "description": "Wheel drive type"
                     },
                     "currencySymbol": {

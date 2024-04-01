@@ -175,7 +175,7 @@ export class CarDetailsDto {
     bodyStyle: BodyStyles;
 
     @ApiProperty({
-        enum: ['AllWheelDrive', 'FrontWheelDrive', 'RearWheelDrive', 'FourWheelDrive'],
+        enum: ['FrontWheel', 'RearWheel', 'FourWheel'],
         required: true,
         description: 'Wheel drive type',
     })

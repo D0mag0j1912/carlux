@@ -135,5 +135,5 @@ export interface CarDetailsDto {
   /**
    * Wheel drive type
    */
-  wheelDriveType: 'AllWheelDrive' | 'FrontWheelDrive' | 'RearWheelDrive' | 'FourWheelDrive';
+  wheelDriveType: 'FrontWheel' | 'RearWheel' | 'FourWheel';
 }

@@ -1,6 +1,5 @@
 export enum WheelDrivesType {
-    ALL_WHEEL_DRIVE = 'AllWheelDrive',
-    FRONT_WHEEL_DRIVE = 'FrontWheelDrive',
-    REAR_WHEEL_DRIVE = 'RearWheelDrive',
-    FOUR_WHEEL_DRIVE = 'FourWheelDrive',
+    FRONT_WHEEL_DRIVE = 'FrontWheel',
+    REAR_WHEEL_DRIVE = 'RearWheel',
+    FOUR_WHEEL_DRIVE = 'FourWheel',
 }
