@@ -259,6 +259,30 @@
                             </ion-row>
                         </ion-grid>
                     </div>
+                    <div class="section">
+                        <div class="title">
+                            <ion-icon name="color-palette-outline" color="primary"></ion-icon>
+                            {{ t('car_details.colors.title') }}
+                        </div>
+                        <ion-grid class="info-grid">
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.colors.exterior_color') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.exteriorColor }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.colors.interior_color') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.interiorColor }}
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
                 </div>
             }
         } @else {

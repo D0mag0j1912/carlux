@@ -23,6 +23,7 @@ import {
     carSportOutline,
     settingsOutline,
     analyticsOutline,
+    colorPaletteOutline,
 } from 'ionicons/icons';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
@@ -93,6 +94,7 @@ export class CarDetailsComponent {
             carSportOutline,
             settingsOutline,
             analyticsOutline,
+            colorPaletteOutline,
         });
     }
 }

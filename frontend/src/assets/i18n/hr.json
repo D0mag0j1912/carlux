@@ -115,6 +115,11 @@
             "fuel_consumption_combined": "Potrošnja goriva (kombinirano)",
             "fuel_consumption_city": "Potrošnja goriva (grad)",
             "fuel_consumption_highway": "Potrošnja goriva (autocesta)"
+        },
+        "colors": {
+            "title": "Boje",
+            "exterior_color": "Vanjska boja",
+            "interior_color": "Unutarnja boja"
         }
     },
     "wheel_drive_type": {
