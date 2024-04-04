@@ -128,9 +128,23 @@ export class CarDetailsDto {
     @ApiProperty({
         type: Number,
         required: true,
-        description: 'How much fuel does the car consumes',
+        description: 'Average fuel consumption',
     })
-    fuelConsumption: number;
+    fuelConsumptionCombined: number;
+
+    @ApiProperty({
+        type: Number,
+        required: true,
+        description: 'Fuel consumption in the city',
+    })
+    fuelConsumptionCity: number;
+
+    @ApiProperty({
+        type: Number,
+        required: true,
+        description: 'Fuel consumption on the highway',
+    })
+    fuelConsumptionHighway: number;
 
     @ApiProperty({
         type: Number,

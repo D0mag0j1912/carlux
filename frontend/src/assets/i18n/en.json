@@ -112,7 +112,9 @@
         "energy_consumption": {
             "title": "Energy consumption",
             "fuel_type": "Fuel type",
-            "fuel_consumption": "Fuel consumption"
+            "fuel_consumption_combined": "Fuel consumption (combined)",
+            "fuel_consumption_city": "Fuel consumption (city)",
+            "fuel_consumption_highway": "Fuel consumption (highway)"
         }
     },
     "wheel_drive_type": {

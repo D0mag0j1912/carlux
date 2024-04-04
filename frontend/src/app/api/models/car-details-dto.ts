@@ -48,9 +48,19 @@ export interface CarDetailsDto {
   firstRegistrationDate: string;
 
   /**
-   * How much fuel does the car consumes
+   * Fuel consumption in the city
    */
-  fuelConsumption: number;
+  fuelConsumptionCity: number;
+
+  /**
+   * Average fuel consumption
+   */
+  fuelConsumptionCombined: number;
+
+  /**
+   * Fuel consumption on the highway
+   */
+  fuelConsumptionHighway: number;
 
   /**
    * Fuel type

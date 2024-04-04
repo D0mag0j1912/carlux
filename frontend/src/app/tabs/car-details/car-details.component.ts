@@ -70,7 +70,7 @@ export class CarDetailsComponent {
         en: 'HP',
         hr: 'KS',
     };
-    readonly FUEL_CONSUMPTION = 'l/100 km';
+    readonly FUEL_CONSUMPTION_SUFFIX = 'l/100 km';
     readonly WHEEL_DRIVE_TYPES = WheelDrivesType;
     readonly FOUR_WHEEL_DRIVE_TYPES = FourWheelDriveTypes;
     readonly PREMIUM_BRANDS = PremiumBrands;

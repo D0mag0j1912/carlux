@@ -61,7 +61,13 @@ export class CarEntity {
     Kilowatts: number;
 
     @Column()
-    FuelConsumption: number;
+    FuelConsumptionCombined: number;
+
+    @Column()
+    FuelConsumptionCity: number;
+
+    @Column()
+    FuelConsumptionHighway: number;
 
     @Column()
     CO2Emissions: number;

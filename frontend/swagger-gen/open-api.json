@@ -675,9 +675,17 @@
                         "type": "number",
                         "description": "How many kilowatts does the car have"
                     },
-                    "fuelConsumption": {
+                    "fuelConsumptionCombined": {
                         "type": "number",
-                        "description": "How much fuel does the car consumes"
+                        "description": "Average fuel consumption"
+                    },
+                    "fuelConsumptionCity": {
+                        "type": "number",
+                        "description": "Fuel consumption in the city"
+                    },
+                    "fuelConsumptionHighway": {
+                        "type": "number",
+                        "description": "Fuel consumption on the highway"
                     },
                     "co2Emissions": {
                         "type": "number",
@@ -740,7 +748,9 @@
                     "bodyKit",
                     "horsePower",
                     "kilowatts",
-                    "fuelConsumption",
+                    "fuelConsumptionCombined",
+                    "fuelConsumptionCity",
+                    "fuelConsumptionHighway",
                     "co2Emissions",
                     "numberOfCylinders",
                     "rimSize",

@@ -235,10 +235,26 @@
                             </ion-row>
                             <ion-row>
                                 <ion-col class="column-title">
-                                    {{ t('car_details.energy_consumption.fuel_consumption') }}
+                                    {{ t('car_details.energy_consumption.fuel_consumption_combined') }}
                                 </ion-col>
                                 <ion-col>
-                                    {{ carDetails.fuelConsumption + ' ' + FUEL_CONSUMPTION }}
+                                    {{ carDetails.fuelConsumptionCombined + ' ' + FUEL_CONSUMPTION_SUFFIX }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.fuel_consumption_city') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.fuelConsumptionCity + ' ' + FUEL_CONSUMPTION_SUFFIX }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.fuel_consumption_highway') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.fuelConsumptionHighway + ' ' + FUEL_CONSUMPTION_SUFFIX }}
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
