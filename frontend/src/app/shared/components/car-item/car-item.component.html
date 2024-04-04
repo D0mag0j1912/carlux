@@ -1,7 +1,7 @@
 @if (car) {
     <ion-card class="item" *transloco="let t">
         <swiper-container [pagination]="true">
-            @for (image of car.images; track car.id) {
+            @for (image of car.images; track image) {
                 <swiper-slide>
                     <img class="image" [alt]="image" [src]="image" />
                 </swiper-slide>
@@ -17,12 +17,12 @@
                 </div>
                 <div class="info">
                     {{ car.kilometersTravelled + KILOMETERS }} •
-                    {{ car.firstRegistrationDate | date: 'mediumDate' }}
+                    {{ car.firstRegistrationDate | date: DATE_FORMAT }}
                 </div>
             </div>
             <div class="seller-type">
                 <ion-chip class="chip" color="primary">{{
-                    t('recommended_cars.seller_type.' + (car.sellerType | camelToSnakeCase))
+                    t('common.seller_type.' + (car.sellerType | camelToSnakeCase))
                 }}</ion-chip>
             </div>
             <div class="location">

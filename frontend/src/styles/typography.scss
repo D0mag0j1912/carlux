@@ -1,0 +1,54 @@
+
+@mixin typography-sizes($font-size, $line-height, $font-weight) {
+    font-size: $font-size;
+    line-height: $line-height;
+    font-weight: $font-weight;
+}
+
+@mixin extra-extra-large {
+    @include typography-sizes(var(--ion-font-xxl), 42px, normal);
+}
+
+@mixin extra-extra-large-bold {
+    @include typography-sizes(var(--ion-font-xxl), 42px, bold);
+}
+
+@mixin extra-large {
+    @include typography-sizes(var(--ion-font-xl), 32px, normal);
+}
+
+@mixin extra-large-bold {
+    @include typography-sizes(var(--ion-font-xl), 32px, bold);
+}
+
+@mixin large {
+    @include typography-sizes(var(--ion-font-l), 24px, normal);
+}
+
+@mixin large-bold {
+    @include typography-sizes(var(--ion-font-l), 24px, bold);
+}
+
+@mixin medium {
+    @include typography-sizes(var(--ion-font-m), 20px, normal);
+}
+
+@mixin medium-bold {
+    @include typography-sizes(var(--ion-font-m), 20px, bold);
+}
+
+@mixin small {
+    @include typography-sizes(var(--ion-font-sm), 16px, normal);
+}
+
+@mixin small-bold {
+    @include typography-sizes(var(--ion-font-sm), 16px, bold);
+}
+
+@mixin extra-small {
+    @include typography-sizes(var(--ion-font-xs), 14px, normal);
+}
+
+@mixin extra-small-bold {
+    @include typography-sizes(var(--ion-font-xs), 14px, bold);
+}

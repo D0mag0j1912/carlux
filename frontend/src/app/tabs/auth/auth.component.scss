@@ -1,3 +1,4 @@
+@import '../../../styles/typography';
 
 .desktop-mode {
     margin-top: 40px;
@@ -22,8 +23,7 @@
 
     .google-text,
     .apple-text {
-        font-size: var(--ion-font-m);
-        line-height: 20px;
+        @include medium;
     }
 }
 
@@ -39,8 +39,7 @@
     }
 
     .text {
-        font-size: var(--ion-font-l);
-        line-height: 24px;
+        @include large;
         margin: 0 14px;
     }
 }
@@ -68,8 +67,7 @@
 
         .text {
             margin-bottom: 10px;
-            font-size: var(--ion-font-l);
-            line-height: 24px;
+            @include large;
             text-align: center;
         }
     }
@@ -83,8 +81,7 @@
         height: 100%;
 
         .text {
-            font-size: var(--ion-font-l);
-            line-height: 24px;
+            @include large;
         }
     }
 

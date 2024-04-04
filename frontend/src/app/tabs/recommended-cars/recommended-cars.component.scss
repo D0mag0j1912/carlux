@@ -1,3 +1,4 @@
+@import '../../../styles/typography';
 
 .search-cars-wrapper {
     display: flex;
@@ -15,8 +16,7 @@
     margin: 20px 10px 0 10px;
 
     .title {
-        font-size: var(--ion-font-l);
-        line-height: 24px;
+        @include large;
         margin-top: 20px;
     }
 
@@ -26,12 +26,9 @@
         row-gap: 20px;
         column-gap: 20px;
         margin: 20px 0;
-    }
-}
 
-.spinner-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+        .empty-image {
+            margin: 20px auto 0 auto;
+        }
+    }
 }

@@ -15,6 +15,11 @@
             "confirm": "Confirm",
             "save": "Save",
             "back": "Back"
+        },
+        "seller_type": {
+            "dealer": "Dealer",
+            "private": "Private",
+            "company_vehicle": "Company vehicle"
         }
     },
     "auth": {
@@ -76,13 +81,51 @@
     "recommended_cars": {
         "search_cars": "Search cars",
         "title": "Recommended cars for you",
-        "seller_type": {
-            "dealer": "Dealer",
-            "private": "Private",
-            "company_vehicle": "Company vehicle"
-        },
+        "empty_recommended_cars": "There are no recommended cars. Try narrowing your search by clicking <b>Search cars</b>.",
         "errors": {
-            "get_recommended_cars": "Unable to get recommended cars. Please try again."
+            "get_recommended_cars": "Unable to get recommended cars. Please try again.",
+            "car_details": "Unable to get car details. Please try again."
         }
+    },
+    "car_details": {
+        "title": "Car details",
+        "first_registration_date": "First registration date",
+        "number_of_previous_owners": "Number of previous owners",
+        "kilometers_travelled": "Kilometers travelled",
+        "horse_power": "Horse power",
+        "basic_information": {
+            "title": "Basic information",
+            "seller_type": "Seller type",
+            "release_date": "Release date",
+            "body_style": "Body style",
+            "wheel_drive_type": "Wheel drive type"
+        },
+        "technical_information": {
+            "title": "Technical information",
+            "power": "Power",
+            "transmission": "Transmission",
+            "number_of_cylinders": "Number of cylinders",
+            "body_kit": "Body kit",
+            "rim_size": "Rim size",
+            "engine": "Engine"
+        },
+        "energy_consumption": {
+            "title": "Energy consumption",
+            "fuel_type": "Fuel type",
+            "fuel_consumption_combined": "Fuel consumption (combined)",
+            "fuel_consumption_city": "Fuel consumption (city)",
+            "fuel_consumption_highway": "Fuel consumption (highway)",
+            "co_two_emissions": "CO2 emissions"
+        },
+        "colors": {
+            "title": "Colors",
+            "exterior_color": "Exterior color",
+            "interior_color": "Interior color"
+        }
+    },
+    "wheel_drive_type": {
+        "front_wheel": "Front wheel drive",
+        "rear_wheel": "Rear wheel drive",
+        "four_wheel": "Four wheel drive"
     }
 }

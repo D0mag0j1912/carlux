@@ -2,6 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { SellerType } from '../../../constants/seller-type';
 import { BodyStyles } from '../../../constants/body-style';
 import { WheelDrivesType } from '../../../constants/wheel-drive';
+import { Transmission } from '../../../constants/transmission';
+import { FuelType } from '../../../constants/fuel-type';
 
 export class CarDetailsDto {
     @ApiProperty({
@@ -68,11 +70,39 @@ export class CarDetailsDto {
     noOfPreviousOwners: number;
 
     @ApiProperty({
+        enum: ['Manual', 'Automatic'],
+        required: true,
+        description: 'Type of transmission',
+    })
+    transmission: Transmission;
+
+    @ApiProperty({
         type: String,
         required: true,
-        description: 'Color',
+        description: 'Engine code name',
     })
-    color: string;
+    engineCodeName: string;
+
+    @ApiProperty({
+        enum: ['Gasoline', 'Diesel'],
+        required: true,
+        description: 'Fuel type',
+    })
+    fuelType: FuelType;
+
+    @ApiProperty({
+        type: String,
+        required: true,
+        description: 'Exterior color',
+    })
+    exteriorColor: string;
+
+    @ApiProperty({
+        type: String,
+        required: true,
+        description: 'Interior color',
+    })
+    interiorColor: string;
 
     @ApiProperty({
         type: String,
@@ -98,9 +128,23 @@ export class CarDetailsDto {
     @ApiProperty({
         type: Number,
         required: true,
-        description: 'How much fuel does the car consumes',
+        description: 'Average fuel consumption',
     })
-    fuelConsumption: number;
+    fuelConsumptionCombined: number;
+
+    @ApiProperty({
+        type: Number,
+        required: true,
+        description: 'Fuel consumption in the city',
+    })
+    fuelConsumptionCity: number;
+
+    @ApiProperty({
+        type: Number,
+        required: true,
+        description: 'Fuel consumption on the highway',
+    })
+    fuelConsumptionHighway: number;
 
     @ApiProperty({
         type: Number,
@@ -145,7 +189,7 @@ export class CarDetailsDto {
     bodyStyle: BodyStyles;
 
     @ApiProperty({
-        enum: ['AllWheelDrive', 'FrontWheelDrive', 'RearWheelDrive', 'FourWheelDrive'],
+        enum: ['FrontWheel', 'RearWheel', 'FourWheel'],
         required: true,
         description: 'Wheel drive type',
     })

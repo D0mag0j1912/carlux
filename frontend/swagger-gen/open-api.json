@@ -641,9 +641,27 @@
                         "type": "number",
                         "description": "Number of previous car owners"
                     },
-                    "color": {
+                    "transmission": {
                         "type": "string",
-                        "description": "Color"
+                        "enum": ["Manual", "Automatic"],
+                        "description": "Type of transmission"
+                    },
+                    "engineCodeName": {
+                        "type": "string",
+                        "description": "Engine code name"
+                    },
+                    "fuelType": {
+                        "type": "string",
+                        "enum": ["Gasoline", "Diesel"],
+                        "description": "Fuel type"
+                    },
+                    "exteriorColor": {
+                        "type": "string",
+                        "description": "Exterior color"
+                    },
+                    "interiorColor": {
+                        "type": "string",
+                        "description": "Interior color"
                     },
                     "bodyKit": {
                         "type": "string",
@@ -657,9 +675,17 @@
                         "type": "number",
                         "description": "How many kilowatts does the car have"
                     },
-                    "fuelConsumption": {
+                    "fuelConsumptionCombined": {
                         "type": "number",
-                        "description": "How much fuel does the car consumes"
+                        "description": "Average fuel consumption"
+                    },
+                    "fuelConsumptionCity": {
+                        "type": "number",
+                        "description": "Fuel consumption in the city"
+                    },
+                    "fuelConsumptionHighway": {
+                        "type": "number",
+                        "description": "Fuel consumption on the highway"
                     },
                     "co2Emissions": {
                         "type": "number",
@@ -689,12 +715,7 @@
                     },
                     "wheelDriveType": {
                         "type": "string",
-                        "enum": [
-                            "AllWheelDrive",
-                            "FrontWheelDrive",
-                            "RearWheelDrive",
-                            "FourWheelDrive"
-                        ],
+                        "enum": ["FrontWheel", "RearWheel", "FourWheel"],
                         "description": "Wheel drive type"
                     },
                     "currencySymbol": {
@@ -719,11 +740,17 @@
                     "modelName",
                     "countryOrigin",
                     "noOfPreviousOwners",
-                    "color",
+                    "transmission",
+                    "engineCodeName",
+                    "fuelType",
+                    "exteriorColor",
+                    "interiorColor",
                     "bodyKit",
                     "horsePower",
                     "kilowatts",
-                    "fuelConsumption",
+                    "fuelConsumptionCombined",
+                    "fuelConsumptionCity",
+                    "fuelConsumptionHighway",
                     "co2Emissions",
                     "numberOfCylinders",
                     "rimSize",

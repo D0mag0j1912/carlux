@@ -8,6 +8,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { RecommendedCarsDto as RecommendedCars } from '../../../api/models/recommended-cars-dto';
 import { KILOMETERS_TRAVELLED } from '../../../constants/kilometers-travelled';
 import { CamelToSnakeCasePipe } from '../../../pipes/camel-to-snake-case.pipe';
+import { MEDIUM_DATE_FORMAT } from '../../../constants/medium-date-format';
 
 @Component({
     selector: 'car-item',
@@ -20,6 +21,7 @@ import { CamelToSnakeCasePipe } from '../../../pipes/camel-to-snake-case.pipe';
 })
 export class CarItemComponent {
     readonly KILOMETERS = KILOMETERS_TRAVELLED;
+    readonly DATE_FORMAT = MEDIUM_DATE_FORMAT;
 
     @Input({ required: true })
     car: RecommendedCars | undefined;

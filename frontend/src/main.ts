@@ -1,6 +1,6 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { IonicRouteStrategy } from '@ionic/angular';
-import { RouteReuseStrategy, provideRouter } from '@angular/router';
+import { RouteReuseStrategy, provideRouter, withComponentInputBinding } from '@angular/router';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -55,7 +55,7 @@ void bootstrapApplication(RootComponent, {
             useClass: AuthInterceptor,
             multi: true,
         },
-        provideRouter(routes),
+        provideRouter(routes, withComponentInputBinding()),
         provideHttpClient(),
         provideTransloco({
             config: {

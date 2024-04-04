@@ -1,0 +1,302 @@
+<ng-container *transloco="let t">
+    <ion-header [translucent]="true">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button
+                    defaultHref="/tabs/recommended-cars"
+                    [text]="t('common.actions.back')"
+                ></ion-back-button>
+            </ion-buttons>
+            <ion-title>{{ t('car_details.title') }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        @if (areCarDetailsNotLoading$ | async) {
+            @if (carDetails$ | async; as carDetails) {
+                <swiper-container [pagination]="true">
+                    @for (image of carDetails.images; track image) {
+                        <swiper-slide>
+                            <img class="image" [alt]="image" [src]="image" />
+                        </swiper-slide>
+                    }
+                </swiper-container>
+                <div class="car-details-container">
+                    <div class="title">
+                        {{ carDetails.brand + ' ' + carDetails.modelName }}
+                    </div>
+                    <div class="small-divider"></div>
+                    <div class="base-info">
+                        <div class="price">
+                            <ion-icon name="cash-outline" color="primary"></ion-icon>
+                            <div class="value">
+                                {{ carDetails.price + carDetails.currencySymbol }}
+                            </div>
+                        </div>
+                        <div class="location">
+                            <ion-icon name="location-outline" color="primary"></ion-icon>
+                            <div class="value">
+                                {{ carDetails.countryOrigin }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-divider"></div>
+                    <div class="meta">
+                        <div class="section">
+                            <ion-icon name="calendar-outline" color="primary"></ion-icon>
+                            <div class="meta-data-wrapper">
+                                <div class="key">
+                                    {{ t('car_details.first_registration_date') }}
+                                </div>
+                                <div class="value">
+                                    {{ carDetails.firstRegistrationDate | date: DATE_FORMAT }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <ion-icon name="people-outline" color="primary"></ion-icon>
+                            <div class="meta-data-wrapper">
+                                <div class="key">
+                                    {{ t('car_details.number_of_previous_owners') }}
+                                </div>
+                                <div class="value">
+                                    {{ carDetails.noOfPreviousOwners }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <ion-icon name="bar-chart-outline" color="primary"></ion-icon>
+                            <div class="meta-data-wrapper">
+                                <div class="key">
+                                    {{ t('car_details.kilometers_travelled') }}
+                                </div>
+                                <div class="value">
+                                    {{ carDetails.kilometersTravelled + KILOMETERS_TRAVELLED_SHORT }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <ion-icon name="timer-outline" color="primary"></ion-icon>
+                            <div class="meta-data-wrapper">
+                                <div class="key">
+                                    {{ t('car_details.horse_power') }}
+                                </div>
+                                @if (selectedLanguage(); as selectedLanguage) {
+                                    <div class="value">
+                                        {{
+                                            carDetails.horsePower +
+                                                HORSE_POWER_TRANSLATION[selectedLanguage] +
+                                                ' (' +
+                                                carDetails.kilowatts +
+                                                KILOWATTS +
+                                                ')'
+                                        }}
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section">
+                        <div class="title">
+                            <ion-icon name="car-sport-outline" color="primary"></ion-icon>
+                            {{ t('car_details.basic_information.title') }}
+                        </div>
+                        <ion-grid class="info-grid">
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.basic_information.seller_type') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ t('common.seller_type.' + (carDetails.sellerType | camelToSnakeCase)) }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.basic_information.release_date') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.releaseDate | date: DATE_FORMAT }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.basic_information.body_style') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.bodyStyle }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.basic_information.wheel_drive_type') }}
+                                </ion-col>
+                                <ion-col>
+                                    @if (
+                                        carDetails.wheelDriveType === WHEEL_DRIVE_TYPES.FRONT_WHEEL_DRIVE ||
+                                        carDetails.wheelDriveType === WHEEL_DRIVE_TYPES.REAR_WHEEL_DRIVE
+                                    ) {
+                                        {{ t('wheel_drive_type.' + (carDetails.wheelDriveType | camelToSnakeCase)) }}
+                                    } @else {
+                                        @switch (carDetails.brand) {
+                                            @case (PREMIUM_BRANDS.BMW) {
+                                                {{ FOUR_WHEEL_DRIVE_TYPES.BMW }}
+                                            }
+                                            @case (PREMIUM_BRANDS.AUDI) {
+                                                {{ FOUR_WHEEL_DRIVE_TYPES.AUDI }}
+                                            }
+                                            @case (PREMIUM_BRANDS.MERCEDES) {
+                                                {{ FOUR_WHEEL_DRIVE_TYPES.MERCEDES }}
+                                            }
+                                        }
+                                    }
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <div class="section">
+                        <div class="title">
+                            <ion-icon name="settings-outline" color="primary"></ion-icon>
+                            {{ t('car_details.technical_information.title') }}
+                        </div>
+                        <ion-grid class="info-grid">
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.power') }}
+                                </ion-col>
+                                <ion-col>
+                                    @if (selectedLanguage(); as selectedLanguage) {
+                                        {{
+                                            carDetails.horsePower +
+                                                HORSE_POWER_TRANSLATION[selectedLanguage] +
+                                                ' (' +
+                                                carDetails.kilowatts +
+                                                KILOWATTS +
+                                                ')'
+                                        }}
+                                    }
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.transmission') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.transmission }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.number_of_cylinders') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.numberOfCylinders }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.body_kit') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.bodyKit }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.rim_size') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.rimSize }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.technical_information.engine') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.engineCodeName }}
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <div class="section">
+                        <div class="title">
+                            <ion-icon name="analytics-outline" color="primary"></ion-icon>
+                            {{ t('car_details.energy_consumption.title') }}
+                        </div>
+                        <ion-grid class="info-grid">
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.fuel_type') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.fuelType }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.fuel_consumption_combined') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.fuelConsumptionCombined + ' ' + FUEL_CONSUMPTION_SUFFIX }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.fuel_consumption_city') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.fuelConsumptionCity + ' ' + FUEL_CONSUMPTION_SUFFIX }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.fuel_consumption_highway') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.fuelConsumptionHighway + ' ' + FUEL_CONSUMPTION_SUFFIX }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.co_two_emissions') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.co2Emissions }}
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <div class="section">
+                        <div class="title">
+                            <ion-icon name="color-palette-outline" color="primary"></ion-icon>
+                            {{ t('car_details.colors.title') }}
+                        </div>
+                        <ion-grid class="info-grid">
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.colors.exterior_color') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.exteriorColor }}
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.colors.interior_color') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.interiorColor }}
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                </div>
+            }
+        } @else {
+            <div class="spinner-wrapper">
+                <ion-spinner color="primary"></ion-spinner>
+            </div>
+        }
+    </ion-content>
+</ng-container>

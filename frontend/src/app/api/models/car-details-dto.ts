@@ -23,11 +23,6 @@ export interface CarDetailsDto {
   co2Emissions: number;
 
   /**
-   * Color
-   */
-  color: string;
-
-  /**
    * Country origin
    */
   countryOrigin: string;
@@ -38,14 +33,39 @@ export interface CarDetailsDto {
   currencySymbol: string;
 
   /**
+   * Engine code name
+   */
+  engineCodeName: string;
+
+  /**
+   * Exterior color
+   */
+  exteriorColor: string;
+
+  /**
    * First registration date
    */
   firstRegistrationDate: string;
 
   /**
-   * How much fuel does the car consumes
+   * Fuel consumption in the city
    */
-  fuelConsumption: number;
+  fuelConsumptionCity: number;
+
+  /**
+   * Average fuel consumption
+   */
+  fuelConsumptionCombined: number;
+
+  /**
+   * Fuel consumption on the highway
+   */
+  fuelConsumptionHighway: number;
+
+  /**
+   * Fuel type
+   */
+  fuelType: 'Gasoline' | 'Diesel';
 
   /**
    * How many horse power does the car have
@@ -61,6 +81,11 @@ export interface CarDetailsDto {
    * Images
    */
   images: Array<string>;
+
+  /**
+   * Interior color
+   */
+  interiorColor: string;
 
   /**
    * How many kilometers travelled
@@ -108,6 +133,11 @@ export interface CarDetailsDto {
   sellerType: 'Dealer' | 'Private' | 'CompanyVehicle';
 
   /**
+   * Type of transmission
+   */
+  transmission: 'Manual' | 'Automatic';
+
+  /**
    * Uploaded date
    */
   uploadedDate: string;
@@ -115,5 +145,5 @@ export interface CarDetailsDto {
   /**
    * Wheel drive type
    */
-  wheelDriveType: 'AllWheelDrive' | 'FrontWheelDrive' | 'RearWheelDrive' | 'FourWheelDrive';
+  wheelDriveType: 'FrontWheel' | 'RearWheel' | 'FourWheel';
 }

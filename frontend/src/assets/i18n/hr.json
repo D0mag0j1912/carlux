@@ -15,6 +15,11 @@
             "confirm": "Potvrdi",
             "save": "Spremi",
             "back": "Nazad"
+        },
+        "seller_type": {
+            "dealer": "Autokuća",
+            "private": "Privatno",
+            "company_vehicle": "Poslovni automobil"
         }
     },
     "auth": {
@@ -76,13 +81,51 @@
     "recommended_cars": {
         "search_cars": "Pretraži automobile",
         "title": "Preporučeni automobili za tebe",
-        "seller_type": {
-            "dealer": "Autokuća",
-            "private": "Privatno",
-            "company_vehicle": "Poslovni automobil"
-        },
+        "empty_recommended_cars": "Nismo pronašli preporučene automobile. Pokušajte suziti Vašu pretragu klikom na <b>Pretraži automobile</b>.",
         "errors": {
-            "get_recommended_cars": "Greška prilikom dohvata preporučenih vozila. Molimo pokušajte ponovno."
+            "get_recommended_cars": "Greška prilikom dohvata preporučenih automobila. Molimo pokušajte ponovno.",
+            "car_details": "Greška prilikom dohvata detalja automobila. Molimo pokušajte ponovno."
         }
+    },
+    "car_details": {
+        "title": "Detalji automobila",
+        "first_registration_date": "Prvi datum registracije",
+        "number_of_previous_owners": "Broj prethodnih vlasnika",
+        "kilometers_travelled": "Kilometara prešao",
+        "horse_power": "Konjske snage",
+        "basic_information": {
+            "title": "Osnovne informacije",
+            "seller_type": "Tip prodavača",
+            "release_date": "Godina proizvodnje",
+            "body_style": "Vrsta karoserije",
+            "wheel_drive_type": "Vrsta pogona"
+        },
+        "technical_information": {
+            "title": "Tehničke informacije",
+            "power": "Snaga",
+            "transmission": "Mijenjač",
+            "number_of_cylinders": "Broj cilindara",
+            "body_kit": "Body kit",
+            "rim_size": "Promjer felgi",
+            "engine": "Motor"
+        },
+        "energy_consumption": {
+            "title": "Potrošnja energije",
+            "fuel_type": "Tip goriva",
+            "fuel_consumption_combined": "Potrošnja goriva (kombinirano)",
+            "fuel_consumption_city": "Potrošnja goriva (grad)",
+            "fuel_consumption_highway": "Potrošnja goriva (autocesta)",
+            "co_two_emissions": "CO2 emisije"
+        },
+        "colors": {
+            "title": "Boje",
+            "exterior_color": "Vanjska boja",
+            "interior_color": "Unutarnja boja"
+        }
+    },
+    "wheel_drive_type": {
+        "front_wheel": "Prednji pogon",
+        "rear_wheel": "Zadnji pogon",
+        "four_wheel": "Pogon na sva 4 kotača"
     }
 }
