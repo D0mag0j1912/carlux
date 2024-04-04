@@ -257,6 +257,14 @@
                                     {{ carDetails.fuelConsumptionHighway + ' ' + FUEL_CONSUMPTION_SUFFIX }}
                                 </ion-col>
                             </ion-row>
+                            <ion-row>
+                                <ion-col class="column-title">
+                                    {{ t('car_details.energy_consumption.co_two_emissions') }}
+                                </ion-col>
+                                <ion-col>
+                                    {{ carDetails.co2Emissions }}
+                                </ion-col>
+                            </ion-row>
                         </ion-grid>
                     </div>
                     <div class="section">

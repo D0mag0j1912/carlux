@@ -114,7 +114,8 @@
             "fuel_type": "Fuel type",
             "fuel_consumption_combined": "Fuel consumption (combined)",
             "fuel_consumption_city": "Fuel consumption (city)",
-            "fuel_consumption_highway": "Fuel consumption (highway)"
+            "fuel_consumption_highway": "Fuel consumption (highway)",
+            "co_two_emissions": "CO2 emissions"
         },
         "colors": {
             "title": "Colors",
