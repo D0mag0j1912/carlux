@@ -1,14 +1,13 @@
 import { Controller, Put, Query } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
-    ApiCreatedResponse,
     ApiInternalServerErrorResponse,
+    ApiOkResponse,
 } from '@nestjs/swagger';
 import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { GeneralResponseDto } from '../../models/general-response.dto';
 import { FavoritesListService } from './favorites-list.service';
-import { FavoriteListDto } from './models/favorite-list.dto';
 import { FavoriteListQueryDto } from './models/favorite-list-query.dto';
 
 const FAVOURITES_LIST_FEATURE_KEY = 'favorites-list';
@@ -17,10 +16,10 @@ const FAVOURITES_LIST_FEATURE_KEY = 'favorites-list';
 export class FavouritesListController {
     constructor(private _favouritesListService: FavoritesListService) {}
 
-    @ApiCreatedResponse({
-        status: 201,
+    @ApiOkResponse({
+        status: 200,
         description: RESPONSE_MESSAGE.CREATED,
-        type: FavoriteListDto,
+        type: GeneralResponseDto,
     })
     @ApiInternalServerErrorResponse({
         status: 500,

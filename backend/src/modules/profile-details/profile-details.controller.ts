@@ -2,7 +2,6 @@ import { Body, Controller, Get, Param, ParseIntPipe, Put } from '@nestjs/common'
 import {
     ApiBadRequestResponse,
     ApiBody,
-    ApiCreatedResponse,
     ApiInternalServerErrorResponse,
     ApiOkResponse,
     ApiTags,
@@ -35,8 +34,8 @@ export class ProfileDetailsController {
         return this._profileDetailsService.getProfileDetails(userId);
     }
 
-    @ApiCreatedResponse({
-        status: 201,
+    @ApiOkResponse({
+        status: 200,
         description: RESPONSE_MESSAGE.CREATED,
         type: UserDto,
     })
