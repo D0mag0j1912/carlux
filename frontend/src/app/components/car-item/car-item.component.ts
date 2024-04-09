@@ -5,10 +5,10 @@ import { locationSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { DatePipe } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
-import { RecommendedCarsDto as RecommendedCars } from '../../../api/models/recommended-cars-dto';
-import { KILOMETERS_TRAVELLED } from '../../../constants/kilometers-travelled';
-import { CamelToSnakeCasePipe } from '../../../pipes/camel-to-snake-case.pipe';
-import { MEDIUM_DATE_FORMAT } from '../../../constants/medium-date-format';
+import { RecommendedCarsDto as RecommendedCars } from '../../api/models/recommended-cars-dto';
+import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
+import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
+import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
 
 @Component({
     selector: 'car-item',
