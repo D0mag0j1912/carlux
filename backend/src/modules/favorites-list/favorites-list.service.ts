@@ -32,6 +32,7 @@ export class FavoritesListService {
         selectedCar = {
             ...selectedCar,
             IsFavorite: true,
+            AddedToFavoritesDate: new Date().toISOString(),
         };
         await this._carsRepository.save(selectedCar);
         return { success: true };

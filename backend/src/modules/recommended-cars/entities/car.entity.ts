@@ -96,6 +96,9 @@ export class CarEntity {
     @Column()
     IsFavorite: boolean;
 
+    @Column({ nullable: true })
+    AddedToFavoritesDate: string;
+
     @OneToOne(() => BodyStyleEntity, (bodyStyle) => bodyStyle.Id)
     @JoinColumn({ name: 'BodyStyleId' })
     bodyStyle: BodyStyleEntity;
