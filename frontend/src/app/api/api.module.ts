@@ -8,6 +8,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { PreferencesService } from './services/preferences.service';
 import { UserProfileDetailsService } from './services/user-profile-details.service';
 import { CarListService } from './services/car-list.service';
+import { FavoriteListService } from './services/favorite-list.service';
 
 /**
  * Module that provides all services and configuration.
@@ -21,6 +22,7 @@ import { CarListService } from './services/car-list.service';
     PreferencesService,
     UserProfileDetailsService,
     CarListService,
+    FavoriteListService,
     ApiConfiguration
   ],
 })
