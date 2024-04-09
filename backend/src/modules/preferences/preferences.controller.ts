@@ -22,7 +22,7 @@ export class PreferencesController {
 
     @ApiCreatedResponse({
         status: 201,
-        description: RESPONSE_MESSAGE.CREATED,
+        description: RESPONSE_MESSAGE.SUCCESS,
         type: LanguageChangeDto,
     })
     @ApiInternalServerErrorResponse({

@@ -36,7 +36,7 @@ export class ProfileDetailsController {
 
     @ApiOkResponse({
         status: 200,
-        description: RESPONSE_MESSAGE.CREATED,
+        description: RESPONSE_MESSAGE.SUCCESS,
         type: UserDto,
     })
     @ApiInternalServerErrorResponse({
