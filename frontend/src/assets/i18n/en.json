@@ -66,7 +66,8 @@
     "tabs": {
         "auth": "Sign in",
         "car_list": "Cars",
-        "settings": "Settings"
+        "settings": "Settings",
+        "favorite_list": "Favorites"
     },
     "languages": {
         "croatian": "Croatian",
