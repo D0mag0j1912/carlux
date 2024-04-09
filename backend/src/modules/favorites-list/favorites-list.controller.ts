@@ -8,7 +8,7 @@ import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { GeneralResponseDto } from '../../models/general-response.dto';
 import { FavoritesListService } from './favorites-list.service';
-import { FavoriteListQueryDto } from './models/favorite-list-query.dto';
+import { FavoriteListUpdateQueryDto } from './models/favorite-list-query.dto';
 
 const FAVOURITES_LIST_FEATURE_KEY = 'favorites-list';
 
@@ -31,8 +31,8 @@ export class FavouritesListController {
     })
     @Put()
     async addToFavoritesList(
-        @Query() favoriteListQuery: FavoriteListQueryDto,
+        @Query() favoriteListUpdateQuery: FavoriteListUpdateQueryDto,
     ): Promise<GeneralResponseDto> {
-        return this._favouritesListService.saveToFavoriteList(favoriteListQuery.carId);
+        return this._favouritesListService.saveToFavoriteList(favoriteListUpdateQuery);
     }
 }
