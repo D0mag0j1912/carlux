@@ -85,7 +85,7 @@ export const routes: Routes = [
             {
                 path: 'car/:id',
                 loadComponent: () =>
-                    import('./tabs/car-details/car-details.component').then(
+                    import('./components/car-details/car-details.component').then(
                         (component) => component.CarDetailsComponent,
                     ),
                 providers: [CARS_PROVIDERS],
