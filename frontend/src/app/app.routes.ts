@@ -116,6 +116,14 @@ export const routes: Routes = [
                 canMatch: [canMatchAuth],
             },
             {
+                path: 'favorites',
+                loadComponent: () =>
+                    import('./tabs/favorites/favorites.component').then(
+                        (component) => component.FavoritesComponent,
+                    ),
+                canMatch: [canMatchAuth],
+            },
+            {
                 path: '',
                 redirectTo: '/tabs/auth',
                 pathMatch: 'full',
