@@ -413,9 +413,9 @@
                 "tags": ["Car list"]
             }
         },
-        "/api/favorites-list": {
+        "/api/favourites-list": {
             "put": {
-                "operationId": "FavouritesListController_addToFavoritesList",
+                "operationId": "FavouritesListController_addToFavouritesList",
                 "parameters": [
                     {
                         "name": "carId",
@@ -445,10 +445,10 @@
                         "description": "Internal server error"
                     }
                 },
-                "tags": ["Favorite list"]
+                "tags": ["Favourite list"]
             },
             "get": {
-                "operationId": "FavouritesListController_getFavoriteList",
+                "operationId": "FavouritesListController_getFavouriteList",
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -458,7 +458,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/FavoriteListDto"
+                                        "$ref": "#/components/schemas/FavouriteListDto"
                                     }
                                 }
                             }
@@ -471,7 +471,7 @@
                         "description": "Internal server error"
                     }
                 },
-                "tags": ["Favorite list"]
+                "tags": ["Favourite list"]
             }
         }
     },
@@ -832,7 +832,7 @@
                 },
                 "required": ["success"]
             },
-            "FavoriteListDto": {
+            "FavouriteListDto": {
                 "type": "object",
                 "properties": {
                     "id": {

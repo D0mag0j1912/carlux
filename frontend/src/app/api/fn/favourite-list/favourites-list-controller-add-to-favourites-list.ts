@@ -8,7 +8,7 @@ import { RequestBuilder } from '../../request-builder';
 
 import { GeneralResponseDto } from '../../models/general-response-dto';
 
-export interface FavouritesListControllerAddToFavoritesList$Params {
+export interface FavouritesListControllerAddToFavouritesList$Params {
 
 /**
  * Car ID
@@ -16,8 +16,8 @@ export interface FavouritesListControllerAddToFavoritesList$Params {
   carId: number;
 }
 
-export function favouritesListControllerAddToFavoritesList(http: HttpClient, rootUrl: string, params: FavouritesListControllerAddToFavoritesList$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
-  const rb = new RequestBuilder(rootUrl, favouritesListControllerAddToFavoritesList.PATH, 'put');
+export function favouritesListControllerAddToFavouritesList(http: HttpClient, rootUrl: string, params: FavouritesListControllerAddToFavouritesList$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
+  const rb = new RequestBuilder(rootUrl, favouritesListControllerAddToFavouritesList.PATH, 'put');
   if (params) {
     rb.query('carId', params.carId, {});
   }
@@ -32,4 +32,4 @@ export function favouritesListControllerAddToFavoritesList(http: HttpClient, roo
   );
 }
 
-favouritesListControllerAddToFavoritesList.PATH = '/api/favorites-list';
+favouritesListControllerAddToFavouritesList.PATH = '/api/favourites-list';

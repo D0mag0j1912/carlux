@@ -116,10 +116,10 @@ export const routes: Routes = [
                 canMatch: [canMatchAuth],
             },
             {
-                path: 'favorites',
+                path: 'favourites',
                 loadComponent: () =>
-                    import('./tabs/favorites/favorites.component').then(
-                        (component) => component.FavoritesComponent,
+                    import('./tabs/favourites/favourites.component').then(
+                        (component) => component.FavouritesComponent,
                     ),
                 canMatch: [canMatchAuth],
             },
