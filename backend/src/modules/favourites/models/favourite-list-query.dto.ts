@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
-export class FavoriteListUpdateQueryDto {
+export class FavouriteListUpdateQueryDto {
     @ApiProperty({
         type: Number,
         required: true,

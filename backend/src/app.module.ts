@@ -13,14 +13,14 @@ import { BodyStyleEntity } from './modules/recommended-cars/entities/body-style.
 import { RecommendedCarsModule } from './modules/recommended-cars/recommended-cars.module';
 import { ImageEntity } from './modules/recommended-cars/entities/image.entity';
 import { CurrencyEntity } from './modules/recommended-cars/entities/currency.entity';
-import { FavoritesListModule } from './modules/favorites-list/favorites-list.module';
+import { FavouritesListModule } from './modules/favourites/favourites-list.module';
 
 const IMPORTS = [
     AuthModule,
     PreferencesModule,
     ProfileDetailsModule,
     RecommendedCarsModule,
-    FavoritesListModule,
+    FavouritesListModule,
 ];
 
 @Module({

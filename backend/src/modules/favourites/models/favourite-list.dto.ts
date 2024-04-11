@@ -3,7 +3,7 @@ import { Transmission } from '../../../constants/transmission';
 import { FuelType } from '../../../constants/fuel-type';
 import { SellerType } from '../../../constants/seller-type';
 
-export class FavoriteListDto {
+export class FavouriteListDto {
     @ApiProperty({
         type: Number,
         required: true,

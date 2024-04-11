@@ -94,10 +94,10 @@ export class CarEntity {
     CurrencyCode: string;
 
     @Column()
-    IsFavorite: boolean;
+    IsFavourite: boolean;
 
     @Column({ nullable: true })
-    AddedToFavoritesDate: string;
+    AddedToFavouritesDate: string;
 
     @OneToOne(() => BodyStyleEntity, (bodyStyle) => bodyStyle.Id)
     @JoinColumn({ name: 'BodyStyleId' })

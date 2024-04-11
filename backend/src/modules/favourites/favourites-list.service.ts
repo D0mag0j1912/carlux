@@ -4,50 +4,50 @@ import { Repository } from 'typeorm';
 import { CarEntity } from '../recommended-cars/entities/car.entity';
 import { ImageEntity } from '../recommended-cars/entities/image.entity';
 import { GeneralResponseDto } from '../../models/general-response.dto';
-import { FavoriteListUpdateQueryDto } from './models/favorite-list-query.dto';
-import { FavoriteListDto } from './models/favorite-list.dto';
+import { FavouriteListUpdateQueryDto } from './models/favourite-list-query.dto';
+import { FavouriteListDto } from './models/favourite-list.dto';
 
 @Injectable()
-export class FavoritesListService {
+export class FavouritesListService {
     constructor(
         @InjectRepository(CarEntity) private _carsRepository: Repository<CarEntity>,
         @InjectRepository(ImageEntity) private _imageRepository: Repository<ImageEntity>,
     ) {}
 
-    async saveToFavoriteList(
-        favoriteListUpdateQuery: FavoriteListUpdateQueryDto,
+    async saveToFavouriteList(
+        favouriteListUpdateQuery: FavouriteListUpdateQueryDto,
     ): Promise<GeneralResponseDto> {
         try {
-            return this._saveToFavoriteList(favoriteListUpdateQuery);
+            return this._saveToFavouriteList(favouriteListUpdateQuery);
         } catch (error: unknown) {
             throw new InternalServerErrorException();
         }
     }
 
-    private async _saveToFavoriteList(
-        favoriteListUpdateQuery: FavoriteListUpdateQueryDto,
+    private async _saveToFavouriteList(
+        favouriteListUpdateQuery: FavouriteListUpdateQueryDto,
     ): Promise<GeneralResponseDto> {
         let selectedCar = await this._carsRepository.findOne({
-            where: { Id: favoriteListUpdateQuery.carId },
+            where: { Id: favouriteListUpdateQuery.carId },
         });
         selectedCar = {
             ...selectedCar,
-            IsFavorite: true,
-            AddedToFavoritesDate: new Date().toISOString(),
+            IsFavourite: true,
+            AddedToFavouritesDate: new Date().toISOString(),
         };
         await this._carsRepository.save(selectedCar);
         return { success: true };
     }
 
-    async getFavoriteList(): Promise<FavoriteListDto[]> {
+    async getFavouriteList(): Promise<FavouriteListDto[]> {
         try {
-            return this._getFavoriteList();
+            return this._getFavouriteList();
         } catch (error: unknown) {
             throw new InternalServerErrorException();
         }
     }
 
-    private async _getFavoriteList(): Promise<FavoriteListDto[]> {
+    private async _getFavouriteList(): Promise<FavouriteListDto[]> {
         const carEntityQuery = await this._carsRepository
             .createQueryBuilder('car')
             .select([
@@ -69,11 +69,11 @@ export class FavoritesListService {
                 'car.CountryOrigin',
             ])
             .leftJoin('car.currency', 'currency')
-            .where('car.IsFavorite = :IsFavorite', { IsFavorite: true })
-            .orderBy('car.AddedToFavoritesDate', 'DESC')
+            .where('car.IsFavourite = :IsFavourite', { IsFavourite: true })
+            .orderBy('car.AddedToFavouritesDate', 'DESC')
             .getMany();
         const imageEntities = await this._imageRepository.createQueryBuilder('image').getMany();
-        const favoriteList: FavoriteListDto[] = carEntityQuery.map((carEntity: CarEntity) => ({
+        const favouriteList: FavouriteListDto[] = carEntityQuery.map((carEntity: CarEntity) => ({
             id: carEntity.Id,
             images: imageEntities
                 .filter((imageEntity: ImageEntity) => imageEntity.CarId === carEntity.Id)
@@ -93,6 +93,6 @@ export class FavoritesListService {
             sellerType: carEntity.SellerType,
             countryOrigin: carEntity.CountryOrigin,
         }));
-        return favoriteList;
+        return favouriteList;
     }
 }

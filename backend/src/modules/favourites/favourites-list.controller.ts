@@ -8,16 +8,16 @@ import {
 import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { GeneralResponseDto } from '../../models/general-response.dto';
-import { FavoritesListService } from './favorites-list.service';
-import { FavoriteListUpdateQueryDto } from './models/favorite-list-query.dto';
-import { FavoriteListDto } from './models/favorite-list.dto';
+import { FavouritesListService } from './favourites-list.service';
+import { FavouriteListUpdateQueryDto } from './models/favourite-list-query.dto';
+import { FavouriteListDto } from './models/favourite-list.dto';
 
-const FAVOURITES_LIST_FEATURE_KEY = 'favorites-list';
+const FAVOURITES_LIST_FEATURE_KEY = 'favourites-list';
 
-@ApiTags('Favorite list')
+@ApiTags('Favourite list')
 @Controller(`${BASE_URL}${FAVOURITES_LIST_FEATURE_KEY}`)
 export class FavouritesListController {
-    constructor(private _favouritesListService: FavoritesListService) {}
+    constructor(private _favouritesListService: FavouritesListService) {}
 
     @ApiOkResponse({
         status: 200,
@@ -33,15 +33,15 @@ export class FavouritesListController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Put()
-    async addToFavoritesList(
-        @Query() favoriteListUpdateQuery: FavoriteListUpdateQueryDto,
+    async addToFavouritesList(
+        @Query() favouriteListUpdateQuery: FavouriteListUpdateQueryDto,
     ): Promise<GeneralResponseDto> {
-        return this._favouritesListService.saveToFavoriteList(favoriteListUpdateQuery);
+        return this._favouritesListService.saveToFavouriteList(favouriteListUpdateQuery);
     }
 
     @ApiOkResponse({
         status: 200,
-        type: FavoriteListDto,
+        type: FavouriteListDto,
         isArray: true,
     })
     @ApiInternalServerErrorResponse({
@@ -53,7 +53,7 @@ export class FavouritesListController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Get()
-    async getFavoriteList(): Promise<FavoriteListDto[]> {
-        return this._favouritesListService.getFavoriteList();
+    async getFavouriteList(): Promise<FavouriteListDto[]> {
+        return this._favouritesListService.getFavouriteList();
     }
 }
