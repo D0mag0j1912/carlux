@@ -33,7 +33,7 @@ export class FavouritesController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Put()
-    async addToFavouritesList(
+    async addToFavourites(
         @Query() favouriteListUpdateQuery: FavouritesUpdateQueryDto,
     ): Promise<GeneralResponseDto> {
         return this._favouritesService.saveToFavourites(favouriteListUpdateQuery);
@@ -53,7 +53,7 @@ export class FavouritesController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Get()
-    async getFavouriteList(): Promise<FavouritesDto[]> {
+    async getFavourites(): Promise<FavouritesDto[]> {
         return this._favouritesService.getFavourites();
     }
 }
