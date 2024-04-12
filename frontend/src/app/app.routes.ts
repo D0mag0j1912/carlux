@@ -17,6 +17,8 @@ import * as SettingsEffects from './store/settings/effects/settings.effects';
 import * as PreferencesEffects from './store/preferences/effects/preferences.effects';
 import * as CarsReducers from './store/cars/reducers/cars.reducers';
 import * as CarsEffects from './store/cars/effects/cars.effects';
+import * as FavouritesReducers from './store/favourites/reducers/favourites.reducers';
+import * as FavouritesEffects from './store/favourites/effects/favourites.effects';
 
 const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
     const authenticationFacadeService = inject(AuthenticationFacadeService);
@@ -58,6 +60,11 @@ const SETTINGS_PROVIDERS = importProvidersFrom([
 const CARS_PROVIDERS = importProvidersFrom([
     StoreModule.forFeature(FeatureKeys.CARS, CarsReducers.carsReducers),
     EffectsModule.forFeature(CarsEffects),
+]);
+
+const FAVOURITES_PROVIDERS = importProvidersFrom([
+    StoreModule.forFeature(FeatureKeys.FAVOURITES, FavouritesReducers.reducers),
+    EffectsModule.forFeature(FavouritesEffects),
 ]);
 
 export const routes: Routes = [
@@ -121,6 +128,7 @@ export const routes: Routes = [
                     import('./tabs/favourites/favourites.component').then(
                         (component) => component.FavouritesComponent,
                     ),
+                providers: [FAVOURITES_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
