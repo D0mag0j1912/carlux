@@ -4,28 +4,28 @@ import { Repository } from 'typeorm';
 import { CarEntity } from '../recommended-cars/entities/car.entity';
 import { ImageEntity } from '../recommended-cars/entities/image.entity';
 import { GeneralResponseDto } from '../../models/general-response.dto';
-import { FavouriteListUpdateQueryDto } from './models/favourite-list-query.dto';
-import { FavouriteListDto } from './models/favourite-list.dto';
+import { FavouritesUpdateQueryDto } from './models/favourites-query.dto';
+import { FavouritesDto } from './models/favourites.dto';
 
 @Injectable()
-export class FavouritesListService {
+export class FavouritesService {
     constructor(
         @InjectRepository(CarEntity) private _carsRepository: Repository<CarEntity>,
         @InjectRepository(ImageEntity) private _imageRepository: Repository<ImageEntity>,
     ) {}
 
-    async saveToFavouriteList(
-        favouriteListUpdateQuery: FavouriteListUpdateQueryDto,
+    async saveToFavourites(
+        favouriteListUpdateQuery: FavouritesUpdateQueryDto,
     ): Promise<GeneralResponseDto> {
         try {
-            return this._saveToFavouriteList(favouriteListUpdateQuery);
+            return this._saveToFavourites(favouriteListUpdateQuery);
         } catch (error: unknown) {
             throw new InternalServerErrorException();
         }
     }
 
-    private async _saveToFavouriteList(
-        favouriteListUpdateQuery: FavouriteListUpdateQueryDto,
+    private async _saveToFavourites(
+        favouriteListUpdateQuery: FavouritesUpdateQueryDto,
     ): Promise<GeneralResponseDto> {
         let selectedCar = await this._carsRepository.findOne({
             where: { Id: favouriteListUpdateQuery.carId },
@@ -39,15 +39,15 @@ export class FavouritesListService {
         return { success: true };
     }
 
-    async getFavouriteList(): Promise<FavouriteListDto[]> {
+    async getFavourites(): Promise<FavouritesDto[]> {
         try {
-            return this._getFavouriteList();
+            return this._getFavourites();
         } catch (error: unknown) {
             throw new InternalServerErrorException();
         }
     }
 
-    private async _getFavouriteList(): Promise<FavouriteListDto[]> {
+    private async _getFavourites(): Promise<FavouritesDto[]> {
         const carEntityQuery = await this._carsRepository
             .createQueryBuilder('car')
             .select([
@@ -73,7 +73,7 @@ export class FavouritesListService {
             .orderBy('car.AddedToFavouritesDate', 'DESC')
             .getMany();
         const imageEntities = await this._imageRepository.createQueryBuilder('image').getMany();
-        const favouriteList: FavouriteListDto[] = carEntityQuery.map((carEntity: CarEntity) => ({
+        const favourites: FavouritesDto[] = carEntityQuery.map((carEntity: CarEntity) => ({
             id: carEntity.Id,
             images: imageEntities
                 .filter((imageEntity: ImageEntity) => imageEntity.CarId === carEntity.Id)
@@ -93,6 +93,6 @@ export class FavouritesListService {
             sellerType: carEntity.SellerType,
             countryOrigin: carEntity.CountryOrigin,
         }));
-        return favouriteList;
+        return favourites;
     }
 }
