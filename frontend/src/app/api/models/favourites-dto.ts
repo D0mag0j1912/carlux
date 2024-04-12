@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface FavouriteListDto {
+export interface FavouritesDto {
 
   /**
    * Car brand
