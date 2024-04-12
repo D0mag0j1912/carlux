@@ -8,7 +8,7 @@ import { ImageEntity } from './entities/image.entity';
 import { CarDetailsDto } from './models/car-details.dto';
 
 @Injectable()
-export class CarsService {
+export class RecommendedCarsService {
     constructor(
         @InjectRepository(CarEntity) private _carsRepository: Repository<CarEntity>,
         @InjectRepository(ImageEntity) private _imageRepository: Repository<ImageEntity>,

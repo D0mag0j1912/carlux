@@ -93,6 +93,12 @@ export class CarEntity {
     @Column()
     CurrencyCode: string;
 
+    @Column()
+    IsFavourite: boolean;
+
+    @Column({ nullable: true })
+    AddedToFavouritesDate: string;
+
     @OneToOne(() => BodyStyleEntity, (bodyStyle) => bodyStyle.Id)
     @JoinColumn({ name: 'BodyStyleId' })
     bodyStyle: BodyStyleEntity;

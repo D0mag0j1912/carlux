@@ -85,7 +85,7 @@ export const routes: Routes = [
             {
                 path: 'car/:id',
                 loadComponent: () =>
-                    import('./tabs/car-details/car-details.component').then(
+                    import('./components/car-details/car-details.component').then(
                         (component) => component.CarDetailsComponent,
                     ),
                 providers: [CARS_PROVIDERS],
@@ -113,6 +113,14 @@ export const routes: Routes = [
                     import(
                         './tabs/settings/components/profile-details/profile-details.component'
                     ).then((component) => component.ProfileDetailsComponent),
+                canMatch: [canMatchAuth],
+            },
+            {
+                path: 'favourites',
+                loadComponent: () =>
+                    import('./tabs/favourites/favourites.component').then(
+                        (component) => component.FavouritesComponent,
+                    ),
                 canMatch: [canMatchAuth],
             },
             {

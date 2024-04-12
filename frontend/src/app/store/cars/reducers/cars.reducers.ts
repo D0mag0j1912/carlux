@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CarsActions from '../actions/cars.actions';
 import { RecommendedCarsState } from '../../../tabs/recommended-cars/models/recommended-cars-state';
-import { CarDetailsState } from '../../../tabs/car-details/models/car-details-state';
+import { CarDetailsState } from '../../../components/car-details/models/car-details-state';
 
 export interface CarsState {
     recommendedCars: RecommendedCarsState;

@@ -2,6 +2,8 @@
 /* eslint-disable */
 export { CarDetailsDto } from './models/car-details-dto';
 export { EmailDto } from './models/email-dto';
+export { FavouritesDto } from './models/favourites-dto';
+export { GeneralResponseDto } from './models/general-response-dto';
 export { LanguageChangeDto } from './models/language-change-dto';
 export { LoginResponseDto } from './models/login-response-dto';
 export { PaginationDto } from './models/pagination-dto';

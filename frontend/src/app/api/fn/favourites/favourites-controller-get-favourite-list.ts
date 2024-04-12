@@ -6,16 +6,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { CarDetailsDto } from '../../models/car-details-dto';
+import { FavouritesDto } from '../../models/favourites-dto';
 
-export interface CarsControllerGetCarDetails$Params {
-  carId: number;
+export interface FavouritesControllerGetFavouriteList$Params {
 }
 
-export function carsControllerGetCarDetails(http: HttpClient, rootUrl: string, params: CarsControllerGetCarDetails$Params, context?: HttpContext): Observable<StrictHttpResponse<CarDetailsDto>> {
-  const rb = new RequestBuilder(rootUrl, carsControllerGetCarDetails.PATH, 'get');
+export function favouritesControllerGetFavouriteList(http: HttpClient, rootUrl: string, params?: FavouritesControllerGetFavouriteList$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<FavouritesDto>>> {
+  const rb = new RequestBuilder(rootUrl, favouritesControllerGetFavouriteList.PATH, 'get');
   if (params) {
-    rb.path('carId', params.carId, {});
   }
 
   return http.request(
@@ -23,9 +21,9 @@ export function carsControllerGetCarDetails(http: HttpClient, rootUrl: string, p
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<CarDetailsDto>;
+      return r as StrictHttpResponse<Array<FavouritesDto>>;
     })
   );
 }
 
-carsControllerGetCarDetails.PATH = '/api/cars/{carId}';
+favouritesControllerGetFavouriteList.PATH = '/api/favourites';

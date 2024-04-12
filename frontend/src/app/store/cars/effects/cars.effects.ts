@@ -26,7 +26,7 @@ export const getRecommendedCars$ = createEffect(
             }),
             switchMap((action) =>
                 carsService
-                    .carsControllerGetRecommendedCars({
+                    .recommendedCarsControllerGetRecommendedCars({
                         page: action.page,
                         perPage: action.perPage,
                     })
@@ -63,7 +63,7 @@ export const getCarDetails$ = createEffect(
             ofType(CarsActions.getCarDetails),
             tap((_) => carsFacadeService.setCarDetailsLoading(true)),
             switchMap((action) =>
-                carsService.carsControllerGetCarDetails({ carId: action.carId }).pipe(
+                carsService.recommendedCarsControllerGetCarDetails({ carId: action.carId }).pipe(
                     map((response: CarDetails) =>
                         CarsActions.setCarDetails({ carDetails: response }),
                     ),

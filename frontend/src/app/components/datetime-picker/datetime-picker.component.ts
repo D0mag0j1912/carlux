@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { TranslocoModule } from '@ngneat/transloco';
 import { IonContent, IonDatetime, IonButtons, IonButton } from '@ionic/angular/standalone';
-import { DialogRoles } from '../../../constants/dialog-roles';
+import { DialogRoles } from '../../constants/dialog-roles';
 
 @Component({
     standalone: true,

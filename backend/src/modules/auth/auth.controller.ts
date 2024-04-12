@@ -26,7 +26,7 @@ export class AuthController {
     //--------------------- SEND SMS ------------------
     @ApiCreatedResponse({
         status: 201,
-        description: RESPONSE_MESSAGE.CREATED,
+        description: RESPONSE_MESSAGE.SUCCESS,
         type: StatusResponseDto,
     })
     @ApiInternalServerErrorResponse({
@@ -49,7 +49,7 @@ export class AuthController {
     //--------------- PHONE VERIFICATION ------------------
     @ApiCreatedResponse({
         status: 201,
-        description: RESPONSE_MESSAGE.CREATED,
+        description: RESPONSE_MESSAGE.SUCCESS,
         type: StatusResponseDto,
     })
     @ApiInternalServerErrorResponse({
@@ -72,7 +72,7 @@ export class AuthController {
     //---------------- REGISTRATION ------------------
     @ApiCreatedResponse({
         status: 201,
-        description: RESPONSE_MESSAGE.CREATED,
+        description: RESPONSE_MESSAGE.SUCCESS,
         type: LoginResponseDto,
     })
     @ApiInternalServerErrorResponse({
@@ -112,7 +112,7 @@ export class AuthController {
     //---------------- SIGN IN ------------------
     @ApiCreatedResponse({
         status: 201,
-        description: RESPONSE_MESSAGE.CREATED,
+        description: RESPONSE_MESSAGE.SUCCESS,
         type: LoginResponseDto,
     })
     @ApiInternalServerErrorResponse({

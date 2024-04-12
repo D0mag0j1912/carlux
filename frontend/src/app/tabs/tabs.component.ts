@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
-import { carSportSharp, settingsSharp, logInSharp } from 'ionicons/icons';
+import { carSportSharp, settingsSharp, logInSharp, bookmarkSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs } from '@ionic/angular/standalone';
 import { filter, take } from 'rxjs';
@@ -22,7 +22,7 @@ export class TabsComponent implements OnInit {
     isAuthenticated$ = this._authenticationFacadeService.selectUserData();
 
     constructor() {
-        addIcons({ carSportSharp, settingsSharp, logInSharp });
+        addIcons({ carSportSharp, settingsSharp, logInSharp, bookmarkSharp });
     }
 
     ngOnInit(): void {

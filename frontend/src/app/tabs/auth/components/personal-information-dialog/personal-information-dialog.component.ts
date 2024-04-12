@@ -17,7 +17,7 @@ import {
     IonTitle,
     IonToolbar,
 } from '@ionic/angular/standalone';
-import { DateTimePickerComponent } from '../../../../shared/components/datetime-picker/datetime-picker.component';
+import { DateTimePickerComponent } from '../../../../components/datetime-picker/datetime-picker.component';
 import { DialogRoles } from '../../../../constants/dialog-roles';
 import { AuthenticationFacadeService } from '../../../../store/auth/facades/auth-facade.service';
 import { UserDto as User } from '../../../../api/models/user-dto';

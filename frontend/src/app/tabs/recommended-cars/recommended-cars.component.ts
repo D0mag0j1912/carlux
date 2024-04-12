@@ -17,7 +17,7 @@ import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
 import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
-import { CarItemComponent } from '../../shared/components/car-item/car-item.component';
+import { CarItemComponent } from '../../components/car-item/car-item.component';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
 import { DomSanitizerInputType, DomSanitizerPipe } from '../../pipes/dom-sanitizer.pipe';
 
