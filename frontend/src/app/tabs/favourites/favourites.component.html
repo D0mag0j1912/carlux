@@ -1,3 +1,9 @@
-@for (favourite of favourites(); track favourite.id) {
-    <favourite-car-item></favourite-car-item>
+@if (areFavouritesNotLoading()) {
+    @for (favourite of favourites(); track favourite.id) {
+        <favourite-car-item [favouriteCarItem]="favourite"></favourite-car-item>
+    }
+} @else {
+    <div class="spinner-wrapper">
+        <ion-spinner color="primary"></ion-spinner>
+    </div>
 }

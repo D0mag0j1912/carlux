@@ -1,4 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { FavouritesDto as Favourite } from '../../../api/models/favourites-dto';
 
 @Component({
     standalone: true,
@@ -8,4 +9,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, Component } from '@ang
     changeDetection: ChangeDetectionStrategy.OnPush,
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class FavouriteCarItemComponent {}
+export class FavouriteCarItemComponent {
+    favouriteCarItem = input.required<Favourite>();
+}

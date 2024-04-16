@@ -1,5 +1,6 @@
-import { createReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { FavouritesDto as Favourites } from '../../../api/models/favourites-dto';
+import * as FavouritesActions from '../actions/favourites.actions';
 
 export interface FavouritesState {
     areFavouritesLoading: boolean;
@@ -11,4 +12,14 @@ export const initialFavouritesState: FavouritesState = {
     favourites: [],
 };
 
-export const reducers = createReducer(initialFavouritesState);
+export const reducers = createReducer(
+    initialFavouritesState,
+    on(FavouritesActions.setLoading, (state: FavouritesState, { areFavouritesLoading }) => ({
+        ...state,
+        areFavouritesLoading,
+    })),
+    on(FavouritesActions.setFavourites, (state: FavouritesState, { favourites }) => ({
+        ...state,
+        favourites: [...favourites],
+    })),
+);

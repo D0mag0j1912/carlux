@@ -24,6 +24,10 @@ export class FavouritesFacadeService {
         return this._selectFavourites;
     }
 
+    setLoading(areFavouritesLoading: boolean): void {
+        this._store.dispatch(FavouritesActions.setLoading({ areFavouritesLoading }));
+    }
+
     getFavourites(): void {
         this._store.dispatch(FavouritesActions.getFavourites());
     }
