@@ -1,6 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, Signal, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { AppState } from '../../..';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import * as FavouritesActions from '../actions/favourites.actions';
@@ -11,18 +10,18 @@ import { FavouritesDto as Favourites } from '../../../api/models/favourites-dto'
 export class FavouritesFacadeService {
     private _store = inject(Store<AppState[FeatureKeys.FAVOURITES]>);
 
-    private _selectAreFavouritesNotLoading$ = this._store.select(
-        FavouritesSelectors.selectAreNotFavouritesLoading,
+    private _selectAreFavouritesNotLoading = this._store.selectSignal(
+        FavouritesSelectors.selectAreFavouritesNotLoading,
     );
 
-    private _selectFavourites$ = this._store.select(FavouritesSelectors.selectFavourites);
+    private _selectFavourites = this._store.selectSignal(FavouritesSelectors.selectFavourites);
 
-    selectAreFavouritesNotLoading(): Observable<boolean> {
-        return this._selectAreFavouritesNotLoading$;
+    selectAreFavouritesNotLoading(): Signal<boolean> {
+        return this._selectAreFavouritesNotLoading;
     }
 
-    selectFavourites(): Observable<Favourites[]> {
-        return this._selectFavourites$;
+    selectFavourites(): Signal<Favourites[]> {
+        return this._selectFavourites;
     }
 
     getFavourites(): void {

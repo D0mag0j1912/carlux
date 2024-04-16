@@ -4,7 +4,7 @@ import { FeatureKeys } from '../../../constants/feature-keys';
 
 export const selectFavouritesState = createFeatureSelector<FavouritesState>(FeatureKeys.FAVOURITES);
 
-export const selectAreNotFavouritesLoading = createSelector(
+export const selectAreFavouritesNotLoading = createSelector(
     selectFavouritesState,
     (state: FavouritesState) => !state.areFavouritesLoading,
 );

@@ -18,7 +18,7 @@ import * as PreferencesEffects from './store/preferences/effects/preferences.eff
 import * as CarsReducers from './store/cars/reducers/cars.reducers';
 import * as CarsEffects from './store/cars/effects/cars.effects';
 import * as FavouritesReducers from './store/favourites/reducers/favourites.reducers';
-import * as FavouritesEffects from './store/favourites/effects/favourites.effects';
+import { FavouritesEffects } from './store/favourites/effects/favourites.effects';
 
 const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
     const authenticationFacadeService = inject(AuthenticationFacadeService);

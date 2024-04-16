@@ -128,5 +128,10 @@
         "front_wheel": "Front wheel drive",
         "rear_wheel": "Rear wheel drive",
         "four_wheel": "Four wheel drive"
+    },
+    "favourites": {
+        "errors": {
+            "get_favourites": "Unable to load favourites. Please try again."
+        }
     }
 }

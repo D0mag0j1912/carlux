@@ -128,5 +128,10 @@
         "front_wheel": "Prednji pogon",
         "rear_wheel": "Zadnji pogon",
         "four_wheel": "Pogon na sva 4 kotača"
+    },
+    "favourites": {
+        "errors": {
+            "get_favourites": "Greška prilikom dohvaćanja favorita. Molimo pokušajte ponovno."
+        }
     }
 }

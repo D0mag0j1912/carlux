@@ -4,5 +4,5 @@ export enum FeatureKeys {
     PREFERENCES = 'preferences',
     SETTINGS = 'settings',
     CARS = 'cars',
-    FAVOURITES = 'favorites',
+    FAVOURITES = 'favourites',
 }

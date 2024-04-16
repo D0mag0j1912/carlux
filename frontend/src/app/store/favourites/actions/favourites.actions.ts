@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { FavouriteListDto as Favourites } from '../../../api/models/favourite-list-dto';
+import { FavouritesDto as Favourites } from '../../../api/models/favourites-dto';
 
 export const getFavourites = createAction('[Favourites] Get Favourites');
 
