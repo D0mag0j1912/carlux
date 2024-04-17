@@ -29,6 +29,13 @@ export class FavouritesDto {
     @ApiProperty({
         type: String,
         required: true,
+        description: 'Currency symbol',
+    })
+    currencySymbol: string;
+
+    @ApiProperty({
+        type: String,
+        required: true,
         description: 'Car brand',
     })
     brand: string;

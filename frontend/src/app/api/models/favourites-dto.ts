@@ -18,6 +18,11 @@ export interface FavouritesDto {
   countryOrigin: string;
 
   /**
+   * Currency symbol
+   */
+  currencySymbol: string;
+
+  /**
    * First registration date
    */
   firstRegistrationDate: string;

@@ -79,6 +79,7 @@ export class FavouritesService {
                 .filter((imageEntity: ImageEntity) => imageEntity.CarId === carEntity.Id)
                 .map((imageEntity: ImageEntity) => imageEntity.Image),
             price: carEntity.Price,
+            currencySymbol: carEntity.currency.Symbol,
             brand: carEntity.Brand,
             modelName: carEntity.ModelName,
             kilometersTravelled: carEntity.KilometersTravelled,

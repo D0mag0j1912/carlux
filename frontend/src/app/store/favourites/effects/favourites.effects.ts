@@ -20,7 +20,7 @@ export class FavouritesEffects {
             ofType(FavouritesActions.getFavourites),
             tap(() => this._favouritesFacadeService.setLoading(true)),
             switchMap((_) =>
-                this._favouritesService.favouritesControllerGetFavouriteList().pipe(
+                this._favouritesService.favouritesControllerGetFavourites().pipe(
                     catchError((_) => {
                         this._sharedFacadeService.showToastMessage(
                             'favourites.errors.get_favourites',
