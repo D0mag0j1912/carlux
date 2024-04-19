@@ -1,0 +1,87 @@
+@if (favouriteCarItem()) {
+    <ion-card *transloco="let t" class="card">
+        <swiper-container [pagination]="true">
+            @for (image of favouriteCarItem().images; track image) {
+                <swiper-slide>
+                    <img class="image" [alt]="image" [src]="image" />
+                </swiper-slide>
+            }
+        </swiper-container>
+        <ion-card-content class="content">
+            <div class="price">
+                {{ favouriteCarItem().currencySymbol + favouriteCarItem().price }}
+            </div>
+            <div class="name">
+                {{ favouriteCarItem().brand + ' ' + favouriteCarItem().modelName }}
+            </div>
+            <div class="info">
+                <div class="left">
+                    <div class="kilometers-travelled">
+                        <ion-icon name="bar-chart-outline" color="primary"></ion-icon>
+                        {{ favouriteCarItem().kilometersTravelled + KILOMETERS_TRAVELLED() }}
+                    </div>
+                    @if (selectedLanguage(); as selectedLanguage) {
+                        <div class="power">
+                            <ion-icon name="timer-outline" color="primary"></ion-icon>
+                            {{
+                                favouriteCarItem().horsePower +
+                                    HORSE_POWER_TRANSLATION()[selectedLanguage] +
+                                    ' (' +
+                                    favouriteCarItem().kilowatts +
+                                    KILOWATTS() +
+                                    ')'
+                            }}
+                        </div>
+                    }
+                    <div class="number-of-owners">
+                        <ion-icon name="people-outline" color="primary"></ion-icon>
+                        {{
+                            favouriteCarItem().noOfPreviousOwners +
+                                ' ' +
+                                (favouriteCarItem().noOfPreviousOwners === 1
+                                    ? t('favourites.owner_singular')
+                                    : t('favourites.owner_plural'))
+                        }}
+                    </div>
+                    <div class="fuel-consumption">
+                        <ion-icon name="bar-chart-outline" color="primary"></ion-icon>
+                        {{
+                            favouriteCarItem().fuelConsumptionCombined +
+                                FUEL_CONSUMPTION_SUFFIX() +
+                                ' ' +
+                                t('common.combined')
+                        }}
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="first-registration-date">
+                        <ion-icon name="calendar-outline" color="primary"></ion-icon>
+                        {{ favouriteCarItem().firstRegistrationDate | date: DATE_FORMAT() }}
+                    </div>
+                    <div class="transmission">
+                        <ion-icon name="cog-outline" color="primary"></ion-icon>
+                        {{ t('common.transmission.' + (favouriteCarItem().transmission | lowercase)) }}
+                    </div>
+                    <div class="fuel-type">
+                        <ion-icon name="color-fill-outline" color="primary"></ion-icon>
+                        {{ t('common.fuel_type.' + (favouriteCarItem().fuelType | lowercase)) }}
+                    </div>
+                    <div class="co2-emissions">
+                        <ion-icon name="bar-chart-outline" color="primary"></ion-icon>
+                        {{ favouriteCarItem().co2Emissions + CO2_EMISSIONS_SUFFIX() + ' ' + t('common.combined') }}
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="footer">
+                <ion-chip class="chip" color="primary">{{
+                    t('common.seller_type.' + (favouriteCarItem().sellerType | camelToSnakeCase))
+                }}</ion-chip>
+                <div class="location">
+                    <ion-icon name="location-sharp" color="primary" class="icon"></ion-icon>
+                    {{ favouriteCarItem().countryOrigin }}
+                </div>
+            </div>
+        </ion-card-content>
+    </ion-card>
+}

@@ -20,7 +20,16 @@
             "dealer": "Autokuća",
             "private": "Privatno",
             "company_vehicle": "Poslovni automobil"
-        }
+        },
+        "transmission": {
+            "automatic": "Automatski mijenjač",
+            "manual": "Ručni mijenjač"
+        },
+        "fuel_type": {
+            "gasoline": "Benzin",
+            "diesel": "Dizel"
+        },
+        "combined": "(kombinirano)"
     },
     "auth": {
         "continue_with_google": "Nastavi s Google",
@@ -132,6 +141,8 @@
     "favourites": {
         "errors": {
             "get_favourites": "Greška prilikom dohvaćanja favorita. Molimo pokušajte ponovno."
-        }
+        },
+        "owner_singular": "vlasnik",
+        "owner_plural": "vlasnika"
     }
 }

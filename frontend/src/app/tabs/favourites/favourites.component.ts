@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { IonSpinner } from '@ionic/angular/standalone';
+import { IonContent, IonSpinner } from '@ionic/angular/standalone';
 import { FavouritesFacadeService } from '../../store/favourites/facades/favourites-facade.service';
 import { FavouriteCarItemComponent } from './favourite-car-item/favourite-car-item.component';
 
 @Component({
     standalone: true,
-    imports: [FavouriteCarItemComponent, IonSpinner],
+    imports: [FavouriteCarItemComponent, IonSpinner, IonContent],
     templateUrl: './favourites.component.html',
     styleUrl: './favourites.component.scss',
 })

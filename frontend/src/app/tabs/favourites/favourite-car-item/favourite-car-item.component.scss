@@ -1,0 +1,72 @@
+@import '../../../../styles/typography';
+
+:host {
+    .card {
+        margin: 10px 15px;
+    }
+
+    .image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .content {
+        padding: 10px 0;
+
+        .price {
+            @include large-bold;
+            margin-bottom: 5px;
+            padding: 0 10px;
+        }
+
+        .name {
+            @include medium;
+            padding: 0 10px;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 0 10px;
+
+            .left,
+            .right {
+                display: flex;
+                flex-direction: column;
+                row-gap: 8px;
+
+                & > * {
+                    display: flex;
+                    align-items: center;
+                    column-gap: 10px;
+                    @include medium;
+                }
+            }
+        }
+    }
+
+    .divider {
+        width: 100%;
+        height: 1px;
+        background-color: var(--ion-color-light);
+        margin: 20px 0;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+
+        .chip {
+            @include small;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+            @include small;
+        }
+    }
+}

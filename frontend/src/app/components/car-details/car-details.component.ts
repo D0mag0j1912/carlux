@@ -11,7 +11,7 @@ import {
     IonTitle,
     IonToolbar,
 } from '@ionic/angular/standalone';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe, LowerCasePipe } from '@angular/common';
 import { addIcons } from 'ionicons';
 import {
     calendarOutline,
@@ -33,6 +33,8 @@ import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
 import { WheelDrivesType } from '../../constants/wheel-drive-types';
 import { FourWheelDriveTypes } from '../../constants/four-wheel-drive-type';
 import { PremiumBrands } from '../../constants/premium-brands';
+import { HORSE_POWER_TRANSLATION } from '../../helpers/horse-power-translation';
+import { FUEL_CONSUMPTION_SUFFIX } from '../../helpers/fuel-consumption-suffix';
 
 @Component({
     standalone: true,
@@ -50,6 +52,7 @@ import { PremiumBrands } from '../../constants/premium-brands';
         AsyncPipe,
         DatePipe,
         CamelToSnakeCasePipe,
+        LowerCasePipe,
     ],
     selector: 'car-details',
     templateUrl: './car-details.component.html',
@@ -67,11 +70,8 @@ export class CarDetailsComponent {
     readonly DATE_FORMAT = MEDIUM_DATE_FORMAT;
     readonly KILOWATTS = 'kW';
     readonly KILOMETERS_TRAVELLED_SHORT = KILOMETERS_TRAVELLED;
-    readonly HORSE_POWER_TRANSLATION: { [key: string]: string } = {
-        en: 'HP',
-        hr: 'KS',
-    };
-    readonly FUEL_CONSUMPTION_SUFFIX = 'l/100 km';
+    readonly HORSE_POWER_TRANSLATION = HORSE_POWER_TRANSLATION;
+    readonly FUEL_CONSUMPTION_SUFFIX = FUEL_CONSUMPTION_SUFFIX;
     readonly WHEEL_DRIVE_TYPES = WheelDrivesType;
     readonly FOUR_WHEEL_DRIVE_TYPES = FourWheelDriveTypes;
     readonly PREMIUM_BRANDS = PremiumBrands;

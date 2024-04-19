@@ -1,9 +1,13 @@
-@if (areFavouritesNotLoading()) {
-    @for (favourite of favourites(); track favourite.id) {
-        <favourite-car-item [favouriteCarItem]="favourite"></favourite-car-item>
+<ion-content>
+    @if (areFavouritesNotLoading()) {
+        <div class="favourites-wrapper">
+            @for (favourite of favourites(); track favourite.id) {
+                <favourite-car-item [favouriteCarItem]="favourite"></favourite-car-item>
+            }
+        </div>
+    } @else {
+        <div class="spinner-wrapper">
+            <ion-spinner color="primary"></ion-spinner>
+        </div>
     }
-} @else {
-    <div class="spinner-wrapper">
-        <ion-spinner color="primary"></ion-spinner>
-    </div>
-}
+</ion-content>
