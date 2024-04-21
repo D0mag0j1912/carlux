@@ -415,7 +415,7 @@
         },
         "/api/favourites": {
             "put": {
-                "operationId": "FavouritesController_addToFavouritesList",
+                "operationId": "FavouritesController_addToFavourites",
                 "parameters": [
                     {
                         "name": "carId",
@@ -448,7 +448,7 @@
                 "tags": ["Favourites"]
             },
             "get": {
-                "operationId": "FavouritesController_getFavouriteList",
+                "operationId": "FavouritesController_getFavourites",
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -850,6 +850,10 @@
                         "type": "number",
                         "description": "Car suggested price"
                     },
+                    "currencySymbol": {
+                        "type": "string",
+                        "description": "Currency symbol"
+                    },
                     "brand": {
                         "type": "string",
                         "description": "Car brand"
@@ -910,6 +914,7 @@
                     "id",
                     "images",
                     "price",
+                    "currencySymbol",
                     "brand",
                     "modelName",
                     "kilometersTravelled",

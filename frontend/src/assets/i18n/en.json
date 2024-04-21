@@ -20,7 +20,16 @@
             "dealer": "Dealer",
             "private": "Private",
             "company_vehicle": "Company vehicle"
-        }
+        },
+        "transmission": {
+            "automatic": "Automatic",
+            "manual": "Manual"
+        },
+        "fuel_type": {
+            "gasoline": "Gasoline",
+            "diesel": "Diesel"
+        },
+        "combined": "(comb)"
     },
     "auth": {
         "continue_with_google": "Continue with Google",
@@ -128,5 +137,12 @@
         "front_wheel": "Front wheel drive",
         "rear_wheel": "Rear wheel drive",
         "four_wheel": "Four wheel drive"
+    },
+    "favourites": {
+        "errors": {
+            "get_favourites": "Unable to load favourites. Please try again."
+        },
+        "owner_singular": "owner",
+        "owner_plural": "owners"
     }
 }

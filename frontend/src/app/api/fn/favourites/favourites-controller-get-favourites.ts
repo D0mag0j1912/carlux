@@ -8,11 +8,11 @@ import { RequestBuilder } from '../../request-builder';
 
 import { FavouritesDto } from '../../models/favourites-dto';
 
-export interface FavouritesControllerGetFavouriteList$Params {
+export interface FavouritesControllerGetFavourites$Params {
 }
 
-export function favouritesControllerGetFavouriteList(http: HttpClient, rootUrl: string, params?: FavouritesControllerGetFavouriteList$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<FavouritesDto>>> {
-  const rb = new RequestBuilder(rootUrl, favouritesControllerGetFavouriteList.PATH, 'get');
+export function favouritesControllerGetFavourites(http: HttpClient, rootUrl: string, params?: FavouritesControllerGetFavourites$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<FavouritesDto>>> {
+  const rb = new RequestBuilder(rootUrl, favouritesControllerGetFavourites.PATH, 'get');
   if (params) {
   }
 
@@ -26,4 +26,4 @@ export function favouritesControllerGetFavouriteList(http: HttpClient, rootUrl: 
   );
 }
 
-favouritesControllerGetFavouriteList.PATH = '/api/favourites';
+favouritesControllerGetFavourites.PATH = '/api/favourites';
