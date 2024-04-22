@@ -20,6 +20,7 @@ import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service'
 import { CarItemComponent } from '../../components/car-item/car-item.component';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
 import { DomSanitizerInputType, DomSanitizerPipe } from '../../pipes/dom-sanitizer.pipe';
+import { EmitHandleFavourites } from '../../models/emit-handle-favourites';
 
 @Component({
     standalone: true,
@@ -75,4 +76,6 @@ export class RecommendedCarsComponent implements OnInit {
                 }, this.INFINITE_EVENT_COMPLETE_DURATION);
             });
     }
+
+    handleFavourites(data: EmitHandleFavourites): void {}
 }

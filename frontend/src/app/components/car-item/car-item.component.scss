@@ -13,11 +13,17 @@
     .title {
         @include medium-bold;
         margin-bottom: 5px;
-        @include single-line(175px);
+        @include single-line(140px);
     }
 
     &-content {
         padding: 10px;
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
         .price {
             @include medium;

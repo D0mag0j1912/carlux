@@ -13,7 +13,11 @@
                 </ion-text>
                 <div class="content">
                     @for (car of recommendedCars; track car.id) {
-                        <car-item [car]="car" [routerLink]="['/', 'tabs', 'car', car.id]"></car-item>
+                        <car-item
+                            [car]="car"
+                            [routerLink]="['/', 'tabs', 'car', car.id]"
+                            (emitHandleFavourites)="handleFavourites($event)"
+                        ></car-item>
                     } @empty {
                         <img src="../../../assets/images/common/icons8-search-50.png" class="empty-image" />
                         <div
