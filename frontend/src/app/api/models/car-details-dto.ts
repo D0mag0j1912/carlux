@@ -88,6 +88,11 @@ export interface CarDetailsDto {
   interiorColor: string;
 
   /**
+   * Is car added to the favourites list
+   */
+  isFavourite: boolean;
+
+  /**
    * How many kilometers travelled
    */
   kilometersTravelled: number;

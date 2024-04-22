@@ -415,15 +415,22 @@
         },
         "/api/favourites": {
             "put": {
-                "operationId": "FavouritesController_addToFavourites",
+                "operationId": "FavouritesController_saveToFavourites",
                 "parameters": [
                     {
                         "name": "carId",
                         "required": true,
-                        "in": "query",
-                        "description": "Car ID",
+                        "in": "path",
                         "schema": {
                             "type": "number"
+                        }
+                    },
+                    {
+                        "name": "method",
+                        "required": true,
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -647,6 +654,10 @@
                         "items": {
                             "type": "string"
                         }
+                    },
+                    "isFavourite": {
+                        "type": "boolean",
+                        "description": "Is car added to the favourites list"
                     }
                 },
                 "required": [
@@ -660,7 +671,8 @@
                     "noOfPreviousOwners",
                     "sellerType",
                     "currencySymbol",
-                    "images"
+                    "images",
+                    "isFavourite"
                 ]
             },
             "CarDetailsDto": {
@@ -789,6 +801,10 @@
                         "items": {
                             "type": "string"
                         }
+                    },
+                    "isFavourite": {
+                        "type": "boolean",
+                        "description": "Is car added to the favourites list"
                     }
                 },
                 "required": [
@@ -820,7 +836,8 @@
                     "bodyStyle",
                     "wheelDriveType",
                     "currencySymbol",
-                    "images"
+                    "images",
+                    "isFavourite"
                 ]
             },
             "GeneralResponseDto": {

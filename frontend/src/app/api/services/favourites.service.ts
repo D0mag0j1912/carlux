@@ -9,10 +9,10 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { favouritesControllerAddToFavourites } from '../fn/favourites/favourites-controller-add-to-favourites';
-import { FavouritesControllerAddToFavourites$Params } from '../fn/favourites/favourites-controller-add-to-favourites';
 import { favouritesControllerGetFavourites } from '../fn/favourites/favourites-controller-get-favourites';
 import { FavouritesControllerGetFavourites$Params } from '../fn/favourites/favourites-controller-get-favourites';
+import { favouritesControllerSaveToFavourites } from '../fn/favourites/favourites-controller-save-to-favourites';
+import { FavouritesControllerSaveToFavourites$Params } from '../fn/favourites/favourites-controller-save-to-favourites';
 import { FavouritesDto } from '../models/favourites-dto';
 import { GeneralResponseDto } from '../models/general-response-dto';
 
@@ -47,27 +47,27 @@ export class FavouritesService extends BaseService {
     );
   }
 
-  /** Path part for operation `favouritesControllerAddToFavourites()` */
-  static readonly FavouritesControllerAddToFavouritesPath = '/api/favourites';
+  /** Path part for operation `favouritesControllerSaveToFavourites()` */
+  static readonly FavouritesControllerSaveToFavouritesPath = '/api/favourites';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `favouritesControllerAddToFavourites()` instead.
+   * To access only the response body, use `favouritesControllerSaveToFavourites()` instead.
    *
    * This method doesn't expect any request body.
    */
-  favouritesControllerAddToFavourites$Response(params: FavouritesControllerAddToFavourites$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
-    return favouritesControllerAddToFavourites(this.http, this.rootUrl, params, context);
+  favouritesControllerSaveToFavourites$Response(params: FavouritesControllerSaveToFavourites$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
+    return favouritesControllerSaveToFavourites(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `favouritesControllerAddToFavourites$Response()` instead.
+   * To access the full response (for headers, for example), `favouritesControllerSaveToFavourites$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  favouritesControllerAddToFavourites(params: FavouritesControllerAddToFavourites$Params, context?: HttpContext): Observable<GeneralResponseDto> {
-    return this.favouritesControllerAddToFavourites$Response(params, context).pipe(
+  favouritesControllerSaveToFavourites(params: FavouritesControllerSaveToFavourites$Params, context?: HttpContext): Observable<GeneralResponseDto> {
+    return this.favouritesControllerSaveToFavourites$Response(params, context).pipe(
       map((r: StrictHttpResponse<GeneralResponseDto>): GeneralResponseDto => r.body)
     );
   }
