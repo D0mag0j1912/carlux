@@ -4,8 +4,8 @@ import { Repository } from 'typeorm';
 import { CarEntity } from '../recommended-cars/entities/car.entity';
 import { ImageEntity } from '../recommended-cars/entities/image.entity';
 import { GeneralResponseDto } from '../../models/general-response.dto';
-import { FavouritesUpdateQueryDto } from './models/favourites-query.dto';
 import { FavouritesDto } from './models/favourites.dto';
+import { HandleFavourites } from './constants/handle-favourites';
 
 @Injectable()
 export class FavouritesService {
@@ -14,26 +14,26 @@ export class FavouritesService {
         @InjectRepository(ImageEntity) private _imageRepository: Repository<ImageEntity>,
     ) {}
 
-    async saveToFavourites(
-        favouriteListUpdateQuery: FavouritesUpdateQueryDto,
-    ): Promise<GeneralResponseDto> {
+    async saveToFavourites(carId: number, method: HandleFavourites): Promise<GeneralResponseDto> {
         try {
-            return this._saveToFavourites(favouriteListUpdateQuery);
+            return this._saveToFavourites(carId, method);
         } catch (error: unknown) {
             throw new InternalServerErrorException();
         }
     }
 
     private async _saveToFavourites(
-        favouriteListUpdateQuery: FavouritesUpdateQueryDto,
+        carId: number,
+        method: HandleFavourites,
     ): Promise<GeneralResponseDto> {
         let selectedCar = await this._carsRepository.findOne({
-            where: { Id: favouriteListUpdateQuery.carId },
+            where: { Id: carId },
         });
         selectedCar = {
             ...selectedCar,
-            IsFavourite: true,
-            AddedToFavouritesDate: new Date().toISOString(),
+            IsFavourite: method === HandleFavourites.ADD,
+            AddedToFavouritesDate:
+                method === HandleFavourites.ADD ? new Date().toISOString() : null,
         };
         await this._carsRepository.save(selectedCar);
         return { success: true };

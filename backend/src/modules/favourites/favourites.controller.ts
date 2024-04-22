@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Put, Query } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiInternalServerErrorResponse,
@@ -9,8 +9,8 @@ import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { GeneralResponseDto } from '../../models/general-response.dto';
 import { FavouritesService } from './favourites.service';
-import { FavouritesUpdateQueryDto } from './models/favourites-query.dto';
 import { FavouritesDto } from './models/favourites.dto';
+import { HandleFavourites } from './constants/handle-favourites';
 
 const FAVOURITES_LIST_FEATURE_KEY = 'favourites';
 
@@ -33,10 +33,11 @@ export class FavouritesController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Put()
-    async addToFavourites(
-        @Query() favouriteListUpdateQuery: FavouritesUpdateQueryDto,
+    async saveToFavourites(
+        @Param('carId', ParseIntPipe) carId: number,
+        @Query('method') method: HandleFavourites,
     ): Promise<GeneralResponseDto> {
-        return this._favouritesService.saveToFavourites(favouriteListUpdateQuery);
+        return this._favouritesService.saveToFavourites(carId, method);
     }
 
     @ApiOkResponse({
