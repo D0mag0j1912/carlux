@@ -42,6 +42,7 @@ export class RecommendedCarsService {
                 'car.NoOfPreviousOwners',
                 'car.SellerType',
                 'car.UploadedDate',
+                'car.IsFavourite',
                 'currency.Symbol',
             ])
             .leftJoin('car.currency', 'currency')
@@ -65,6 +66,7 @@ export class RecommendedCarsService {
                 images: imageEntities
                     .filter((imageEntity: ImageEntity) => imageEntity.CarId === carEntity.Id)
                     .map((imageEntity: ImageEntity) => imageEntity.Image),
+                isFavourite: carEntity.IsFavourite,
             }),
         );
         const response: PaginationDto<RecommendedCarsDto> = {
@@ -113,6 +115,7 @@ export class RecommendedCarsService {
                 'car.RimSize',
                 'car.SellerType',
                 'car.UploadedDate',
+                'car.IsFavourite',
                 'bs.Name',
                 'wdt.Type',
                 'cur.Symbol',
@@ -160,6 +163,7 @@ export class RecommendedCarsService {
             wheelDriveType: car.wheelDriveType.Type,
             currencySymbol: car.currency.Symbol,
             images: imageEntities.map((imageEntity: ImageEntity) => imageEntity.Image),
+            isFavourite: car.IsFavourite,
         };
         return carDto;
     }

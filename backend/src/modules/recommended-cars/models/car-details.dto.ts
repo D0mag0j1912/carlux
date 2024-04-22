@@ -209,4 +209,11 @@ export class CarDetailsDto {
         description: 'Images',
     })
     images: string[];
+
+    @ApiProperty({
+        type: Boolean,
+        required: true,
+        description: 'Is car added to the favourites list',
+    })
+    isFavourite: boolean;
 }
