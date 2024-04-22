@@ -9,8 +9,8 @@ import { RecommendedCarsDto as RecommendedCars } from '../../api/models/recommen
 import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
 import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
 import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
-import { EmitHandleFavourites } from '../../models/emit-handle-favourites';
-import { HandleFavourites } from '../../constants/handle-favourites';
+import { EmitHandleFavouritesActions } from '../../models/emit-handle-favourites-actions';
+import { HandleFavouritesActions } from '../../constants/handle-favourites-actions';
 
 @Component({
     selector: 'car-item',
@@ -24,17 +24,17 @@ import { HandleFavourites } from '../../constants/handle-favourites';
 export class CarItemComponent {
     readonly KILOMETERS = KILOMETERS_TRAVELLED;
     readonly DATE_FORMAT = MEDIUM_DATE_FORMAT;
-    readonly HANDLE_FAVOURITES = HandleFavourites;
+    readonly HANDLE_FAVOURITES_ACTIONS = HandleFavouritesActions;
 
     car = input.required<RecommendedCars>();
 
-    emitHandleFavourites = output<EmitHandleFavourites>();
+    emitHandleFavourites = output<EmitHandleFavouritesActions>();
 
     constructor() {
         addIcons({ locationSharp, addCircleOutline, addCircleSharp });
     }
 
-    handleFavourites(carId: number, method: HandleFavourites): void {
+    handleFavouritesActions(carId: number, method: HandleFavouritesActions): void {
         this.emitHandleFavourites.emit({
             carId,
             method,

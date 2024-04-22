@@ -16,13 +16,13 @@
                     <ion-icon
                         name="add-circle-sharp"
                         color="primary"
-                        (click)="handleFavourites(car().id, HANDLE_FAVOURITES.REMOVE_FROM_FAVOURITES)"
+                        (click)="handleFavouritesActions(car().id, HANDLE_FAVOURITES_ACTIONS.REMOVE_FROM_FAVOURITES)"
                     ></ion-icon>
                 } @else {
                     <ion-icon
                         name="add-circle-outline"
                         color="primary"
-                        (click)="handleFavourites(car().id, HANDLE_FAVOURITES.ADD_TO_FAVOURITES)"
+                        (click)="handleFavouritesActions(car().id, HANDLE_FAVOURITES_ACTIONS.ADD_TO_FAVOURITES)"
                     ></ion-icon>
                 }
             </div>
