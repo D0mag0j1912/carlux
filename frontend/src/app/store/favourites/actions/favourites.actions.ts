@@ -18,3 +18,7 @@ export const handleFavouritesActions = createAction(
     '[Favourites] Handle Favourites Actions',
     props<{ carId: number; method: HandleFavouritesActions }>(),
 );
+
+export const handleFavouritesActionsSuccess = createAction(
+    '[Favourites] Handle Favourites Actions Success',
+);

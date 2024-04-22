@@ -14,15 +14,18 @@ export class FavouritesService {
         @InjectRepository(ImageEntity) private _imageRepository: Repository<ImageEntity>,
     ) {}
 
-    async saveToFavourites(carId: number, method: HandleFavourites): Promise<GeneralResponseDto> {
+    async handleFavouritesActions(
+        carId: number,
+        method: HandleFavourites,
+    ): Promise<GeneralResponseDto> {
         try {
-            return this._saveToFavourites(carId, method);
+            return this._handleFavouritesActions(carId, method);
         } catch (error: unknown) {
             throw new InternalServerErrorException();
         }
     }
 
-    private async _saveToFavourites(
+    private async _handleFavouritesActions(
         carId: number,
         method: HandleFavourites,
     ): Promise<GeneralResponseDto> {

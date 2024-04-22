@@ -415,7 +415,7 @@
         },
         "/api/favourites": {
             "put": {
-                "operationId": "FavouritesController_saveToFavourites",
+                "operationId": "FavouritesController_handleFavouritesActions",
                 "parameters": [
                     {
                         "name": "carId",

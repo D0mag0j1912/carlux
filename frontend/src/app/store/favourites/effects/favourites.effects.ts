@@ -7,6 +7,7 @@ import { FavouritesService } from '../../../api/services/favourites.service';
 import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { FavouritesDto as Favourites } from '../../../api/models/favourites-dto';
 import { FavouritesFacadeService } from '../facades/favourites-facade.service';
+import { HandleFavouritesActions } from '../../../constants/handle-favourites-actions';
 
 @Injectable()
 export class FavouritesEffects {
@@ -34,6 +35,34 @@ export class FavouritesEffects {
                     ),
                     finalize(() => this._favouritesFacadeService.setLoading(false)),
                 ),
+            ),
+        ),
+    );
+
+    handleFavouritesActions$ = createEffect(() =>
+        this._actions$.pipe(
+            ofType(FavouritesActions.handleFavouritesActions),
+            switchMap((action) =>
+                this._favouritesService
+                    .favouritesControllerHandleFavouritesActions({
+                        carId: action.carId,
+                        method: action.method,
+                    })
+                    .pipe(
+                        catchError((_) => {
+                            this._sharedFacadeService.showToastMessage(
+                                `favourites.errors.${
+                                    action.method === HandleFavouritesActions.ADD_TO_FAVOURITES
+                                        ? 'add_to_favourites'
+                                        : 'remove_from_favourites'
+                                }`,
+                                POPUP_DURATIONS.ERROR,
+                                'warning',
+                            );
+                            return EMPTY;
+                        }),
+                        map((_) => FavouritesActions.handleFavouritesActionsSuccess()),
+                    ),
             ),
         ),
     );

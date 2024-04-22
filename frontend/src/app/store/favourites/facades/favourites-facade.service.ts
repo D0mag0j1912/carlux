@@ -5,6 +5,7 @@ import { FeatureKeys } from '../../../constants/feature-keys';
 import * as FavouritesActions from '../actions/favourites.actions';
 import * as FavouritesSelectors from '../selectors/favourites.selectors';
 import { FavouritesDto as Favourites } from '../../../api/models/favourites-dto';
+import { HandleFavouritesActions } from '../../../constants/handle-favourites-actions';
 
 @Injectable({ providedIn: 'root' })
 export class FavouritesFacadeService {
@@ -16,6 +17,7 @@ export class FavouritesFacadeService {
 
     private _selectFavourites = this._store.selectSignal(FavouritesSelectors.selectFavourites);
 
+    //------------- Selectors BEGIN ------------------------
     selectAreFavouritesNotLoading(): Signal<boolean> {
         return this._selectAreFavouritesNotLoading;
     }
@@ -23,7 +25,9 @@ export class FavouritesFacadeService {
     selectFavourites(): Signal<Favourites[]> {
         return this._selectFavourites;
     }
+    //------------- Selectors END -------------------------
 
+    //------------- Actions BEGIN ------------------------
     setLoading(areFavouritesLoading: boolean): void {
         this._store.dispatch(FavouritesActions.setLoading({ areFavouritesLoading }));
     }
@@ -31,4 +35,9 @@ export class FavouritesFacadeService {
     getFavourites(): void {
         this._store.dispatch(FavouritesActions.getFavourites());
     }
+
+    handleFavouritesActions(carId: number, method: HandleFavouritesActions): void {
+        this._store.dispatch(FavouritesActions.handleFavouritesActions({ carId, method }));
+    }
+    //------------- Actions END -------------------------
 }

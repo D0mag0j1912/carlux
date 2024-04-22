@@ -33,11 +33,11 @@ export class FavouritesController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @Put()
-    async saveToFavourites(
+    async handleFavouritesActions(
         @Param('carId', ParseIntPipe) carId: number,
         @Query('method') method: HandleFavourites,
     ): Promise<GeneralResponseDto> {
-        return this._favouritesService.saveToFavourites(carId, method);
+        return this._favouritesService.handleFavouritesActions(carId, method);
     }
 
     @ApiOkResponse({

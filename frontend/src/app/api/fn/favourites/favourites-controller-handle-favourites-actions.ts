@@ -8,13 +8,13 @@ import { RequestBuilder } from '../../request-builder';
 
 import { GeneralResponseDto } from '../../models/general-response-dto';
 
-export interface FavouritesControllerSaveToFavourites$Params {
+export interface FavouritesControllerHandleFavouritesActions$Params {
   carId: number;
   method: string;
 }
 
-export function favouritesControllerSaveToFavourites(http: HttpClient, rootUrl: string, params: FavouritesControllerSaveToFavourites$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
-  const rb = new RequestBuilder(rootUrl, favouritesControllerSaveToFavourites.PATH, 'put');
+export function favouritesControllerHandleFavouritesActions(http: HttpClient, rootUrl: string, params: FavouritesControllerHandleFavouritesActions$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
+  const rb = new RequestBuilder(rootUrl, favouritesControllerHandleFavouritesActions.PATH, 'put');
   if (params) {
     rb.path('carId', params.carId, {});
     rb.query('method', params.method, {});
@@ -30,4 +30,4 @@ export function favouritesControllerSaveToFavourites(http: HttpClient, rootUrl: 
   );
 }
 
-favouritesControllerSaveToFavourites.PATH = '/api/favourites';
+favouritesControllerHandleFavouritesActions.PATH = '/api/favourites';

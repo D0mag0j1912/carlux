@@ -140,7 +140,9 @@
     },
     "favourites": {
         "errors": {
-            "get_favourites": "Unable to load favourites. Please try again."
+            "get_favourites": "Unable to load favourites. Please try again.",
+            "add_to_favourites": "Error while adding car to the favourites. Please try again.",
+            "remove_from_favourites": "Error while removing car from the favourites. Please try again."
         },
         "owner_singular": "owner",
         "owner_plural": "owners"
