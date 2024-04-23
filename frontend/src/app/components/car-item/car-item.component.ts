@@ -34,7 +34,8 @@ export class CarItemComponent {
         addIcons({ locationSharp, addCircleOutline, addCircleSharp });
     }
 
-    handleFavouritesActions(carId: number, method: HandleFavouritesActions): void {
+    handleFavouritesActions(event: Event, carId: number, method: HandleFavouritesActions): void {
+        event.stopPropagation();
         this.emitHandleFavourites.emit({
             carId,
             method,
