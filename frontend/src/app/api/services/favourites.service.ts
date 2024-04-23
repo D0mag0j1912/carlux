@@ -22,6 +22,31 @@ export class FavouritesService extends BaseService {
     super(config, http);
   }
 
+  /** Path part for operation `favouritesControllerHandleFavouritesActions()` */
+  static readonly FavouritesControllerHandleFavouritesActionsPath = '/api/favourites/{carId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `favouritesControllerHandleFavouritesActions()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  favouritesControllerHandleFavouritesActions$Response(params: FavouritesControllerHandleFavouritesActions$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
+    return favouritesControllerHandleFavouritesActions(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `favouritesControllerHandleFavouritesActions$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  favouritesControllerHandleFavouritesActions(params: FavouritesControllerHandleFavouritesActions$Params, context?: HttpContext): Observable<GeneralResponseDto> {
+    return this.favouritesControllerHandleFavouritesActions$Response(params, context).pipe(
+      map((r: StrictHttpResponse<GeneralResponseDto>): GeneralResponseDto => r.body)
+    );
+  }
+
   /** Path part for operation `favouritesControllerGetFavourites()` */
   static readonly FavouritesControllerGetFavouritesPath = '/api/favourites';
 
@@ -44,31 +69,6 @@ export class FavouritesService extends BaseService {
   favouritesControllerGetFavourites(params?: FavouritesControllerGetFavourites$Params, context?: HttpContext): Observable<Array<FavouritesDto>> {
     return this.favouritesControllerGetFavourites$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<FavouritesDto>>): Array<FavouritesDto> => r.body)
-    );
-  }
-
-  /** Path part for operation `favouritesControllerHandleFavouritesActions()` */
-  static readonly FavouritesControllerHandleFavouritesActionsPath = '/api/favourites';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `favouritesControllerHandleFavouritesActions()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  favouritesControllerHandleFavouritesActions$Response(params: FavouritesControllerHandleFavouritesActions$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
-    return favouritesControllerHandleFavouritesActions(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `favouritesControllerHandleFavouritesActions$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  favouritesControllerHandleFavouritesActions(params: FavouritesControllerHandleFavouritesActions$Params, context?: HttpContext): Observable<GeneralResponseDto> {
-    return this.favouritesControllerHandleFavouritesActions$Response(params, context).pipe(
-      map((r: StrictHttpResponse<GeneralResponseDto>): GeneralResponseDto => r.body)
     );
   }
 

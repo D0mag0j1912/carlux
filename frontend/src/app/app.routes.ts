@@ -86,7 +86,7 @@ export const routes: Routes = [
                     import('./tabs/recommended-cars/recommended-cars.component').then(
                         (component) => component.RecommendedCarsComponent,
                     ),
-                providers: [CARS_PROVIDERS],
+                providers: [CARS_PROVIDERS, FAVOURITES_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {

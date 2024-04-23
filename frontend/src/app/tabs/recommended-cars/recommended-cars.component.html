@@ -16,7 +16,7 @@
                         <car-item
                             [car]="car"
                             [routerLink]="['/', 'tabs', 'car', car.id]"
-                            (emitHandleFavourites)="handleFavourites($event)"
+                            (emitHandleFavourites)="handleFavouritesActions($event)"
                         ></car-item>
                     } @empty {
                         <img src="../../../assets/images/common/icons8-search-50.png" class="empty-image" />

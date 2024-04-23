@@ -61,7 +61,12 @@ export class FavouritesEffects {
                             );
                             return EMPTY;
                         }),
-                        map((_) => FavouritesActions.handleFavouritesActionsSuccess()),
+                        map((_) =>
+                            FavouritesActions.handleFavouritesActionsSuccess({
+                                carId: action.carId,
+                                method: action.method,
+                            }),
+                        ),
                     ),
             ),
         ),

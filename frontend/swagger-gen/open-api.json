@@ -413,7 +413,7 @@
                 "tags": ["Car list"]
             }
         },
-        "/api/favourites": {
+        "/api/favourites/{carId}": {
             "put": {
                 "operationId": "FavouritesController_handleFavouritesActions",
                 "parameters": [
@@ -453,7 +453,9 @@
                     }
                 },
                 "tags": ["Favourites"]
-            },
+            }
+        },
+        "/api/favourites": {
             "get": {
                 "operationId": "FavouritesController_getFavourites",
                 "parameters": [],

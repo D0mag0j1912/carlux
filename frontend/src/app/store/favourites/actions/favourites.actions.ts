@@ -21,4 +21,5 @@ export const handleFavouritesActions = createAction(
 
 export const handleFavouritesActionsSuccess = createAction(
     '[Favourites] Handle Favourites Actions Success',
+    props<{ carId: number; method: HandleFavouritesActions }>(),
 );

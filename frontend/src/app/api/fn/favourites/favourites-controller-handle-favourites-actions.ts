@@ -30,4 +30,4 @@ export function favouritesControllerHandleFavouritesActions(http: HttpClient, ro
   );
 }
 
-favouritesControllerHandleFavouritesActions.PATH = '/api/favourites';
+favouritesControllerHandleFavouritesActions.PATH = '/api/favourites/{carId}';

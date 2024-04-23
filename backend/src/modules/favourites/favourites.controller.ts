@@ -32,7 +32,7 @@ export class FavouritesController {
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
-    @Put()
+    @Put(':carId')
     async handleFavouritesActions(
         @Param('carId', ParseIntPipe) carId: number,
         @Query('method') method: HandleFavourites,
