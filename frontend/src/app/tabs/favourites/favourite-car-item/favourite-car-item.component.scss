@@ -13,6 +13,20 @@
     .content {
         padding: 10px 0;
 
+        .header {
+            display: flex;
+
+            .meta {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .actions {
+                margin-left: auto;
+                padding-right: 10px;
+            }
+        }
+
         .price {
             @include large-bold;
             margin-bottom: 5px;

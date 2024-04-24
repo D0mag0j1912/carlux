@@ -8,11 +8,22 @@
             }
         </swiper-container>
         <ion-card-content class="content">
-            <div class="price">
-                {{ favouriteCarItem().currencySymbol + favouriteCarItem().price }}
-            </div>
-            <div class="name">
-                {{ favouriteCarItem().brand + ' ' + favouriteCarItem().modelName }}
+            <div class="header">
+                <div class="meta">
+                    <div class="price">
+                        {{ favouriteCarItem().currencySymbol + favouriteCarItem().price }}
+                    </div>
+                    <div class="name">
+                        {{ favouriteCarItem().brand + ' ' + favouriteCarItem().modelName }}
+                    </div>
+                </div>
+                <div class="actions">
+                    <ion-icon
+                        name="trash-outline"
+                        color="primary"
+                        (click)="removeFromFavourites(favouriteCarItem().id)"
+                    ></ion-icon>
+                </div>
             </div>
             <div class="info">
                 <div class="left">
