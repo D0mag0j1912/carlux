@@ -145,6 +145,8 @@
             "remove_from_favourites": "Error while removing car from the favourites. Please try again."
         },
         "owner_singular": "owner",
-        "owner_plural": "owners"
+        "owner_plural": "owners",
+        "no_favourites_title": "No favourites yet",
+        "no_favourites_description": "Favourite car list is empty. Feel free to add cars to your favourite list 🚀"
     }
 }
