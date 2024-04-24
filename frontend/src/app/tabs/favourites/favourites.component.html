@@ -3,6 +3,16 @@
         <div class="favourites-wrapper">
             @for (favourite of favourites(); track favourite.id) {
                 <favourite-car-item [favouriteCarItem]="favourite"></favourite-car-item>
+            } @empty {
+                <div *transloco="let t" class="empty-wrapper">
+                    <img src="../../../assets/images/empty-cart.svg" class="empty-cart-img" />
+                    <div class="title">
+                        {{ t('favourites.no_favourites_title') }}
+                    </div>
+                    <div class="description">
+                        {{ t('favourites.no_favourites_description') }}
+                    </div>
+                </div>
             }
         </div>
     } @else {

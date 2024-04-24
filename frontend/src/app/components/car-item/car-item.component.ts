@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { IonCard, IonCardContent, IonChip } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { locationSharp } from 'ionicons/icons';
+import { addCircleOutline, addCircleSharp, locationSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { DatePipe } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
@@ -9,6 +9,8 @@ import { RecommendedCarsDto as RecommendedCars } from '../../api/models/recommen
 import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
 import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
 import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
+import { EmitHandleFavouritesActions } from '../../models/emit-handle-favourites-actions';
+import { HandleFavouritesActions } from '../../constants/handle-favourites-actions';
 
 @Component({
     selector: 'car-item',
@@ -22,11 +24,21 @@ import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
 export class CarItemComponent {
     readonly KILOMETERS = KILOMETERS_TRAVELLED;
     readonly DATE_FORMAT = MEDIUM_DATE_FORMAT;
+    readonly HANDLE_FAVOURITES_ACTIONS = HandleFavouritesActions;
 
-    @Input({ required: true })
-    car: RecommendedCars | undefined;
+    car = input.required<RecommendedCars>();
+
+    emitHandleFavourites = output<EmitHandleFavouritesActions>();
 
     constructor() {
-        addIcons({ locationSharp });
+        addIcons({ locationSharp, addCircleOutline, addCircleSharp });
+    }
+
+    handleFavouritesActions(event: Event, carId: number, method: HandleFavouritesActions): void {
+        event.stopPropagation();
+        this.emitHandleFavourites.emit({
+            carId,
+            method,
+        });
     }
 }

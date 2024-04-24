@@ -20,6 +20,8 @@ import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service'
 import { CarItemComponent } from '../../components/car-item/car-item.component';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
 import { DomSanitizerInputType, DomSanitizerPipe } from '../../pipes/dom-sanitizer.pipe';
+import { EmitHandleFavouritesActions } from '../../models/emit-handle-favourites-actions';
+import { FavouritesFacadeService } from '../../store/favourites/facades/favourites-facade.service';
 
 @Component({
     standalone: true,
@@ -43,6 +45,7 @@ import { DomSanitizerInputType, DomSanitizerPipe } from '../../pipes/dom-sanitiz
 })
 export class RecommendedCarsComponent implements OnInit {
     private _carsFacadeService = inject(CarsFacadeService);
+    private _favouritesFacadeService = inject(FavouritesFacadeService);
     private _destroyRef = inject(DestroyRef);
 
     areRecommendedCarsNotLoading$ = this._carsFacadeService.selectAreRecommendedCarsNotLoading();
@@ -74,5 +77,9 @@ export class RecommendedCarsComponent implements OnInit {
                     await (event as InfiniteScrollCustomEvent).target.complete();
                 }, this.INFINITE_EVENT_COMPLETE_DURATION);
             });
+    }
+
+    handleFavouritesActions(data: EmitHandleFavouritesActions): void {
+        this._favouritesFacadeService.handleFavouritesActions(data.carId, data.method);
     }
 }

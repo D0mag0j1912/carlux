@@ -1,36 +1,53 @@
-@if (car) {
-    <ion-card class="item" *transloco="let t">
-        <swiper-container [pagination]="true">
-            @for (image of car.images; track image) {
-                <swiper-slide>
-                    <img class="image" [alt]="image" [src]="image" />
-                </swiper-slide>
-            }
-        </swiper-container>
-        <ion-card-content class="item-content">
+<ion-card class="item" *transloco="let t">
+    <swiper-container [pagination]="true">
+        @for (image of car().images; track image) {
+            <swiper-slide>
+                <img class="image" [alt]="image" [src]="image" />
+            </swiper-slide>
+        }
+    </swiper-container>
+    <ion-card-content class="item-content">
+        <div class="header">
             <div class="title">
-                {{ car.brand + ' ' + car.modelName }}
+                {{ car().brand + ' ' + car().modelName }}
             </div>
-            <div class="meta">
-                <div class="price">
-                    {{ car.price + car.currencySymbol }}
-                </div>
-                <div class="info">
-                    {{ car.kilometersTravelled + KILOMETERS }} •
-                    {{ car.firstRegistrationDate | date: DATE_FORMAT }}
-                </div>
+            <div class="actions">
+                @if (car().isFavourite) {
+                    <ion-icon
+                        name="add-circle-sharp"
+                        color="primary"
+                        (click)="
+                            handleFavouritesActions($event, car().id, HANDLE_FAVOURITES_ACTIONS.REMOVE_FROM_FAVOURITES)
+                        "
+                    ></ion-icon>
+                } @else {
+                    <ion-icon
+                        name="add-circle-outline"
+                        color="primary"
+                        (click)="handleFavouritesActions($event, car().id, HANDLE_FAVOURITES_ACTIONS.ADD_TO_FAVOURITES)"
+                    ></ion-icon>
+                }
             </div>
-            <div class="seller-type">
-                <ion-chip class="chip" color="primary">{{
-                    t('common.seller_type.' + (car.sellerType | camelToSnakeCase))
-                }}</ion-chip>
+        </div>
+        <div class="meta">
+            <div class="price">
+                {{ car().price + car().currencySymbol }}
             </div>
-            <div class="location">
-                <ion-icon name="location-sharp" color="primary" class="icon"></ion-icon>
-                <div class="name">
-                    {{ car.countryOrigin }}
-                </div>
+            <div class="info">
+                {{ car().kilometersTravelled + KILOMETERS }} •
+                {{ car().firstRegistrationDate | date: DATE_FORMAT }}
             </div>
-        </ion-card-content>
-    </ion-card>
-}
+        </div>
+        <div class="seller-type">
+            <ion-chip class="chip" color="primary">{{
+                t('common.seller_type.' + (car().sellerType | camelToSnakeCase))
+            }}</ion-chip>
+        </div>
+        <div class="location">
+            <ion-icon name="location-sharp" color="primary" class="icon"></ion-icon>
+            <div class="name">
+                {{ car().countryOrigin }}
+            </div>
+        </div>
+    </ion-card-content>
+</ion-card>

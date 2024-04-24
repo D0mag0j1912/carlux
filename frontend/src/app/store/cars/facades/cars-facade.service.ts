@@ -32,7 +32,7 @@ export class CarsFacadeService {
 
     private _selectCarDetails$ = this._store.select(CarsSelectors.selectCarDetails);
 
-    //Selectors BEGIN -------------------------
+    //--------------- Selectors BEGIN -------------------------
     selectAreRecommendedCarsNotLoading(): Observable<boolean> {
         return this._selectAreRecommendedCarsNotLoading$;
     }
@@ -56,9 +56,9 @@ export class CarsFacadeService {
     selectCarDetails(): Observable<CarDetailsDto | undefined> {
         return this._selectCarDetails$;
     }
-    //Selectors END ---------------------------
+    //--------------- Selectors END ---------------------------
 
-    //Actions BEGIN ---------------------------
+    //--------------- Actions BEGIN ---------------------------
     getRecommendedCars(page: number, perPage: number): void {
         this._store.dispatch(CarsActions.getRecommendedCars({ page, perPage }));
     }
@@ -80,5 +80,5 @@ export class CarsFacadeService {
     setCarDetailsLoading(areCarDetailsLoading: boolean): void {
         this._store.dispatch(CarsActions.setCarDetailsLoading({ areCarDetailsLoading }));
     }
-    //Actions END ---------------------------
+    //--------------- Actions END ---------------------------
 }

@@ -140,9 +140,13 @@
     },
     "favourites": {
         "errors": {
-            "get_favourites": "Greška prilikom dohvaćanja favorita. Molimo pokušajte ponovno."
+            "get_favourites": "Greška prilikom dohvaćanja favorita. Molimo pokušajte ponovno.",
+            "add_to_favourites": "Greška prilikom dodavanja automobila u favorite. Molimo pokušajte ponovno.",
+            "remove_from_favourites": "Greška prilikom brisanja automobila iz favorita. Molimo pokušajte ponovno."
         },
         "owner_singular": "vlasnik",
-        "owner_plural": "vlasnika"
+        "owner_plural": "vlasnika",
+        "no_favourites_title": "Još nema favorita",
+        "no_favourites_description": "Lista omiljenih automobila je prazna. Slobodno dodajte automobile u Vašu listu favorita 🚀"
     }
 }

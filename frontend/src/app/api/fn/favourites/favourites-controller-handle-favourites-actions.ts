@@ -8,18 +8,16 @@ import { RequestBuilder } from '../../request-builder';
 
 import { GeneralResponseDto } from '../../models/general-response-dto';
 
-export interface FavouritesControllerAddToFavourites$Params {
-
-/**
- * Car ID
- */
+export interface FavouritesControllerHandleFavouritesActions$Params {
   carId: number;
+  method: string;
 }
 
-export function favouritesControllerAddToFavourites(http: HttpClient, rootUrl: string, params: FavouritesControllerAddToFavourites$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
-  const rb = new RequestBuilder(rootUrl, favouritesControllerAddToFavourites.PATH, 'put');
+export function favouritesControllerHandleFavouritesActions(http: HttpClient, rootUrl: string, params: FavouritesControllerHandleFavouritesActions$Params, context?: HttpContext): Observable<StrictHttpResponse<GeneralResponseDto>> {
+  const rb = new RequestBuilder(rootUrl, favouritesControllerHandleFavouritesActions.PATH, 'put');
   if (params) {
-    rb.query('carId', params.carId, {});
+    rb.path('carId', params.carId, {});
+    rb.query('method', params.method, {});
   }
 
   return http.request(
@@ -32,4 +30,4 @@ export function favouritesControllerAddToFavourites(http: HttpClient, rootUrl: s
   );
 }
 
-favouritesControllerAddToFavourites.PATH = '/api/favourites';
+favouritesControllerHandleFavouritesActions.PATH = '/api/favourites/{carId}';

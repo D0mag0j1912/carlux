@@ -33,6 +33,11 @@ export interface RecommendedCarsDto {
   images: Array<string>;
 
   /**
+   * Is car added to the favourites list
+   */
+  isFavourite: boolean;
+
+  /**
    * Kilometers travelled since the first registration date
    */
   kilometersTravelled: number;
