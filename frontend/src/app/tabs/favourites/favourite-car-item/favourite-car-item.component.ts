@@ -4,6 +4,7 @@ import {
     Component,
     inject,
     input,
+    output,
     signal,
 } from '@angular/core';
 import { IonCard, IonCardContent, IonChip, IonIcon } from '@ionic/angular/standalone';
@@ -19,6 +20,7 @@ import {
     locationSharp,
     peopleOutline,
     timerOutline,
+    trashOutline,
 } from 'ionicons/icons';
 import { FavouritesDto as Favourite } from '../../../api/models/favourites-dto';
 import { KILOMETERS_TRAVELLED } from '../../../constants/kilometers-travelled';
@@ -27,6 +29,7 @@ import { FUEL_CONSUMPTION_SUFFIX } from '../../../helpers/fuel-consumption-suffi
 import { MEDIUM_DATE_FORMAT } from '../../../constants/medium-date-format';
 import { CO2_EMISSIONS_SUFFIX } from '../../../helpers/co2-emissions-suffix';
 import { CamelToSnakeCasePipe } from '../../../pipes/camel-to-snake-case.pipe';
+import { HandleFavouritesActions } from '../../../constants/handle-favourites-actions';
 
 @Component({
     standalone: true,
@@ -49,8 +52,6 @@ import { CamelToSnakeCasePipe } from '../../../pipes/camel-to-snake-case.pipe';
 export class FavouriteCarItemComponent {
     private _translocoService = inject(TranslocoService);
 
-    favouriteCarItem = input.required<Favourite>();
-
     KILOMETERS_TRAVELLED = signal(KILOMETERS_TRAVELLED).asReadonly();
     KILOWATTS = signal('kW').asReadonly();
     HORSE_POWER_TRANSLATION = signal(HORSE_POWER_TRANSLATION).asReadonly();
@@ -59,6 +60,10 @@ export class FavouriteCarItemComponent {
     CO2_EMISSIONS_SUFFIX = signal(CO2_EMISSIONS_SUFFIX).asReadonly();
 
     selectedLanguage = toSignal(this._translocoService.langChanges$, { initialValue: 'en' });
+
+    favouriteCarItem = input.required<Favourite>();
+
+    emitRemoveFromFavourites = output<{ carId: number; method: HandleFavouritesActions }>();
 
     constructor() {
         addIcons({
@@ -69,6 +74,14 @@ export class FavouriteCarItemComponent {
             cogOutline,
             colorFillOutline,
             locationSharp,
+            trashOutline,
+        });
+    }
+
+    removeFromFavourites(carId: number): void {
+        this.emitRemoveFromFavourites.emit({
+            carId,
+            method: HandleFavouritesActions.REMOVE_FROM_FAVOURITES,
         });
     }
 }
