@@ -23,14 +23,3 @@ export const selectHasInfiniteEventCompleted = createSelector(
     selectCarsState,
     (state: CarsState) => state.recommendedCars.hasInfiniteEventCompleted,
 );
-
-// ------ CAR DETAILS ------
-export const selectAreCarDetailsNotLoading = createSelector(
-    selectCarsState,
-    (state: CarsState) => !state.carDetails.areCarDetailsLoading,
-);
-
-export const selectCarDetails = createSelector(
-    selectCarsState,
-    (state: CarsState) => state.carDetails.carDetailsData,
-);

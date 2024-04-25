@@ -26,7 +26,6 @@ import {
     colorPaletteOutline,
 } from 'ionicons/icons';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { CarsFacadeService } from '../../store/cars/facades/cars-facade.service';
 import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
 import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
 import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
@@ -35,6 +34,7 @@ import { FourWheelDriveTypes } from '../../constants/four-wheel-drive-type';
 import { PremiumBrands } from '../../constants/premium-brands';
 import { HORSE_POWER_TRANSLATION } from '../../helpers/horse-power-translation';
 import { FUEL_CONSUMPTION_SUFFIX } from '../../helpers/fuel-consumption-suffix';
+import { CarDetailsFacadeService } from '../../store/car-details/facades/car-details-facade.service';
 
 @Component({
     standalone: true,
@@ -60,11 +60,11 @@ import { FUEL_CONSUMPTION_SUFFIX } from '../../helpers/fuel-consumption-suffix';
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CarDetailsComponent {
-    private _carsFacadeService = inject(CarsFacadeService);
+    private _carsDetailsFacadeService = inject(CarDetailsFacadeService);
     private _translocoService = inject(TranslocoService);
 
-    areCarDetailsNotLoading$ = this._carsFacadeService.selectAreCarDetailsNotLoading();
-    carDetails$ = this._carsFacadeService.selectCarDetails();
+    areCarDetailsNotLoading$ = this._carsDetailsFacadeService.selectAreCarDetailsNotLoading();
+    carDetails$ = this._carsDetailsFacadeService.selectCarDetails();
     selectedLanguage = toSignal(this._translocoService.langChanges$);
 
     readonly DATE_FORMAT = MEDIUM_DATE_FORMAT;
@@ -79,7 +79,7 @@ export class CarDetailsComponent {
     @Input()
     set id(carId: number | undefined) {
         if (carId) {
-            this._carsFacadeService.getCarDetails(carId);
+            this._carsDetailsFacadeService.getCarDetails(carId);
         }
     }
 
