@@ -6,7 +6,6 @@ import * as CarsActions from '../actions/cars.actions';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import * as CarsSelectors from '../selectors/cars.selectors';
 import { RecommendedCarsDto as RecommendedCars } from '../../../api/models/recommended-cars-dto';
-import { CarDetailsDto } from '../../../api';
 
 @Injectable({ providedIn: 'root' })
 export class CarsFacadeService {
@@ -26,12 +25,6 @@ export class CarsFacadeService {
         CarsSelectors.selectHasInfiniteEventCompleted,
     );
 
-    private _selectAreCarDetailsNotLoading$ = this._store.select(
-        CarsSelectors.selectAreCarDetailsNotLoading,
-    );
-
-    private _selectCarDetails$ = this._store.select(CarsSelectors.selectCarDetails);
-
     //--------------- Selectors BEGIN -------------------------
     selectAreRecommendedCarsNotLoading(): Observable<boolean> {
         return this._selectAreRecommendedCarsNotLoading$;
@@ -48,14 +41,6 @@ export class CarsFacadeService {
     selectHasInfiniteEventCompleted(): Observable<boolean> {
         return this._selectHasInfiniteEventCompleted$;
     }
-
-    selectAreCarDetailsNotLoading(): Observable<boolean> {
-        return this._selectAreCarDetailsNotLoading$;
-    }
-
-    selectCarDetails(): Observable<CarDetailsDto | undefined> {
-        return this._selectCarDetails$;
-    }
     //--------------- Selectors END ---------------------------
 
     //--------------- Actions BEGIN ---------------------------
@@ -71,14 +56,6 @@ export class CarsFacadeService {
         this._store.dispatch(
             CarsActions.setHasInfiniteEventCompleted({ hasInfiniteEventCompleted }),
         );
-    }
-
-    getCarDetails(carId: number): void {
-        this._store.dispatch(CarsActions.getCarDetails({ carId }));
-    }
-
-    setCarDetailsLoading(areCarDetailsLoading: boolean): void {
-        this._store.dispatch(CarsActions.setCarDetailsLoading({ areCarDetailsLoading }));
     }
     //--------------- Actions END ---------------------------
 }

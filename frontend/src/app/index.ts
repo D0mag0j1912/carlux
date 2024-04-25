@@ -12,6 +12,8 @@ import { CarsState } from './store/cars/reducers/cars.reducers';
 import * as CarsReducers from './store/cars/reducers/cars.reducers';
 import * as FavouritesReducers from './store/favourites/reducers/favourites.reducers';
 import { FavouritesState } from './store/favourites/reducers/favourites.reducers';
+import { CarDetailsState } from './store/car-details/reducers/car-details.reducers';
+import * as CarDetailsReducers from './store/car-details/reducers/car-details.reducers';
 
 export interface AppState {
     [FeatureKeys.PLATFORM]: PlatformState;
@@ -20,6 +22,7 @@ export interface AppState {
     [FeatureKeys.SETTINGS]: SettingsState;
     [FeatureKeys.CARS]: CarsState;
     [FeatureKeys.FAVOURITES]: FavouritesState;
+    [FeatureKeys.CAR_DETAILS]: CarDetailsState;
 }
 
 export const appReducers = combineReducers({
@@ -29,4 +32,5 @@ export const appReducers = combineReducers({
     ...SettingsReducers.settingsReducer,
     ...CarsReducers.carsReducers,
     ...FavouritesReducers.reducers,
+    ...CarDetailsReducers.reducers,
 });

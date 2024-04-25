@@ -1,14 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CarsActions from '../actions/cars.actions';
 import { RecommendedCarsState } from '../../../tabs/recommended-cars/models/recommended-cars-state';
-import { CarDetailsState } from '../../../components/car-details/models/car-details-state';
 import { RecommendedCarsDto as RecommendedCar } from '../../../api/models/recommended-cars-dto';
 import { HandleFavouritesActions } from '../../../constants/handle-favourites-actions';
 import * as FavouritesActions from '../../favourites/actions/favourites.actions';
 
 export interface CarsState {
     recommendedCars: RecommendedCarsState;
-    carDetails: CarDetailsState;
 }
 
 export const initialState: CarsState = {
@@ -17,10 +15,6 @@ export const initialState: CarsState = {
         recommendedCarsData: undefined,
         hasNoMoreRecommendedCars: false,
         hasInfiniteEventCompleted: false,
-    },
-    carDetails: {
-        areCarDetailsLoading: false,
-        carDetailsData: undefined,
     },
 };
 
@@ -104,18 +98,4 @@ export const carsReducers = createReducer(
         }
         return { ...state };
     }),
-    on(CarsActions.setCarDetails, (state: CarsState, { carDetails }) => ({
-        ...state,
-        carDetails: {
-            ...state.carDetails,
-            carDetailsData: { ...carDetails },
-        },
-    })),
-    on(CarsActions.setCarDetailsLoading, (state: CarsState, { areCarDetailsLoading }) => ({
-        ...state,
-        carDetails: {
-            ...state.carDetails,
-            areCarDetailsLoading,
-        },
-    })),
 );
