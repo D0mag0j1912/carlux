@@ -10,6 +10,7 @@ import {
     IonRow,
     IonTitle,
     IonToolbar,
+    NavController,
 } from '@ionic/angular/standalone';
 import { AsyncPipe, DatePipe, LowerCasePipe } from '@angular/common';
 import { addIcons } from 'ionicons';
@@ -62,6 +63,7 @@ import { CarDetailsFacadeService } from '../../store/car-details/facades/car-det
 export class CarDetailsComponent {
     private _carsDetailsFacadeService = inject(CarDetailsFacadeService);
     private _translocoService = inject(TranslocoService);
+    private _navController = inject(NavController);
 
     areCarDetailsNotLoading$ = this._carsDetailsFacadeService.selectAreCarDetailsNotLoading();
     carDetails$ = this._carsDetailsFacadeService.selectCarDetails();
@@ -96,5 +98,9 @@ export class CarDetailsComponent {
             analyticsOutline,
             colorPaletteOutline,
         });
+    }
+
+    navigateToPreviousPage(): void {
+        this._navController.back();
     }
 }
