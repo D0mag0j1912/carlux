@@ -5,6 +5,7 @@
                 <ion-back-button
                     defaultHref="/tabs/recommended-cars"
                     [text]="t('common.actions.back')"
+                    (click)="navigateToPreviousPage()"
                 ></ion-back-button>
             </ion-buttons>
             <ion-title>{{ t('car_details.title') }}</ion-title>

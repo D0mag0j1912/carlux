@@ -78,7 +78,8 @@ export class FavouriteCarItemComponent {
         });
     }
 
-    removeFromFavourites(carId: number): void {
+    removeFromFavourites(event: Event, carId: number): void {
+        event.stopPropagation();
         this.emitRemoveFromFavourites.emit({
             carId,
             method: HandleFavouritesActions.REMOVE_FROM_FAVOURITES,

@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { IonContent, IonSpinner } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
+import { RouterModule } from '@angular/router';
 import { FavouritesFacadeService } from '../../store/favourites/facades/favourites-facade.service';
 import { HandleFavouritesActions } from '../../constants/handle-favourites-actions';
 import { FavouriteCarItemComponent } from './favourite-car-item/favourite-car-item.component';
 
 @Component({
     standalone: true,
-    imports: [FavouriteCarItemComponent, IonSpinner, IonContent, TranslocoModule],
+    imports: [FavouriteCarItemComponent, IonSpinner, IonContent, TranslocoModule, RouterModule],
     templateUrl: './favourites.component.html',
     styleUrl: './favourites.component.scss',
 })

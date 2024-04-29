@@ -4,6 +4,7 @@
             @for (favourite of favourites(); track favourite.id) {
                 <favourite-car-item
                     [favouriteCarItem]="favourite"
+                    [routerLink]="['/', 'tabs', 'car', favourite.id]"
                     (emitRemoveFromFavourites)="removeFromFavourites($event)"
                 ></favourite-car-item>
             } @empty {
