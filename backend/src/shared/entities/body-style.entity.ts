@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { BodyStyles } from '../../../constants/body-style';
+import { BodyStyles } from '../../constants/body-style';
 
 @Entity({ name: 'BodyStyles' })
 export class BodyStyleEntity {

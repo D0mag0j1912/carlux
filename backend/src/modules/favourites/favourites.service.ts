@@ -1,8 +1,8 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CarEntity } from '../recommended-cars/entities/car.entity';
-import { ImageEntity } from '../recommended-cars/entities/image.entity';
+import { CarEntity } from '../../shared/entities/car.entity';
+import { ImageEntity } from '../../shared/entities/image.entity';
 import { GeneralResponseDto } from '../../models/general-response.dto';
 import { FavouritesDto } from './models/favourites.dto';
 import { HandleFavourites } from './constants/handle-favourites';

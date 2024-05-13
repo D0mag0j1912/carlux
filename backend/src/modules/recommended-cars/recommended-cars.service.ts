@@ -2,9 +2,9 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PaginationDto } from '../../models/pagination.dto';
-import { CarEntity } from './entities/car.entity';
+import { CarEntity } from '../../shared/entities/car.entity';
+import { ImageEntity } from '../../shared/entities/image.entity';
 import { RecommendedCarsDto } from './models/recommended-cars.dto';
-import { ImageEntity } from './entities/image.entity';
 
 @Injectable()
 export class RecommendedCarsService {
