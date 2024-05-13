@@ -2,14 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../../..';
-import * as CarsActions from '../actions/cars.actions';
-import { FeatureKeys } from '../../../constants/feature-keys';
-import * as CarsSelectors from '../selectors/cars.selectors';
 import { RecommendedCarsDto as RecommendedCars } from '../../../api/models/recommended-cars-dto';
+import { FeatureKeys } from '../../../constants/feature-keys';
+import * as CarsActions from '../actions/recommended-cars.actions';
+import * as CarsSelectors from '../selectors/recommended-cars.selectors';
 
 @Injectable({ providedIn: 'root' })
-export class CarsFacadeService {
-    private _store = inject(Store<AppState[FeatureKeys.CARS]>);
+export class RecommendedCarsFacadeService {
+    private _store = inject(Store<AppState[FeatureKeys.RECOMMENDED_CARS]>);
 
     private _selectAreRecommendedCarsNotLoading$ = this._store.select(
         CarsSelectors.selectAreRecommendedCarsNotLoading,
