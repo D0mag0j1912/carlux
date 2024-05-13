@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CarEntity } from '../recommended-cars/entities/car.entity';
-import { ImageEntity } from '../recommended-cars/entities/image.entity';
+import { CarEntity } from '../../shared/entities/car.entity';
+import { ImageEntity } from '../../shared/entities/image.entity';
 import { FavouritesController } from './favourites.controller';
 import { FavouritesService } from './favourites.service';
 

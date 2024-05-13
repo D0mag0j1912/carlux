@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RecommendedCarsController } from './recommended-cars.controller';
 import { CarEntity } from '../../shared/entities/car.entity';
-import { RecommendedCarsService } from './recommended-cars.service';
 import { ImageEntity } from '../../shared/entities/image.entity';
+import { CarDetailsController } from './car-details.controller';
+import { CarDetailsService } from './car-details.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([CarEntity, ImageEntity])],
-    controllers: [RecommendedCarsController],
-    providers: [RecommendedCarsService],
+    controllers: [CarDetailsController],
+    providers: [CarDetailsService],
 })
-export class RecommendedCarsModule {}
+export class CarDetailsModule {}

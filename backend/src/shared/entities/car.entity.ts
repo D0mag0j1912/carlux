@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { SellerType as SellerType } from '../../../constants/seller-type';
-import { Transmission } from '../../../constants/transmission';
-import { FuelType } from '../../../constants/fuel-type';
+import { SellerType as SellerType } from '../../constants/seller-type';
+import { Transmission } from '../../constants/transmission';
+import { FuelType } from '../../constants/fuel-type';
 import { BodyStyleEntity } from './body-style.entity';
 import { WheelDriveTypeEntity } from './wheel-drive-types.entity';
 import { CurrencyEntity } from './currency.entity';

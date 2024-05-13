@@ -7,13 +7,14 @@ import { PreferencesModule } from './modules/preferences/preferences.module';
 import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
 import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
-import { CarEntity } from './modules/recommended-cars/entities/car.entity';
-import { WheelDriveTypeEntity } from './modules/recommended-cars/entities/wheel-drive-types.entity';
-import { BodyStyleEntity } from './modules/recommended-cars/entities/body-style.entity';
+import { CarEntity } from './shared/entities/car.entity';
+import { WheelDriveTypeEntity } from './shared/entities/wheel-drive-types.entity';
+import { BodyStyleEntity } from './shared/entities/body-style.entity';
 import { RecommendedCarsModule } from './modules/recommended-cars/recommended-cars.module';
-import { ImageEntity } from './modules/recommended-cars/entities/image.entity';
-import { CurrencyEntity } from './modules/recommended-cars/entities/currency.entity';
+import { ImageEntity } from './shared/entities/image.entity';
+import { CurrencyEntity } from './shared/entities/currency.entity';
 import { FavouritesModule } from './modules/favourites/favourites.module';
+import { CarDetailsModule } from './modules/car-details/car-details.module';
 
 const IMPORTS = [
     AuthModule,
@@ -21,6 +22,7 @@ const IMPORTS = [
     ProfileDetailsModule,
     RecommendedCarsModule,
     FavouritesModule,
+    CarDetailsModule,
 ];
 
 @Module({

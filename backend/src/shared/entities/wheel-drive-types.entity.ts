@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { WheelDrivesType } from '../../../constants/wheel-drive';
+import { WheelDrivesType } from '../../constants/wheel-drive';
 
 @Entity({ name: 'WheelDriveTypes' })
 export class WheelDriveTypeEntity {
