@@ -14,6 +14,7 @@ import { RecommendedCarsModule } from './modules/recommended-cars/recommended-ca
 import { ImageEntity } from './modules/recommended-cars/entities/image.entity';
 import { CurrencyEntity } from './modules/recommended-cars/entities/currency.entity';
 import { FavouritesModule } from './modules/favourites/favourites.module';
+import { CarDetailsModule } from './modules/car-details/car-details.module';
 
 const IMPORTS = [
     AuthModule,
@@ -21,6 +22,7 @@ const IMPORTS = [
     ProfileDetailsModule,
     RecommendedCarsModule,
     FavouritesModule,
+    CarDetailsModule,
 ];
 
 @Module({
