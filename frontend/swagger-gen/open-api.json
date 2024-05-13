@@ -313,7 +313,7 @@
                 "tags": ["User profile details"]
             }
         },
-        "/api/cars/recommended-cars": {
+        "/api/recommended-cars": {
             "get": {
                 "operationId": "RecommendedCarsController_getRecommendedCars",
                 "parameters": [
@@ -365,40 +365,6 @@
                                             }
                                         }
                                     ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request from the client"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                },
-                "tags": ["Car list"]
-            }
-        },
-        "/api/cars/{carId}": {
-            "get": {
-                "operationId": "RecommendedCarsController_getCarDetails",
-                "parameters": [
-                    {
-                        "name": "carId",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "number"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CarDetailsDto"
                                 }
                             }
                         }
@@ -481,6 +447,40 @@
                     }
                 },
                 "tags": ["Favourites"]
+            }
+        },
+        "/api/car/{carId}": {
+            "get": {
+                "operationId": "CarDetailsController_getCarDetails",
+                "parameters": [
+                    {
+                        "name": "carId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CarDetailsDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Car details"]
             }
         }
     },
@@ -677,6 +677,113 @@
                     "isFavourite"
                 ]
             },
+            "GeneralResponseDto": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "required": ["success"]
+            },
+            "FavouritesDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "Car's ID"
+                    },
+                    "images": {
+                        "description": "Car's images",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "price": {
+                        "type": "number",
+                        "description": "Car suggested price"
+                    },
+                    "currencySymbol": {
+                        "type": "string",
+                        "description": "Currency symbol"
+                    },
+                    "brand": {
+                        "type": "string",
+                        "description": "Car brand"
+                    },
+                    "modelName": {
+                        "type": "string",
+                        "description": "Car model name"
+                    },
+                    "kilometersTravelled": {
+                        "type": "number",
+                        "description": "Kilometers travelled since the first registration date"
+                    },
+                    "horsePower": {
+                        "type": "number",
+                        "description": "How many horse power does the car have"
+                    },
+                    "kilowatts": {
+                        "type": "number",
+                        "description": "How many kilowatts does the car have"
+                    },
+                    "noOfPreviousOwners": {
+                        "type": "number",
+                        "description": "Number of previous car owners"
+                    },
+                    "fuelConsumptionCombined": {
+                        "type": "number",
+                        "description": "Average fuel consumption"
+                    },
+                    "firstRegistrationDate": {
+                        "type": "string",
+                        "description": "First registration date"
+                    },
+                    "transmission": {
+                        "type": "string",
+                        "enum": ["Manual", "Automatic"],
+                        "description": "Type of transmission"
+                    },
+                    "fuelType": {
+                        "type": "string",
+                        "enum": ["Gasoline", "Diesel"],
+                        "description": "Fuel type"
+                    },
+                    "co2Emissions": {
+                        "type": "number",
+                        "description": "How many C02 emissions does the car have"
+                    },
+                    "sellerType": {
+                        "type": "string",
+                        "enum": ["Dealer", "Private", "CompanyVehicle"],
+                        "description": "Seller type"
+                    },
+                    "countryOrigin": {
+                        "type": "string",
+                        "description": "Country origin"
+                    }
+                },
+                "required": [
+                    "id",
+                    "images",
+                    "price",
+                    "currencySymbol",
+                    "brand",
+                    "modelName",
+                    "kilometersTravelled",
+                    "horsePower",
+                    "kilowatts",
+                    "noOfPreviousOwners",
+                    "fuelConsumptionCombined",
+                    "firstRegistrationDate",
+                    "transmission",
+                    "fuelType",
+                    "co2Emissions",
+                    "sellerType",
+                    "countryOrigin"
+                ]
+            },
             "CarDetailsDto": {
                 "type": "object",
                 "properties": {
@@ -840,113 +947,6 @@
                     "currencySymbol",
                     "images",
                     "isFavourite"
-                ]
-            },
-            "GeneralResponseDto": {
-                "type": "object",
-                "properties": {
-                    "success": {
-                        "type": "boolean"
-                    }
-                },
-                "required": ["success"]
-            },
-            "FavouritesDto": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "number",
-                        "description": "Car's ID"
-                    },
-                    "images": {
-                        "description": "Car's images",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "price": {
-                        "type": "number",
-                        "description": "Car suggested price"
-                    },
-                    "currencySymbol": {
-                        "type": "string",
-                        "description": "Currency symbol"
-                    },
-                    "brand": {
-                        "type": "string",
-                        "description": "Car brand"
-                    },
-                    "modelName": {
-                        "type": "string",
-                        "description": "Car model name"
-                    },
-                    "kilometersTravelled": {
-                        "type": "number",
-                        "description": "Kilometers travelled since the first registration date"
-                    },
-                    "horsePower": {
-                        "type": "number",
-                        "description": "How many horse power does the car have"
-                    },
-                    "kilowatts": {
-                        "type": "number",
-                        "description": "How many kilowatts does the car have"
-                    },
-                    "noOfPreviousOwners": {
-                        "type": "number",
-                        "description": "Number of previous car owners"
-                    },
-                    "fuelConsumptionCombined": {
-                        "type": "number",
-                        "description": "Average fuel consumption"
-                    },
-                    "firstRegistrationDate": {
-                        "type": "string",
-                        "description": "First registration date"
-                    },
-                    "transmission": {
-                        "type": "string",
-                        "enum": ["Manual", "Automatic"],
-                        "description": "Type of transmission"
-                    },
-                    "fuelType": {
-                        "type": "string",
-                        "enum": ["Gasoline", "Diesel"],
-                        "description": "Fuel type"
-                    },
-                    "co2Emissions": {
-                        "type": "number",
-                        "description": "How many C02 emissions does the car have"
-                    },
-                    "sellerType": {
-                        "type": "string",
-                        "enum": ["Dealer", "Private", "CompanyVehicle"],
-                        "description": "Seller type"
-                    },
-                    "countryOrigin": {
-                        "type": "string",
-                        "description": "Country origin"
-                    }
-                },
-                "required": [
-                    "id",
-                    "images",
-                    "price",
-                    "currencySymbol",
-                    "brand",
-                    "modelName",
-                    "kilometersTravelled",
-                    "horsePower",
-                    "kilowatts",
-                    "noOfPreviousOwners",
-                    "fuelConsumptionCombined",
-                    "firstRegistrationDate",
-                    "transmission",
-                    "fuelType",
-                    "co2Emissions",
-                    "sellerType",
-                    "countryOrigin"
                 ]
             },
             "PaginationDto": {

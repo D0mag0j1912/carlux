@@ -41,4 +41,4 @@ export function recommendedCarsControllerGetRecommendedCars(http: HttpClient, ro
   );
 }
 
-recommendedCarsControllerGetRecommendedCars.PATH = '/api/cars/recommended-cars';
+recommendedCarsControllerGetRecommendedCars.PATH = '/api/recommended-cars';

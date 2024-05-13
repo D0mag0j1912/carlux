@@ -1,15 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
-import * as CarsActions from '../actions/cars.actions';
-import { RecommendedCarsState } from '../../../tabs/recommended-cars/models/recommended-cars-state';
 import { RecommendedCarsDto as RecommendedCar } from '../../../api/models/recommended-cars-dto';
 import { HandleFavouritesActions } from '../../../constants/handle-favourites-actions';
+import { RecommendedCarsDataState } from '../../../tabs/recommended-cars/models/recommended-cars-state';
 import * as FavouritesActions from '../../favourites/actions/favourites.actions';
+import * as CarsActions from '../actions/recommended-cars.actions';
 
-export interface CarsState {
-    recommendedCars: RecommendedCarsState;
+export interface RecommendedCarsState {
+    recommendedCars: RecommendedCarsDataState;
 }
 
-export const initialState: CarsState = {
+export const initialState: RecommendedCarsState = {
     recommendedCars: {
         areRecommendedCarsLoading: false,
         recommendedCarsData: undefined,
@@ -18,11 +18,11 @@ export const initialState: CarsState = {
     },
 };
 
-export const carsReducers = createReducer(
+export const reducers = createReducer(
     initialState,
     on(
         CarsActions.setRecommendedCarsLoading,
-        (state: CarsState, { areRecommendedCarsLoading }) => ({
+        (state: RecommendedCarsState, { areRecommendedCarsLoading }) => ({
             ...state,
             recommendedCars: {
                 ...state.recommendedCars,
@@ -30,7 +30,7 @@ export const carsReducers = createReducer(
             },
         }),
     ),
-    on(CarsActions.setRecommendedCars, (state: CarsState, { response }) => {
+    on(CarsActions.setRecommendedCars, (state: RecommendedCarsState, { response }) => {
         if (
             state.recommendedCars &&
             state.recommendedCars?.recommendedCarsData?.results &&
@@ -64,7 +64,7 @@ export const carsReducers = createReducer(
     }),
     on(
         CarsActions.setHasInfiniteEventCompleted,
-        (state: CarsState, { hasInfiniteEventCompleted }) => ({
+        (state: RecommendedCarsState, { hasInfiniteEventCompleted }) => ({
             ...state,
             recommendedCars: {
                 ...state.recommendedCars,
@@ -72,30 +72,34 @@ export const carsReducers = createReducer(
             },
         }),
     ),
-    on(FavouritesActions.handleFavouritesActionsSuccess, (state: CarsState, { carId, method }) => {
-        if (state.recommendedCars.recommendedCarsData?.results) {
-            return {
-                ...state,
-                recommendedCars: {
-                    ...state.recommendedCars,
-                    recommendedCarsData: {
-                        ...state.recommendedCars.recommendedCarsData,
-                        results: [...state.recommendedCars.recommendedCarsData.results].map(
-                            (recommendedCar: RecommendedCar) => {
-                                if (recommendedCar.id === carId) {
-                                    return {
-                                        ...recommendedCar,
-                                        isFavourite:
-                                            method === HandleFavouritesActions.ADD_TO_FAVOURITES,
-                                    };
-                                }
-                                return { ...recommendedCar };
-                            },
-                        ),
+    on(
+        FavouritesActions.handleFavouritesActionsSuccess,
+        (state: RecommendedCarsState, { carId, method }) => {
+            if (state.recommendedCars.recommendedCarsData?.results) {
+                return {
+                    ...state,
+                    recommendedCars: {
+                        ...state.recommendedCars,
+                        recommendedCarsData: {
+                            ...state.recommendedCars.recommendedCarsData,
+                            results: [...state.recommendedCars.recommendedCarsData.results].map(
+                                (recommendedCar: RecommendedCar) => {
+                                    if (recommendedCar.id === carId) {
+                                        return {
+                                            ...recommendedCar,
+                                            isFavourite:
+                                                method ===
+                                                HandleFavouritesActions.ADD_TO_FAVOURITES,
+                                        };
+                                    }
+                                    return { ...recommendedCar };
+                                },
+                            ),
+                        },
                     },
-                },
-            };
-        }
-        return { ...state };
-    }),
+                };
+            }
+            return { ...state };
+        },
+    ),
 );

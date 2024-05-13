@@ -3,24 +3,24 @@ import { importProvidersFrom, inject } from '@angular/core';
 import { CanMatchFn, Route, Router, Routes, UrlSegment } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { take, switchMap, of, map } from 'rxjs';
-import { FeatureKeys } from './constants/feature-keys';
+import { map, of, switchMap, take } from 'rxjs';
 import { LoginResponseDto as UserData } from './api/models/login-response-dto';
-import { TabsComponent } from './tabs/tabs.component';
-import * as AuthReducers from './store/auth/reducers/auth.reducers';
+import { FeatureKeys } from './constants/feature-keys';
 import { AuthEffects } from './store/auth/effects/auth.effects';
 import { AuthenticationFacadeService } from './store/auth/facades/auth-facade.service';
-import { AuthenticationHelperService } from './tabs/auth/helpers/auth-helper.service';
-import * as PreferencesReducers from './store/preferences/reducers/preferences.reducers';
-import * as SettingsReducers from './store/settings/reducers/settings.reducer';
-import * as SettingsEffects from './store/settings/effects/settings.effects';
-import * as PreferencesEffects from './store/preferences/effects/preferences.effects';
-import * as CarsReducers from './store/cars/reducers/cars.reducers';
-import * as CarsEffects from './store/cars/effects/cars.effects';
-import * as FavouritesReducers from './store/favourites/reducers/favourites.reducers';
-import { FavouritesEffects } from './store/favourites/effects/favourites.effects';
+import * as AuthReducers from './store/auth/reducers/auth.reducers';
 import * as CarDetailsEffects from './store/car-details/effects/car-details.effects';
 import * as CarDetailsReducers from './store/car-details/reducers/car-details.reducers';
+import { FavouritesEffects } from './store/favourites/effects/favourites.effects';
+import * as FavouritesReducers from './store/favourites/reducers/favourites.reducers';
+import * as PreferencesEffects from './store/preferences/effects/preferences.effects';
+import * as PreferencesReducers from './store/preferences/reducers/preferences.reducers';
+import * as RecommendedCarsEffects from './store/recommended-cars/effects/recommended-cars.effects';
+import * as CarsReducers from './store/recommended-cars/reducers/recommended-cars.reducers';
+import * as SettingsEffects from './store/settings/effects/settings.effects';
+import * as SettingsReducers from './store/settings/reducers/settings.reducer';
+import { AuthenticationHelperService } from './tabs/auth/helpers/auth-helper.service';
+import { TabsComponent } from './tabs/tabs.component';
 
 const canMatchAuth: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
     const authenticationFacadeService = inject(AuthenticationFacadeService);
@@ -59,9 +59,9 @@ const SETTINGS_PROVIDERS = importProvidersFrom([
     EffectsModule.forFeature(SettingsEffects),
 ]);
 
-const CARS_PROVIDERS = importProvidersFrom([
-    StoreModule.forFeature(FeatureKeys.CARS, CarsReducers.carsReducers),
-    EffectsModule.forFeature(CarsEffects),
+const RECOMMENDED_CARS_PROVIDERS = importProvidersFrom([
+    StoreModule.forFeature(FeatureKeys.RECOMMENDED_CARS, CarsReducers.reducers),
+    EffectsModule.forFeature(RecommendedCarsEffects),
 ]);
 
 const FAVOURITES_PROVIDERS = importProvidersFrom([
@@ -93,7 +93,7 @@ export const routes: Routes = [
                     import('./tabs/recommended-cars/recommended-cars.component').then(
                         (component) => component.RecommendedCarsComponent,
                     ),
-                providers: [CARS_PROVIDERS, FAVOURITES_PROVIDERS],
+                providers: [RECOMMENDED_CARS_PROVIDERS, FAVOURITES_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
