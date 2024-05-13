@@ -8,12 +8,12 @@ import { RequestBuilder } from '../../request-builder';
 
 import { CarDetailsDto } from '../../models/car-details-dto';
 
-export interface RecommendedCarsControllerGetCarDetails$Params {
+export interface CarDetailsControllerGetCarDetails$Params {
   carId: number;
 }
 
-export function recommendedCarsControllerGetCarDetails(http: HttpClient, rootUrl: string, params: RecommendedCarsControllerGetCarDetails$Params, context?: HttpContext): Observable<StrictHttpResponse<CarDetailsDto>> {
-  const rb = new RequestBuilder(rootUrl, recommendedCarsControllerGetCarDetails.PATH, 'get');
+export function carDetailsControllerGetCarDetails(http: HttpClient, rootUrl: string, params: CarDetailsControllerGetCarDetails$Params, context?: HttpContext): Observable<StrictHttpResponse<CarDetailsDto>> {
+  const rb = new RequestBuilder(rootUrl, carDetailsControllerGetCarDetails.PATH, 'get');
   if (params) {
     rb.path('carId', params.carId, {});
   }
@@ -28,4 +28,4 @@ export function recommendedCarsControllerGetCarDetails(http: HttpClient, rootUrl
   );
 }
 
-recommendedCarsControllerGetCarDetails.PATH = '/api/cars/{carId}';
+carDetailsControllerGetCarDetails.PATH = '/api/car/{carId}';
