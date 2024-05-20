@@ -482,6 +482,71 @@
                 },
                 "tags": ["Car details"]
             }
+        },
+        "/api/basic-info/brands": {
+            "get": {
+                "operationId": "BasicInfoController_getCarBrands",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CarBrandDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Basic car information"]
+            }
+        },
+        "/api/basic-info/{brandId}": {
+            "get": {
+                "operationId": "BasicInfoController_getCarModels",
+                "parameters": [
+                    {
+                        "name": "brandId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CarModelDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Basic car information"]
+            }
         }
     },
     "info": {
@@ -948,6 +1013,46 @@
                     "images",
                     "isFavourite"
                 ]
+            },
+            "CarBrandDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "Car brand ID"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Car code"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Car brand name"
+                    }
+                },
+                "required": ["id", "code", "title"]
+            },
+            "CarModelDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "Car model ID"
+                    },
+                    "brandId": {
+                        "type": "number",
+                        "description": "Car brand ID"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Car code"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Car model name"
+                    }
+                },
+                "required": ["id", "brandId", "code", "title"]
             },
             "PaginationDto": {
                 "type": "object",

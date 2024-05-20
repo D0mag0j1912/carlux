@@ -10,6 +10,7 @@ import { UserProfileDetailsService } from './services/user-profile-details.servi
 import { CarListService } from './services/car-list.service';
 import { FavouritesService } from './services/favourites.service';
 import { CarDetailsService } from './services/car-details.service';
+import { BasicCarInformationService } from './services/basic-car-information.service';
 
 /**
  * Module that provides all services and configuration.
@@ -25,6 +26,7 @@ import { CarDetailsService } from './services/car-details.service';
     CarListService,
     FavouritesService,
     CarDetailsService,
+    BasicCarInformationService,
     ApiConfiguration
   ],
 })
