@@ -1,20 +1,22 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserEntity } from './modules/auth/entity/user.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
-import { PreferencesModule } from './modules/preferences/preferences.module';
-import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
-import { LanguageEntity } from './modules/languages/entity/language.entity';
-import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
-import { CarEntity } from './shared/entities/car.entity';
-import { WheelDriveTypeEntity } from './shared/entities/wheel-drive-types.entity';
-import { BodyStyleEntity } from './shared/entities/body-style.entity';
-import { RecommendedCarsModule } from './modules/recommended-cars/recommended-cars.module';
-import { ImageEntity } from './shared/entities/image.entity';
-import { CurrencyEntity } from './shared/entities/currency.entity';
-import { FavouritesModule } from './modules/favourites/favourites.module';
+import { UserEntity } from './modules/auth/entity/user.entity';
 import { CarDetailsModule } from './modules/car-details/car-details.module';
+import { FavouritesModule } from './modules/favourites/favourites.module';
+import { LanguageEntity } from './modules/languages/entity/language.entity';
+import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
+import { PreferencesModule } from './modules/preferences/preferences.module';
+import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
+import { RecommendedCarsModule } from './modules/recommended-cars/recommended-cars.module';
+import { BasicInfoModule } from './shared/basic-info/basic-info.module';
+import { CarBrandEntity } from './shared/entities/car-brand.entity';
+import { CarModelEntity } from './shared/entities/car-model.entity';
+import { CarEntity } from './shared/entities/car.entity';
+import { CurrencyEntity } from './shared/entities/currency.entity';
+import { ImageEntity } from './shared/entities/image.entity';
+import { WheelDriveTypeEntity } from './shared/entities/wheel-drive-types.entity';
 
 const IMPORTS = [
     AuthModule,
@@ -23,6 +25,7 @@ const IMPORTS = [
     RecommendedCarsModule,
     FavouritesModule,
     CarDetailsModule,
+    BasicInfoModule,
 ];
 
 @Module({
@@ -45,9 +48,10 @@ const IMPORTS = [
                     LanguageEntity,
                     CarEntity,
                     WheelDriveTypeEntity,
-                    BodyStyleEntity,
                     ImageEntity,
                     CurrencyEntity,
+                    CarBrandEntity,
+                    CarModelEntity,
                 ],
             }),
             inject: [ConfigService],

@@ -1,11 +1,11 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { SellerType as SellerType } from '../../constants/seller-type';
-import { Transmission } from '../../constants/transmission';
+import { BodyStyles } from '../../constants/body-style';
 import { FuelType } from '../../constants/fuel-type';
-import { BodyStyleEntity } from './body-style.entity';
-import { WheelDriveTypeEntity } from './wheel-drive-types.entity';
+import { SellerType } from '../../constants/seller-type';
+import { Transmission } from '../../constants/transmission';
 import { CurrencyEntity } from './currency.entity';
 import { ImageEntity } from './image.entity';
+import { WheelDriveTypeEntity } from './wheel-drive-types.entity';
 
 @Entity({ name: 'Cars' })
 export class CarEntity {
@@ -85,7 +85,7 @@ export class CarEntity {
     UploadedDate: string;
 
     @Column()
-    BodyStyleId: number;
+    BodyStyle: BodyStyles;
 
     @Column()
     WheelDriveTypeId: number;
@@ -98,10 +98,6 @@ export class CarEntity {
 
     @Column({ nullable: true })
     AddedToFavouritesDate: string;
-
-    @OneToOne(() => BodyStyleEntity, (bodyStyle) => bodyStyle.Id)
-    @JoinColumn({ name: 'BodyStyleId' })
-    bodyStyle: BodyStyleEntity;
 
     @OneToOne(() => WheelDriveTypeEntity, (wheelDriveType) => wheelDriveType.Id)
     @JoinColumn({ name: 'WheelDriveTypeId' })
