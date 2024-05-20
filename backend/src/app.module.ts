@@ -11,7 +11,6 @@ import { PreferencesModule } from './modules/preferences/preferences.module';
 import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
 import { RecommendedCarsModule } from './modules/recommended-cars/recommended-cars.module';
 import { BasicInfoModule } from './shared/basic-info/basic-info.module';
-import { BodyStyleEntity } from './shared/entities/body-style.entity';
 import { CarBrandEntity } from './shared/entities/car-brand.entity';
 import { CarModelEntity } from './shared/entities/car-model.entity';
 import { CarEntity } from './shared/entities/car.entity';
@@ -49,7 +48,6 @@ const IMPORTS = [
                     LanguageEntity,
                     CarEntity,
                     WheelDriveTypeEntity,
-                    BodyStyleEntity,
                     ImageEntity,
                     CurrencyEntity,
                     CarBrandEntity,

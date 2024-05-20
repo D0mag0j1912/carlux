@@ -50,11 +50,10 @@ export class CarDetailsService {
                 'car.SellerType',
                 'car.UploadedDate',
                 'car.IsFavourite',
-                'bs.Name',
+                'car.BodyStyle',
                 'wdt.Type',
                 'cur.Symbol',
             ])
-            .innerJoin('car.bodyStyle', 'bs')
             .innerJoin('car.wheelDriveType', 'wdt')
             .innerJoin('car.currency', 'cur')
             .where('car.Id = :carId', { carId })
@@ -93,7 +92,7 @@ export class CarDetailsService {
             rimSize: car.RimSize,
             sellerType: car.SellerType,
             uploadedDate: car.UploadedDate,
-            bodyStyle: car.bodyStyle.Name,
+            bodyStyle: car.BodyStyle,
             wheelDriveType: car.wheelDriveType.Type,
             currencySymbol: car.currency.Symbol,
             images: imageEntities.map((imageEntity: ImageEntity) => imageEntity.Image),
