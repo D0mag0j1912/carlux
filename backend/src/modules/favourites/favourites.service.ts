@@ -1,11 +1,11 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { GeneralResponseDto } from '../../models/general-response.dto';
 import { CarEntity } from '../../shared/entities/car.entity';
 import { ImageEntity } from '../../shared/entities/image.entity';
-import { GeneralResponseDto } from '../../models/general-response.dto';
-import { FavouritesDto } from './models/favourites.dto';
 import { HandleFavourites } from './constants/handle-favourites';
+import { FavouritesDto } from './models/favourites.dto';
 
 @Injectable()
 export class FavouritesService {
@@ -57,8 +57,6 @@ export class FavouritesService {
                 'car.Id',
                 'car.Price',
                 'currency.Symbol',
-                'car.Brand',
-                'car.ModelName',
                 'car.KilometersTravelled',
                 'car.HorsePower',
                 'car.Kilowatts',
@@ -70,8 +68,12 @@ export class FavouritesService {
                 'car.CO2Emissions',
                 'car.SellerType',
                 'car.CountryOrigin',
+                'carBrand.Title',
+                'carModel.Title',
             ])
             .leftJoin('car.currency', 'currency')
+            .leftJoin('car.carBrand', 'carBrand')
+            .leftJoin('car.carModel', 'carModel')
             .where('car.IsFavourite = :IsFavourite', { IsFavourite: true })
             .orderBy('car.AddedToFavouritesDate', 'DESC')
             .getMany();
@@ -83,8 +85,8 @@ export class FavouritesService {
                 .map((imageEntity: ImageEntity) => imageEntity.Image),
             price: carEntity.Price,
             currencySymbol: carEntity.currency.Symbol,
-            brand: carEntity.Brand,
-            modelName: carEntity.ModelName,
+            brand: carEntity.carBrand.Title,
+            modelName: carEntity.carModel.Title,
             kilometersTravelled: carEntity.KilometersTravelled,
             horsePower: carEntity.HorsePower,
             kilowatts: carEntity.Kilowatts,
