@@ -25,12 +25,10 @@ export class CarDetailsService {
             .createQueryBuilder('car')
             .select([
                 'car.Id',
-                'car.Brand',
                 'car.KilometersTravelled',
                 'car.Price',
                 'car.FirstRegistrationDate',
                 'car.ReleaseDate',
-                'car.ModelName',
                 'car.CountryOrigin',
                 'car.NoOfPreviousOwners',
                 'car.Transmission',
@@ -53,9 +51,13 @@ export class CarDetailsService {
                 'car.BodyStyle',
                 'wdt.Type',
                 'cur.Symbol',
+                'carBrand.Title',
+                'carModel.Title',
             ])
             .innerJoin('car.wheelDriveType', 'wdt')
             .innerJoin('car.currency', 'cur')
+            .innerJoin('car.carBrand', 'carBrand')
+            .innerJoin('car.carModel', 'carModel')
             .where('car.Id = :carId', { carId })
             .getOne();
         const imageEntities: ImageEntity[] = await this._imageRepository.find({
@@ -68,12 +70,12 @@ export class CarDetailsService {
         });
         const carDto: CarDetailsDto = {
             id: car.Id,
-            brand: car.Brand,
+            brand: car.carBrand.Title,
             kilometersTravelled: car.KilometersTravelled,
             price: car.Price,
             firstRegistrationDate: car.FirstRegistrationDate,
             releaseDate: car.ReleaseDate,
-            modelName: car.ModelName,
+            modelName: car.carModel.Title,
             countryOrigin: car.CountryOrigin,
             noOfPreviousOwners: car.NoOfPreviousOwners,
             transmission: car.Transmission,

@@ -32,19 +32,21 @@ export class RecommendedCarsService {
             .createQueryBuilder('car')
             .select([
                 'car.Id',
-                'car.Brand',
                 'car.KilometersTravelled',
                 'car.Price',
                 'car.FirstRegistrationDate',
-                'car.ModelName',
                 'car.CountryOrigin',
                 'car.NoOfPreviousOwners',
                 'car.SellerType',
                 'car.UploadedDate',
                 'car.IsFavourite',
                 'currency.Symbol',
+                'carBrand.Title',
+                'carModel.Title',
             ])
             .leftJoin('car.currency', 'currency')
+            .leftJoin('car.carBrand', 'carBrand')
+            .leftJoin('car.carModel', 'carModel')
             .skip((page - 1) * perPage)
             .take(perPage)
             .orderBy('car.UploadedDate', 'DESC')
@@ -53,11 +55,11 @@ export class RecommendedCarsService {
         const recommendedCars: RecommendedCarsDto[] = recommendedCarsEntities.map(
             (carEntity: CarEntity) => ({
                 id: carEntity.Id,
-                brand: carEntity.Brand,
+                brand: carEntity.carBrand.Title,
                 kilometersTravelled: carEntity.KilometersTravelled,
                 price: carEntity.Price,
                 firstRegistrationDate: carEntity.FirstRegistrationDate,
-                modelName: carEntity.ModelName,
+                modelName: carEntity.carModel.Title,
                 countryOrigin: carEntity.CountryOrigin,
                 noOfPreviousOwners: carEntity.NoOfPreviousOwners,
                 sellerType: carEntity.SellerType,

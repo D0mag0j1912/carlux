@@ -3,6 +3,8 @@ import { BodyStyles } from '../../constants/body-style';
 import { FuelType } from '../../constants/fuel-type';
 import { SellerType } from '../../constants/seller-type';
 import { Transmission } from '../../constants/transmission';
+import { CarBrandEntity } from './car-brand.entity';
+import { CarModelEntity } from './car-model.entity';
 import { CurrencyEntity } from './currency.entity';
 import { ImageEntity } from './image.entity';
 import { WheelDriveTypeEntity } from './wheel-drive-types.entity';
@@ -13,7 +15,10 @@ export class CarEntity {
     Id: number;
 
     @Column()
-    Brand: string;
+    BrandId: number;
+
+    @Column()
+    ModelId: number;
 
     @Column()
     KilometersTravelled: number;
@@ -26,9 +31,6 @@ export class CarEntity {
 
     @Column()
     ReleaseDate: string;
-
-    @Column()
-    ModelName: string;
 
     @Column()
     CountryOrigin: string;
@@ -98,6 +100,14 @@ export class CarEntity {
 
     @Column({ nullable: true })
     AddedToFavouritesDate: string;
+
+    @OneToOne(() => CarBrandEntity, (carBrandEntity) => carBrandEntity.Id)
+    @JoinColumn({ name: 'BrandId' })
+    carBrand: CarBrandEntity;
+
+    @OneToOne(() => CarModelEntity, (carModelEntity) => carModelEntity.Id)
+    @JoinColumn({ name: 'ModelId' })
+    carModel: CarModelEntity;
 
     @OneToOne(() => WheelDriveTypeEntity, (wheelDriveType) => wheelDriveType.Id)
     @JoinColumn({ name: 'WheelDriveTypeId' })
