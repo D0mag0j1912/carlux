@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiExtraModels,
@@ -6,14 +6,17 @@ import {
     ApiTags,
 } from '@nestjs/swagger';
 import { BASE_URL } from '../../constants/base-url';
+import { PaginationDocs } from '../../decorators/pagination-docs.decorator';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { PaginationDto } from '../../models/pagination.dto';
-import { PaginationDocs } from '../../decorators/pagination-docs.decorator';
-import { RecommendedCarsService } from './recommended-cars.service';
+import { CarFilterDto } from './models/car-filter.dto';
 import { RecommendedCarsDto } from './models/recommended-cars.dto';
+import { RecommendedCarsService } from './recommended-cars.service';
+
+const RECOMMENDED_CARS_FEATURE_KEY = 'recommended-cars';
 
 @ApiTags('Car list')
-@Controller(`${BASE_URL}`)
+@Controller(`${BASE_URL}${RECOMMENDED_CARS_FEATURE_KEY}`)
 export class RecommendedCarsController {
     constructor(private _recommendedCarsService: RecommendedCarsService) {}
 
@@ -27,12 +30,10 @@ export class RecommendedCarsController {
     })
     @PaginationDocs(RecommendedCarsDto)
     @ApiExtraModels(RecommendedCarsDto)
-    @Get('recommended-cars')
+    @Get()
     async getRecommendedCars(
-        @Query('page', ParseIntPipe) page: number,
-        @Query('perPage', ParseIntPipe)
-        perPage: number,
+        @Query() query: CarFilterDto,
     ): Promise<PaginationDto<RecommendedCarsDto>> {
-        return this._recommendedCarsService.getRecommendedCars(page, perPage);
+        return this._recommendedCarsService.getRecommendedCars(query);
     }
 }
