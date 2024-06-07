@@ -10,8 +10,86 @@ import { PaginationDto } from '../../models/pagination-dto';
 import { RecommendedCarsDto } from '../../models/recommended-cars-dto';
 
 export interface RecommendedCarsControllerGetRecommendedCars$Params {
+
+/**
+ * Page number
+ */
   page: number;
+
+/**
+ * Car's per page
+ */
   perPage: number;
+
+/**
+ * Car's brand ID
+ */
+  brandId: number;
+
+/**
+ * Car's model ID
+ */
+  modelId?: number;
+
+/**
+ * Car's body style
+ */
+  bodyStyle?: string;
+
+/**
+ * Car's fuel type
+ */
+  fuelType?: 'Gasoline' | 'Diesel';
+
+/**
+ * Year registration FROM
+ */
+  yearRegistrationFrom?: number;
+
+/**
+ * Year registration TO
+ */
+  yearRegistrationTo?: number;
+
+/**
+ * Price FROM
+ */
+  priceFrom?: number;
+
+/**
+ * Price TO
+ */
+  priceTo?: number;
+
+/**
+ * Kilometers travelled FROM
+ */
+  kilometersTravelledFrom?: number;
+
+/**
+ * Kilometers travelled TO
+ */
+  kilometersTravelledTo?: number;
+
+/**
+ * Power metric
+ */
+  powerMetric?: 'PS' | 'KW';
+
+/**
+ * Power FROM
+ */
+  powerFrom?: number;
+
+/**
+ * Power TO
+ */
+  powerTo?: number;
+
+/**
+ * Type of transmission
+ */
+  transmission?: string;
 }
 
 export function recommendedCarsControllerGetRecommendedCars(http: HttpClient, rootUrl: string, params: RecommendedCarsControllerGetRecommendedCars$Params, context?: HttpContext): Observable<StrictHttpResponse<PaginationDto & {
@@ -24,6 +102,20 @@ export function recommendedCarsControllerGetRecommendedCars(http: HttpClient, ro
   if (params) {
     rb.query('page', params.page, {});
     rb.query('perPage', params.perPage, {});
+    rb.query('brandId', params.brandId, {});
+    rb.query('modelId', params.modelId, {});
+    rb.query('bodyStyle', params.bodyStyle, {});
+    rb.query('fuelType', params.fuelType, {});
+    rb.query('yearRegistrationFrom', params.yearRegistrationFrom, {});
+    rb.query('yearRegistrationTo', params.yearRegistrationTo, {});
+    rb.query('priceFrom', params.priceFrom, {});
+    rb.query('priceTo', params.priceTo, {});
+    rb.query('kilometersTravelledFrom', params.kilometersTravelledFrom, {});
+    rb.query('kilometersTravelledTo', params.kilometersTravelledTo, {});
+    rb.query('powerMetric', params.powerMetric, {});
+    rb.query('powerFrom', params.powerFrom, {});
+    rb.query('powerTo', params.powerTo, {});
+    rb.query('transmission', params.transmission, {});
   }
 
   return http.request(
