@@ -321,6 +321,241 @@
                         "name": "page",
                         "required": true,
                         "in": "query",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "perPage",
+                        "required": true,
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "PaginationDocs",
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/PaginationDto"
+                                        },
+                                        {
+                                            "properties": {
+                                                "page": {
+                                                    "type": "number"
+                                                },
+                                                "perPage": {
+                                                    "type": "number"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "results": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/RecommendedCarsDto"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Recommended cars list"]
+            }
+        },
+        "/api/favourites/{carId}": {
+            "put": {
+                "operationId": "FavouritesController_handleFavouritesActions",
+                "parameters": [
+                    {
+                        "name": "carId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "method",
+                        "required": true,
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Server returns successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GeneralResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Favourites"]
+            }
+        },
+        "/api/favourites": {
+            "get": {
+                "operationId": "FavouritesController_getFavourites",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FavouritesDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Favourites"]
+            }
+        },
+        "/api/car/{carId}": {
+            "get": {
+                "operationId": "CarDetailsController_getCarDetails",
+                "parameters": [
+                    {
+                        "name": "carId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CarDetailsDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Car details"]
+            }
+        },
+        "/api/basic-info/brands": {
+            "get": {
+                "operationId": "BasicInfoController_getCarBrands",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CarBrandDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Basic car information"]
+            }
+        },
+        "/api/basic-info/{brandId}": {
+            "get": {
+                "operationId": "BasicInfoController_getCarModels",
+                "parameters": [
+                    {
+                        "name": "brandId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CarModelDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Basic car information"]
+            }
+        },
+        "/api/cars": {
+            "get": {
+                "operationId": "CarsController_getCars",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "required": true,
+                        "in": "query",
                         "description": "Page number",
                         "schema": {
                             "type": "number"
@@ -507,175 +742,6 @@
                     }
                 },
                 "tags": ["Car list"]
-            }
-        },
-        "/api/favourites/{carId}": {
-            "put": {
-                "operationId": "FavouritesController_handleFavouritesActions",
-                "parameters": [
-                    {
-                        "name": "carId",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "method",
-                        "required": true,
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Server returns successful response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GeneralResponseDto"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request from the client"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                },
-                "tags": ["Favourites"]
-            }
-        },
-        "/api/favourites": {
-            "get": {
-                "operationId": "FavouritesController_getFavourites",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/FavouritesDto"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request from the client"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                },
-                "tags": ["Favourites"]
-            }
-        },
-        "/api/car/{carId}": {
-            "get": {
-                "operationId": "CarDetailsController_getCarDetails",
-                "parameters": [
-                    {
-                        "name": "carId",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "number"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CarDetailsDto"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request from the client"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                },
-                "tags": ["Car details"]
-            }
-        },
-        "/api/basic-info/brands": {
-            "get": {
-                "operationId": "BasicInfoController_getCarBrands",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/CarBrandDto"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request from the client"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                },
-                "tags": ["Basic car information"]
-            }
-        },
-        "/api/basic-info/{brandId}": {
-            "get": {
-                "operationId": "BasicInfoController_getCarModels",
-                "parameters": [
-                    {
-                        "name": "brandId",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "number"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/CarModelDto"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request from the client"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                },
-                "tags": ["Basic car information"]
             }
         }
     },

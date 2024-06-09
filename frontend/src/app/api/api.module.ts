@@ -7,10 +7,11 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { AuthenticationService } from './services/authentication.service';
 import { PreferencesService } from './services/preferences.service';
 import { UserProfileDetailsService } from './services/user-profile-details.service';
-import { CarListService } from './services/car-list.service';
+import { RecommendedCarsListService } from './services/recommended-cars-list.service';
 import { FavouritesService } from './services/favourites.service';
 import { CarDetailsService } from './services/car-details.service';
 import { BasicCarInformationService } from './services/basic-car-information.service';
+import { CarListService } from './services/car-list.service';
 
 /**
  * Module that provides all services and configuration.
@@ -23,10 +24,11 @@ import { BasicCarInformationService } from './services/basic-car-information.ser
     AuthenticationService,
     PreferencesService,
     UserProfileDetailsService,
-    CarListService,
+    RecommendedCarsListService,
     FavouritesService,
     CarDetailsService,
     BasicCarInformationService,
+    CarListService,
     ApiConfiguration
   ],
 })
