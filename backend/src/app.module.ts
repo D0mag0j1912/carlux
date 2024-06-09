@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserEntity } from './modules/auth/entity/user.entity';
 import { CarDetailsModule } from './modules/car-details/car-details.module';
+import { CarsModule } from './modules/cars/cars.module';
 import { FavouritesModule } from './modules/favourites/favourites.module';
 import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
@@ -26,6 +27,7 @@ const IMPORTS = [
     FavouritesModule,
     CarDetailsModule,
     BasicInfoModule,
+    CarsModule,
 ];
 
 @Module({
