@@ -9,48 +9,48 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { carsControllerGetCars } from '../fn/car-list/cars-controller-get-cars';
-import { CarsControllerGetCars$Params } from '../fn/car-list/cars-controller-get-cars';
 import { PaginationDto } from '../models/pagination-dto';
+import { recommendedCarsControllerGetRecommendedCars } from '../fn/recommended-cars-list/recommended-cars-controller-get-recommended-cars';
+import { RecommendedCarsControllerGetRecommendedCars$Params } from '../fn/recommended-cars-list/recommended-cars-controller-get-recommended-cars';
 import { RecommendedCarsDto } from '../models/recommended-cars-dto';
 
 @Injectable({ providedIn: 'root' })
-export class CarListService extends BaseService {
+export class RecommendedCarsListService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /** Path part for operation `carsControllerGetCars()` */
-  static readonly CarsControllerGetCarsPath = '/api/cars';
+  /** Path part for operation `recommendedCarsControllerGetRecommendedCars()` */
+  static readonly RecommendedCarsControllerGetRecommendedCarsPath = '/api/recommended-cars';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `carsControllerGetCars()` instead.
+   * To access only the response body, use `recommendedCarsControllerGetRecommendedCars()` instead.
    *
    * This method doesn't expect any request body.
    */
-  carsControllerGetCars$Response(params: CarsControllerGetCars$Params, context?: HttpContext): Observable<StrictHttpResponse<PaginationDto & {
+  recommendedCarsControllerGetRecommendedCars$Response(params: RecommendedCarsControllerGetRecommendedCars$Params, context?: HttpContext): Observable<StrictHttpResponse<PaginationDto & {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
 'results'?: Array<RecommendedCarsDto>;
 }>> {
-    return carsControllerGetCars(this.http, this.rootUrl, params, context);
+    return recommendedCarsControllerGetRecommendedCars(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `carsControllerGetCars$Response()` instead.
+   * To access the full response (for headers, for example), `recommendedCarsControllerGetRecommendedCars$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  carsControllerGetCars(params: CarsControllerGetCars$Params, context?: HttpContext): Observable<PaginationDto & {
+  recommendedCarsControllerGetRecommendedCars(params: RecommendedCarsControllerGetRecommendedCars$Params, context?: HttpContext): Observable<PaginationDto & {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
 'results'?: Array<RecommendedCarsDto>;
 }> {
-    return this.carsControllerGetCars$Response(params, context).pipe(
+    return this.recommendedCarsControllerGetRecommendedCars$Response(params, context).pipe(
       map((r: StrictHttpResponse<PaginationDto & {
 'page'?: number;
 'perPage'?: number;

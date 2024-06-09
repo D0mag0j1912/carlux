@@ -9,7 +9,7 @@ import { RequestBuilder } from '../../request-builder';
 import { PaginationDto } from '../../models/pagination-dto';
 import { RecommendedCarsDto } from '../../models/recommended-cars-dto';
 
-export interface RecommendedCarsControllerGetRecommendedCars$Params {
+export interface CarsControllerGetCars$Params {
 
 /**
  * Page number
@@ -92,13 +92,13 @@ export interface RecommendedCarsControllerGetRecommendedCars$Params {
   transmission?: string;
 }
 
-export function recommendedCarsControllerGetRecommendedCars(http: HttpClient, rootUrl: string, params: RecommendedCarsControllerGetRecommendedCars$Params, context?: HttpContext): Observable<StrictHttpResponse<PaginationDto & {
+export function carsControllerGetCars(http: HttpClient, rootUrl: string, params: CarsControllerGetCars$Params, context?: HttpContext): Observable<StrictHttpResponse<PaginationDto & {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
 'results'?: Array<RecommendedCarsDto>;
 }>> {
-  const rb = new RequestBuilder(rootUrl, recommendedCarsControllerGetRecommendedCars.PATH, 'get');
+  const rb = new RequestBuilder(rootUrl, carsControllerGetCars.PATH, 'get');
   if (params) {
     rb.query('page', params.page, {});
     rb.query('perPage', params.perPage, {});
@@ -133,4 +133,4 @@ export function recommendedCarsControllerGetRecommendedCars(http: HttpClient, ro
   );
 }
 
-recommendedCarsControllerGetRecommendedCars.PATH = '/api/recommended-cars';
+carsControllerGetCars.PATH = '/api/cars';
