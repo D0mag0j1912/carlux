@@ -2,7 +2,7 @@
     @if (areRecommendedCarsNotLoading$ | async) {
         @if (recommendedCars$ | async; as recommendedCars) {
             <div class="search-cars-wrapper">
-                <ion-button class="search-btn">
+                <ion-button class="search-btn" (click)="searchCars()">
                     <ion-icon name="search-sharp" slot="start"></ion-icon>
                     {{ t('recommended_cars.search_cars') }}
                 </ion-button>

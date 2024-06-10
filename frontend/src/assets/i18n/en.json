@@ -148,5 +148,11 @@
         "owner_plural": "owners",
         "no_favourites_title": "No favourites yet",
         "no_favourites_description": "Favourite car list is empty. Feel free to add cars to your favourite list 🚀"
+    },
+    "filters": {
+        "title": "Detailed search",
+        "sections": {
+            "basic_information": "Basic information"
+        }
     }
 }

@@ -148,5 +148,11 @@
         "owner_plural": "vlasnika",
         "no_favourites_title": "Još nema favorita",
         "no_favourites_description": "Lista omiljenih automobila je prazna. Slobodno dodajte automobile u Vašu listu favorita 🚀"
+    },
+    "filters": {
+        "title": "Detaljna pretraga",
+        "sections": {
+            "basic_information": "Osnovne informacije"
+        }
     }
 }

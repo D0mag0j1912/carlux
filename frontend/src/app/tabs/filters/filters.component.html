@@ -1,0 +1,20 @@
+<ion-header *transloco="let t">
+    <ion-toolbar>
+        <ion-title>{{ 'filters.title' | transloco }}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeFiltersModal()">{{ t('common.actions.back') }}</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *transloco="let t">
+    <ion-accordion-group>
+        <ion-accordion [value]="filtersAccordionGroups.BASIC_INFORMATION">
+            <ion-item slot="header" color="light">
+                <ion-label class="basic-info-title">
+                    {{ t('filters.sections.basic_information') }}
+                </ion-label>
+            </ion-item>
+        </ion-accordion>
+    </ion-accordion-group>
+</ion-content>
