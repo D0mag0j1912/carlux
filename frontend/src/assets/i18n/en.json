@@ -153,6 +153,9 @@
         "title": "Detailed search",
         "sections": {
             "basic_information": "Basic information"
+        },
+        "errors": {
+            "get_car_brands": "Error while getting car brands. Please try again."
         }
     }
 }

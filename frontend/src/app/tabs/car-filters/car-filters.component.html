@@ -1,9 +1,9 @@
 <ion-header *transloco="let t">
     <ion-toolbar>
-        <ion-title>{{ 'filters.title' | transloco }}</ion-title>
-        <ion-buttons slot="end">
-            <ion-button (click)="closeFiltersModal()">{{ t('common.actions.back') }}</ion-button>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/recommended-cars" [text]="t('common.actions.back')"></ion-back-button>
         </ion-buttons>
+        <ion-title>{{ t('filters.title') }}</ion-title>
     </ion-toolbar>
 </ion-header>
 

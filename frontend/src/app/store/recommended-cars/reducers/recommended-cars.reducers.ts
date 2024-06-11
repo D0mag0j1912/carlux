@@ -9,7 +9,7 @@ export interface RecommendedCarsState {
     recommendedCars: RecommendedCarsDataState;
 }
 
-export const initialState: RecommendedCarsState = {
+const initialState: RecommendedCarsState = {
     recommendedCars: {
         areRecommendedCarsLoading: false,
         recommendedCarsData: undefined,

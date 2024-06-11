@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import {
     IonAccordion,
     IonAccordionGroup,
+    IonBackButton,
     IonButton,
     IonButtons,
     IonContent,
@@ -10,10 +11,8 @@ import {
     IonLabel,
     IonTitle,
     IonToolbar,
-    ModalController,
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
-import { DialogRoles } from '../../constants/dialog-roles';
 import { FilterAccordionGroups } from './constants/filter-accordion-groups';
 
 const IONIC_IMPORTS = [
@@ -27,21 +26,16 @@ const IONIC_IMPORTS = [
     IonAccordion,
     IonItem,
     IonLabel,
+    IonBackButton,
 ];
 
 @Component({
     standalone: true,
     imports: [...IONIC_IMPORTS, TranslocoModule],
     selector: 'car-filters',
-    templateUrl: './filters.component.html',
-    styleUrl: './filters.component.scss',
+    templateUrl: './car-filters.component.html',
+    styleUrl: './car-filters.component.scss',
 })
-export class FiltersComponent {
-    private _modalController = inject(ModalController);
-
-    readonly filtersAccordionGroups = FilterAccordionGroups;
-
-    async closeFiltersModal(): Promise<void> {
-        await this._modalController.dismiss(undefined, DialogRoles.CANCEL);
-    }
+export class CarFiltersComponent {
+    filtersAccordionGroups = FilterAccordionGroups;
 }
