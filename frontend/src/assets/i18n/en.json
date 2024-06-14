@@ -14,7 +14,8 @@
             "close": "Close",
             "confirm": "Confirm",
             "save": "Save",
-            "back": "Back"
+            "back": "Back",
+            "select": "Select"
         },
         "seller_type": {
             "dealer": "Dealer",

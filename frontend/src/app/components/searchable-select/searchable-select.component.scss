@@ -1,0 +1,14 @@
+
+.ios .searchable-toolbar {
+    --background: white;
+
+    .searchbar {
+        padding-top: 10px;
+    }
+}
+
+.selected-items {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
