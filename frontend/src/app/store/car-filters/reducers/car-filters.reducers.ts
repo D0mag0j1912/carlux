@@ -14,6 +14,6 @@ export const reducers = createReducer(
     initialState,
     on(CarFiltersActions.setCarBrands, (state: CarFiltersState, { carBrands }) => ({
         ...state,
-        carBrands: { ...carBrands },
+        carBrands: [ ...carBrands ],
     })),
 );

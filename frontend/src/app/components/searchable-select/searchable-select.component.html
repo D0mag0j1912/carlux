@@ -2,7 +2,7 @@
     @if (selectedItems()?.length) {
         <div class="selected-items">
             @for (item of selectedItems(); track item[hiddenValue()]; let last = $last) {
-                <span> {{ t(item[visibleValue()]) }} {{ last ? '' : ', ' }} </span>
+                <span> {{ item[visibleValue()] }} {{ last ? '' : ', ' }} </span>
             }
         </div>
     }
@@ -28,8 +28,9 @@
             <ion-content>
                 @for (item of filteredItems(); track item[hiddenValue()]) {
                     <ion-item (click)="itemSelected(item)">
-                        <ion-checkbox slot="start" [(ngModel)]="item.selected"></ion-checkbox>
-                        <ion-label>{{ t(item[visibleValue()]) }}</ion-label>
+                        <ion-checkbox [(ngModel)]="item.selected" labelPlacement="start">
+                            {{ item[visibleValue()] }}
+                        </ion-checkbox>
                     </ion-item>
                 }
             </ion-content>

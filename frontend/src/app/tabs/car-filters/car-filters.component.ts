@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import {
     IonAccordion,
     IonAccordionGroup,
@@ -13,6 +14,8 @@ import {
     IonToolbar,
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
+import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
+import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { FilterAccordionGroups } from './constants/filter-accordion-groups';
 
@@ -32,7 +35,7 @@ const IONIC_IMPORTS = [
 
 @Component({
     standalone: true,
-    imports: [...IONIC_IMPORTS, TranslocoModule],
+    imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent],
     selector: 'car-filters',
     templateUrl: './car-filters.component.html',
     styleUrl: './car-filters.component.scss',
@@ -43,6 +46,10 @@ export class CarFiltersComponent implements OnInit {
     carBrands = this._carFiltersFacadeService.selectCarBrands();
 
     readonly filtersAccordionGroups = FilterAccordionGroups;
+
+    form = new FormGroup({
+        brands: new FormControl<CarBrand[]>([]),
+    });
 
     ngOnInit(): void {
         this._carFiltersFacadeService.getCarBrands();

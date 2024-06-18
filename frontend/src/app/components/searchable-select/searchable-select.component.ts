@@ -9,7 +9,6 @@ import {
     IonContent,
     IonHeader,
     IonItem,
-    IonLabel,
     IonModal,
     IonSearchbar,
     IonToolbar,
@@ -26,7 +25,6 @@ const IONIC_IMPORTS = [
     IonContent,
     IonItem,
     IonCheckbox,
-    IonLabel,
 ];
 
 @Component({
@@ -52,8 +50,8 @@ export class SearchableSelectComponent implements ControlValueAccessor {
     selectedItems = signal<any[] | undefined>([]);
     filteredItems = signal<any[] | undefined>([]);
 
-    onChange: (obj: any[]) => void;
-    onTouched: () => void;
+    onChange: ((obj: any[]) => void) | undefined;
+    onTouched: (() => void) | undefined;
 
     data = input.required<any[] | undefined>();
 
@@ -176,7 +174,9 @@ export class SearchableSelectComponent implements ControlValueAccessor {
 
     private _modifySelectedOutput(): void {
         const selectedOutput = this.selectedItems()?.map(({ selected, ...rest }) => rest);
-        this.onChange(selectedOutput as any[]);
+        if (this.onChange) {
+            this.onChange(selectedOutput as any[]);
+        }
     }
 
     private _resetFilteredItems(): void {

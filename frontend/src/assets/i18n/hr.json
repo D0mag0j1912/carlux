@@ -30,7 +30,8 @@
             "gasoline": "Benzin",
             "diesel": "Dizel"
         },
-        "combined": "(kombinirano)"
+        "combined": "(kombinirano)",
+        "car_brands": "Marke automobila"
     },
     "auth": {
         "continue_with_google": "Nastavi s Google",
@@ -152,6 +153,7 @@
     },
     "filters": {
         "title": "Detaljna pretraga",
+        "search_car_brands": "Pretraži marke automobila",
         "sections": {
             "basic_information": "Osnovne informacije"
         },

@@ -30,7 +30,8 @@
             "gasoline": "Gasoline",
             "diesel": "Diesel"
         },
-        "combined": "(comb)"
+        "combined": "(comb)",
+        "car_brands": "Car brands"
     },
     "auth": {
         "continue_with_google": "Continue with Google",
@@ -152,6 +153,7 @@
     },
     "filters": {
         "title": "Detailed search",
+        "search_car_brands": "Search car brands",
         "sections": {
             "basic_information": "Basic information"
         },
