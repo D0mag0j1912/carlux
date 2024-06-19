@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, forwardRef, inject, input, output, signal } from '@angular/core';
+import { Component, forwardRef, input, model, output, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SearchbarCustomEvent } from '@ionic/angular';
 import {
@@ -13,7 +13,7 @@ import {
     IonSearchbar,
     IonToolbar,
 } from '@ionic/angular/standalone';
-import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { TranslocoModule } from '@ngneat/transloco';
 
 const IONIC_IMPORTS = [
     IonModal,
@@ -42,8 +42,6 @@ const IONIC_IMPORTS = [
     ],
 })
 export class SearchableSelectComponent implements ControlValueAccessor {
-    private _translocoService = inject(TranslocoService);
-
     isOpen = signal(false);
     toggleFilterChange = signal(false);
 
@@ -53,7 +51,7 @@ export class SearchableSelectComponent implements ControlValueAccessor {
     onChange: ((obj: any[]) => void) | undefined;
     onTouched: (() => void) | undefined;
 
-    data = input.required<any[] | undefined>();
+    data = model<any[]>([]);
 
     multiple = input.required<boolean>();
 
@@ -117,8 +115,8 @@ export class SearchableSelectComponent implements ControlValueAccessor {
         if (event.detail.value) {
             filter = event.detail.value.toLowerCase();
         }
-        /* this.data = this.data()?.map((item) => {
-            const itemFound = this.selectedItems.find(
+        const updatedData = this.data()?.map((item) => {
+            const itemFound = this.selectedItems()?.find(
                 (selectedValue) => selectedValue[this.hiddenValue()] === item[this.hiddenValue()],
             );
             if (!itemFound) {
@@ -129,13 +127,10 @@ export class SearchableSelectComponent implements ControlValueAccessor {
                 ...item,
                 selected: true,
             };
-        }); */
+        });
+        this.data.set([...updatedData]);
         const filteredItems = this.data()?.filter(
-            (item) =>
-                this._translocoService
-                    .translate(item[this.visibleValue()])
-                    .toLowerCase()
-                    .indexOf(filter) >= 0,
+            (item) => item[this.visibleValue()].toLowerCase().indexOf(filter) >= 0,
         );
         this.filteredItems.set(filteredItems);
     }
