@@ -17,7 +17,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
-import { FilterAccordionGroups } from './constants/filter-accordion-groups';
+import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
 
 const IONIC_IMPORTS = [
     IonHeader,
@@ -45,7 +45,7 @@ export class CarFiltersComponent implements OnInit {
 
     carBrands = this._carFiltersFacadeService.selectCarBrands();
 
-    readonly filtersAccordionGroups = FilterAccordionGroups;
+    readonly filtersAccordionGroups = CarFilterAccordionGroups;
 
     form = new FormGroup({
         brands: new FormControl<CarBrand[]>([]),
