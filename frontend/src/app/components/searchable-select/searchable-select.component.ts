@@ -111,7 +111,7 @@ export class SearchableSelectComponent implements ControlValueAccessor {
     }
 
     filter(event: SearchbarCustomEvent): void {
-        let filter: string;
+        let filter = '';
         if (event.detail.value) {
             filter = event.detail.value.toLowerCase();
         }
@@ -129,9 +129,14 @@ export class SearchableSelectComponent implements ControlValueAccessor {
             };
         });
         this.data.set([...updatedData]);
-        const filteredItems = this.data()?.filter(
-            (item) => item[this.visibleValue()].toLowerCase().indexOf(filter) >= 0,
-        );
+        let filteredItems: any[];
+        if (filter) {
+            filteredItems = this.data()?.filter(
+                (item) => item[this.visibleValue()].toLowerCase().indexOf(filter) >= 0,
+            );
+        } else {
+            filteredItems = [...this.data()];
+        }
         this.filteredItems.set(filteredItems);
     }
 
