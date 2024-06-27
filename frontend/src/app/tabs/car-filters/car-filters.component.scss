@@ -3,3 +3,8 @@
 .basic-info-title {
     @include large;
 }
+
+.search-label {
+    padding-left: 10px;
+    font-family: var(--ion-font-family);
+}

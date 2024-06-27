@@ -48,7 +48,7 @@ export class SearchableSelectComponent implements ControlValueAccessor {
     selectedItems = signal<any[] | undefined>([]);
     filteredItems = signal<any[] | undefined>([]);
 
-    onChange: ((obj: any[]) => void) | undefined;
+    onChange!: (obj: any[]) => void;
     onTouched: (() => void) | undefined;
 
     data = model<any[]>([]);
@@ -174,9 +174,7 @@ export class SearchableSelectComponent implements ControlValueAccessor {
 
     private _modifySelectedOutput(): void {
         const selectedOutput = this.selectedItems()?.map(({ selected, ...rest }) => rest);
-        if (this.onChange) {
-            this.onChange(selectedOutput as any[]);
-        }
+        this.onChange(selectedOutput as any[]);
     }
 
     private _resetFilteredItems(): void {
