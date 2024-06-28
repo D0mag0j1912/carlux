@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
     IonAccordion,
     IonAccordionGroup,
@@ -35,7 +35,7 @@ const IONIC_IMPORTS = [
 
 @Component({
     standalone: true,
-    imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent],
+    imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent, ReactiveFormsModule],
     selector: 'car-filters',
     templateUrl: './car-filters.component.html',
     styleUrl: './car-filters.component.scss',
