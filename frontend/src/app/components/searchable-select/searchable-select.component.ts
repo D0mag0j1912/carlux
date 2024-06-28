@@ -141,8 +141,8 @@ export class SearchableSelectComponent implements ControlValueAccessor {
     }
 
     itemSelected(item: any): void {
-        if (!this.multiple) {
-            if (this.selectedItems.length) {
+        if (!this.multiple()) {
+            if (this.selectedItems()?.length) {
                 this.selectedItems.update(
                     (previouslySelectedItems) =>
                         previouslySelectedItems?.map((item, index) => {
@@ -156,7 +156,7 @@ export class SearchableSelectComponent implements ControlValueAccessor {
                         }),
                 );
             }
-            this.selectedItems.set(item);
+            this.selectedItems.set([item]);
             this.select();
             this.selectItem.emit(item);
         } else {
