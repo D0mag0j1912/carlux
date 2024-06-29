@@ -158,7 +158,8 @@
             "basic_information": "Osnovne informacije"
         },
         "errors": {
-            "get_car_brands": "Greška prilikom dohvaćanja marki automobila. Molimo pokušajte ponovno."
+            "get_car_brands": "Greška prilikom dohvaćanja marki automobila. Molimo pokušajte ponovno.",
+            "get_car_models": "Greška prilikom dohvaćanja modela automobila. Molimo pokušajte ponovno."
         }
     }
 }

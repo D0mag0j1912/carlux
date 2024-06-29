@@ -158,7 +158,8 @@
             "basic_information": "Basic information"
         },
         "errors": {
-            "get_car_brands": "Error while getting car brands. Please try again."
+            "get_car_brands": "Error while loading car brands. Please try again.",
+            "get_car_models": "Error while loading car models. Please try again."
         }
     }
 }

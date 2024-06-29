@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
     IonAccordion,
@@ -42,6 +43,7 @@ const IONIC_IMPORTS = [
 })
 export class CarFiltersComponent implements OnInit {
     private _carFiltersFacadeService = inject(CarFiltersFacadeService);
+    private _destroyRef = inject(DestroyRef);
 
     carBrands = this._carFiltersFacadeService.selectCarBrands();
 
@@ -53,5 +55,14 @@ export class CarFiltersComponent implements OnInit {
 
     ngOnInit(): void {
         this._carFiltersFacadeService.getCarBrands();
+
+        this.form.controls.brands.valueChanges
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((carBrands: CarBrand[] | null) => {
+                if (carBrands) {
+                    const brandId = carBrands[0].id;
+                    this._carFiltersFacadeService.getCarModels(brandId);
+                }
+            });
     }
 }

@@ -22,5 +22,9 @@ export class CarFiltersFacadeService {
     getCarBrands(): void {
         this._store.dispatch(CarFiltersActions.getCarBrands());
     }
+
+    getCarModels(brandId: number): void {
+        this._store.dispatch(CarFiltersActions.getCarModels({ brandId }));
+    }
     //Actions END -------------------------
 }
