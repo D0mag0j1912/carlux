@@ -16,6 +16,7 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
+import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
@@ -46,11 +47,17 @@ export class CarFiltersComponent implements OnInit {
     private _destroyRef = inject(DestroyRef);
 
     carBrands = this._carFiltersFacadeService.selectCarBrands();
+    carModels = this._carFiltersFacadeService.selectCarModels();
 
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
+    readonly CAR_BRAND_VISIBLE_VALUE = 'title';
+    readonly CAR_BRAND_HIDDEN_VALUE = 'id';
+    readonly CAR_MODELS_VISIBLE_VALUE = 'title';
+    readonly CAR_MODELS_HIDDEN_VALUE = 'id';
 
     form = new FormGroup({
         brands: new FormControl<CarBrand[]>([]),
+        models: new FormControl<CarModel[]>([]),
     });
 
     ngOnInit(): void {
