@@ -32,12 +32,18 @@
                     </car-searchable-select>
                 </ion-item>
 
-                <ion-item class="ion-no-padding" slot="content">
+                <ion-item
+                    (click)="carModelsSelect.open()"
+                    class="ion-no-padding"
+                    slot="content"
+                    [disabled]="!form.controls.brands.value?.length"
+                >
                     <ion-label class="search-label" [class.remove-item]="form.controls.brands.value?.length">{{
                         t('filters.search_car_models')
                     }}</ion-label>
                     <car-searchable-select
                         #carModelsSelect
+                        class="models-select"
                         formControlName="models"
                         [multiple]="true"
                         [data]="carModels()"
