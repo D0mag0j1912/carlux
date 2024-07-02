@@ -1,3 +1,4 @@
+import { KeyValue } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +12,8 @@ import {
     IonHeader,
     IonItem,
     IonLabel,
+    IonSelect,
+    IonSelectOption,
     IonTitle,
     IonToolbar,
 } from '@ionic/angular/standalone';
@@ -33,6 +36,8 @@ const IONIC_IMPORTS = [
     IonItem,
     IonLabel,
     IonBackButton,
+    IonSelect,
+    IonSelectOption,
 ];
 
 @Component({
@@ -54,6 +59,39 @@ export class CarFiltersComponent implements OnInit {
     readonly CAR_BRAND_HIDDEN_VALUE = 'id';
     readonly CAR_MODELS_VISIBLE_VALUE = 'title';
     readonly CAR_MODELS_HIDDEN_VALUE = 'id';
+    readonly bodyStyles: KeyValue<string, string>[] = [
+        {
+            key: 'convertible',
+            value: 'Convertible',
+        },
+        {
+            key: 'coupe',
+            value: 'Coupe',
+        },
+        {
+            key: 'sedan',
+            value: 'Sedan',
+        },
+        {
+            key: 'suv',
+            value: 'SUV',
+        },
+        {
+            key: 'hatchback',
+            value: 'Hatchback',
+        },
+    ];
+
+    readonly fuelTypes: KeyValue<string, string>[] = [
+        {
+            key: 'gasoline',
+            value: 'Gasoline',
+        },
+        {
+            key: 'diesel',
+            value: 'Diesel',
+        },
+    ];
 
     form = new FormGroup({
         brands: new FormControl<CarBrand[]>([]),

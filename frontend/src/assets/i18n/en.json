@@ -155,6 +155,8 @@
         "title": "Detailed search",
         "search_car_brands": "Search car brands",
         "search_car_models": "Search car models",
+        "body_style": "Body style",
+        "fuel_type": "Fuel type",
         "sections": {
             "basic_information": "Basic information"
         },

@@ -155,6 +155,8 @@
         "title": "Detaljna pretraga",
         "search_car_brands": "Pretraži marke automobila",
         "search_car_models": "Pretraži modele automobila",
+        "body_style": "Oblik karoserije",
+        "fuel_type": "Vrsta goriva",
         "sections": {
             "basic_information": "Osnovne informacije"
         },

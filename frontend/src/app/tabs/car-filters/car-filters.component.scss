@@ -4,6 +4,10 @@
     @include large;
 }
 
+.select-item {
+    margin-top: 15px;
+}
+
 .search-label {
     padding-left: 10px;
     font-family: var(--ion-font-family);
@@ -17,4 +21,10 @@
             max-width: 220px;
         }
     }
+}
+
+.body-style-item,
+.fuel-type-item {
+    width: 350px;
+    margin-top: 15px;
 }
