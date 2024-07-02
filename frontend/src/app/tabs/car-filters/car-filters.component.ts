@@ -21,6 +21,8 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
+import { BodyStyles } from '../../models/body-styles';
+import { FuelTypes } from '../../models/fuel-types';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
 
@@ -59,7 +61,7 @@ export class CarFiltersComponent implements OnInit {
     readonly CAR_BRAND_HIDDEN_VALUE = 'id';
     readonly CAR_MODELS_VISIBLE_VALUE = 'title';
     readonly CAR_MODELS_HIDDEN_VALUE = 'id';
-    readonly bodyStyles: KeyValue<string, string>[] = [
+    readonly bodyStyles: KeyValue<Lowercase<BodyStyles>, BodyStyles>[] = [
         {
             key: 'convertible',
             value: 'Convertible',
@@ -82,7 +84,7 @@ export class CarFiltersComponent implements OnInit {
         },
     ];
 
-    readonly fuelTypes: KeyValue<string, string>[] = [
+    readonly fuelTypes: KeyValue<Lowercase<FuelTypes>, FuelTypes>[] = [
         {
             key: 'gasoline',
             value: 'Gasoline',
