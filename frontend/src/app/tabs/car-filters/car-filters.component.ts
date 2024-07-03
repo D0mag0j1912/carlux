@@ -1,4 +1,3 @@
-import { KeyValue } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -21,10 +20,10 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
-import { BodyStyles } from '../../models/body-styles';
-import { FuelTypes } from '../../models/fuel-types';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
+import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
+import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
 
 const IONIC_IMPORTS = [
     IonHeader,
@@ -61,39 +60,8 @@ export class CarFiltersComponent implements OnInit {
     readonly CAR_BRAND_HIDDEN_VALUE = 'id';
     readonly CAR_MODELS_VISIBLE_VALUE = 'title';
     readonly CAR_MODELS_HIDDEN_VALUE = 'id';
-    readonly bodyStyles: KeyValue<Lowercase<BodyStyles>, BodyStyles>[] = [
-        {
-            key: 'convertible',
-            value: 'Convertible',
-        },
-        {
-            key: 'coupe',
-            value: 'Coupe',
-        },
-        {
-            key: 'sedan',
-            value: 'Sedan',
-        },
-        {
-            key: 'suv',
-            value: 'SUV',
-        },
-        {
-            key: 'hatchback',
-            value: 'Hatchback',
-        },
-    ];
-
-    readonly fuelTypes: KeyValue<Lowercase<FuelTypes>, FuelTypes>[] = [
-        {
-            key: 'gasoline',
-            value: 'Gasoline',
-        },
-        {
-            key: 'diesel',
-            value: 'Diesel',
-        },
-    ];
+    readonly bodyStyles = CAR_FILTERS_BODY_STYLES;
+    readonly fuelTypes = CAR_FILTERS_FUEL_TYPES;
 
     form = new FormGroup({
         brands: new FormControl<CarBrand[]>([]),
