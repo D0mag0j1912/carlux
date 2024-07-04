@@ -16,61 +16,99 @@
                         {{ t('filters.sections.basic_information') }}
                     </ion-label>
                 </ion-item>
-                <ion-item (click)="carBrandSelect.open()" class="ion-no-padding select-item" slot="content">
-                    <ion-label class="search-label" [class.remove-item]="form.controls.brands.value?.length">{{
-                        t('filters.search_car_brands')
-                    }}</ion-label>
-                    <car-searchable-select
-                        #carBrandSelect
-                        formControlName="brands"
-                        [multiple]="false"
-                        [data]="carBrands()"
-                        [visibleValue]="CAR_BRAND_VISIBLE_VALUE"
-                        [hiddenValue]="CAR_BRAND_HIDDEN_VALUE"
-                    >
-                        <ion-title class="title">{{ t('common.car_brands') }}</ion-title>
-                    </car-searchable-select>
-                </ion-item>
+                <ion-grid slot="content">
+                    <ion-row>
+                        <ion-col>
+                            <ion-item (click)="carBrandSelect.open()">
+                                <ion-label [class.remove-item]="form.controls.brands.value?.length">{{
+                                    t('filters.search_car_brands')
+                                }}</ion-label>
+                                <car-searchable-select
+                                    #carBrandSelect
+                                    formControlName="brands"
+                                    [multiple]="false"
+                                    [data]="carBrands()"
+                                    [visibleValue]="CAR_BRAND_VISIBLE_VALUE"
+                                    [hiddenValue]="CAR_BRAND_HIDDEN_VALUE"
+                                >
+                                    <ion-title class="title">{{ t('common.car_brands') }}</ion-title>
+                                </car-searchable-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
 
-                <ion-item
-                    (click)="carModelsSelect.open()"
-                    class="ion-no-padding select-item"
-                    slot="content"
-                    [disabled]="!form.controls.brands.value?.length"
-                >
-                    <ion-label class="search-label" [class.remove-item]="form.controls.brands.value?.length">{{
-                        t('filters.search_car_models')
-                    }}</ion-label>
-                    <car-searchable-select
-                        #carModelsSelect
-                        class="models-select"
-                        formControlName="models"
-                        [multiple]="true"
-                        [data]="carModels()"
-                        [visibleValue]="CAR_MODELS_VISIBLE_VALUE"
-                        [hiddenValue]="CAR_MODELS_HIDDEN_VALUE"
-                    ></car-searchable-select>
-                </ion-item>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item (click)="carModelsSelect.open()" [disabled]="!form.controls.brands.value?.length">
+                                <ion-label [class.remove-item]="form.controls.brands.value?.length">{{
+                                    t('filters.search_car_models')
+                                }}</ion-label>
+                                <car-searchable-select
+                                    #carModelsSelect
+                                    class="models-select"
+                                    formControlName="models"
+                                    [multiple]="true"
+                                    [data]="carModels()"
+                                    [visibleValue]="CAR_MODELS_VISIBLE_VALUE"
+                                    [hiddenValue]="CAR_MODELS_HIDDEN_VALUE"
+                                ></car-searchable-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
 
-                <ion-item slot="content" class="ion-no-padding body-style-item select-item">
-                    <ion-select [placeholder]="t('filters.body_style')" [multiple]="true">
-                        @for (bodyStyle of bodyStyles; track bodyStyle.key) {
-                            <ion-select-option [value]="bodyStyle.key">
-                                {{ bodyStyle.value }}
-                            </ion-select-option>
-                        }
-                    </ion-select>
-                </ion-item>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select [placeholder]="t('filters.body_style')" [multiple]="true">
+                                    @for (bodyStyle of bodyStyles; track bodyStyle.key) {
+                                        <ion-select-option [value]="bodyStyle.key">
+                                            {{ bodyStyle.value }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
 
-                <ion-item slot="content" class="ion-no-padding fuel-type-item select-item">
-                    <ion-select [placeholder]="t('filters.fuel_type')" [multiple]="true">
-                        @for (fuelType of fuelTypes; track fuelType.key) {
-                            <ion-select-option [value]="fuelType.key">
-                                {{ fuelType.value }}
-                            </ion-select-option>
-                        }
-                    </ion-select>
-                </ion-item>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select [placeholder]="t('filters.fuel_type')" [multiple]="true">
+                                    @for (fuelType of fuelTypes; track fuelType.key) {
+                                        <ion-select-option [value]="fuelType.key">
+                                            {{ fuelType.value }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select [placeholder]="t('filters.registration_from')">
+                                    @for (year of registrationYears; track year) {
+                                        <ion-select-option [value]="year">
+                                            {{ year }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select [placeholder]="t('filters.registration_to')">
+                                    @for (year of registrationYears; track year) {
+                                        <ion-select-option [value]="year">
+                                            {{ year }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-accordion>
         </ion-accordion-group>
     </form>

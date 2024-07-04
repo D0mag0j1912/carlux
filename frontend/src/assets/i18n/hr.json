@@ -157,6 +157,8 @@
         "search_car_models": "Pretraži modele automobila",
         "body_style": "Oblik karoserije",
         "fuel_type": "Vrsta goriva",
+        "registration_from": "Registracija od",
+        "registration_to": "Registracija do",
         "sections": {
             "basic_information": "Osnovne informacije"
         },

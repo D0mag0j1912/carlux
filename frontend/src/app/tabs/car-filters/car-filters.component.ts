@@ -7,10 +7,13 @@ import {
     IonBackButton,
     IonButton,
     IonButtons,
+    IonCol,
     IonContent,
+    IonGrid,
     IonHeader,
     IonItem,
     IonLabel,
+    IonRow,
     IonSelect,
     IonSelectOption,
     IonTitle,
@@ -24,6 +27,7 @@ import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-fil
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
+import { generateCarFiltersRegistrationYears } from './helpers/car-filters-registration-dates';
 
 const IONIC_IMPORTS = [
     IonHeader,
@@ -39,6 +43,9 @@ const IONIC_IMPORTS = [
     IonBackButton,
     IonSelect,
     IonSelectOption,
+    IonGrid,
+    IonRow,
+    IonCol,
 ];
 
 @Component({
@@ -62,6 +69,7 @@ export class CarFiltersComponent implements OnInit {
     readonly CAR_MODELS_HIDDEN_VALUE = 'id';
     readonly bodyStyles = CAR_FILTERS_BODY_STYLES;
     readonly fuelTypes = CAR_FILTERS_FUEL_TYPES;
+    readonly registrationYears = generateCarFiltersRegistrationYears();
 
     form = new FormGroup({
         brands: new FormControl<CarBrand[]>([]),

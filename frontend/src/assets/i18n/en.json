@@ -157,6 +157,8 @@
         "search_car_models": "Search car models",
         "body_style": "Body style",
         "fuel_type": "Fuel type",
+        "registration_from": "Registration from",
+        "registration_to": "Registration to",
         "sections": {
             "basic_information": "Basic information"
         },

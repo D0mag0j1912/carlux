@@ -4,17 +4,6 @@
     @include large;
 }
 
-.select-item {
-    margin-top: 15px;
-}
-
-.search-label {
-    padding-left: 10px;
-    font-family: var(--ion-font-family);
-    color: var(--ion-color-primary);
-    font-weight: 600;
-}
-
 ::ng-deep {
     .models-select {
         .selected-items {
@@ -23,8 +12,6 @@
     }
 }
 
-.body-style-item,
-.fuel-type-item {
-    width: 350px;
-    margin-top: 15px;
+.registration-date-wrapper {
+    display: flex;
 }
