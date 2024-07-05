@@ -27,7 +27,8 @@ import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-fil
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
-import { generateCarFiltersRegistrationYears } from './helpers/car-filters-registration-dates';
+import { generatePrices } from './helpers/car-filters-price.helper';
+import { generateCarFiltersRegistrationYears } from './helpers/car-filters-registration-dates.helpers';
 
 const IONIC_IMPORTS = [
     IonHeader,
@@ -70,6 +71,7 @@ export class CarFiltersComponent implements OnInit {
     readonly bodyStyles = CAR_FILTERS_BODY_STYLES;
     readonly fuelTypes = CAR_FILTERS_FUEL_TYPES;
     readonly registrationYears = generateCarFiltersRegistrationYears();
+    readonly prices = generatePrices();
 
     form = new FormGroup({
         brands: new FormControl<CarBrand[]>([]),

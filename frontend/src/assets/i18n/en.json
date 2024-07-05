@@ -159,6 +159,8 @@
         "fuel_type": "Fuel type",
         "registration_from": "Registration from",
         "registration_to": "Registration to",
+        "price_from": "Price from",
+        "price_to": "Price to",
         "sections": {
             "basic_information": "Basic information"
         },

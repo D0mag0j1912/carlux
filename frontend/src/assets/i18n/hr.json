@@ -159,6 +159,8 @@
         "fuel_type": "Vrsta goriva",
         "registration_from": "Registracija od",
         "registration_to": "Registracija do",
+        "price_from": "Cijena od",
+        "price_to": "Cijena do",
         "sections": {
             "basic_information": "Osnovne informacije"
         },

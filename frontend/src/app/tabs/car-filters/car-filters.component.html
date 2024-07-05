@@ -108,6 +108,31 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select [placeholder]="t('filters.price_from')">
+                                    @for (price of prices; track price) {
+                                        <ion-select-option [value]="price">
+                                            {{ price }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select [placeholder]="t('filters.price_to')">
+                                    @for (price of prices; track price) {
+                                        <ion-select-option [value]="price">
+                                            {{ price }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
                 </ion-grid>
             </ion-accordion>
         </ion-accordion-group>
