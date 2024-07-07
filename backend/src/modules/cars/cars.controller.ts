@@ -34,4 +34,18 @@ export class CarsController {
     async getCars(@Query() query: CarFilterDto): Promise<PaginationDto<RecommendedCarsDto>> {
         return this._carsService.filterRecommendedCars(query);
     }
+
+    @ApiInternalServerErrorResponse({
+        status: 500,
+        description: RESPONSE_MESSAGE.INTERNAL_SERVER_ERROR,
+    })
+    @ApiBadRequestResponse({
+        status: 404,
+        description: RESPONSE_MESSAGE.NOT_FOUND,
+    })
+    @ApiExtraModels(RecommendedCarsDto, CarFilterDto)
+    @Get('count')
+    async getCarsFiltersCount(@Query() query: CarFilterDto): Promise<number> {
+        return this._carsService.getCarsFiltersCount(query);
+    }
 }

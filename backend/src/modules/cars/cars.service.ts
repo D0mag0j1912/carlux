@@ -139,4 +139,85 @@ export class CarsService {
         };
         return response;
     }
+
+    async getCarsFiltersCount(query: CarFilterDto): Promise<number> {
+        try {
+            return this._getCarsFiltersCount(query);
+        } catch (error: unknown) {
+            throw new InternalServerErrorException();
+        }
+    }
+
+    private async _getCarsFiltersCount(query: CarFilterDto): Promise<number> {
+        const yearRegistrationFrom = query.yearRegistrationFrom;
+        const yearRegistrationTo = query.yearRegistrationTo;
+        const priceFrom = query.priceFrom;
+        const priceTo = query.priceTo;
+        const kilometersTravelledFrom = query.kilometersTravelledFrom;
+        const kilometersTravelledTo = query.kilometersTravelledTo;
+        const powerMetric = query.powerMetric;
+        const powerFrom = query.powerFrom;
+        const powerTo = query.powerTo;
+        const transmission = query.transmission;
+        const carsCount = await this._carsRepository
+            .createQueryBuilder('car')
+            .leftJoin('car.currency', 'currency')
+            .leftJoin('car.carBrand', 'carBrand')
+            .leftJoin('car.carModel', 'carModel')
+            .where('car.BrandId = :brandId', { brandId: query.brandId })
+            .andWhere(query.modelId ? 'car.ModelId = :modelId' : 'TRUE', { modelId: query.modelId })
+            .andWhere(query.bodyStyle ? 'car.BodyStyle = :bodyStyle' : 'TRUE', {
+                bodyStyle: query.bodyStyle,
+            })
+            .andWhere(query.fuelType ? 'car.FuelType = :fuelType' : 'TRUE', {
+                fuelType: query.fuelType,
+            })
+            .andWhere(
+                yearRegistrationFrom
+                    ? 'YEAR(car.FirstRegistrationDate) >= :yearRegistrationFrom'
+                    : 'TRUE',
+                {
+                    yearRegistrationFrom,
+                },
+            )
+            .andWhere(
+                yearRegistrationTo
+                    ? 'YEAR(car.FirstRegistrationDate) <= :yearRegistrationTo'
+                    : 'TRUE',
+                { yearRegistrationTo },
+            )
+            .andWhere(priceFrom ? 'car.Price >= :priceFrom' : 'TRUE', { priceFrom })
+            .andWhere(priceTo ? 'car.Price <= :priceTo' : 'TRUE', { priceTo })
+            .andWhere(
+                kilometersTravelledFrom
+                    ? 'car.KilometersTravelled >= :kilometersTravelledFrom'
+                    : 'TRUE',
+                { kilometersTravelledFrom },
+            )
+            .andWhere(
+                kilometersTravelledTo
+                    ? 'car.KilometersTravelled <= :kilometersTravelledTo'
+                    : 'TRUE',
+                { kilometersTravelledTo },
+            )
+            .andWhere(
+                powerFrom
+                    ? powerMetric === PowerMetric.PS
+                        ? 'car.HorsePower >= :powerFrom'
+                        : 'car.Kilowatts >: powerFrom'
+                    : 'TRUE',
+                { powerFrom },
+            )
+            .andWhere(
+                powerTo
+                    ? powerMetric === PowerMetric.PS
+                        ? 'car.HorsePower <= :powerTo'
+                        : 'car.Kilowatts <= powerTo'
+                    : 'TRUE',
+                { powerTo },
+            )
+            .andWhere(transmission ? 'car.Transmission = :transmission' : 'TRUE', { transmission })
+            .getCount();
+        return carsCount;
+    }
 }
