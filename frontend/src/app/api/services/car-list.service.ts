@@ -11,6 +11,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { carsControllerGetCars } from '../fn/car-list/cars-controller-get-cars';
 import { CarsControllerGetCars$Params } from '../fn/car-list/cars-controller-get-cars';
+import { carsControllerGetCarsFiltersCount } from '../fn/car-list/cars-controller-get-cars-filters-count';
+import { CarsControllerGetCarsFiltersCount$Params } from '../fn/car-list/cars-controller-get-cars-filters-count';
 import { PaginationDto } from '../models/pagination-dto';
 import { RecommendedCarsDto } from '../models/recommended-cars-dto';
 
@@ -62,6 +64,31 @@ export class CarListService extends BaseService {
 'count'?: number;
 'results'?: Array<RecommendedCarsDto>;
 } => r.body)
+    );
+  }
+
+  /** Path part for operation `carsControllerGetCarsFiltersCount()` */
+  static readonly CarsControllerGetCarsFiltersCountPath = '/api/cars/count';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `carsControllerGetCarsFiltersCount()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  carsControllerGetCarsFiltersCount$Response(params: CarsControllerGetCarsFiltersCount$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return carsControllerGetCarsFiltersCount(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `carsControllerGetCarsFiltersCount$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  carsControllerGetCarsFiltersCount(params: CarsControllerGetCarsFiltersCount$Params, context?: HttpContext): Observable<void> {
+    return this.carsControllerGetCarsFiltersCount$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
