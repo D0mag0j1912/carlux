@@ -115,7 +115,7 @@
                                 <ion-select [placeholder]="t('filters.price_from')">
                                     @for (price of prices; track price) {
                                         <ion-select-option [value]="price">
-                                            {{ price }}
+                                            {{ price + euros }}
                                         </ion-select-option>
                                     }
                                 </ion-select>
@@ -126,7 +126,7 @@
                                 <ion-select [placeholder]="t('filters.price_to')">
                                     @for (price of prices; track price) {
                                         <ion-select-option [value]="price">
-                                            {{ price }}
+                                            {{ price + euros }}
                                         </ion-select-option>
                                     }
                                 </ion-select>

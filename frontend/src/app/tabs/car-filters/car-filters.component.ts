@@ -69,6 +69,7 @@ export class CarFiltersComponent implements OnInit {
     readonly CAR_BRAND_HIDDEN_VALUE = 'id';
     readonly CAR_MODELS_VISIBLE_VALUE = 'title';
     readonly CAR_MODELS_HIDDEN_VALUE = 'id';
+    readonly euros = '€';
     readonly bodyStyles = CAR_FILTERS_BODY_STYLES;
     readonly fuelTypes = CAR_FILTERS_FUEL_TYPES;
     readonly registrationYears = generateCarFiltersRegistrationYears();
