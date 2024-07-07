@@ -161,6 +161,8 @@
         "registration_to": "Registration to",
         "price_from": "Price from",
         "price_to": "Price to",
+        "kilometers_from": "Kilometers from",
+        "kilometers_to": "Kilometers to",
         "sections": {
             "basic_information": "Basic information"
         },

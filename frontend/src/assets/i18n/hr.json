@@ -161,6 +161,8 @@
         "registration_to": "Registracija do",
         "price_from": "Cijena od",
         "price_to": "Cijena do",
+        "kilometers_from": "Kilometri od",
+        "kilometers_to": "Kilometeri do",
         "sections": {
             "basic_information": "Osnovne informacije"
         },
