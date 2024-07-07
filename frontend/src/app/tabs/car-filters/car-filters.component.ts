@@ -11,6 +11,7 @@ import {
     IonContent,
     IonGrid,
     IonHeader,
+    IonInput,
     IonItem,
     IonLabel,
     IonRow,
@@ -23,10 +24,13 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
+import { BodyStyles } from '../../models/body-styles';
+import { FuelTypes } from '../../models/fuel-types';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
+import { CAR_FILTERS_POWER_UNITS, PowerUnit } from './constants/car-filters-power-metric';
 import { generateKilometers } from './helpers/car-filters-kilometers.helper';
 import { generatePrices } from './helpers/car-filters-price.helper';
 import { generateCarFiltersRegistrationYears } from './helpers/car-filters-registration-dates.helpers';
@@ -48,6 +52,7 @@ const IONIC_IMPORTS = [
     IonGrid,
     IonRow,
     IonCol,
+    IonInput,
 ];
 
 @Component({
@@ -72,6 +77,7 @@ export class CarFiltersComponent implements OnInit {
     readonly euros = '€';
     readonly bodyStyles = CAR_FILTERS_BODY_STYLES;
     readonly fuelTypes = CAR_FILTERS_FUEL_TYPES;
+    readonly powerUnits = CAR_FILTERS_POWER_UNITS;
     readonly registrationYears = generateCarFiltersRegistrationYears();
     readonly prices = generatePrices();
     readonly kilometers = generateKilometers();
@@ -79,6 +85,25 @@ export class CarFiltersComponent implements OnInit {
     form = new FormGroup({
         brands: new FormControl<CarBrand[]>([]),
         models: new FormControl<CarModel[]>([]),
+        bodyStyle: new FormControl<BodyStyles | null>(null),
+        fuelType: new FormControl<FuelTypes | null>(null),
+        registrationYear: new FormGroup({
+            registrationYearFrom: new FormControl<number | null>(null),
+            registrationYearTo: new FormControl<number | null>(null),
+        }),
+        price: new FormGroup({
+            priceFrom: new FormControl<number | null>(null),
+            priceTo: new FormControl<number | null>(null),
+        }),
+        kilometers: new FormGroup({
+            kilometersFrom: new FormControl<number | null>(null),
+            kilometersTo: new FormControl<number | null>(null),
+        }),
+        power: new FormGroup({
+            unit: new FormControl<PowerUnit | null>(null),
+            powerFrom: new FormControl<number | null>(null),
+            powerTo: new FormControl<number | null>(null),
+        }),
     });
 
     ngOnInit(): void {

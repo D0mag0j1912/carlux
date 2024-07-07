@@ -163,6 +163,9 @@
         "price_to": "Cijena do",
         "kilometers_from": "Kilometri od",
         "kilometers_to": "Kilometeri do",
+        "power_unit": "Jedinica snage",
+        "power_from": "Snaga od",
+        "power_to": "Snaga do",
         "sections": {
             "basic_information": "Osnovne informacije"
         },

@@ -163,6 +163,9 @@
         "price_to": "Price to",
         "kilometers_from": "Kilometers from",
         "kilometers_to": "Kilometers to",
+        "power_unit": "Power unit",
+        "power_from": "Power from",
+        "power_to": "Power to",
         "sections": {
             "basic_information": "Basic information"
         },
