@@ -195,13 +195,21 @@
 
                         <ion-col>
                             <ion-item>
-                                <ion-input labelPlacement="floating" [label]="t('filters.power_from')"></ion-input>
+                                <ion-input
+                                    formControlName="powerFrom"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.power_from')"
+                                ></ion-input>
                             </ion-item>
                         </ion-col>
 
                         <ion-col>
                             <ion-item>
-                                <ion-input labelPlacement="floating" [label]="t('filters.power_to')"></ion-input>
+                                <ion-input
+                                    formControlName="powerTo"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.power_to')"
+                                ></ion-input>
                             </ion-item>
                         </ion-col>
                     </ion-row>
