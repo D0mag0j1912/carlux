@@ -1,0 +1,246 @@
+<ion-header *transloco="let t">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/recommended-cars" [text]="t('common.actions.back')"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ t('filters.title') }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *transloco="let t">
+    <form [formGroup]="form">
+        <ion-accordion-group>
+            <ion-accordion [value]="filtersAccordionGroups.BASIC_INFORMATION">
+                <ion-item slot="header" color="light">
+                    <ion-label class="basic-info-title">
+                        {{ t('filters.sections.basic_information') }}
+                    </ion-label>
+                </ion-item>
+                <ion-grid slot="content">
+                    <ion-row>
+                        <ion-col>
+                            <ion-item (click)="carBrandSelect.open()">
+                                <ion-label [class.remove-item]="form.controls.brands.value?.length">{{
+                                    t('filters.search_car_brands')
+                                }}</ion-label>
+                                <car-searchable-select
+                                    #carBrandSelect
+                                    formControlName="brands"
+                                    [multiple]="false"
+                                    [data]="carBrands()"
+                                    [visibleValue]="CAR_BRAND_VISIBLE_VALUE"
+                                    [hiddenValue]="CAR_BRAND_HIDDEN_VALUE"
+                                >
+                                    <ion-title class="title">{{ t('common.car_brands') }}</ion-title>
+                                </car-searchable-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item (click)="carModelsSelect.open()" [disabled]="!form.controls.brands.value?.length">
+                                <ion-label [class.remove-item]="form.controls.brands.value?.length">{{
+                                    t('filters.search_car_models')
+                                }}</ion-label>
+                                <car-searchable-select
+                                    #carModelsSelect
+                                    class="models-select"
+                                    formControlName="models"
+                                    [multiple]="true"
+                                    [data]="carModels()"
+                                    [visibleValue]="CAR_MODELS_VISIBLE_VALUE"
+                                    [hiddenValue]="CAR_MODELS_HIDDEN_VALUE"
+                                ></car-searchable-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select
+                                    formControlName="bodyStyle"
+                                    [placeholder]="t('filters.body_style')"
+                                    [multiple]="true"
+                                >
+                                    @for (bodyStyle of bodyStyles; track bodyStyle.key) {
+                                        <ion-select-option [value]="bodyStyle.key">
+                                            {{ bodyStyle.value }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select
+                                    formControlName="fuelType"
+                                    [placeholder]="t('filters.fuel_type')"
+                                    [multiple]="true"
+                                >
+                                    @for (fuelType of fuelTypes; track fuelType.key) {
+                                        <ion-select-option [value]="fuelType.key">
+                                            {{ fuelType.value }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row formGroupName="registrationYear">
+                        <ion-col>
+                            <ion-item>
+                                <ion-select
+                                    formControlName="registrationYearFrom"
+                                    [placeholder]="t('filters.registration_from')"
+                                >
+                                    @for (year of registrationYears; track year) {
+                                        <ion-select-option [value]="year">
+                                            {{ year }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select
+                                    formControlName="registrationYearTo"
+                                    [placeholder]="t('filters.registration_to')"
+                                >
+                                    @for (year of registrationYears; track year) {
+                                        <ion-select-option [value]="year">
+                                            {{ year }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row formGroupName="price">
+                        <ion-col>
+                            <ion-item>
+                                <ion-select formControlName="priceFrom" [placeholder]="t('filters.price_from')">
+                                    @for (price of prices; track price) {
+                                        <ion-select-option [value]="price">
+                                            {{ price + euros }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select formControlName="priceTo" [placeholder]="t('filters.price_to')">
+                                    @for (price of prices; track price) {
+                                        <ion-select-option [value]="price">
+                                            {{ price + euros }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row formGroupName="kilometers">
+                        <ion-col>
+                            <ion-item>
+                                <ion-select
+                                    formControlName="kilometersFrom"
+                                    [placeholder]="t('filters.kilometers_from')"
+                                >
+                                    @for (item of kilometers; track item) {
+                                        <ion-select-option [value]="item">
+                                            {{ item }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select formControlName="kilometersTo" [placeholder]="t('filters.kilometers_to')">
+                                    @for (item of kilometers; track item) {
+                                        <ion-select-option [value]="item">
+                                            {{ item }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row formGroupName="power">
+                        <ion-col>
+                            <ion-item>
+                                <ion-select
+                                    formControlName="unit"
+                                    interface="popover"
+                                    [placeholder]="t('filters.power_unit')"
+                                >
+                                    @for (unit of powerUnits; track unit.key) {
+                                        <ion-select-option [value]="unit.key">
+                                            {{ unit.value }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+
+                        <ion-col>
+                            <ion-item>
+                                <ion-input
+                                    formControlName="powerFrom"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.power_from')"
+                                ></ion-input>
+                            </ion-item>
+                        </ion-col>
+
+                        <ion-col>
+                            <ion-item>
+                                <ion-input
+                                    formControlName="powerTo"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.power_to')"
+                                ></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select
+                                    formControlName="transmissionType"
+                                    [placeholder]="t('filters.transmission_type')"
+                                    [multiple]="true"
+                                >
+                                    @for (type of transmissionTypes; track type.key) {
+                                        <ion-select-option [value]="type.key">
+                                            {{ type.value }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col class="ion-text-center">
+                            <ion-button color="primary">
+                                {{ 'results' }}
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-accordion>
+        </ion-accordion-group>
+    </form>
+</ion-content>

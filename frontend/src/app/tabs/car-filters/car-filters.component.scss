@@ -1,0 +1,17 @@
+@import '../../../styles/typography';
+
+.basic-info-title {
+    @include large;
+}
+
+::ng-deep {
+    .models-select {
+        .selected-items {
+            max-width: 220px;
+        }
+    }
+}
+
+.registration-date-wrapper {
+    display: flex;
+}

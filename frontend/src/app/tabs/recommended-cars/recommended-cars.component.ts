@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {
     InfiniteScrollCustomEvent,
     IonButton,
@@ -22,6 +22,7 @@ import { EmitHandleFavouritesActions } from '../../models/emit-handle-favourites
 import { DomSanitizerInputType, DomSanitizerPipe } from '../../pipes/dom-sanitizer.pipe';
 import { FavouritesFacadeService } from '../../store/favourites/facades/favourites-facade.service';
 import { RecommendedCarsFacadeService } from '../../store/recommended-cars/facades/recommended-cars-facade.service';
+import { CarFiltersComponent } from '../car-filters/car-filters.component';
 
 @Component({
     standalone: true,
@@ -38,6 +39,7 @@ import { RecommendedCarsFacadeService } from '../../store/recommended-cars/facad
         CarItemComponent,
         RouterModule,
         DomSanitizerPipe,
+        CarFiltersComponent,
     ],
     selector: 'car-recommended-cars',
     templateUrl: './recommended-cars.component.html',
@@ -47,6 +49,7 @@ export class RecommendedCarsComponent implements OnInit {
     private _recommendedCarsFacadeService = inject(RecommendedCarsFacadeService);
     private _favouritesFacadeService = inject(FavouritesFacadeService);
     private _destroyRef = inject(DestroyRef);
+    private _router = inject(Router);
 
     areRecommendedCarsNotLoading$ =
         this._recommendedCarsFacadeService.selectAreRecommendedCarsNotLoading();
@@ -82,5 +85,9 @@ export class RecommendedCarsComponent implements OnInit {
 
     handleFavouritesActions(data: EmitHandleFavouritesActions): void {
         this._favouritesFacadeService.handleFavouritesActions(data.carId, data.method);
+    }
+
+    async searchCars(): Promise<void> {
+        await this._router.navigateByUrl('/tabs/car-filters');
     }
 }

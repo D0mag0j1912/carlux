@@ -14,7 +14,8 @@
             "close": "Close",
             "confirm": "Confirm",
             "save": "Save",
-            "back": "Back"
+            "back": "Back",
+            "select": "Select"
         },
         "seller_type": {
             "dealer": "Dealer",
@@ -29,7 +30,10 @@
             "gasoline": "Gasoline",
             "diesel": "Diesel"
         },
-        "combined": "(comb)"
+        "combined": "(comb)",
+        "car_brands": "Car brands",
+        "n_results_singular": "{{ n }} result",
+        "n_results_plural": "{{ n }} results"
     },
     "auth": {
         "continue_with_google": "Continue with Google",
@@ -148,5 +152,29 @@
         "owner_plural": "owners",
         "no_favourites_title": "No favourites yet",
         "no_favourites_description": "Favourite car list is empty. Feel free to add cars to your favourite list 🚀"
+    },
+    "filters": {
+        "title": "Detailed search",
+        "search_car_brands": "Search car brands",
+        "search_car_models": "Search car models",
+        "body_style": "Body style",
+        "fuel_type": "Fuel type",
+        "registration_from": "Registration from",
+        "registration_to": "Registration to",
+        "price_from": "Price from",
+        "price_to": "Price to",
+        "kilometers_from": "Kilometers from",
+        "kilometers_to": "Kilometers to",
+        "power_unit": "Power unit",
+        "power_from": "Power from",
+        "power_to": "Power to",
+        "transmission_type": "Transmission",
+        "sections": {
+            "basic_information": "Basic information"
+        },
+        "errors": {
+            "get_car_brands": "Error while loading car brands. Please try again.",
+            "get_car_models": "Error while loading car models. Please try again."
+        }
     }
 }

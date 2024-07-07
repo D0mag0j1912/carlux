@@ -1,0 +1,39 @@
+<ng-container *transloco="let t">
+    @if (selectedItems()?.length) {
+        <div class="selected-items">
+            @for (item of selectedItems(); track item[hiddenValue()]; let last = $last) {
+                <span> {{ item[visibleValue()] }} {{ last ? '' : ', ' }} </span>
+            }
+        </div>
+    }
+
+    <ion-modal [isOpen]="isOpen()">
+        <ng-template>
+            <ion-header>
+                <ion-toolbar color="primary">
+                    <ion-buttons slot="start">
+                        <ion-button (click)="cancel()">{{ t('common.cancel') }}</ion-button>
+                    </ion-buttons>
+                    <ng-content select=".title"></ng-content>
+                    @if (multiple()) {
+                        <ion-buttons slot="end">
+                            <ion-button (click)="select()">{{ t('common.actions.select') }}</ion-button>
+                        </ion-buttons>
+                    }
+                </ion-toolbar>
+                <ion-toolbar class="searchable-toolbar">
+                    <ion-searchbar class="searchbar" (ionInput)="filter($any($event))"></ion-searchbar>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
+                @for (item of filteredItems(); track item[hiddenValue()]) {
+                    <ion-item (click)="itemSelected(item)">
+                        <ion-checkbox [(ngModel)]="item.selected" labelPlacement="start">
+                            {{ item[visibleValue()] }}
+                        </ion-checkbox>
+                    </ion-item>
+                }
+            </ion-content>
+        </ng-template>
+    </ion-modal>
+</ng-container>

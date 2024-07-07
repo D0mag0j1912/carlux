@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
-import { CarListService } from '../../../api/services/car-list.service';
+import { RecommendedCarsListService } from '../../../api/services/recommended-cars-list.service';
 import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { SharedFacadeService } from '../../shared/facades/shared-facade.service';
 import * as CarsActions from '../actions/recommended-cars.actions';
@@ -11,7 +11,7 @@ export const getRecommendedCars$ = createEffect(
     (
         actions$ = inject(Actions),
         sharedFacadeService = inject(SharedFacadeService),
-        carsService = inject(CarListService),
+        recommendedCarsService = inject(RecommendedCarsListService),
         carsFacadeService = inject(RecommendedCarsFacadeService),
     ) =>
         actions$.pipe(
@@ -24,7 +24,7 @@ export const getRecommendedCars$ = createEffect(
                 }
             }),
             switchMap((action) =>
-                carsService
+                recommendedCarsService
                     .recommendedCarsControllerGetRecommendedCars({
                         page: action.page,
                         perPage: action.perPage,

@@ -14,7 +14,8 @@
             "close": "Izađi",
             "confirm": "Potvrdi",
             "save": "Spremi",
-            "back": "Nazad"
+            "back": "Nazad",
+            "select": "Odaberi"
         },
         "seller_type": {
             "dealer": "Autokuća",
@@ -29,7 +30,10 @@
             "gasoline": "Benzin",
             "diesel": "Dizel"
         },
-        "combined": "(kombinirano)"
+        "combined": "(kombinirano)",
+        "car_brands": "Marke automobila",
+        "n_results_singular": "{{ n }} rezultat",
+        "n_results_plural": "{{ n }} rezultata"
     },
     "auth": {
         "continue_with_google": "Nastavi s Google",
@@ -148,5 +152,29 @@
         "owner_plural": "vlasnika",
         "no_favourites_title": "Još nema favorita",
         "no_favourites_description": "Lista omiljenih automobila je prazna. Slobodno dodajte automobile u Vašu listu favorita 🚀"
+    },
+    "filters": {
+        "title": "Detaljna pretraga",
+        "search_car_brands": "Pretraži marke automobila",
+        "search_car_models": "Pretraži modele automobila",
+        "body_style": "Oblik karoserije",
+        "fuel_type": "Vrsta goriva",
+        "registration_from": "Registracija od",
+        "registration_to": "Registracija do",
+        "price_from": "Cijena od",
+        "price_to": "Cijena do",
+        "kilometers_from": "Kilometri od",
+        "kilometers_to": "Kilometeri do",
+        "power_unit": "Jedinica snage",
+        "power_from": "Snaga od",
+        "power_to": "Snaga do",
+        "transmission_type": "Tip mijenjača",
+        "sections": {
+            "basic_information": "Osnovne informacije"
+        },
+        "errors": {
+            "get_car_brands": "Greška prilikom dohvaćanja marki automobila. Molimo pokušajte ponovno.",
+            "get_car_models": "Greška prilikom dohvaćanja modela automobila. Molimo pokušajte ponovno."
+        }
     }
 }
