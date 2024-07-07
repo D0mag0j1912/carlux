@@ -26,11 +26,13 @@ import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
 import { BodyStyles } from '../../models/body-styles';
 import { FuelTypes } from '../../models/fuel-types';
+import { TransmissionType } from '../../models/transmission-type';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
 import { CAR_FILTERS_POWER_UNITS, PowerUnit } from './constants/car-filters-power-metric';
+import { CAR_FILTERS_TRANSMISSION_TYPES } from './constants/car-filters-transmission-type';
 import { generateKilometers } from './helpers/car-filters-kilometers.helper';
 import { generatePrices } from './helpers/car-filters-price.helper';
 import { generateCarFiltersRegistrationYears } from './helpers/car-filters-registration-dates.helpers';
@@ -78,6 +80,7 @@ export class CarFiltersComponent implements OnInit {
     readonly bodyStyles = CAR_FILTERS_BODY_STYLES;
     readonly fuelTypes = CAR_FILTERS_FUEL_TYPES;
     readonly powerUnits = CAR_FILTERS_POWER_UNITS;
+    readonly transmissionTypes = CAR_FILTERS_TRANSMISSION_TYPES;
     readonly registrationYears = generateCarFiltersRegistrationYears();
     readonly prices = generatePrices();
     readonly kilometers = generateKilometers();
@@ -104,6 +107,7 @@ export class CarFiltersComponent implements OnInit {
             powerFrom: new FormControl<number | null>(null),
             powerTo: new FormControl<number | null>(null),
         }),
+        transmissionType: new FormControl<TransmissionType | null>(null),
     });
 
     ngOnInit(): void {

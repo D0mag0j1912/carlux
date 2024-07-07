@@ -31,7 +31,9 @@
             "diesel": "Dizel"
         },
         "combined": "(kombinirano)",
-        "car_brands": "Marke automobila"
+        "car_brands": "Marke automobila",
+        "n_results_singular": "{{ n }} rezultat",
+        "n_results_plural": "{{ n }} rezultata"
     },
     "auth": {
         "continue_with_google": "Nastavi s Google",
@@ -166,6 +168,7 @@
         "power_unit": "Jedinica snage",
         "power_from": "Snaga od",
         "power_to": "Snaga do",
+        "transmission_type": "Tip mijenjača",
         "sections": {
             "basic_information": "Osnovne informacije"
         },

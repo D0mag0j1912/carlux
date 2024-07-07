@@ -31,7 +31,9 @@
             "diesel": "Diesel"
         },
         "combined": "(comb)",
-        "car_brands": "Car brands"
+        "car_brands": "Car brands",
+        "n_results_singular": "{{ n }} result",
+        "n_results_plural": "{{ n }} results"
     },
     "auth": {
         "continue_with_google": "Continue with Google",
@@ -166,6 +168,7 @@
         "power_unit": "Power unit",
         "power_from": "Power from",
         "power_to": "Power to",
+        "transmission_type": "Transmission",
         "sections": {
             "basic_information": "Basic information"
         },

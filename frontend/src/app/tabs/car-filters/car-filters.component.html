@@ -213,6 +213,32 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-select
+                                    formControlName="transmissionType"
+                                    [placeholder]="t('filters.transmission_type')"
+                                    [multiple]="true"
+                                >
+                                    @for (type of transmissionTypes; track type.key) {
+                                        <ion-select-option [value]="type.key">
+                                            {{ type.value }}
+                                        </ion-select-option>
+                                    }
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col class="ion-text-center">
+                            <ion-button color="primary">
+                                {{ 'results' }}
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
                 </ion-grid>
             </ion-accordion>
         </ion-accordion-group>
