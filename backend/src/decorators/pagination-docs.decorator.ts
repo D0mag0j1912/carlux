@@ -1,9 +1,10 @@
 import { Type, applyDecorators } from '@nestjs/common';
-import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
+import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 import { PaginationDto } from '../models/pagination.dto';
 
 export const PaginationDocs = <T extends Type<unknown>>(model: T) =>
     applyDecorators(
+        ApiExtraModels(PaginationDto),
         ApiOkResponse({
             status: 200,
             schema: {

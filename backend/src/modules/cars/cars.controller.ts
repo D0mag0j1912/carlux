@@ -43,7 +43,6 @@ export class CarsController {
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
-    @ApiExtraModels(RecommendedCarsDto)
     @Get('count')
     async getCarsFiltersCount(@Query() query: CarFilterDto): Promise<number> {
         return this._carsService.getCarsFiltersCount(query);

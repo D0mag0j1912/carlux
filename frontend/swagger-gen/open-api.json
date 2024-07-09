@@ -1100,6 +1100,24 @@
                     "isFavourite"
                 ]
             },
+            "PaginationDto": {
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "number",
+                        "title": "Current page"
+                    },
+                    "perPage": {
+                        "type": "number",
+                        "title": "Per page"
+                    },
+                    "count": {
+                        "type": "number",
+                        "title": "Total count of results"
+                    }
+                },
+                "required": ["page", "perPage", "count"]
+            },
             "GeneralResponseDto": {
                 "type": "object",
                 "properties": {
@@ -1411,96 +1429,6 @@
                     }
                 },
                 "required": ["id", "brandId", "code", "title"]
-            },
-            "CarFilterDto": {
-                "type": "object",
-                "properties": {
-                    "page": {
-                        "type": "number",
-                        "description": "Page number"
-                    },
-                    "perPage": {
-                        "type": "number",
-                        "description": "Car's per page"
-                    },
-                    "brandId": {
-                        "type": "number",
-                        "description": "Car's brand ID"
-                    },
-                    "modelId": {
-                        "type": "number",
-                        "description": "Car's model ID"
-                    },
-                    "bodyStyle": {
-                        "type": "string",
-                        "description": "Car's body style"
-                    },
-                    "fuelType": {
-                        "type": "string",
-                        "enum": ["Gasoline", "Diesel"],
-                        "description": "Car's fuel type"
-                    },
-                    "yearRegistrationFrom": {
-                        "type": "number",
-                        "description": "Year registration FROM"
-                    },
-                    "yearRegistrationTo": {
-                        "type": "number",
-                        "description": "Year registration TO"
-                    },
-                    "priceFrom": {
-                        "type": "number",
-                        "description": "Price FROM"
-                    },
-                    "priceTo": {
-                        "type": "number",
-                        "description": "Price TO"
-                    },
-                    "kilometersTravelledFrom": {
-                        "type": "number",
-                        "description": "Kilometers travelled FROM"
-                    },
-                    "kilometersTravelledTo": {
-                        "type": "number",
-                        "description": "Kilometers travelled TO"
-                    },
-                    "powerMetric": {
-                        "type": "string",
-                        "enum": ["PS", "KW"],
-                        "description": "Power metric"
-                    },
-                    "powerFrom": {
-                        "type": "number",
-                        "description": "Power FROM"
-                    },
-                    "powerTo": {
-                        "type": "number",
-                        "description": "Power TO"
-                    },
-                    "transmission": {
-                        "type": "string",
-                        "description": "Type of transmission"
-                    }
-                },
-                "required": ["page", "perPage", "brandId"]
-            },
-            "PaginationDto": {
-                "type": "object",
-                "properties": {
-                    "page": {
-                        "type": "number",
-                        "title": "Current page"
-                    },
-                    "perPage": {
-                        "type": "number",
-                        "title": "Per page"
-                    },
-                    "count": {
-                        "type": "number",
-                        "title": "Total count of results"
-                    }
-                },
-                "required": ["page", "perPage", "count"]
             }
         }
     }
