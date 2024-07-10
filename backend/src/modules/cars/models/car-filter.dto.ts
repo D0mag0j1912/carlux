@@ -44,7 +44,7 @@ export class CarFilterDto {
     modelId: number;
 
     @ApiProperty({
-        type: String,
+        enum: ['Convertible', 'Coupe', 'Sedan', 'SUV', 'Hatchback'],
         required: false,
         description: 'Car\'s body style',
     })
