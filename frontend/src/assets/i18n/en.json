@@ -174,7 +174,8 @@
         },
         "errors": {
             "get_car_brands": "Error while loading car brands. Please try again.",
-            "get_car_models": "Error while loading car models. Please try again."
+            "get_car_models": "Error while loading car models. Please try again.",
+            "get_car_filters_result_count": "Error while loading number of results. Please try again."
         }
     }
 }

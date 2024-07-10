@@ -12,18 +12,18 @@ export interface CarsControllerGetCarsFiltersCount$Params {
   carFilterOptions: CarFilterDto;
 }
 
-export function carsControllerGetCarsFiltersCount(http: HttpClient, rootUrl: string, params: CarsControllerGetCarsFiltersCount$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+export function carsControllerGetCarsFiltersCount(http: HttpClient, rootUrl: string, params: CarsControllerGetCarsFiltersCount$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
   const rb = new RequestBuilder(rootUrl, carsControllerGetCarsFiltersCount.PATH, 'get');
   if (params) {
     rb.query('carFilterOptions', params.carFilterOptions, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'text', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: 'application/json', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      return (r as HttpResponse<any>).clone({ body: parseFloat(String((r as HttpResponse<any>).body)) }) as StrictHttpResponse<number>;
     })
   );
 }

@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { CarBrandDto as CarBrand } from '../../../api/models/car-brand-dto';
+import { CarFilterDto as CarFilters } from '../../../api/models/car-filter-dto';
 import { CarModelDto as CarModel } from '../../../api/models/car-model-dto';
 
 export const getCarBrands = createAction('[Car Filters] Get Car Brands');
@@ -17,4 +18,14 @@ export const getCarModels = createAction(
 export const setCarModels = createAction(
     '[Car Filters] Set Car Models',
     props<{ carModels: CarModel[] }>(),
+);
+
+export const getCarFiltersResultCount = createAction(
+    '[Car Filters] Get Car Filters Result Count',
+    props<{ query: CarFilters }>(),
+);
+
+export const setCarFiltersResultCount = createAction(
+    '[Car Filters] Set Car Filters Result Count',
+    props<{ count: number }>(),
 );

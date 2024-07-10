@@ -3,6 +3,7 @@ import {
     ApiBadRequestResponse,
     ApiExtraModels,
     ApiInternalServerErrorResponse,
+    ApiOkResponse,
     ApiQuery,
     ApiTags,
     getSchemaPath,
@@ -48,6 +49,11 @@ export class CarsController {
         return this._carsService.filterRecommendedCars(query);
     }
 
+    @ApiOkResponse({
+        description:
+            'Response indicating how many car results there are for the specific query params',
+        type: Number,
+    })
     @ApiInternalServerErrorResponse({
         status: 500,
         description: RESPONSE_MESSAGE.INTERNAL_SERVER_ERROR,

@@ -620,6 +620,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Response indicating how many car results there are for the specific query params",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "Bad request from the client"
                     },

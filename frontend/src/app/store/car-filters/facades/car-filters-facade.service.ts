@@ -2,6 +2,7 @@ import { Injectable, Signal, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../..';
 import { CarBrandDto as CarBrand } from '../../../api/models/car-brand-dto';
+import { CarFilterDto as CarFilters } from '../../../api/models/car-filter-dto';
 import { CarModelDto as CarModel } from '../../../api/models/car-model-dto';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import * as CarFiltersActions from '../actions/car-filters.actions';
@@ -15,6 +16,10 @@ export class CarFiltersFacadeService {
 
     private _selectCarModels = this._store.selectSignal(CarFiltersSelectors.selectCarModels);
 
+    private _selectCarFiltersResultCount = this._store.selectSignal(
+        CarFiltersSelectors.selectCarFiltersResultCount,
+    );
+
     //Selectors BEGIN -------------------------
     selectCarBrands(): Signal<CarBrand[]> {
         return this._selectCarBrands;
@@ -22,6 +27,10 @@ export class CarFiltersFacadeService {
 
     selectCarModels(): Signal<CarModel[]> {
         return this._selectCarModels;
+    }
+
+    selectCarFiltersResultCount(): Signal<number | undefined> {
+        return this._selectCarFiltersResultCount;
     }
     //Selectors END -------------------------
 
@@ -32,6 +41,10 @@ export class CarFiltersFacadeService {
 
     getCarModels(brandId: number): void {
         this._store.dispatch(CarFiltersActions.getCarModels({ brandId }));
+    }
+
+    getCarFiltersResultCount(query: CarFilters): void {
+        this._store.dispatch(CarFiltersActions.getCarFiltersResultCount({ query }));
     }
     //Actions END -------------------------
 }
