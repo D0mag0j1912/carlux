@@ -1,30 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsNumber } from 'class-validator';
+import { IsArray, IsNumber } from 'class-validator';
+import { BodyStyles } from '../../../constants/body-style';
 import { FuelType } from '../../../constants/fuel-type';
 import { PowerMetric } from '../../../constants/power-type';
-import { Transmission } from '../../../constants/transmission';
+import { TransmissionType } from '../../../constants/transmission-type';
 
 export class CarFilterDto {
-
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'Page number',
-    })
-    @Type(() => Number)
-    @IsNumber()
-    page: number;
-
-    @ApiProperty({
-        type: Number,
-        required: true,
-        description: 'Car\'s per page',
-    })
-    @Type(() => Number)
-    @IsNumber()
-    perPage: number;
-
     @ApiProperty({
         type: Number,
         required: true,
@@ -35,27 +17,29 @@ export class CarFilterDto {
     brandId: number;
 
     @ApiProperty({
-        type: Number,
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        type: Array<Number>,
         required: false,
         description: 'Car\'s model ID',
     })
-    @Type(() => Number)
-    @IsNumber()
-    modelId: number;
+    @IsArray()
+    modelIds?: number[];
 
     @ApiProperty({
         enum: ['Convertible', 'Coupe', 'Sedan', 'SUV', 'Hatchback'],
         required: false,
         description: 'Car\'s body style',
     })
-    bodyStyle: string;
+    @IsArray()
+    bodyStyles?: BodyStyles[];
 
     @ApiProperty({
         enum: ['Gasoline', 'Diesel'],
         required: false,
         description: 'Car\'s fuel type',
     })
-    fuelType: FuelType;
+    @IsArray()
+    fuelTypes?: FuelType[];
 
     @ApiProperty({
         type: Number,
@@ -64,7 +48,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    yearRegistrationFrom: number;
+    yearRegistrationFrom?: number;
 
     @ApiProperty({
         type: Number,
@@ -73,7 +57,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    yearRegistrationTo: number;
+    yearRegistrationTo?: number;
 
     @ApiProperty({
         type: Number,
@@ -82,7 +66,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    priceFrom: number;
+    priceFrom?: number;
 
     @ApiProperty({
         type: Number,
@@ -91,7 +75,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    priceTo: number;
+    priceTo?: number;
 
     @ApiProperty({
         type: Number,
@@ -100,7 +84,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    kilometersTravelledFrom: number;
+    kilometersTravelledFrom?: number;
 
     @ApiProperty({
         type: Number,
@@ -109,14 +93,14 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    kilometersTravelledTo: number;
+    kilometersTravelledTo?: number;
 
     @ApiProperty({
         enum: ['PS', 'KW'],
         required: false,
         description: 'Power metric',
     })
-    powerMetric: PowerMetric;
+    powerMetric?: PowerMetric;
 
     @ApiProperty({
         type: Number,
@@ -125,7 +109,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    powerFrom: number;
+    powerFrom?: number;
 
     @ApiProperty({
         type: Number,
@@ -134,12 +118,13 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    powerTo: number;
+    powerTo?: number;
 
     @ApiProperty({
-        type: String,
+        enum: ['Automatic', 'Manual'],
         required: false,
         description: 'Type of transmission',
     })
-    transmission: Transmission;
+    @IsArray()
+    transmissionTypes?: TransmissionType[];
 }

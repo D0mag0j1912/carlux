@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Transmission } from '../../../constants/transmission';
 import { FuelType } from '../../../constants/fuel-type';
 import { SellerType } from '../../../constants/seller-type';
+import { TransmissionType } from '../../../constants/transmission-type';
 
 export class FavouritesDto {
     @ApiProperty({
@@ -94,7 +94,7 @@ export class FavouritesDto {
         required: true,
         description: 'Type of transmission',
     })
-    transmission: Transmission;
+    transmission: TransmissionType;
 
     @ApiProperty({
         enum: ['Gasoline', 'Diesel'],

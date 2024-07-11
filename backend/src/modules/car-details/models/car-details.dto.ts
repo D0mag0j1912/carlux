@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { SellerType } from '../../../constants/seller-type';
 import { BodyStyles } from '../../../constants/body-style';
-import { WheelDrivesType } from '../../../constants/wheel-drive';
-import { Transmission } from '../../../constants/transmission';
 import { FuelType } from '../../../constants/fuel-type';
+import { SellerType } from '../../../constants/seller-type';
+import { TransmissionType } from '../../../constants/transmission-type';
+import { WheelDrivesType } from '../../../constants/wheel-drive';
 
 export class CarDetailsDto {
     @ApiProperty({
@@ -74,7 +74,7 @@ export class CarDetailsDto {
         required: true,
         description: 'Type of transmission',
     })
-    transmission: Transmission;
+    transmission: TransmissionType;
 
     @ApiProperty({
         type: String,

@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn
 import { BodyStyles } from '../../constants/body-style';
 import { FuelType } from '../../constants/fuel-type';
 import { SellerType } from '../../constants/seller-type';
-import { Transmission } from '../../constants/transmission';
+import { TransmissionType } from '../../constants/transmission-type';
 import { CarBrandEntity } from './car-brand.entity';
 import { CarModelEntity } from './car-model.entity';
 import { CurrencyEntity } from './currency.entity';
@@ -39,7 +39,7 @@ export class CarEntity {
     NoOfPreviousOwners: number;
 
     @Column()
-    Transmission: Transmission;
+    Transmission: TransmissionType;
 
     @Column()
     EngineCodeName: string;
