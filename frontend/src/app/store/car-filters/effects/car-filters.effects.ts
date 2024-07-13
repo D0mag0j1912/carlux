@@ -73,7 +73,24 @@ export const getCarFiltersResultCount$ = createEffect(
             ofType(CarFiltersActions.getCarFiltersResultCount),
             switchMap((action) =>
                 carsService
-                    .carsControllerGetCarsFiltersCount({ carFilterOptions: action.query })
+                    .carsControllerGetCarsFiltersCount({
+                        page: action.query.page,
+                        perPage: action.query.perPage,
+                        brandId: action.query.brandId,
+                        modelIds: action.query.modelIds,
+                        bodyStyles: action.query.bodyStyles,
+                        fuelTypes: action.query.fuelTypes,
+                        yearRegistrationFrom: action.query.yearRegistrationFrom,
+                        yearRegistrationTo: action.query.yearRegistrationTo,
+                        priceFrom: action.query.priceFrom,
+                        priceTo: action.query.priceTo,
+                        kilometersTravelledFrom: action.query.kilometersTravelledFrom,
+                        kilometersTravelledTo: action.query.kilometersTravelledTo,
+                        powerMetric: action.query.powerMetric,
+                        powerFrom: action.query.powerFrom,
+                        powerTo: action.query.powerTo,
+                        transmissionTypes: action.query.transmissionTypes,
+                    })
                     .pipe(
                         catchError(() => {
                             sharedFacadeService.showToastMessage(
