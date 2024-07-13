@@ -39,7 +39,9 @@ export class CarFilterDto {
         required: false,
         description: 'Car\'s model ID',
     })
+    @Type(() => Number)
     @IsArray()
+    @IsNumber({}, { each: true })
     modelIds?: number[] | undefined;
 
     @ApiPropertyOptional({
