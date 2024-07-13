@@ -20,12 +20,12 @@
                     <ion-row>
                         <ion-col>
                             <ion-item (click)="carBrandSelect.open()">
-                                <ion-label [class.remove-item]="form.controls.brands.value?.length">{{
+                                <ion-label [class.remove-item]="form.controls.brand.value.length">{{
                                     t('filters.search_car_brands')
                                 }}</ion-label>
                                 <car-searchable-select
                                     #carBrandSelect
-                                    formControlName="brands"
+                                    formControlName="brand"
                                     [multiple]="false"
                                     [data]="carBrands()"
                                     [visibleValue]="CAR_BRAND_VISIBLE_VALUE"
@@ -39,8 +39,8 @@
 
                     <ion-row>
                         <ion-col>
-                            <ion-item (click)="carModelsSelect.open()" [disabled]="!form.controls.brands.value?.length">
-                                <ion-label [class.remove-item]="form.controls.brands.value?.length">{{
+                            <ion-item (click)="carModelsSelect.open()" [disabled]="!form.controls.brand.value.length">
+                                <ion-label [class.remove-item]="form.controls.brand.value.length">{{
                                     t('filters.search_car_models')
                                 }}</ion-label>
                                 <car-searchable-select
@@ -60,7 +60,7 @@
                         <ion-col>
                             <ion-item>
                                 <ion-select
-                                    formControlName="bodyStyle"
+                                    formControlName="bodyStyles"
                                     [placeholder]="t('filters.body_style')"
                                     [multiple]="true"
                                 >
@@ -78,7 +78,7 @@
                         <ion-col>
                             <ion-item>
                                 <ion-select
-                                    formControlName="fuelType"
+                                    formControlName="fuelTypes"
                                     [placeholder]="t('filters.fuel_type')"
                                     [multiple]="true"
                                 >
@@ -218,7 +218,7 @@
                         <ion-col>
                             <ion-item>
                                 <ion-select
-                                    formControlName="transmissionType"
+                                    formControlName="transmissionTypes"
                                     [placeholder]="t('filters.transmission_type')"
                                     [multiple]="true"
                                 >
@@ -235,7 +235,19 @@
                     <ion-row>
                         <ion-col class="ion-text-center">
                             <ion-button color="primary">
-                                {{ 'results' }}
+                                @if (carsFiltersResultsCount() === ZERO_CAR_RESULTS_COUNT) {
+                                    {{ t('common.n_results_plural', { n: carsFiltersResultsCount() }) }}
+                                } @else {
+                                    @if (carsFiltersResultsCount()) {
+                                        @if (carsFiltersResultsCount() === SINGULAR_COUNT_CAR_RESULT) {
+                                            {{ t('common.n_results_singular', { n: carsFiltersResultsCount() }) }}
+                                        } @else {
+                                            {{ t('common.n_results_plural', { n: carsFiltersResultsCount() }) }}
+                                        }
+                                    } @else {
+                                        {{ t('common.actions.search') }}
+                                    }
+                                }
                             </ion-button>
                         </ion-col>
                     </ion-row>

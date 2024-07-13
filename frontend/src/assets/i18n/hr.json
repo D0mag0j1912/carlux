@@ -15,7 +15,8 @@
             "confirm": "Potvrdi",
             "save": "Spremi",
             "back": "Nazad",
-            "select": "Odaberi"
+            "select": "Odaberi",
+            "search": "Search"
         },
         "seller_type": {
             "dealer": "Autokuća",

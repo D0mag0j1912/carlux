@@ -40,7 +40,7 @@ export class CarFilterDto {
         description: 'Car\'s model ID',
     })
     @IsArray()
-    modelIds?: number[];
+    modelIds?: number[] | undefined;
 
     @ApiPropertyOptional({
         enum: ['Convertible', 'Coupe', 'Sedan', 'SUV', 'Hatchback'],
@@ -49,7 +49,7 @@ export class CarFilterDto {
         description: 'Car\'s body style',
     })
     @IsArray()
-    bodyStyles?: BodyStyles[];
+    bodyStyles?: BodyStyles[] | undefined;
 
     @ApiPropertyOptional({
         enum: ['Gasoline', 'Diesel'],
@@ -58,7 +58,7 @@ export class CarFilterDto {
         description: 'Car\'s fuel type',
     })
     @IsArray()
-    fuelTypes?: FuelType[];
+    fuelTypes?: FuelType[] | undefined;
 
     @ApiPropertyOptional({
         type: Number,
@@ -67,7 +67,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    yearRegistrationFrom?: number;
+    yearRegistrationFrom?: number | undefined;
 
     @ApiPropertyOptional({
         type: Number,
@@ -76,7 +76,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    yearRegistrationTo?: number;
+    yearRegistrationTo?: number | undefined;
 
     @ApiPropertyOptional({
         type: Number,
@@ -85,7 +85,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    priceFrom?: number;
+    priceFrom?: number | undefined;
 
     @ApiPropertyOptional({
         type: Number,
@@ -94,7 +94,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    priceTo?: number;
+    priceTo?: number | undefined;
 
     @ApiPropertyOptional({
         type: Number,
@@ -103,7 +103,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    kilometersTravelledFrom?: number;
+    kilometersTravelledFrom?: number | undefined;
 
     @ApiPropertyOptional({
         type: Number,
@@ -112,14 +112,14 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    kilometersTravelledTo?: number;
+    kilometersTravelledTo?: number | undefined;
 
     @ApiPropertyOptional({
         enum: ['PS', 'KW'],
         required: false,
         description: 'Power metric',
     })
-    powerMetric?: PowerMetric;
+    powerMetric?: PowerMetric | undefined;
 
     @ApiPropertyOptional({
         type: Number,
@@ -128,7 +128,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    powerFrom?: number;
+    powerFrom?: number | undefined;
 
     @ApiPropertyOptional({
         type: Number,
@@ -137,7 +137,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    powerTo?: number;
+    powerTo?: number | undefined;
 
     @ApiPropertyOptional({
         enum: ['Automatic', 'Manual'],
@@ -146,5 +146,5 @@ export class CarFilterDto {
         description: 'Type of transmission',
     })
     @IsArray()
-    transmissionTypes?: TransmissionType[];
+    transmissionTypes?: TransmissionType[] | undefined;
 }
