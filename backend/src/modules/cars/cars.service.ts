@@ -35,7 +35,7 @@ export class CarsService {
         const powerMetric = query.powerMetric;
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
-        const transmission = query.transmission;
+        const transmission = query.transmissionTypes;
         const [recommendedCarsEntities, recommendedCarsTotalCount] = await this._carsRepository
             .createQueryBuilder('car')
             .select([
@@ -56,12 +56,14 @@ export class CarsService {
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
             .where('car.BrandId = :brandId', { brandId: query.brandId })
-            .andWhere(query.modelId ? 'car.ModelId = :modelId' : 'TRUE', { modelId: query.modelId })
-            .andWhere(query.bodyStyle ? 'car.BodyStyle = :bodyStyle' : 'TRUE', {
-                bodyStyle: query.bodyStyle,
+            .andWhere(query.modelIds.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
+                modelIds: query.modelIds,
             })
-            .andWhere(query.fuelType ? 'car.FuelType = :fuelType' : 'TRUE', {
-                fuelType: query.fuelType,
+            .andWhere(query.bodyStyles.length ? 'car.BodyStyle IN (:...bodyStyles)' : 'TRUE', {
+                bodyStyles: query.bodyStyles,
+            })
+            .andWhere(query.fuelTypes.length ? 'car.FuelType IN (:...fuelTypes)' : 'TRUE', {
+                fuelTypes: query.fuelTypes,
             })
             .andWhere(
                 yearRegistrationFrom
@@ -158,19 +160,21 @@ export class CarsService {
         const powerMetric = query.powerMetric;
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
-        const transmission = query.transmission;
+        const transmission = query.transmissionTypes;
         const carsCount = await this._carsRepository
             .createQueryBuilder('car')
             .leftJoin('car.currency', 'currency')
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
             .where('car.BrandId = :brandId', { brandId: query.brandId })
-            .andWhere(query.modelId ? 'car.ModelId = :modelId' : 'TRUE', { modelId: query.modelId })
-            .andWhere(query.bodyStyle ? 'car.BodyStyle = :bodyStyle' : 'TRUE', {
-                bodyStyle: query.bodyStyle,
+            .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
+                modelIds: query.modelIds,
             })
-            .andWhere(query.fuelType ? 'car.FuelType = :fuelType' : 'TRUE', {
-                fuelType: query.fuelType,
+            .andWhere(query.bodyStyles?.length ? 'car.BodyStyle IN (:...bodyStyles)' : 'TRUE', {
+                bodyStyles: query.bodyStyles,
+            })
+            .andWhere(query.fuelTypes?.length ? 'car.FuelType IN (:...fuelTypes)' : 'TRUE', {
+                fuelTypes: query.fuelTypes,
             })
             .andWhere(
                 yearRegistrationFrom

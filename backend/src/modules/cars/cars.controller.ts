@@ -4,9 +4,7 @@ import {
     ApiExtraModels,
     ApiInternalServerErrorResponse,
     ApiOkResponse,
-    ApiQuery,
     ApiTags,
-    getSchemaPath,
 } from '@nestjs/swagger';
 import { BASE_URL } from '../../constants/base-url';
 import { PaginationDocs } from '../../decorators/pagination-docs.decorator';
@@ -18,7 +16,6 @@ import { CarFilterDto } from './models/car-filter.dto';
 
 const CARS_FEATURE_KEY = 'cars';
 
-@ApiExtraModels(CarFilterDto)
 @ApiTags('Car list')
 @Controller(`${BASE_URL}${CARS_FEATURE_KEY}`)
 export class CarsController {
@@ -33,19 +30,9 @@ export class CarsController {
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
     @PaginationDocs(RecommendedCarsDto)
-    @ApiExtraModels(RecommendedCarsDto)
+    @ApiExtraModels(RecommendedCarsDto, CarFilterDto)
     @Get()
-    @ApiQuery({
-        name: 'carFilterOptions',
-        required: true,
-        type: 'object',
-        schema: {
-            $ref: getSchemaPath(CarFilterDto),
-        },
-    })
-    async getCars(
-        @Query('carFilterOptions') query: CarFilterDto,
-    ): Promise<PaginationDto<RecommendedCarsDto>> {
+    async getCars(@Query() query: CarFilterDto): Promise<PaginationDto<RecommendedCarsDto>> {
         return this._carsService.filterRecommendedCars(query);
     }
 
@@ -62,16 +49,9 @@ export class CarsController {
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
+    @ApiExtraModels(CarFilterDto)
     @Get('count')
-    @ApiQuery({
-        name: 'carFilterOptions',
-        required: true,
-        type: 'object',
-        schema: {
-            $ref: getSchemaPath(CarFilterDto),
-        },
-    })
-    async getCarsFiltersCount(@Query('carFilterOptions') query: CarFilterDto): Promise<number> {
+    async getCarsFiltersCount(@Query() query: CarFilterDto): Promise<number> {
         return this._carsService.getCarsFiltersCount(query);
     }
 }

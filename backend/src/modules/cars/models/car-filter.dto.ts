@@ -10,6 +10,24 @@ export class CarFilterDto {
     @ApiProperty({
         type: Number,
         required: true,
+        description: 'Page number',
+    })
+    @Type(() => Number)
+    @IsNumber()
+    page: number;
+
+    @ApiProperty({
+        type: Number,
+        required: true,
+        description: 'Car\'s per page',
+    })
+    @Type(() => Number)
+    @IsNumber()
+    perPage: number;
+    
+    @ApiProperty({
+        type: Number,
+        required: true,
         description: 'Car\'s brand ID',
     })
     @Type(() => Number)
@@ -17,8 +35,7 @@ export class CarFilterDto {
     brandId: number;
 
     @ApiProperty({
-        // eslint-disable-next-line @typescript-eslint/ban-types
-        type: Array<Number>,
+        type: [Number],
         required: false,
         description: 'Car\'s model ID',
     })
@@ -28,6 +45,7 @@ export class CarFilterDto {
     @ApiProperty({
         enum: ['Convertible', 'Coupe', 'Sedan', 'SUV', 'Hatchback'],
         required: false,
+        isArray: true,
         description: 'Car\'s body style',
     })
     @IsArray()
@@ -36,6 +54,7 @@ export class CarFilterDto {
     @ApiProperty({
         enum: ['Gasoline', 'Diesel'],
         required: false,
+        isArray: true,
         description: 'Car\'s fuel type',
     })
     @IsArray()
@@ -123,6 +142,7 @@ export class CarFilterDto {
     @ApiProperty({
         enum: ['Automatic', 'Manual'],
         required: false,
+        isArray: true,
         description: 'Type of transmission',
     })
     @IsArray()
