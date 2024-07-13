@@ -9,29 +9,25 @@ import * as PreferencesSelectors from '../selectors/preferences.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class PreferencesFacadeService {
-    private _store = inject(Store<AppState[FeatureKeys.PREFERENCES]>);
-
-    private _selectUserId$ = this._store.select(PreferencesSelectors.selectUserId);
-
-    private _selectLanguageCode$ = this._store.select(PreferencesSelectors.selectLanguageCode);
-
-    //Actions BEGIN -------------------------
-    getPreferences(userId: number): void {
-        this._store.dispatch(PreferencesActions.getPreferences({ userId }));
-    }
-
-    changeLanguage(userId: number, languageCode: LanguageCodeType): void {
-        this._store.dispatch(PreferencesActions.changeLanguage({ userId, languageCode }));
-    }
-    //Actions END -------------------------
+    #store = inject(Store<AppState[FeatureKeys.PREFERENCES]>);
 
     //Selectors BEGIN -------------------------
     selectUserId(): Observable<number | undefined> {
-        return this._selectUserId$;
+        return this.#store.select(PreferencesSelectors.selectUserId);
     }
 
     selectLanguageCode(): Observable<LanguageCodeType | undefined> {
-        return this._selectLanguageCode$;
+        return this.#store.select(PreferencesSelectors.selectLanguageCode);
     }
     //Selectors END -------------------------
+
+    //Actions BEGIN -------------------------
+    getPreferences(userId: number): void {
+        this.#store.dispatch(PreferencesActions.getPreferences({ userId }));
+    }
+
+    changeLanguage(userId: number, languageCode: LanguageCodeType): void {
+        this.#store.dispatch(PreferencesActions.changeLanguage({ userId, languageCode }));
+    }
+    //Actions END -------------------------
 }
