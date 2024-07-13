@@ -1,7 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UserDto {
-    @ApiProperty({
+    @ApiPropertyOptional({
         type: Number,
         required: false,
         description: 'User\'s ID',
@@ -22,7 +22,7 @@ export class UserDto {
     })
     lastName: string;
 
-    @ApiProperty({
+    @ApiPropertyOptional({
         type: String,
         required: false,
         description: 'User\'s profile picture',
@@ -43,7 +43,7 @@ export class UserDto {
     })
     email: string;
 
-    @ApiProperty({
+    @ApiPropertyOptional({
         type: String,
         required: false,
         description: 'Date and time when the user was created',
