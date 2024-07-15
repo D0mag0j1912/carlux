@@ -27,12 +27,12 @@ export class CarFilterDto {
     
     @ApiProperty({
         type: Number,
-        required: true,
+        required: false,
         description: 'Car\'s brand ID',
     })
     @Type(() => Number)
     @IsNumber()
-    brandId: number;
+    brandId?: number;
 
     @ApiPropertyOptional({
         type: [Number],
@@ -51,6 +51,7 @@ export class CarFilterDto {
         isArray: true,
         description: 'Car\'s body style',
     })
+    @Transform(({ value }) => Array.isArray(value) ? value : [value])
     @IsArray()
     bodyStyles?: BodyStyles[] | undefined;
 
@@ -60,6 +61,7 @@ export class CarFilterDto {
         isArray: true,
         description: 'Car\'s fuel type',
     })
+    @Transform(({ value }) => Array.isArray(value) ? value : [value])
     @IsArray()
     fuelTypes?: FuelType[] | undefined;
 

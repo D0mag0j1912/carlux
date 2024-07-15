@@ -24,7 +24,7 @@ export interface CarsControllerGetCars$Params {
 /**
  * Car's brand ID
  */
-  brandId: number;
+  brandId?: number;
 
 /**
  * Car's model ID

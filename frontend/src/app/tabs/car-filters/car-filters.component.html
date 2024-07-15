@@ -61,7 +61,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="bodyStyles"
-                                    [placeholder]="t('filters.body_style')"
+                                    [label]="t('filters.body_style')"
                                     [multiple]="true"
                                 >
                                     @for (bodyStyle of bodyStyles; track bodyStyle.key) {
@@ -79,7 +79,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="fuelTypes"
-                                    [placeholder]="t('filters.fuel_type')"
+                                    [label]="t('filters.fuel_type')"
                                     [multiple]="true"
                                 >
                                     @for (fuelType of fuelTypes; track fuelType.key) {
@@ -97,8 +97,11 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="registrationYearFrom"
-                                    [placeholder]="t('filters.registration_from')"
+                                    [label]="t('filters.registration_from')"
                                 >
+                                    <ion-select-option [value]="null">
+                                        {{ t('common.none') }}
+                                    </ion-select-option>
                                     @for (year of registrationYears; track year) {
                                         <ion-select-option [value]="year">
                                             {{ year }}
@@ -109,10 +112,10 @@
                         </ion-col>
                         <ion-col>
                             <ion-item>
-                                <ion-select
-                                    formControlName="registrationYearTo"
-                                    [placeholder]="t('filters.registration_to')"
-                                >
+                                <ion-select formControlName="registrationYearTo" [label]="t('filters.registration_to')">
+                                    <ion-select-option [value]="null">
+                                        {{ t('common.none') }}
+                                    </ion-select-option>
                                     @for (year of registrationYears; track year) {
                                         <ion-select-option [value]="year">
                                             {{ year }}
@@ -126,7 +129,10 @@
                     <ion-row formGroupName="price">
                         <ion-col>
                             <ion-item>
-                                <ion-select formControlName="priceFrom" [placeholder]="t('filters.price_from')">
+                                <ion-select formControlName="priceFrom" [label]="t('filters.price_from')">
+                                    <ion-select-option [value]="null">
+                                        {{ t('common.none') }}
+                                    </ion-select-option>
                                     @for (price of prices; track price) {
                                         <ion-select-option [value]="price">
                                             {{ price + euros }}
@@ -137,7 +143,10 @@
                         </ion-col>
                         <ion-col>
                             <ion-item>
-                                <ion-select formControlName="priceTo" [placeholder]="t('filters.price_to')">
+                                <ion-select formControlName="priceTo" [label]="t('filters.price_to')">
+                                    <ion-select-option [value]="null">
+                                        {{ t('common.none') }}
+                                    </ion-select-option>
                                     @for (price of prices; track price) {
                                         <ion-select-option [value]="price">
                                             {{ price + euros }}
@@ -151,10 +160,10 @@
                     <ion-row formGroupName="kilometers">
                         <ion-col>
                             <ion-item>
-                                <ion-select
-                                    formControlName="kilometersFrom"
-                                    [placeholder]="t('filters.kilometers_from')"
-                                >
+                                <ion-select formControlName="kilometersFrom" [label]="t('filters.kilometers_from')">
+                                    <ion-select-option [value]="null">
+                                        {{ t('common.none') }}
+                                    </ion-select-option>
                                     @for (item of kilometers; track item) {
                                         <ion-select-option [value]="item">
                                             {{ item }}
@@ -165,7 +174,10 @@
                         </ion-col>
                         <ion-col>
                             <ion-item>
-                                <ion-select formControlName="kilometersTo" [placeholder]="t('filters.kilometers_to')">
+                                <ion-select formControlName="kilometersTo" [label]="t('filters.kilometers_to')">
+                                    <ion-select-option [value]="null">
+                                        {{ t('common.none') }}
+                                    </ion-select-option>
                                     @for (item of kilometers; track item) {
                                         <ion-select-option [value]="item">
                                             {{ item }}

@@ -1,5 +1,6 @@
 {
     "common": {
+        "none": "None",
         "cancel": "Cancel",
         "or": "OR",
         "continue": "Continue",

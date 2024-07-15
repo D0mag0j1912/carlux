@@ -132,7 +132,7 @@ export class CarFiltersComponent implements OnInit {
             const query: CarFilters = {
                 page: this.INITIAL_PAGE,
                 perPage: this.PER_PAGE,
-                brandId: (value.brand as CarBrand[])[0].id,
+                brandId: (value.brand as CarBrand[])[0]?.id ?? undefined,
                 modelIds: value.models?.map((model: CarModel) => model.id) ?? [],
                 bodyStyles: value.bodyStyles ?? [],
                 fuelTypes: value.fuelTypes ?? [],

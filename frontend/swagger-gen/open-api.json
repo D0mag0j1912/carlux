@@ -572,7 +572,7 @@
                     },
                     {
                         "name": "brandId",
-                        "required": true,
+                        "required": false,
                         "in": "query",
                         "description": "Car's brand ID",
                         "schema": {
@@ -782,7 +782,7 @@
                     },
                     {
                         "name": "brandId",
-                        "required": true,
+                        "required": false,
                         "in": "query",
                         "description": "Car's brand ID",
                         "schema": {
@@ -1552,7 +1552,7 @@
                         }
                     }
                 },
-                "required": ["page", "perPage", "brandId"]
+                "required": ["page", "perPage"]
             }
         }
     }
