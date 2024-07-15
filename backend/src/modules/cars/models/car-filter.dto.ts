@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { IsArray, IsNumber } from 'class-validator';
 import { BodyStyles } from '../../../constants/body-style';
 import { FuelType } from '../../../constants/fuel-type';
@@ -40,6 +40,7 @@ export class CarFilterDto {
         description: 'Car\'s model ID',
     })
     @Type(() => Number)
+    @Transform(({ value }) => Array.isArray(value) ? value : [value])
     @IsArray()
     @IsNumber({}, { each: true })
     modelIds?: number[] | undefined;
