@@ -25,7 +25,7 @@ export class CarFilterDto {
     @IsNumber()
     perPage: number;
     
-    @ApiProperty({
+    @ApiPropertyOptional({
         type: Number,
         required: false,
         description: 'Car\'s brand ID',
