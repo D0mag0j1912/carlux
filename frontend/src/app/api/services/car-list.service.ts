@@ -76,7 +76,7 @@ export class CarListService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  carsControllerGetCarsFiltersCount$Response(params: CarsControllerGetCarsFiltersCount$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  carsControllerGetCarsFiltersCount$Response(params: CarsControllerGetCarsFiltersCount$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
     return carsControllerGetCarsFiltersCount(this.http, this.rootUrl, params, context);
   }
 
@@ -86,9 +86,9 @@ export class CarListService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  carsControllerGetCarsFiltersCount(params: CarsControllerGetCarsFiltersCount$Params, context?: HttpContext): Observable<void> {
+  carsControllerGetCarsFiltersCount(params: CarsControllerGetCarsFiltersCount$Params, context?: HttpContext): Observable<number> {
     return this.carsControllerGetCarsFiltersCount$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+      map((r: StrictHttpResponse<number>): number => r.body)
     );
   }
 

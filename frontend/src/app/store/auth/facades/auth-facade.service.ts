@@ -1,89 +1,75 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AppState } from '../../..';
-import { FeatureKeys } from '../../../constants/feature-keys';
+import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 import { UserDto as User } from '../../../api/models/user-dto';
-import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
+import { FeatureKeys } from '../../../constants/feature-keys';
 import * as AuthenticationActions from '../actions/auth.actions';
 import * as AuthenticationSelectors from '../selectors/auth.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationFacadeService {
-    private _store = inject(Store<AppState[FeatureKeys.AUTH]>);
-
-    private _selectIsNotLoading$ = this._store.select(AuthenticationSelectors.selectIsNotLoading);
-
-    private _selectSMSResponse$ = this._store.select(AuthenticationSelectors.selectSMSResponse);
-
-    private _selectVerifyCodeResponse$ = this._store.select(
-        AuthenticationSelectors.selectVerifyCodeResponse,
-    );
-
-    private _selectEmailExists$ = this._store.select(AuthenticationSelectors.selectEmailExists);
-
-    private _selectUserData$ = this._store.select(AuthenticationSelectors.selectUserData);
-
-    private _selectUserId$ = this._store.select(AuthenticationSelectors.selectUserId);
+    #store = inject(Store<AppState[FeatureKeys.AUTH]>);
 
     //Selectors BEGIN -------------------------
     selectIsNotLoading(): Observable<boolean> {
-        return this._selectIsNotLoading$;
+        return this.#store.select(AuthenticationSelectors.selectIsNotLoading);
     }
 
     selectSMSResponse(): Observable<StatusResponse | undefined> {
-        return this._selectSMSResponse$;
+        return this.#store.select(AuthenticationSelectors.selectSMSResponse);
     }
 
     selectVerifyCodeResponse(): Observable<StatusResponse | undefined> {
-        return this._selectVerifyCodeResponse$;
+        return this.#store.select(AuthenticationSelectors.selectVerifyCodeResponse);
     }
 
     selectEmailExists(): Observable<boolean> {
-        return this._selectEmailExists$;
+        return this.#store.select(AuthenticationSelectors.selectEmailExists);
     }
 
     selectUserData(): Observable<UserData | undefined> {
-        return this._selectUserData$;
+        return this.#store.select(AuthenticationSelectors.selectUserData);
     }
 
     selectUserId(): Observable<number | undefined> {
-        return this._selectUserId$;
+        return this.#store.select(AuthenticationSelectors.selectUserId);
     }
     //Selectors END ---------------------------
 
     //Actions BEGIN ---------------------------
     sendSMS(): void {
-        this._store.dispatch(AuthenticationActions.sendSMS());
+        this.#store.dispatch(AuthenticationActions.sendSMS());
     }
 
     setLoading(isLoading: boolean): void {
-        this._store.dispatch(AuthenticationActions.setLoading({ isLoading: isLoading }));
+        this.#store.dispatch(AuthenticationActions.setLoading({ isLoading: isLoading }));
     }
 
     verifyCode(code: string): void {
-        this._store.dispatch(AuthenticationActions.verifyCode({ code }));
+        this.#store.dispatch(AuthenticationActions.verifyCode({ code }));
     }
 
     getEmailExists(email: string): void {
-        this._store.dispatch(AuthenticationActions.getEmailExists({ email }));
+        this.#store.dispatch(AuthenticationActions.getEmailExists({ email }));
     }
 
     registerUser(user: User): void {
-        this._store.dispatch(AuthenticationActions.registerUser({ user }));
+        this.#store.dispatch(AuthenticationActions.registerUser({ user }));
     }
 
     logout(): void {
-        this._store.dispatch(AuthenticationActions.logout());
+        this.#store.dispatch(AuthenticationActions.logout());
     }
 
     signIn(email: string): void {
-        this._store.dispatch(AuthenticationActions.signIn({ email }));
+        this.#store.dispatch(AuthenticationActions.signIn({ email }));
     }
 
     signInSuccess(userData: UserData): void {
-        this._store.dispatch(AuthenticationActions.signInSuccess({ userData }));
+        this.#store.dispatch(AuthenticationActions.signInSuccess({ userData }));
     }
     //Actions END ---------------------------
 }

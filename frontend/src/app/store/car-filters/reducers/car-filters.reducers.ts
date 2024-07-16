@@ -6,21 +6,36 @@ import * as CarFiltersActions from '../actions/car-filters.actions';
 export interface CarFiltersState {
     carBrands: CarBrand[];
     carModels: CarModel[];
+    resultCount: number | undefined;
 }
 
 const initialState: CarFiltersState = {
     carBrands: [],
     carModels: [],
+    resultCount: undefined,
 };
 
 export const reducers = createReducer(
     initialState,
-    on(CarFiltersActions.setCarBrands, (state: CarFiltersState, { carBrands }) => ({
-        ...state,
-        carBrands: [...carBrands],
-    })),
-    on(CarFiltersActions.setCarModels, (state: CarFiltersState, { carModels }) => ({
-        ...state,
-        carModels: [...carModels],
-    })),
+    on(
+        CarFiltersActions.setCarBrands,
+        (state: CarFiltersState, { carBrands }): CarFiltersState => ({
+            ...state,
+            carBrands: [...carBrands],
+        }),
+    ),
+    on(
+        CarFiltersActions.setCarModels,
+        (state: CarFiltersState, { carModels }): CarFiltersState => ({
+            ...state,
+            carModels: [...carModels],
+        }),
+    ),
+    on(
+        CarFiltersActions.setCarFiltersResultCount,
+        (state: CarFiltersState, { count }): CarFiltersState => ({
+            ...state,
+            resultCount: count,
+        }),
+    ),
 );

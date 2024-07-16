@@ -553,11 +553,163 @@
                 "operationId": "CarsController_getCars",
                 "parameters": [
                     {
-                        "name": "carFilterOptions",
+                        "name": "page",
                         "required": true,
                         "in": "query",
+                        "description": "Page number",
                         "schema": {
-                            "$ref": "#/components/schemas/CarFilterDto"
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "perPage",
+                        "required": true,
+                        "in": "query",
+                        "description": "Car's per page",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "brandId",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's brand ID",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "modelIds",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's model ID",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    },
+                    {
+                        "name": "bodyStyles",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's body style",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": ["Convertible", "Coupe", "Sedan", "SUV", "Hatchback"]
+                            }
+                        }
+                    },
+                    {
+                        "name": "fuelTypes",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's fuel type",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": ["Gasoline", "Diesel"]
+                            }
+                        }
+                    },
+                    {
+                        "name": "yearRegistrationFrom",
+                        "required": false,
+                        "in": "query",
+                        "description": "Year registration FROM",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "yearRegistrationTo",
+                        "required": false,
+                        "in": "query",
+                        "description": "Year registration TO",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "priceFrom",
+                        "required": false,
+                        "in": "query",
+                        "description": "Price FROM",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "priceTo",
+                        "required": false,
+                        "in": "query",
+                        "description": "Price TO",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "kilometersTravelledFrom",
+                        "required": false,
+                        "in": "query",
+                        "description": "Kilometers travelled FROM",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "kilometersTravelledTo",
+                        "required": false,
+                        "in": "query",
+                        "description": "Kilometers travelled TO",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "powerMetric",
+                        "required": false,
+                        "in": "query",
+                        "description": "Power metric",
+                        "schema": {
+                            "enum": ["PS", "KW"],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "powerFrom",
+                        "required": false,
+                        "in": "query",
+                        "description": "Power FROM",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "powerTo",
+                        "required": false,
+                        "in": "query",
+                        "description": "Power TO",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "transmissionTypes",
+                        "required": false,
+                        "in": "query",
+                        "description": "Type of transmission",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": ["Automatic", "Manual"]
+                            }
                         }
                     }
                 ],
@@ -611,15 +763,177 @@
                 "operationId": "CarsController_getCarsFiltersCount",
                 "parameters": [
                     {
-                        "name": "carFilterOptions",
+                        "name": "page",
                         "required": true,
                         "in": "query",
+                        "description": "Page number",
                         "schema": {
-                            "$ref": "#/components/schemas/CarFilterDto"
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "perPage",
+                        "required": true,
+                        "in": "query",
+                        "description": "Car's per page",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "brandId",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's brand ID",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "modelIds",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's model ID",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    },
+                    {
+                        "name": "bodyStyles",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's body style",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": ["Convertible", "Coupe", "Sedan", "SUV", "Hatchback"]
+                            }
+                        }
+                    },
+                    {
+                        "name": "fuelTypes",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's fuel type",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": ["Gasoline", "Diesel"]
+                            }
+                        }
+                    },
+                    {
+                        "name": "yearRegistrationFrom",
+                        "required": false,
+                        "in": "query",
+                        "description": "Year registration FROM",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "yearRegistrationTo",
+                        "required": false,
+                        "in": "query",
+                        "description": "Year registration TO",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "priceFrom",
+                        "required": false,
+                        "in": "query",
+                        "description": "Price FROM",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "priceTo",
+                        "required": false,
+                        "in": "query",
+                        "description": "Price TO",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "kilometersTravelledFrom",
+                        "required": false,
+                        "in": "query",
+                        "description": "Kilometers travelled FROM",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "kilometersTravelledTo",
+                        "required": false,
+                        "in": "query",
+                        "description": "Kilometers travelled TO",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "powerMetric",
+                        "required": false,
+                        "in": "query",
+                        "description": "Power metric",
+                        "schema": {
+                            "enum": ["PS", "KW"],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "powerFrom",
+                        "required": false,
+                        "in": "query",
+                        "description": "Power FROM",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "powerTo",
+                        "required": false,
+                        "in": "query",
+                        "description": "Power TO",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "transmissionTypes",
+                        "required": false,
+                        "in": "query",
+                        "description": "Type of transmission",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": ["Automatic", "Manual"]
+                            }
                         }
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Response indicating how many car results there are for the specific query params",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "Bad request from the client"
                     },
@@ -1169,19 +1483,28 @@
                         "type": "number",
                         "description": "Car's brand ID"
                     },
-                    "modelId": {
-                        "type": "number",
-                        "description": "Car's model ID"
+                    "modelIds": {
+                        "description": "Car's model ID",
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
                     },
-                    "bodyStyle": {
-                        "type": "string",
-                        "enum": ["Convertible", "Coupe", "Sedan", "SUV", "Hatchback"],
-                        "description": "Car's body style"
+                    "bodyStyles": {
+                        "type": "array",
+                        "description": "Car's body style",
+                        "items": {
+                            "type": "string",
+                            "enum": ["Convertible", "Coupe", "Sedan", "SUV", "Hatchback"]
+                        }
                     },
-                    "fuelType": {
-                        "type": "string",
-                        "enum": ["Gasoline", "Diesel"],
-                        "description": "Car's fuel type"
+                    "fuelTypes": {
+                        "type": "array",
+                        "description": "Car's fuel type",
+                        "items": {
+                            "type": "string",
+                            "enum": ["Gasoline", "Diesel"]
+                        }
                     },
                     "yearRegistrationFrom": {
                         "type": "number",
@@ -1220,12 +1543,16 @@
                         "type": "number",
                         "description": "Power TO"
                     },
-                    "transmission": {
-                        "type": "string",
-                        "description": "Type of transmission"
+                    "transmissionTypes": {
+                        "type": "array",
+                        "description": "Type of transmission",
+                        "items": {
+                            "type": "string",
+                            "enum": ["Automatic", "Manual"]
+                        }
                     }
                 },
-                "required": ["page", "perPage", "brandId"]
+                "required": ["page", "perPage"]
             }
         }
     }

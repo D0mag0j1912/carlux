@@ -1,5 +1,6 @@
 {
     "common": {
+        "none": "Nijedno",
         "cancel": "Odustani",
         "or": "ILI",
         "continue": "Nastavi",
@@ -15,7 +16,8 @@
             "confirm": "Potvrdi",
             "save": "Spremi",
             "back": "Nazad",
-            "select": "Odaberi"
+            "select": "Odaberi",
+            "search": "Search"
         },
         "seller_type": {
             "dealer": "Autokuća",
@@ -174,7 +176,8 @@
         },
         "errors": {
             "get_car_brands": "Greška prilikom dohvaćanja marki automobila. Molimo pokušajte ponovno.",
-            "get_car_models": "Greška prilikom dohvaćanja modela automobila. Molimo pokušajte ponovno."
+            "get_car_models": "Greška prilikom dohvaćanja modela automobila. Molimo pokušajte ponovno.",
+            "get_car_filters_result_count": "Greška prilikom dohvaćanja broja rezultata. Molimo pokušajte ponovno."
         }
     }
 }

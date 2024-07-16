@@ -2,7 +2,6 @@
 /* eslint-disable */
 export { CarBrandDto } from './models/car-brand-dto';
 export { CarDetailsDto } from './models/car-details-dto';
-export { CarFilterDto } from './models/car-filter-dto';
 export { CarModelDto } from './models/car-model-dto';
 export { EmailDto } from './models/email-dto';
 export { FavouritesDto } from './models/favourites-dto';

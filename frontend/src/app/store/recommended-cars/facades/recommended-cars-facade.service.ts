@@ -9,51 +9,37 @@ import * as CarsSelectors from '../selectors/recommended-cars.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class RecommendedCarsFacadeService {
-    private _store = inject(Store<AppState[FeatureKeys.RECOMMENDED_CARS]>);
-
-    private _selectAreRecommendedCarsNotLoading$ = this._store.select(
-        CarsSelectors.selectAreRecommendedCarsNotLoading,
-    );
-
-    private _selectRecommendedCars$ = this._store.select(CarsSelectors.selectRecommendedCars);
-
-    private _selectHasNoMoreRecommendedCars$ = this._store.select(
-        CarsSelectors.selectHasNoMoreRecommendedCars,
-    );
-
-    private _selectHasInfiniteEventCompleted$ = this._store.select(
-        CarsSelectors.selectHasInfiniteEventCompleted,
-    );
+    #store = inject(Store<AppState[FeatureKeys.RECOMMENDED_CARS]>);
 
     //--------------- Selectors BEGIN -------------------------
     selectAreRecommendedCarsNotLoading(): Observable<boolean> {
-        return this._selectAreRecommendedCarsNotLoading$;
+        return this.#store.select(CarsSelectors.selectAreRecommendedCarsNotLoading);
     }
 
     selectRecommendedCars(): Observable<RecommendedCars[]> {
-        return this._selectRecommendedCars$;
+        return this.#store.select(CarsSelectors.selectRecommendedCars);
     }
 
     selectHasNoMoreRecommendedCars(): Observable<boolean> {
-        return this._selectHasNoMoreRecommendedCars$;
+        return this.#store.select(CarsSelectors.selectHasNoMoreRecommendedCars);
     }
 
     selectHasInfiniteEventCompleted(): Observable<boolean> {
-        return this._selectHasInfiniteEventCompleted$;
+        return this.#store.select(CarsSelectors.selectHasInfiniteEventCompleted);
     }
     //--------------- Selectors END ---------------------------
 
     //--------------- Actions BEGIN ---------------------------
     getRecommendedCars(page: number, perPage: number): void {
-        this._store.dispatch(CarsActions.getRecommendedCars({ page, perPage }));
+        this.#store.dispatch(CarsActions.getRecommendedCars({ page, perPage }));
     }
 
     setRecommendedCarsLoading(areRecommendedCarsLoading: boolean): void {
-        this._store.dispatch(CarsActions.setRecommendedCarsLoading({ areRecommendedCarsLoading }));
+        this.#store.dispatch(CarsActions.setRecommendedCarsLoading({ areRecommendedCarsLoading }));
     }
 
     setHasInfiniteEventCompleted(hasInfiniteEventCompleted: boolean): void {
-        this._store.dispatch(
+        this.#store.dispatch(
             CarsActions.setHasInfiniteEventCompleted({ hasInfiniteEventCompleted }),
         );
     }
