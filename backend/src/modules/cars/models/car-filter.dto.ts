@@ -32,7 +32,7 @@ export class CarFilterDto {
     })
     @Type(() => Number)
     @IsNumber()
-    brandId?: number;
+    brandId?: number | undefined;
 
     @ApiPropertyOptional({
         type: [Number],
