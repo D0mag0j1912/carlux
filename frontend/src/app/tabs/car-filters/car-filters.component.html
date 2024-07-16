@@ -97,6 +97,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="registrationYearFrom"
+                                    labelPlacement="floating"
                                     [label]="t('filters.registration_from')"
                                 >
                                     <ion-select-option [value]="null">
@@ -112,7 +113,11 @@
                         </ion-col>
                         <ion-col>
                             <ion-item>
-                                <ion-select formControlName="registrationYearTo" [label]="t('filters.registration_to')">
+                                <ion-select
+                                    formControlName="registrationYearTo"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.registration_to')"
+                                >
                                     <ion-select-option [value]="null">
                                         {{ t('common.none') }}
                                     </ion-select-option>
@@ -129,7 +134,11 @@
                     <ion-row formGroupName="price">
                         <ion-col>
                             <ion-item>
-                                <ion-select formControlName="priceFrom" [label]="t('filters.price_from')">
+                                <ion-select
+                                    formControlName="priceFrom"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.price_from')"
+                                >
                                     <ion-select-option [value]="null">
                                         {{ t('common.none') }}
                                     </ion-select-option>
@@ -143,7 +152,11 @@
                         </ion-col>
                         <ion-col>
                             <ion-item>
-                                <ion-select formControlName="priceTo" [label]="t('filters.price_to')">
+                                <ion-select
+                                    formControlName="priceTo"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.price_to')"
+                                >
                                     <ion-select-option [value]="null">
                                         {{ t('common.none') }}
                                     </ion-select-option>
@@ -160,7 +173,11 @@
                     <ion-row formGroupName="kilometers">
                         <ion-col>
                             <ion-item>
-                                <ion-select formControlName="kilometersFrom" [label]="t('filters.kilometers_from')">
+                                <ion-select
+                                    formControlName="kilometersFrom"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.kilometers_from')"
+                                >
                                     <ion-select-option [value]="null">
                                         {{ t('common.none') }}
                                     </ion-select-option>
@@ -174,7 +191,11 @@
                         </ion-col>
                         <ion-col>
                             <ion-item>
-                                <ion-select formControlName="kilometersTo" [label]="t('filters.kilometers_to')">
+                                <ion-select
+                                    formControlName="kilometersTo"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.kilometers_to')"
+                                >
                                     <ion-select-option [value]="null">
                                         {{ t('common.none') }}
                                     </ion-select-option>
@@ -193,8 +214,8 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="unit"
-                                    interface="popover"
-                                    [placeholder]="t('filters.power_unit')"
+                                    labelPlacement="floating"
+                                    [label]="t('filters.power_unit')"
                                 >
                                     @for (unit of powerUnits; track unit.key) {
                                         <ion-select-option [value]="unit.key">
