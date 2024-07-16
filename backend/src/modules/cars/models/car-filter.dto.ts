@@ -150,6 +150,7 @@ export class CarFilterDto {
         isArray: true,
         description: 'Type of transmission',
     })
+    @Transform(({ value }) => Array.isArray(value) ? value : [value])
     @IsArray()
     transmissionTypes?: TransmissionType[] | undefined;
 }
