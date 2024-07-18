@@ -37,6 +37,7 @@ import { CAR_FILTERS_TRANSMISSION_TYPES } from './constants/car-filters-transmis
 import { generateKilometers } from './helpers/car-filters-kilometers.helper';
 import { generatePrices } from './helpers/car-filters-price.helper';
 import { generateCarFiltersRegistrationYears } from './helpers/car-filters-registration-dates.helpers';
+import { priceValidator } from './validators/price.validator';
 import { registrationYearValidator } from './validators/registration-year.validator';
 
 const IONIC_IMPORTS = [
@@ -104,10 +105,13 @@ export class CarFiltersComponent implements OnInit {
             },
             { validators: registrationYearValidator() },
         ),
-        price: new FormGroup({
-            priceFrom: new FormControl<number | null>(null),
-            priceTo: new FormControl<number | null>(null),
-        }),
+        price: new FormGroup(
+            {
+                priceFrom: new FormControl<number | null>(null),
+                priceTo: new FormControl<number | null>(null),
+            },
+            { validators: priceValidator() },
+        ),
         kilometers: new FormGroup({
             kilometersFrom: new FormControl<number | null>(null),
             kilometersTo: new FormControl<number | null>(null),

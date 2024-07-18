@@ -180,6 +180,11 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
+                    @if (form.controls.price.errors?.priceInvalid) {
+                        <div class="price-error">
+                            {{ t('filters.validations.price') }}
+                        </div>
+                    }
 
                     <ion-row formGroupName="kilometers">
                         <ion-col>

@@ -180,7 +180,8 @@
             "get_car_filters_result_count": "Greška prilikom dohvaćanja broja rezultata. Molimo pokušajte ponovno."
         },
         "validations": {
-            "registration_year": "Registracija OD mora biti manja od registracije DO"
+            "registration_year": "Registracija OD mora biti manja od registracije DO",
+            "price": "Cijena OD mora biti manja od cijene DO"
         }
     }
 }

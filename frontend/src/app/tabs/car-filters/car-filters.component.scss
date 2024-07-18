@@ -16,7 +16,8 @@
     display: flex;
 }
 
-.registration-year-error {
+.registration-year-error,
+.price-error {
     @include small;
     margin-left: 20px;
     color: var(--ion-color-danger);

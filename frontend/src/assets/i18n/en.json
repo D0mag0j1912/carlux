@@ -180,7 +180,8 @@
             "get_car_filters_result_count": "Error while loading number of results. Please try again."
         },
         "validations": {
-            "registration_year": "Registration FROM needs to be lower than registration TO"
+            "registration_year": "Registration FROM needs to be lower than registration TO",
+            "price": "Price FROM needs to be lower than price TO"
         }
     }
 }
