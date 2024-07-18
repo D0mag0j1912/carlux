@@ -15,3 +15,9 @@
 .registration-date-wrapper {
     display: flex;
 }
+
+.registration-year-error {
+    @include small;
+    margin-left: 20px;
+    color: var(--ion-color-danger);
+}

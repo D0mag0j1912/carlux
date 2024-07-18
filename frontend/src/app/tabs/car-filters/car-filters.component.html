@@ -61,6 +61,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="bodyStyles"
+                                    interface="popover"
                                     [label]="t('filters.body_style')"
                                     [multiple]="true"
                                 >
@@ -79,6 +80,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="fuelTypes"
+                                    interface="popover"
                                     [label]="t('filters.fuel_type')"
                                     [multiple]="true"
                                 >
@@ -98,6 +100,7 @@
                                 <ion-select
                                     formControlName="registrationYearFrom"
                                     labelPlacement="floating"
+                                    interface="popover"
                                     [label]="t('filters.registration_from')"
                                 >
                                     <ion-select-option [value]="null">
@@ -116,6 +119,7 @@
                                 <ion-select
                                     formControlName="registrationYearTo"
                                     labelPlacement="floating"
+                                    interface="popover"
                                     [label]="t('filters.registration_to')"
                                 >
                                     <ion-select-option [value]="null">
@@ -130,12 +134,18 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
+                    @if (form.controls.registrationYear.errors?.registrationYearInvalid) {
+                        <div class="registration-year-error">
+                            {{ t('filters.validations.registration_year') }}
+                        </div>
+                    }
 
                     <ion-row formGroupName="price">
                         <ion-col>
                             <ion-item>
                                 <ion-select
                                     formControlName="priceFrom"
+                                    interface="popover"
                                     labelPlacement="floating"
                                     [label]="t('filters.price_from')"
                                 >
@@ -154,6 +164,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="priceTo"
+                                    interface="popover"
                                     labelPlacement="floating"
                                     [label]="t('filters.price_to')"
                                 >
@@ -175,6 +186,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="kilometersFrom"
+                                    interface="popover"
                                     labelPlacement="floating"
                                     [label]="t('filters.kilometers_from')"
                                 >
@@ -193,6 +205,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="kilometersTo"
+                                    interface="popover"
                                     labelPlacement="floating"
                                     [label]="t('filters.kilometers_to')"
                                 >
@@ -214,6 +227,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="unit"
+                                    interface="popover"
                                     labelPlacement="floating"
                                     [label]="t('filters.power_unit')"
                                 >
@@ -252,6 +266,7 @@
                             <ion-item>
                                 <ion-select
                                     formControlName="transmissionTypes"
+                                    interface="popover"
                                     [placeholder]="t('filters.transmission_type')"
                                     [multiple]="true"
                                 >
