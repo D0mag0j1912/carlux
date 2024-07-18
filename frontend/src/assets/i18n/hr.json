@@ -181,7 +181,9 @@
         },
         "validations": {
             "registration_year": "Registracija OD mora biti manja od registracije DO",
-            "price": "Cijena OD mora biti manja od cijene DO"
+            "price": "Cijena OD mora biti manja od cijene DO",
+            "kilometers_travelled": "Kilometeri OD moraju biti manji od kilometara DO",
+            "power": "Snaga OD mora biti manja od snage DO"
         }
     }
 }

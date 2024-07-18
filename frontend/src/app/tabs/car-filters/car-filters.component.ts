@@ -37,8 +37,7 @@ import { CAR_FILTERS_TRANSMISSION_TYPES } from './constants/car-filters-transmis
 import { generateKilometers } from './helpers/car-filters-kilometers.helper';
 import { generatePrices } from './helpers/car-filters-price.helper';
 import { generateCarFiltersRegistrationYears } from './helpers/car-filters-registration-dates.helpers';
-import { priceValidator } from './validators/price.validator';
-import { registrationYearValidator } from './validators/registration-year.validator';
+import { carFiltersFormValidator } from './validators/car-filters-form.validator';
 
 const IONIC_IMPORTS = [
     IonHeader,
@@ -103,24 +102,30 @@ export class CarFiltersComponent implements OnInit {
                 registrationYearFrom: new FormControl<number | null>(null),
                 registrationYearTo: new FormControl<number | null>(null),
             },
-            { validators: registrationYearValidator() },
+            { validators: carFiltersFormValidator('registrationYear') },
         ),
         price: new FormGroup(
             {
                 priceFrom: new FormControl<number | null>(null),
                 priceTo: new FormControl<number | null>(null),
             },
-            { validators: priceValidator() },
+            { validators: carFiltersFormValidator('price') },
         ),
-        kilometers: new FormGroup({
-            kilometersFrom: new FormControl<number | null>(null),
-            kilometersTo: new FormControl<number | null>(null),
-        }),
-        power: new FormGroup({
-            unit: new FormControl<PowerUnit | null>(null),
-            powerFrom: new FormControl<number | null>(null, { updateOn: 'blur' }),
-            powerTo: new FormControl<number | null>(null, { updateOn: 'blur' }),
-        }),
+        kilometers: new FormGroup(
+            {
+                kilometersFrom: new FormControl<number | null>(null),
+                kilometersTo: new FormControl<number | null>(null),
+            },
+            { validators: carFiltersFormValidator('kilometersTravelled') },
+        ),
+        power: new FormGroup(
+            {
+                unit: new FormControl<PowerUnit | null>(null),
+                powerFrom: new FormControl<number | null>(null, { updateOn: 'blur' }),
+                powerTo: new FormControl<number | null>(null, { updateOn: 'blur' }),
+            },
+            { validators: carFiltersFormValidator('power') },
+        ),
         transmissionTypes: new FormControl<TransmissionType[] | null>(null),
     });
 

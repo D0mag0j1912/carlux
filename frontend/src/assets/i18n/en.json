@@ -181,7 +181,9 @@
         },
         "validations": {
             "registration_year": "Registration FROM needs to be lower than registration TO",
-            "price": "Price FROM needs to be lower than price TO"
+            "price": "Price FROM needs to be lower than price TO",
+            "kilometers_travelled": "Kilometers FROM needs to be lower than kilometers TO",
+            "power": "Power FROM needs to be lower than power TO"
         }
     }
 }

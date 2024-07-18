@@ -17,7 +17,9 @@
 }
 
 .registration-year-error,
-.price-error {
+.price-error,
+.kilometers-travelled-error,
+.power-error {
     @include small;
     margin-left: 20px;
     color: var(--ion-color-danger);

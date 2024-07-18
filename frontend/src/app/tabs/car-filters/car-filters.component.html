@@ -226,6 +226,11 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
+                    @if (form.controls.kilometers.errors?.kilometersTravelledInvalid) {
+                        <div class="kilometers-travelled-error">
+                            {{ t('filters.validations.kilometers_travelled') }}
+                        </div>
+                    }
 
                     <ion-row formGroupName="power">
                         <ion-col>
@@ -265,6 +270,11 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
+                    @if (form.controls.power.errors?.powerInvalid) {
+                        <div class="power-error">
+                            {{ t('filters.validations.power') }}
+                        </div>
+                    }
 
                     <ion-row>
                         <ion-col>
