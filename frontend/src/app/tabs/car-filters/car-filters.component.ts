@@ -59,6 +59,8 @@ const IONIC_IMPORTS = [
     IonInput,
 ];
 
+type PowerUnitFormType = Lowercase<PowerUnit>;
+
 @Component({
     standalone: true,
     imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent, ReactiveFormsModule],
@@ -74,6 +76,7 @@ export class CarFiltersComponent implements OnInit {
     carModels = this._carFiltersFacadeService.selectCarModels();
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
 
+    readonly INITIAL_POWER_UNIT: Lowercase<PowerUnit> = 'ps';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
     readonly INITIAL_PAGE = 1;
     readonly PER_PAGE = 20;
@@ -120,7 +123,9 @@ export class CarFiltersComponent implements OnInit {
         ),
         power: new FormGroup(
             {
-                unit: new FormControl<PowerUnit | null>(null),
+                unit: new FormControl<PowerUnitFormType>(this.INITIAL_POWER_UNIT, {
+                    nonNullable: true,
+                }),
                 powerFrom: new FormControl<number | null>(null, { updateOn: 'blur' }),
                 powerTo: new FormControl<number | null>(null, { updateOn: 'blur' }),
             },
@@ -142,6 +147,14 @@ export class CarFiltersComponent implements OnInit {
             });
 
         this.form.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
+            let powerUnit: PowerUnit | undefined;
+            if (value.power?.unit) {
+                if (value.power.unit === 'kw') {
+                    powerUnit = 'KW';
+                } else {
+                    powerUnit = 'PS';
+                }
+            }
             const query: CarFilters = {
                 page: this.INITIAL_PAGE,
                 perPage: this.PER_PAGE,
@@ -155,7 +168,7 @@ export class CarFiltersComponent implements OnInit {
                 priceTo: value.price?.priceTo ?? undefined,
                 kilometersTravelledFrom: value.kilometers?.kilometersFrom ?? undefined,
                 kilometersTravelledTo: value.kilometers?.kilometersTo ?? undefined,
-                powerMetric: value.power?.unit ?? undefined,
+                powerMetric: powerUnit,
                 powerFrom: value.power?.powerFrom ?? undefined,
                 powerTo: value.power?.powerTo ?? undefined,
                 transmissionTypes: value.transmissionTypes ?? [],
