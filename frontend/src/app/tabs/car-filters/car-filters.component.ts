@@ -168,7 +168,7 @@ export class CarFiltersComponent implements OnInit {
                 priceTo: value.price?.priceTo ?? undefined,
                 kilometersTravelledFrom: value.kilometers?.kilometersFrom ?? undefined,
                 kilometersTravelledTo: value.kilometers?.kilometersTo ?? undefined,
-                powerMetric: powerUnit,
+                powerUnit: powerUnit,
                 powerFrom: value.power?.powerFrom ?? undefined,
                 powerTo: value.power?.powerTo ?? undefined,
                 transmissionTypes: value.transmissionTypes ?? [],

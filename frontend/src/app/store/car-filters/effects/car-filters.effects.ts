@@ -86,7 +86,7 @@ export const getCarFiltersResultCount$ = createEffect(
                         priceTo: action.query.priceTo,
                         kilometersTravelledFrom: action.query.kilometersTravelledFrom,
                         kilometersTravelledTo: action.query.kilometersTravelledTo,
-                        powerMetric: action.query.powerMetric,
+                        powerUnit: action.query.powerUnit,
                         powerFrom: action.query.powerFrom,
                         powerTo: action.query.powerTo,
                         transmissionTypes: action.query.transmissionTypes,
