@@ -1,10 +1,10 @@
 import { Injectable, Signal, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../..';
-import { CarsControllerGetCars$Params as CarFilters } from '../../../api/fn/car-list/cars-controller-get-cars';
 import { CarBrandDto as CarBrand } from '../../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../../api/models/car-model-dto';
 import { FeatureKeys } from '../../../constants/feature-keys';
+import { CarFilters } from '../../../tabs/car-filters/models/car-filters.model';
 import * as CarFiltersActions from '../actions/car-filters.actions';
 import * as CarFiltersSelectors from '../selectors/car-filters.selectors';
 
