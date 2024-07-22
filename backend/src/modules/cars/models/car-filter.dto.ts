@@ -3,7 +3,7 @@ import { Transform, Type } from 'class-transformer';
 import { IsArray, IsNumber } from 'class-validator';
 import { BodyStyles } from '../../../constants/body-style';
 import { FuelType } from '../../../constants/fuel-type';
-import { PowerMetric } from '../../../constants/power-type';
+import { PowerUnit } from '../../../constants/power-type';
 import { TransmissionType } from '../../../constants/transmission-type';
 
 export class CarFilterDto {
@@ -122,9 +122,9 @@ export class CarFilterDto {
     @ApiPropertyOptional({
         enum: ['PS', 'KW'],
         required: false,
-        description: 'Power metric',
+        description: 'Power unit',
     })
-    powerMetric?: PowerMetric | undefined;
+    powerUnit?: PowerUnit | undefined;
 
     @ApiPropertyOptional({
         type: Number,

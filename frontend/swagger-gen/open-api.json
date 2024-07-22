@@ -672,10 +672,10 @@
                         }
                     },
                     {
-                        "name": "powerMetric",
+                        "name": "powerUnit",
                         "required": false,
                         "in": "query",
-                        "description": "Power metric",
+                        "description": "Power unit",
                         "schema": {
                             "enum": ["PS", "KW"],
                             "type": "string"
@@ -882,10 +882,10 @@
                         }
                     },
                     {
-                        "name": "powerMetric",
+                        "name": "powerUnit",
                         "required": false,
                         "in": "query",
-                        "description": "Power metric",
+                        "description": "Power unit",
                         "schema": {
                             "enum": ["PS", "KW"],
                             "type": "string"
@@ -1530,10 +1530,10 @@
                         "type": "number",
                         "description": "Kilometers travelled TO"
                     },
-                    "powerMetric": {
+                    "powerUnit": {
                         "type": "string",
                         "enum": ["PS", "KW"],
-                        "description": "Power metric"
+                        "description": "Power unit"
                     },
                     "powerFrom": {
                         "type": "number",

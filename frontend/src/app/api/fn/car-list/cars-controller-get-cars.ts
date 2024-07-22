@@ -72,9 +72,9 @@ export interface CarsControllerGetCars$Params {
   kilometersTravelledTo?: number;
 
 /**
- * Power metric
+ * Power unit
  */
-  powerMetric?: 'PS' | 'KW';
+  powerUnit?: 'PS' | 'KW';
 
 /**
  * Power FROM
@@ -112,7 +112,7 @@ export function carsControllerGetCars(http: HttpClient, rootUrl: string, params:
     rb.query('priceTo', params.priceTo, {});
     rb.query('kilometersTravelledFrom', params.kilometersTravelledFrom, {});
     rb.query('kilometersTravelledTo', params.kilometersTravelledTo, {});
-    rb.query('powerMetric', params.powerMetric, {});
+    rb.query('powerUnit', params.powerUnit, {});
     rb.query('powerFrom', params.powerFrom, {});
     rb.query('powerTo', params.powerTo, {});
     rb.query('transmissionTypes', params.transmissionTypes, {});

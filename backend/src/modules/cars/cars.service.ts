@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PowerMetric } from '../../constants/power-type';
+import { PowerUnit } from '../../constants/power-type';
 import { PaginationDto } from '../../models/pagination.dto';
 import { CarEntity } from '../../shared/entities/car.entity';
 import { ImageEntity } from '../../shared/entities/image.entity';
@@ -32,7 +32,7 @@ export class CarsService {
         const priceTo = query.priceTo;
         const kilometersTravelledFrom = query.kilometersTravelledFrom;
         const kilometersTravelledTo = query.kilometersTravelledTo;
-        const powerMetric = query.powerMetric;
+        const powerMetric = query.powerUnit;
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
@@ -95,7 +95,7 @@ export class CarsService {
             )
             .andWhere(
                 powerFrom
-                    ? powerMetric === PowerMetric.PS
+                    ? powerMetric === PowerUnit.PS
                         ? 'car.HorsePower >= :powerFrom'
                         : 'car.Kilowatts >: powerFrom'
                     : 'TRUE',
@@ -103,7 +103,7 @@ export class CarsService {
             )
             .andWhere(
                 powerTo
-                    ? powerMetric === PowerMetric.PS
+                    ? powerMetric === PowerUnit.PS
                         ? 'car.HorsePower <= :powerTo'
                         : 'car.Kilowatts <= powerTo'
                     : 'TRUE',
@@ -162,7 +162,7 @@ export class CarsService {
         const priceTo = query.priceTo;
         const kilometersTravelledFrom = query.kilometersTravelledFrom;
         const kilometersTravelledTo = query.kilometersTravelledTo;
-        const powerMetric = query.powerMetric;
+        const powerUnit = query.powerUnit;
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
@@ -211,7 +211,7 @@ export class CarsService {
             )
             .andWhere(
                 powerFrom
-                    ? powerMetric === PowerMetric.PS
+                    ? powerUnit === PowerUnit.PS
                         ? 'car.HorsePower >= :powerFrom'
                         : 'car.Kilowatts >: powerFrom'
                     : 'TRUE',
@@ -219,7 +219,7 @@ export class CarsService {
             )
             .andWhere(
                 powerTo
-                    ? powerMetric === PowerMetric.PS
+                    ? powerUnit === PowerUnit.PS
                         ? 'car.HorsePower <= :powerTo'
                         : 'car.Kilowatts <= powerTo'
                     : 'TRUE',

@@ -37,6 +37,7 @@ import { CAR_FILTERS_TRANSMISSION_TYPES } from './constants/car-filters-transmis
 import { generateKilometers } from './helpers/car-filters-kilometers.helper';
 import { generatePrices } from './helpers/car-filters-price.helper';
 import { generateCarFiltersRegistrationYears } from './helpers/car-filters-registration-dates.helpers';
+import { carFiltersFormValidator } from './validators/car-filters-form.validator';
 
 const IONIC_IMPORTS = [
     IonHeader,
@@ -58,6 +59,8 @@ const IONIC_IMPORTS = [
     IonInput,
 ];
 
+type PowerUnitFormType = Lowercase<PowerUnit>;
+
 @Component({
     standalone: true,
     imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent, ReactiveFormsModule],
@@ -73,6 +76,7 @@ export class CarFiltersComponent implements OnInit {
     carModels = this._carFiltersFacadeService.selectCarModels();
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
 
+    readonly INITIAL_POWER_UNIT: Lowercase<PowerUnit> = 'ps';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
     readonly INITIAL_PAGE = 1;
     readonly PER_PAGE = 20;
@@ -96,23 +100,37 @@ export class CarFiltersComponent implements OnInit {
         models: new FormControl<CarModel[]>([]),
         bodyStyles: new FormControl<BodyStyles[] | null>(null),
         fuelTypes: new FormControl<FuelTypes[] | null>(null),
-        registrationYear: new FormGroup({
-            registrationYearFrom: new FormControl<number | null>(null),
-            registrationYearTo: new FormControl<number | null>(null),
-        }),
-        price: new FormGroup({
-            priceFrom: new FormControl<number | null>(null),
-            priceTo: new FormControl<number | null>(null),
-        }),
-        kilometers: new FormGroup({
-            kilometersFrom: new FormControl<number | null>(null),
-            kilometersTo: new FormControl<number | null>(null),
-        }),
-        power: new FormGroup({
-            unit: new FormControl<PowerUnit | null>(null),
-            powerFrom: new FormControl<number | null>(null, { updateOn: 'blur' }),
-            powerTo: new FormControl<number | null>(null, { updateOn: 'blur' }),
-        }),
+        registrationYear: new FormGroup(
+            {
+                registrationYearFrom: new FormControl<number | null>(null),
+                registrationYearTo: new FormControl<number | null>(null),
+            },
+            { validators: carFiltersFormValidator('registrationYear') },
+        ),
+        price: new FormGroup(
+            {
+                priceFrom: new FormControl<number | null>(null),
+                priceTo: new FormControl<number | null>(null),
+            },
+            { validators: carFiltersFormValidator('price') },
+        ),
+        kilometers: new FormGroup(
+            {
+                kilometersFrom: new FormControl<number | null>(null),
+                kilometersTo: new FormControl<number | null>(null),
+            },
+            { validators: carFiltersFormValidator('kilometersTravelled') },
+        ),
+        power: new FormGroup(
+            {
+                unit: new FormControl<PowerUnitFormType>(this.INITIAL_POWER_UNIT, {
+                    nonNullable: true,
+                }),
+                powerFrom: new FormControl<number | null>(null, { updateOn: 'blur' }),
+                powerTo: new FormControl<number | null>(null, { updateOn: 'blur' }),
+            },
+            { validators: carFiltersFormValidator('power') },
+        ),
         transmissionTypes: new FormControl<TransmissionType[] | null>(null),
     });
 
@@ -129,6 +147,14 @@ export class CarFiltersComponent implements OnInit {
             });
 
         this.form.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
+            let powerUnit: PowerUnit | undefined;
+            if (value.power?.unit) {
+                if (value.power.unit === 'kw') {
+                    powerUnit = 'KW';
+                } else {
+                    powerUnit = 'PS';
+                }
+            }
             const query: CarFilters = {
                 page: this.INITIAL_PAGE,
                 perPage: this.PER_PAGE,
@@ -142,7 +168,7 @@ export class CarFiltersComponent implements OnInit {
                 priceTo: value.price?.priceTo ?? undefined,
                 kilometersTravelledFrom: value.kilometers?.kilometersFrom ?? undefined,
                 kilometersTravelledTo: value.kilometers?.kilometersTo ?? undefined,
-                powerMetric: value.power?.unit ?? undefined,
+                powerUnit: powerUnit,
                 powerFrom: value.power?.powerFrom ?? undefined,
                 powerTo: value.power?.powerTo ?? undefined,
                 transmissionTypes: value.transmissionTypes ?? [],
