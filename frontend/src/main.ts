@@ -45,7 +45,7 @@ void bootstrapApplication(RootComponent, {
                     strictStateSerializability: true,
                 },
             }),
-            StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+            StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production , connectInZone: true}),
             EffectsModule.forRoot([SharedEffects, PreferencesEffects]),
             ApiModule.forRoot({ rootUrl: environment.apiUrl }),
         ]),
