@@ -10,7 +10,6 @@ import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
 import { PreferencesModule } from './modules/preferences/preferences.module';
 import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
-import { RecommendedCarsModule } from './modules/recommended-cars/recommended-cars.module';
 import { BasicInfoModule } from './shared/basic-info/basic-info.module';
 import { CarBrandEntity } from './shared/entities/car-brand.entity';
 import { CarModelEntity } from './shared/entities/car-model.entity';
@@ -23,7 +22,6 @@ const IMPORTS = [
     AuthModule,
     PreferencesModule,
     ProfileDetailsModule,
-    RecommendedCarsModule,
     FavouritesModule,
     CarDetailsModule,
     BasicInfoModule,

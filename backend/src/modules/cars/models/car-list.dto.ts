@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { SellerType } from '../../../constants/seller-type';
 
-export class RecommendedCarsDto {
+export class CarListDto {
     @ApiProperty({
         type: Number,
         required: true,

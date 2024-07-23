@@ -6,8 +6,8 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { CarListDto } from '../../models/car-list-dto';
 import { PaginationDto } from '../../models/pagination-dto';
-import { RecommendedCarsDto } from '../../models/recommended-cars-dto';
 
 export interface CarsControllerGetCars$Params {
 
@@ -96,7 +96,7 @@ export function carsControllerGetCars(http: HttpClient, rootUrl: string, params:
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'results'?: Array<RecommendedCarsDto>;
+'results'?: Array<CarListDto>;
 }>> {
   const rb = new RequestBuilder(rootUrl, carsControllerGetCars.PATH, 'get');
   if (params) {
@@ -127,7 +127,7 @@ export function carsControllerGetCars(http: HttpClient, rootUrl: string, params:
       'page'?: number;
       'perPage'?: number;
       'count'?: number;
-      'results'?: Array<RecommendedCarsDto>;
+      'results'?: Array<CarListDto>;
       }>;
     })
   );

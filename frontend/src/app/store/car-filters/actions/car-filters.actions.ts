@@ -29,8 +29,3 @@ export const setCarFiltersResultCount = createAction(
     '[Car Filters] Set Car Filters Result Count',
     props<{ count: number }>(),
 );
-
-export const getCarFiltersResults = createAction(
-    '[Car Filters] Get Car Filters Results',
-    props<{ query: CarFilters }>(),
-);

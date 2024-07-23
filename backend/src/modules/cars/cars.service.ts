@@ -5,8 +5,8 @@ import { PowerUnit } from '../../constants/power-type';
 import { PaginationDto } from '../../models/pagination.dto';
 import { CarEntity } from '../../shared/entities/car.entity';
 import { ImageEntity } from '../../shared/entities/image.entity';
-import { RecommendedCarsDto } from '../recommended-cars/models/recommended-cars.dto';
 import { CarFilterDto } from './models/car-filter.dto';
+import { CarListDto } from './models/car-list.dto';
 
 @Injectable()
 export class CarsService {
@@ -15,7 +15,7 @@ export class CarsService {
         @InjectRepository(ImageEntity) private _imageRepository: Repository<ImageEntity>,
     ) {}
 
-    async filterRecommendedCars(query: CarFilterDto): Promise<PaginationDto<RecommendedCarsDto>> {
+    async filterRecommendedCars(query: CarFilterDto): Promise<PaginationDto<CarListDto>> {
         try {
             return this._filterRecommendedCars(query);
         } catch (error: unknown) {
@@ -23,9 +23,7 @@ export class CarsService {
         }
     }
 
-    private async _filterRecommendedCars(
-        query: CarFilterDto,
-    ): Promise<PaginationDto<RecommendedCarsDto>> {
+    private async _filterRecommendedCars(query: CarFilterDto): Promise<PaginationDto<CarListDto>> {
         const yearRegistrationFrom = query.yearRegistrationFrom;
         const yearRegistrationTo = query.yearRegistrationTo;
         const priceFrom = query.priceFrom;
@@ -120,7 +118,7 @@ export class CarsService {
             .orderBy('car.UploadedDate', 'DESC')
             .getManyAndCount();
         const imageEntities = await this._imageRepository.createQueryBuilder('image').getMany();
-        const recommendedCars: RecommendedCarsDto[] = recommendedCarsEntities.map(
+        const recommendedCars: CarListDto[] = recommendedCarsEntities.map(
             (carEntity: CarEntity) => ({
                 id: carEntity.Id,
                 brand: carEntity.carBrand.Title,
@@ -138,7 +136,7 @@ export class CarsService {
                 isFavourite: carEntity.IsFavourite,
             }),
         );
-        const response: PaginationDto<RecommendedCarsDto> = {
+        const response: PaginationDto<CarListDto> = {
             page: query.page,
             perPage: query.perPage,
             results: recommendedCars,
