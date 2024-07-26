@@ -3,7 +3,7 @@ export enum FeatureKeys {
     AUTH = 'auth',
     PREFERENCES = 'preferences',
     SETTINGS = 'settings',
-    RECOMMENDED_CARS = 'recommended-cars',
+    CARS = 'cars',
     CAR_FILTERS = 'car-filters',
     FAVOURITES = 'favourites',
     CAR_DETAILS = 'car-details',

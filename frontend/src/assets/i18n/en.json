@@ -94,12 +94,12 @@
             "change_language": "Error while trying to change the language. Please try again."
         }
     },
-    "recommended_cars": {
+    "car_list": {
         "search_cars": "Search cars",
-        "title": "Recommended cars for you",
-        "empty_recommended_cars": "There are no recommended cars. Try narrowing your search by clicking <b>Search cars</b>.",
+        "title": "Cars for you",
+        "empty_car_list": "There are no cars found. Try narrowing your search by clicking <b>Search cars</b>.",
         "errors": {
-            "get_recommended_cars": "Unable to get recommended cars. Please try again.",
+            "get_car_list": "Unable to get cars. Please try again.",
             "car_details": "Unable to get car details. Please try again."
         }
     },

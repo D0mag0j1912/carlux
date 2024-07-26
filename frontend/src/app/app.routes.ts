@@ -13,12 +13,12 @@ import * as CarDetailsEffects from './store/car-details/effects/car-details.effe
 import * as CarDetailsReducers from './store/car-details/reducers/car-details.reducers';
 import * as CarFiltersEffects from './store/car-filters/effects/car-filters.effects';
 import * as CarFiltersReducers from './store/car-filters/reducers/car-filters.reducers';
+import * as CarListEffects from './store/car-list/effects/car-list.effects';
+import * as CarsReducers from './store/car-list/reducers/car-list.reducers';
 import { FavouritesEffects } from './store/favourites/effects/favourites.effects';
 import * as FavouritesReducers from './store/favourites/reducers/favourites.reducers';
 import * as PreferencesEffects from './store/preferences/effects/preferences.effects';
 import * as PreferencesReducers from './store/preferences/reducers/preferences.reducers';
-import * as RecommendedCarsEffects from './store/recommended-cars/effects/recommended-cars.effects';
-import * as CarsReducers from './store/recommended-cars/reducers/recommended-cars.reducers';
 import * as SettingsEffects from './store/settings/effects/settings.effects';
 import * as SettingsReducers from './store/settings/reducers/settings.reducer';
 import { AuthenticationHelperService } from './tabs/auth/helpers/auth-helper.service';
@@ -61,9 +61,9 @@ const SETTINGS_PROVIDERS = importProvidersFrom([
     EffectsModule.forFeature(SettingsEffects),
 ]);
 
-const RECOMMENDED_CARS_PROVIDERS = importProvidersFrom([
-    StoreModule.forFeature(FeatureKeys.RECOMMENDED_CARS, CarsReducers.reducers),
-    EffectsModule.forFeature(RecommendedCarsEffects),
+const CAR_LIST_PROVIDERS = importProvidersFrom([
+    StoreModule.forFeature(FeatureKeys.CARS, CarsReducers.reducers),
+    EffectsModule.forFeature(CarListEffects),
 ]);
 
 const CAR_FILTERS_PROVIDERS = importProvidersFrom([
@@ -95,12 +95,12 @@ export const routes: Routes = [
                     ),
             },
             {
-                path: 'recommended-cars',
+                path: 'car-list',
                 loadComponent: () =>
-                    import('./tabs/recommended-cars/recommended-cars.component').then(
-                        (component) => component.RecommendedCarsComponent,
+                    import('./tabs/car-list/car-list.component').then(
+                        (component) => component.CarListComponent,
                     ),
-                providers: [RECOMMENDED_CARS_PROVIDERS, FAVOURITES_PROVIDERS],
+                providers: [CAR_LIST_PROVIDERS, FAVOURITES_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {

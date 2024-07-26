@@ -33,7 +33,7 @@ export class CarsController {
     @ApiExtraModels(CarListDto, CarFilterDto)
     @Get()
     async getCars(@Query() query: CarFilterDto): Promise<PaginationDto<CarListDto>> {
-        return this._carsService.filterRecommendedCars(query);
+        return this._carsService.filterCarList(query);
     }
 
     @ApiOkResponse({

@@ -94,12 +94,12 @@
             "change_language": "Greška prilikom promjene jezika. Molimo pokušajte ponovno."
         }
     },
-    "recommended_cars": {
+    "car_list": {
         "search_cars": "Pretraži automobile",
         "title": "Preporučeni automobili za tebe",
-        "empty_recommended_cars": "Nismo pronašli preporučene automobile. Pokušajte suziti Vašu pretragu klikom na <b>Pretraži automobile</b>.",
+        "empty_car_list": "Nismo pronašli preporučene automobile. Pokušajte suziti Vašu pretragu klikom na <b>Pretraži automobile</b>.",
         "errors": {
-            "get_recommended_cars": "Greška prilikom dohvata preporučenih automobila. Molimo pokušajte ponovno.",
+            "get_car_list": "Greška prilikom dohvata preporučenih automobila. Molimo pokušajte ponovno.",
             "car_details": "Greška prilikom dohvata detalja automobila. Molimo pokušajte ponovno."
         }
     },

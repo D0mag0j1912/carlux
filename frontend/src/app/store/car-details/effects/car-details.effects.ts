@@ -25,7 +25,7 @@ export const getCarDetails$ = createEffect(
                     ),
                     catchError((_) => {
                         sharedFacadeService.showToastMessage(
-                            'recommended_cars.errors.car_details',
+                            'car_list.errors.car_details',
                             POPUP_DURATIONS.ERROR,
                             'warning',
                         );

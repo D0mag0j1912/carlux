@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import {
     AfterViewInit,
     Component,
@@ -17,10 +18,7 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import * as intlTelInput from 'intl-tel-input';
-import { filter, take } from 'rxjs';
 import { ModalController, NavController } from '@ionic/angular';
-import { TranslocoModule } from '@ngneat/transloco';
 import {
     IonButton,
     IonButtons,
@@ -37,13 +35,15 @@ import {
     IonTitle,
     IonToolbar,
 } from '@ionic/angular/standalone';
-import { logoGoogle, logoApple } from 'ionicons/icons';
+import { TranslocoModule } from '@ngneat/transloco';
+import * as intlTelInput from 'intl-tel-input';
 import { addIcons } from 'ionicons';
-import { AsyncPipe } from '@angular/common';
-import { PlatformFacadeService } from '../../store/platform/facades/platform-facade.service';
+import { logoApple, logoGoogle } from 'ionicons/icons';
+import { filter, take } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { StatusResponseDto as StatusResponse } from '../../api/models/status-response-dto';
 import { AuthenticationFacadeService } from '../../store/auth/facades/auth-facade.service';
+import { PlatformFacadeService } from '../../store/platform/facades/platform-facade.service';
 import { PersonalInformationDialogComponent } from './components/personal-information-dialog/personal-information-dialog.component';
 import { AuthenticationEventEmitterService } from './event-emitter/auth-event-emitter.service';
 
@@ -150,9 +150,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
                 filter((data) => data.type === 'signIn'),
                 takeUntilDestroyed(this._destroyRef),
             )
-            .subscribe(
-                async (_) => await this._navController.navigateForward('tabs/recommended-cars'),
-            );
+            .subscribe(async (_) => await this._navController.navigateForward('tabs/car-list'));
     }
 
     ngAfterViewInit(): void {

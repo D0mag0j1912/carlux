@@ -2,7 +2,7 @@
     <ng-container *transloco="let t">
         <ion-tab-bar slot="bottom">
             @if (isAuthenticated$ | async) {
-                <ion-tab-button tab="recommended-cars" href="/tabs/recommended-cars">
+                <ion-tab-button tab="car-list" href="/tabs/car-list">
                     <ion-icon name="car-sport-sharp"></ion-icon>
                     <ion-label>{{ t('tabs.car_list') }}</ion-label>
                 </ion-tab-button>
