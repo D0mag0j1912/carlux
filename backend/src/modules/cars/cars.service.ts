@@ -24,6 +24,7 @@ export class CarsService {
     }
 
     private async _filterCarList(query: CarFilterDto): Promise<PaginationDto<CarListDto>> {
+        const brandId = query.brandId;
         const yearRegistrationFrom = query.yearRegistrationFrom;
         const yearRegistrationTo = query.yearRegistrationTo;
         const priceFrom = query.priceFrom;
@@ -53,7 +54,7 @@ export class CarsService {
             .leftJoin('car.currency', 'currency')
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
-            .where('car.BrandId = :brandId', { brandId: query.brandId })
+            .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId: query.brandId })
             .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
                 modelIds: query.modelIds,
             })
