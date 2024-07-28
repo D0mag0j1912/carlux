@@ -36,7 +36,10 @@ export const reducers = createReducer(
                     carListData: {
                         ...state.carList.carListData,
                         page: response.page,
-                        results: [...state.carList.carListData.results, ...response.results],
+                        results:
+                            response.page > 1
+                                ? [...state.carList.carListData.results, ...response.results]
+                                : [...response.results],
                     },
                     hasNoMoreCarListItems:
                         [...state.carList.carListData.results, ...response.results].length >=
