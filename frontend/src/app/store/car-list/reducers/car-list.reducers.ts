@@ -42,8 +42,10 @@ export const reducers = createReducer(
                                 : [...response.results],
                     },
                     hasNoMoreCarListItems:
-                        [...state.carList.carListData.results, ...response.results].length >=
-                        response.count,
+                        response.page > 1
+                            ? [...state.carList.carListData.results, ...response.results].length >=
+                              response.count
+                            : response.results.length >= response.count,
                 },
             };
         }

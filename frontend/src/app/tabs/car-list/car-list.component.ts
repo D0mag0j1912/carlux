@@ -24,6 +24,7 @@ import { CarListFacadeService } from '../../store/car-list/facades/car-list-faca
 import { FavouritesFacadeService } from '../../store/favourites/facades/favourites-facade.service';
 import { CarFiltersComponent } from '../car-filters/car-filters.component';
 import { CarFilters } from '../car-filters/models/car-filters.model';
+import { CarsPageResetService } from '../car-filters/services/cars-page-reset.service';
 
 @Component({
     standalone: true,
@@ -51,16 +52,18 @@ export class CarListComponent implements OnInit {
     private _favouritesFacadeService = inject(FavouritesFacadeService);
     private _destroyRef = inject(DestroyRef);
     private _router = inject(Router);
+    private _carsPageResetService = inject(CarsPageResetService);
 
     isCarListNotLoading$ = this._carListFacadeService.selectIsCarListNotLoading();
     carList$ = this._carListFacadeService.selectCarList();
     hasNoMoreCarListItems$ = this._carListFacadeService.selectHasNoMoreCarListItems();
 
-    page = signal(1);
-    perPage = signal(DEFAULT_ITEMS_PER_PAGE);
-
     readonly INFINITE_EVENT_COMPLETE_DURATION = 500;
     readonly DOM_SANITIZER_INPUT_VALUE: DomSanitizerInputType = 'html';
+    readonly INITIAL_PAGE = 1;
+
+    page = signal(this.INITIAL_PAGE);
+    perPage = signal(DEFAULT_ITEMS_PER_PAGE);
 
     constructor() {
         addIcons({ searchSharp });
@@ -72,10 +75,15 @@ export class CarListComponent implements OnInit {
             perPage: this.perPage(),
         };
         this._carListFacadeService.getCarList(query);
+
+        this._carsPageResetService
+            .getPageResetEvent()
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => this.page.set(this.INITIAL_PAGE));
     }
 
     onScrollDown(event: CustomEvent): void {
-        this.page.set(this.page() + 1);
+        this.page.update((page: number) => page + 1);
         const query: CarFilters = {
             page: this.page(),
             perPage: this.perPage(),
