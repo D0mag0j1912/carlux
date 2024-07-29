@@ -40,7 +40,6 @@ import { CAR_FILTERS_TRANSMISSION_TYPES } from './constants/car-filters-transmis
 import { generateKilometers } from './helpers/car-filters-kilometers.helper';
 import { generatePrices } from './helpers/car-filters-price.helper';
 import { generateCarFiltersRegistrationYears } from './helpers/car-filters-registration-dates.helpers';
-import { CarsPageResetService } from './services/cars-page-reset.service';
 import { carFiltersFormValidator } from './validators/car-filters-form.validator';
 
 const IONIC_IMPORTS = [
@@ -75,7 +74,6 @@ export class CarFiltersComponent implements OnInit {
     private _carListFacadeService = inject(CarListFacadeService);
     private _destroyRef = inject(DestroyRef);
     private _navController = inject(NavController);
-    private _carsPageResetService = inject(CarsPageResetService);
 
     carBrands = this._carFiltersFacadeService.selectCarBrands();
     carModels = this._carFiltersFacadeService.selectCarModels();
@@ -199,7 +197,6 @@ export class CarFiltersComponent implements OnInit {
             powerTo: this.form.value.power?.powerTo ?? undefined,
             transmissionTypes: this.form.value.transmissionTypes ?? [],
         };
-        this._carsPageResetService.emitPageReset();
         this._carListFacadeService.getCarList(query);
         await this._navController.navigateForward('tabs/car-list');
     }

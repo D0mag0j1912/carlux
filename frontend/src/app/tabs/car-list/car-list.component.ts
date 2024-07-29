@@ -24,7 +24,6 @@ import { CarListFacadeService } from '../../store/car-list/facades/car-list-faca
 import { FavouritesFacadeService } from '../../store/favourites/facades/favourites-facade.service';
 import { CarFiltersComponent } from '../car-filters/car-filters.component';
 import { CarFilters } from '../car-filters/models/car-filters.model';
-import { CarsPageResetService } from '../car-filters/services/cars-page-reset.service';
 
 @Component({
     standalone: true,
@@ -52,7 +51,6 @@ export class CarListComponent implements OnInit {
     private _favouritesFacadeService = inject(FavouritesFacadeService);
     private _destroyRef = inject(DestroyRef);
     private _router = inject(Router);
-    private _carsPageResetService = inject(CarsPageResetService);
 
     isCarListNotLoading$ = this._carListFacadeService.selectIsCarListNotLoading();
     carList$ = this._carListFacadeService.selectCarList();
@@ -75,11 +73,6 @@ export class CarListComponent implements OnInit {
             perPage: this.perPage(),
         };
         this._carListFacadeService.getCarList(query);
-
-        this._carsPageResetService
-            .getPageResetEvent()
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => this.page.set(this.INITIAL_PAGE));
     }
 
     onScrollDown(event: CustomEvent): void {
