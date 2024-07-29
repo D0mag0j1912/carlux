@@ -20,3 +20,8 @@ export const selectCarFiltersResultCount = createSelector(
     selectCarFiltersState,
     (state: CarFiltersState) => state.resultCount,
 );
+
+export const selectSelectedCarFilters = createSelector(
+    selectCarFiltersState,
+    (state: CarFiltersState) => state.selectedCarFilters,
+);

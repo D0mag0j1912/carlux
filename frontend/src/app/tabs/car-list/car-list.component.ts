@@ -20,6 +20,7 @@ import { CarItemComponent } from '../../components/car-item/car-item.component';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../constants/items-per-page';
 import { EmitHandleFavouritesActions } from '../../models/emit-handle-favourites-actions';
 import { DomSanitizerInputType, DomSanitizerPipe } from '../../pipes/dom-sanitizer.pipe';
+import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarListFacadeService } from '../../store/car-list/facades/car-list-facade.service';
 import { FavouritesFacadeService } from '../../store/favourites/facades/favourites-facade.service';
 import { CarFiltersComponent } from '../car-filters/car-filters.component';
@@ -48,6 +49,7 @@ import { CarFilters } from '../car-filters/models/car-filters.model';
 })
 export class CarListComponent implements OnInit {
     private _carListFacadeService = inject(CarListFacadeService);
+    private _carFiltersFacadeService = inject(CarFiltersFacadeService);
     private _favouritesFacadeService = inject(FavouritesFacadeService);
     private _destroyRef = inject(DestroyRef);
     private _router = inject(Router);
@@ -78,10 +80,11 @@ export class CarListComponent implements OnInit {
     onScrollDown(event: CustomEvent): void {
         this.page.update((page: number) => page + 1);
         const query: CarFilters = {
+            ...this._carFiltersFacadeService.selectSelectedCarFilters()(),
             page: this.page(),
-            perPage: this.perPage(),
         };
         this._carListFacadeService.getCarList(query);
+
         this._carListFacadeService
             .selectHasInfiniteEventCompleted()
             .pipe(filter(Boolean), takeUntilDestroyed(this._destroyRef))

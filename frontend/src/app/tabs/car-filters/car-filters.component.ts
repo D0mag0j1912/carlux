@@ -27,6 +27,7 @@ import { CarsControllerGetCars$Params as CarFilters } from '../../api/fn/car-lis
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
+import { INITIAL_PAGE, PER_PAGE } from '../../constants/initial-paging-values';
 import { BodyStyles } from '../../models/body-styles';
 import { FuelTypes } from '../../models/fuel-types';
 import { TransmissionType } from '../../models/transmission-type';
@@ -81,8 +82,8 @@ export class CarFiltersComponent implements OnInit {
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
-    readonly INITIAL_PAGE = 1;
-    readonly PER_PAGE = 20;
+    readonly INITIAL_PAGE = INITIAL_PAGE;
+    readonly PER_PAGE = PER_PAGE;
     readonly ZERO_CAR_RESULTS_COUNT = 0;
     readonly SINGULAR_COUNT_CAR_RESULT = 1;
     readonly CAR_BRAND_VISIBLE_VALUE = 'title';

@@ -74,22 +74,23 @@ export const getCarFiltersResultCount$ = createEffect(
             switchMap((action) =>
                 carsService
                     .carsControllerGetCarsFiltersCount({
-                        page: action.query.page,
-                        perPage: action.query.perPage,
-                        brandId: action.query.brandId,
-                        modelIds: action.query.modelIds,
-                        bodyStyles: action.query.bodyStyles,
-                        fuelTypes: action.query.fuelTypes,
-                        yearRegistrationFrom: action.query.yearRegistrationFrom,
-                        yearRegistrationTo: action.query.yearRegistrationTo,
-                        priceFrom: action.query.priceFrom,
-                        priceTo: action.query.priceTo,
-                        kilometersTravelledFrom: action.query.kilometersTravelledFrom,
-                        kilometersTravelledTo: action.query.kilometersTravelledTo,
-                        powerUnit: action.query.powerUnit,
-                        powerFrom: action.query.powerFrom,
-                        powerTo: action.query.powerTo,
-                        transmissionTypes: action.query.transmissionTypes,
+                        page: action.selectedCarFiltersQuery.page,
+                        perPage: action.selectedCarFiltersQuery.perPage,
+                        brandId: action.selectedCarFiltersQuery.brandId,
+                        modelIds: action.selectedCarFiltersQuery.modelIds,
+                        bodyStyles: action.selectedCarFiltersQuery.bodyStyles,
+                        fuelTypes: action.selectedCarFiltersQuery.fuelTypes,
+                        yearRegistrationFrom: action.selectedCarFiltersQuery.yearRegistrationFrom,
+                        yearRegistrationTo: action.selectedCarFiltersQuery.yearRegistrationTo,
+                        priceFrom: action.selectedCarFiltersQuery.priceFrom,
+                        priceTo: action.selectedCarFiltersQuery.priceTo,
+                        kilometersTravelledFrom:
+                            action.selectedCarFiltersQuery.kilometersTravelledFrom,
+                        kilometersTravelledTo: action.selectedCarFiltersQuery.kilometersTravelledTo,
+                        powerUnit: action.selectedCarFiltersQuery.powerUnit,
+                        powerFrom: action.selectedCarFiltersQuery.powerFrom,
+                        powerTo: action.selectedCarFiltersQuery.powerTo,
+                        transmissionTypes: action.selectedCarFiltersQuery.transmissionTypes,
                     })
                     .pipe(
                         catchError(() => {
@@ -101,7 +102,10 @@ export const getCarFiltersResultCount$ = createEffect(
                             return EMPTY;
                         }),
                         map((count: number) =>
-                            CarFiltersActions.setCarFiltersResultCount({ count }),
+                            CarFiltersActions.setCarFiltersResultCount({
+                                count,
+                                selectedCarFiltersQuery: action.selectedCarFiltersQuery,
+                            }),
                         ),
                     ),
             ),
