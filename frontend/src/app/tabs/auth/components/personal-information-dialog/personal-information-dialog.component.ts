@@ -1,11 +1,7 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalController, NavController } from '@ionic/angular';
-import { TranslocoModule } from '@ngneat/transloco';
-import { format, parseISO } from 'date-fns';
-import { filter, from } from 'rxjs';
-import { OverlayEventDetail } from '@ionic/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     IonButton,
     IonCol,
@@ -17,13 +13,17 @@ import {
     IonTitle,
     IonToolbar,
 } from '@ionic/angular/standalone';
+import { OverlayEventDetail } from '@ionic/core';
+import { TranslocoModule } from '@ngneat/transloco';
+import { format, parseISO } from 'date-fns';
+import { filter, from } from 'rxjs';
+import { UserDto as User } from '../../../../api/models/user-dto';
 import { DateTimePickerComponent } from '../../../../components/datetime-picker/datetime-picker.component';
+import { DATETIME_PICKER_INPUT_FORMAT } from '../../../../constants/datetime-picker-input-format';
 import { DialogRoles } from '../../../../constants/dialog-roles';
 import { AuthenticationFacadeService } from '../../../../store/auth/facades/auth-facade.service';
-import { UserDto as User } from '../../../../api/models/user-dto';
 import { AuthenticationEventEmitterService } from '../../event-emitter/auth-event-emitter.service';
 import { emailExistsValidator } from '../../validators/email-exists.validator';
-import { DATETIME_PICKER_INPUT_FORMAT } from '../../../../constants/datetime-picker-input-format';
 
 @Component({
     standalone: true,
@@ -69,7 +69,7 @@ export class PersonalInformationDialogComponent implements OnInit {
             )
             .subscribe(async (_) => {
                 await this._modalController.dismiss();
-                await this._navController.navigateForward('tabs/recommended-cars');
+                await this._navController.navigateForward('tabs/car-list');
             });
     }
 

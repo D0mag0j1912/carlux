@@ -1,7 +1,7 @@
 <ion-header *transloco="let t">
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/tabs/recommended-cars" [text]="t('common.actions.back')"></ion-back-button>
+            <ion-back-button defaultHref="/tabs/car-list" [text]="t('common.actions.back')"></ion-back-button>
         </ion-buttons>
         <ion-title>{{ t('filters.title') }}</ion-title>
     </ion-toolbar>
@@ -297,7 +297,7 @@
 
                     <ion-row>
                         <ion-col class="ion-text-center">
-                            <ion-button color="primary">
+                            <ion-button color="primary" (click)="searchCars()">
                                 @if (carsFiltersResultsCount() === ZERO_CAR_RESULTS_COUNT) {
                                     {{ t('common.n_results_plural', { n: carsFiltersResultsCount() }) }}
                                 } @else {

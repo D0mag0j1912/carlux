@@ -19,16 +19,20 @@ import {
     IonSelectOption,
     IonTitle,
     IonToolbar,
+    NavController,
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
+import { filter } from 'rxjs/operators';
 import { CarsControllerGetCars$Params as CarFilters } from '../../api/fn/car-list/cars-controller-get-cars';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
+import { INITIAL_PAGE, PER_PAGE } from '../../constants/initial-paging-values';
 import { BodyStyles } from '../../models/body-styles';
 import { FuelTypes } from '../../models/fuel-types';
 import { TransmissionType } from '../../models/transmission-type';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
+import { CarListFacadeService } from '../../store/car-list/facades/car-list-facade.service';
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
@@ -59,8 +63,6 @@ const IONIC_IMPORTS = [
     IonInput,
 ];
 
-type PowerUnitFormType = Lowercase<PowerUnit>;
-
 @Component({
     standalone: true,
     imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent, ReactiveFormsModule],
@@ -70,16 +72,18 @@ type PowerUnitFormType = Lowercase<PowerUnit>;
 })
 export class CarFiltersComponent implements OnInit {
     private _carFiltersFacadeService = inject(CarFiltersFacadeService);
+    private _carListFacadeService = inject(CarListFacadeService);
     private _destroyRef = inject(DestroyRef);
+    private _navController = inject(NavController);
 
     carBrands = this._carFiltersFacadeService.selectCarBrands();
     carModels = this._carFiltersFacadeService.selectCarModels();
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
 
-    readonly INITIAL_POWER_UNIT: Lowercase<PowerUnit> = 'ps';
+    readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
-    readonly INITIAL_PAGE = 1;
-    readonly PER_PAGE = 20;
+    readonly INITIAL_PAGE = INITIAL_PAGE;
+    readonly PER_PAGE = PER_PAGE;
     readonly ZERO_CAR_RESULTS_COUNT = 0;
     readonly SINGULAR_COUNT_CAR_RESULT = 1;
     readonly CAR_BRAND_VISIBLE_VALUE = 'title';
@@ -123,7 +127,7 @@ export class CarFiltersComponent implements OnInit {
         ),
         power: new FormGroup(
             {
-                unit: new FormControl<PowerUnitFormType>(this.INITIAL_POWER_UNIT, {
+                unit: new FormControl<PowerUnit>(this.INITIAL_POWER_UNIT, {
                     nonNullable: true,
                 }),
                 powerFrom: new FormControl<number | null>(null, { updateOn: 'blur' }),
@@ -146,34 +150,55 @@ export class CarFiltersComponent implements OnInit {
                 }
             });
 
-        this.form.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
-            let powerUnit: PowerUnit | undefined;
-            if (value.power?.unit) {
-                if (value.power.unit === 'kw') {
-                    powerUnit = 'KW';
-                } else {
-                    powerUnit = 'PS';
-                }
-            }
-            const query: CarFilters = {
-                page: this.INITIAL_PAGE,
-                perPage: this.PER_PAGE,
-                brandId: (value.brand as CarBrand[])[0]?.id ?? undefined,
-                modelIds: value.models?.map((model: CarModel) => model.id) ?? [],
-                bodyStyles: value.bodyStyles ?? [],
-                fuelTypes: value.fuelTypes ?? [],
-                yearRegistrationFrom: value.registrationYear?.registrationYearFrom ?? undefined,
-                yearRegistrationTo: value.registrationYear?.registrationYearTo ?? undefined,
-                priceFrom: value.price?.priceFrom ?? undefined,
-                priceTo: value.price?.priceTo ?? undefined,
-                kilometersTravelledFrom: value.kilometers?.kilometersFrom ?? undefined,
-                kilometersTravelledTo: value.kilometers?.kilometersTo ?? undefined,
-                powerUnit: powerUnit,
-                powerFrom: value.power?.powerFrom ?? undefined,
-                powerTo: value.power?.powerTo ?? undefined,
-                transmissionTypes: value.transmissionTypes ?? [],
-            };
-            this._carFiltersFacadeService.getCarFiltersResultCount(query);
-        });
+        this.form.valueChanges
+            .pipe(
+                filter(() => this.form.valid),
+                takeUntilDestroyed(this._destroyRef),
+            )
+            .subscribe((value) => {
+                const query: CarFilters = {
+                    page: this.INITIAL_PAGE,
+                    perPage: this.PER_PAGE,
+                    brandId: (value.brand as CarBrand[])[0]?.id ?? undefined,
+                    modelIds: value.models?.map((model: CarModel) => model.id) ?? [],
+                    bodyStyles: value.bodyStyles ?? [],
+                    fuelTypes: value.fuelTypes ?? [],
+                    yearRegistrationFrom: value.registrationYear?.registrationYearFrom ?? undefined,
+                    yearRegistrationTo: value.registrationYear?.registrationYearTo ?? undefined,
+                    priceFrom: value.price?.priceFrom ?? undefined,
+                    priceTo: value.price?.priceTo ?? undefined,
+                    kilometersTravelledFrom: value.kilometers?.kilometersFrom ?? undefined,
+                    kilometersTravelledTo: value.kilometers?.kilometersTo ?? undefined,
+                    powerUnit: value.power?.unit ?? undefined,
+                    powerFrom: value.power?.powerFrom ?? undefined,
+                    powerTo: value.power?.powerTo ?? undefined,
+                    transmissionTypes: value.transmissionTypes ?? [],
+                };
+                this._carFiltersFacadeService.getCarFiltersResultCount(query);
+            });
+    }
+
+    async searchCars(): Promise<void> {
+        const query: CarFilters = {
+            page: this.INITIAL_PAGE,
+            perPage: this.PER_PAGE,
+            brandId: (this.form.value.brand as CarBrand[])[0]?.id ?? undefined,
+            modelIds: this.form.value.models?.map((model: CarModel) => model.id) ?? [],
+            bodyStyles: this.form.value.bodyStyles ?? [],
+            fuelTypes: this.form.value.fuelTypes ?? [],
+            yearRegistrationFrom:
+                this.form.value.registrationYear?.registrationYearFrom ?? undefined,
+            yearRegistrationTo: this.form.value.registrationYear?.registrationYearTo ?? undefined,
+            priceFrom: this.form.value.price?.priceFrom ?? undefined,
+            priceTo: this.form.value.price?.priceTo ?? undefined,
+            kilometersTravelledFrom: this.form.value.kilometers?.kilometersFrom ?? undefined,
+            kilometersTravelledTo: this.form.value.kilometers?.kilometersTo ?? undefined,
+            powerUnit: this.form.value.power?.unit ?? undefined,
+            powerFrom: this.form.value.power?.powerFrom ?? undefined,
+            powerTo: this.form.value.power?.powerTo ?? undefined,
+            transmissionTypes: this.form.value.transmissionTypes ?? [],
+        };
+        this._carListFacadeService.getCarList(query);
+        await this._navController.navigateForward('tabs/car-list');
     }
 }

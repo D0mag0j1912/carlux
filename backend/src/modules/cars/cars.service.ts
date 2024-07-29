@@ -5,8 +5,8 @@ import { PowerUnit } from '../../constants/power-type';
 import { PaginationDto } from '../../models/pagination.dto';
 import { CarEntity } from '../../shared/entities/car.entity';
 import { ImageEntity } from '../../shared/entities/image.entity';
-import { RecommendedCarsDto } from '../recommended-cars/models/recommended-cars.dto';
 import { CarFilterDto } from './models/car-filter.dto';
+import { CarListDto } from './models/car-list.dto';
 
 @Injectable()
 export class CarsService {
@@ -15,17 +15,16 @@ export class CarsService {
         @InjectRepository(ImageEntity) private _imageRepository: Repository<ImageEntity>,
     ) {}
 
-    async filterRecommendedCars(query: CarFilterDto): Promise<PaginationDto<RecommendedCarsDto>> {
+    async filterCarList(query: CarFilterDto): Promise<PaginationDto<CarListDto>> {
         try {
-            return this._filterRecommendedCars(query);
+            return this._filterCarList(query);
         } catch (error: unknown) {
             throw new InternalServerErrorException();
         }
     }
 
-    private async _filterRecommendedCars(
-        query: CarFilterDto,
-    ): Promise<PaginationDto<RecommendedCarsDto>> {
+    private async _filterCarList(query: CarFilterDto): Promise<PaginationDto<CarListDto>> {
+        const brandId = query.brandId;
         const yearRegistrationFrom = query.yearRegistrationFrom;
         const yearRegistrationTo = query.yearRegistrationTo;
         const priceFrom = query.priceFrom;
@@ -36,7 +35,7 @@ export class CarsService {
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
-        const [recommendedCarsEntities, recommendedCarsTotalCount] = await this._carsRepository
+        const [carListEntities, carListTotalCount] = await this._carsRepository
             .createQueryBuilder('car')
             .select([
                 'car.Id',
@@ -55,14 +54,14 @@ export class CarsService {
             .leftJoin('car.currency', 'currency')
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
-            .where('car.BrandId = :brandId', { brandId: query.brandId })
-            .andWhere(query.modelIds.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
+            .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId: query.brandId })
+            .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
                 modelIds: query.modelIds,
             })
-            .andWhere(query.bodyStyles.length ? 'car.BodyStyle IN (:...bodyStyles)' : 'TRUE', {
+            .andWhere(query.bodyStyles?.length ? 'car.BodyStyle IN (:...bodyStyles)' : 'TRUE', {
                 bodyStyles: query.bodyStyles,
             })
-            .andWhere(query.fuelTypes.length ? 'car.FuelType IN (:...fuelTypes)' : 'TRUE', {
+            .andWhere(query.fuelTypes?.length ? 'car.FuelType IN (:...fuelTypes)' : 'TRUE', {
                 fuelTypes: query.fuelTypes,
             })
             .andWhere(
@@ -120,29 +119,27 @@ export class CarsService {
             .orderBy('car.UploadedDate', 'DESC')
             .getManyAndCount();
         const imageEntities = await this._imageRepository.createQueryBuilder('image').getMany();
-        const recommendedCars: RecommendedCarsDto[] = recommendedCarsEntities.map(
-            (carEntity: CarEntity) => ({
-                id: carEntity.Id,
-                brand: carEntity.carBrand.Title,
-                kilometersTravelled: carEntity.KilometersTravelled,
-                price: carEntity.Price,
-                firstRegistrationDate: carEntity.FirstRegistrationDate,
-                modelName: carEntity.carModel.Title,
-                countryOrigin: carEntity.CountryOrigin,
-                noOfPreviousOwners: carEntity.NoOfPreviousOwners,
-                sellerType: carEntity.SellerType,
-                currencySymbol: carEntity.currency.Symbol,
-                images: imageEntities
-                    .filter((imageEntity: ImageEntity) => imageEntity.CarId === carEntity.Id)
-                    .map((imageEntity: ImageEntity) => imageEntity.Image),
-                isFavourite: carEntity.IsFavourite,
-            }),
-        );
-        const response: PaginationDto<RecommendedCarsDto> = {
+        const carList: CarListDto[] = carListEntities.map((carEntity: CarEntity) => ({
+            id: carEntity.Id,
+            brand: carEntity.carBrand.Title,
+            kilometersTravelled: carEntity.KilometersTravelled,
+            price: carEntity.Price,
+            firstRegistrationDate: carEntity.FirstRegistrationDate,
+            modelName: carEntity.carModel.Title,
+            countryOrigin: carEntity.CountryOrigin,
+            noOfPreviousOwners: carEntity.NoOfPreviousOwners,
+            sellerType: carEntity.SellerType,
+            currencySymbol: carEntity.currency.Symbol,
+            images: imageEntities
+                .filter((imageEntity: ImageEntity) => imageEntity.CarId === carEntity.Id)
+                .map((imageEntity: ImageEntity) => imageEntity.Image),
+            isFavourite: carEntity.IsFavourite,
+        }));
+        const response: PaginationDto<CarListDto> = {
             page: query.page,
             perPage: query.perPage,
-            results: recommendedCars,
-            count: recommendedCarsTotalCount,
+            results: carList,
+            count: carListTotalCount,
         };
         return response;
     }

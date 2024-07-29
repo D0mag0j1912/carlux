@@ -1,18 +1,22 @@
 import { createReducer, on } from '@ngrx/store';
 import { CarBrandDto as CarBrand } from '../../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../../api/models/car-model-dto';
+import { CAR_FILTERS_INITIAL_STATE } from '../../../tabs/car-filters/constants/car-filters-initial-state';
+import { CarFilters } from '../../../tabs/car-filters/models/car-filters.model';
 import * as CarFiltersActions from '../actions/car-filters.actions';
 
 export interface CarFiltersState {
     carBrands: CarBrand[];
     carModels: CarModel[];
     resultCount: number | undefined;
+    selectedCarFilters: CarFilters;
 }
 
 const initialState: CarFiltersState = {
     carBrands: [],
     carModels: [],
     resultCount: undefined,
+    selectedCarFilters: CAR_FILTERS_INITIAL_STATE,
 };
 
 export const reducers = createReducer(
@@ -33,9 +37,10 @@ export const reducers = createReducer(
     ),
     on(
         CarFiltersActions.setCarFiltersResultCount,
-        (state: CarFiltersState, { count }): CarFiltersState => ({
+        (state: CarFiltersState, { count, selectedCarFiltersQuery }): CarFiltersState => ({
             ...state,
             resultCount: count,
+            selectedCarFilters: { ...selectedCarFiltersQuery },
         }),
     ),
 );

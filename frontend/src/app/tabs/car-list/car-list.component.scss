@@ -12,12 +12,15 @@
     }
 }
 
-.recommended-cars-container {
+.car-list-container {
     margin: 20px 10px 0 10px;
 
     .title {
         @include large;
-        margin-top: 20px;
+        display: block;
+        width: 100%;
+        margin: auto;
+        text-align: center;
     }
 
     .content {

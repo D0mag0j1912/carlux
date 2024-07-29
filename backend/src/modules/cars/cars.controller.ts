@@ -10,9 +10,9 @@ import { BASE_URL } from '../../constants/base-url';
 import { PaginationDocs } from '../../decorators/pagination-docs.decorator';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { PaginationDto } from '../../models/pagination.dto';
-import { RecommendedCarsDto } from '../recommended-cars/models/recommended-cars.dto';
 import { CarsService } from './cars.service';
 import { CarFilterDto } from './models/car-filter.dto';
+import { CarListDto } from './models/car-list.dto';
 
 const CARS_FEATURE_KEY = 'cars';
 
@@ -29,11 +29,11 @@ export class CarsController {
         status: 404,
         description: RESPONSE_MESSAGE.NOT_FOUND,
     })
-    @PaginationDocs(RecommendedCarsDto)
-    @ApiExtraModels(RecommendedCarsDto, CarFilterDto)
+    @PaginationDocs(CarListDto)
+    @ApiExtraModels(CarListDto, CarFilterDto)
     @Get()
-    async getCars(@Query() query: CarFilterDto): Promise<PaginationDto<RecommendedCarsDto>> {
-        return this._carsService.filterRecommendedCars(query);
+    async getCars(@Query() query: CarFilterDto): Promise<PaginationDto<CarListDto>> {
+        return this._carsService.filterCarList(query);
     }
 
     @ApiOkResponse({

@@ -2,13 +2,13 @@ import { KeyValue } from '@angular/common';
 
 export type PowerUnit = 'PS' | 'KW';
 
-export const CAR_FILTERS_POWER_UNITS: KeyValue<Lowercase<PowerUnit>, PowerUnit>[] = [
+export const CAR_FILTERS_POWER_UNITS: KeyValue<PowerUnit, PowerUnit>[] = [
     {
-        key: 'kw',
+        key: 'KW',
         value: 'KW',
     },
     {
-        key: 'ps',
+        key: 'PS',
         value: 'PS',
     },
 ];

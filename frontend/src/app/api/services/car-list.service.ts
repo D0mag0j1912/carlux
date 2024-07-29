@@ -9,12 +9,12 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { CarListDto } from '../models/car-list-dto';
 import { carsControllerGetCars } from '../fn/car-list/cars-controller-get-cars';
 import { CarsControllerGetCars$Params } from '../fn/car-list/cars-controller-get-cars';
 import { carsControllerGetCarsFiltersCount } from '../fn/car-list/cars-controller-get-cars-filters-count';
 import { CarsControllerGetCarsFiltersCount$Params } from '../fn/car-list/cars-controller-get-cars-filters-count';
 import { PaginationDto } from '../models/pagination-dto';
-import { RecommendedCarsDto } from '../models/recommended-cars-dto';
 
 @Injectable({ providedIn: 'root' })
 export class CarListService extends BaseService {
@@ -35,7 +35,7 @@ export class CarListService extends BaseService {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'results'?: Array<RecommendedCarsDto>;
+'results'?: Array<CarListDto>;
 }>> {
     return carsControllerGetCars(this.http, this.rootUrl, params, context);
   }
@@ -50,19 +50,19 @@ export class CarListService extends BaseService {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'results'?: Array<RecommendedCarsDto>;
+'results'?: Array<CarListDto>;
 }> {
     return this.carsControllerGetCars$Response(params, context).pipe(
       map((r: StrictHttpResponse<PaginationDto & {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'results'?: Array<RecommendedCarsDto>;
+'results'?: Array<CarListDto>;
 }>): PaginationDto & {
 'page'?: number;
 'perPage'?: number;
 'count'?: number;
-'results'?: Array<RecommendedCarsDto>;
+'results'?: Array<CarListDto>;
 } => r.body)
     );
   }
