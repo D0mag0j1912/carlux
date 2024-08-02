@@ -10,6 +10,7 @@ export interface CarFiltersState {
     carModels: CarModel[];
     resultCount: number | undefined;
     selectedCarFilters: CarFilters;
+    areCarBrandsLoaded: boolean;
 }
 
 const initialState: CarFiltersState = {
@@ -17,6 +18,7 @@ const initialState: CarFiltersState = {
     carModels: [],
     resultCount: undefined,
     selectedCarFilters: CAR_FILTERS_INITIAL_STATE,
+    areCarBrandsLoaded: false,
 };
 
 export const reducers = createReducer(
@@ -41,6 +43,13 @@ export const reducers = createReducer(
             ...state,
             resultCount: count,
             selectedCarFilters: { ...selectedCarFiltersQuery },
+        }),
+    ),
+    on(
+        CarFiltersActions.setAreCarBrandsLoaded,
+        (state: CarFiltersState, { areCarBrandsLoaded }) => ({
+            ...state,
+            areCarBrandsLoaded,
         }),
     ),
 );

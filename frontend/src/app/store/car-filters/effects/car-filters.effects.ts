@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, catchError, map, switchMap } from 'rxjs';
+import { concatLatestFrom } from '@ngrx/operators';
+import { EMPTY, catchError, map, switchMap, tap } from 'rxjs';
 import { CarBrandDto as CarBrand } from '../../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../../api/models/car-model-dto';
 import { BasicCarInformationService } from '../../../api/services/basic-car-information.service';
@@ -8,28 +9,41 @@ import { CarListService } from '../../../api/services/car-list.service';
 import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { SharedFacadeService } from '../../shared/facades/shared-facade.service';
 import * as CarFiltersActions from '../actions/car-filters.actions';
+import { CarFiltersFacadeService } from '../facades/car-filters-facade.service';
 
 export const getCarBrands$ = createEffect(
     (
         actions$ = inject(Actions),
         basicCarInformationService = inject(BasicCarInformationService),
         sharedFacadeService = inject(SharedFacadeService),
+        carFiltersFacadeService = inject(CarFiltersFacadeService),
     ) =>
         actions$.pipe(
             ofType(CarFiltersActions.getCarBrands),
-            switchMap(() =>
-                basicCarInformationService.basicInfoControllerGetCarBrands().pipe(
-                    catchError((_) => {
-                        sharedFacadeService.showToastMessage(
-                            'filters.errors.get_car_brands',
-                            POPUP_DURATIONS.ERROR,
-                            'warning',
-                        );
-                        return EMPTY;
-                    }),
-                    map((carBrands: CarBrand[]) => CarFiltersActions.setCarBrands({ carBrands })),
-                ),
-            ),
+            concatLatestFrom(() => carFiltersFacadeService.selectAreCarBrandsLoaded()),
+            tap(([_, areCarBrandsLoaded]) => {
+                if (!areCarBrandsLoaded) {
+                    carFiltersFacadeService.setAreCarBrandsLoaded(true);
+                }
+            }),
+            switchMap(([_, areCarBrandsLoaded]) => {
+                if (!areCarBrandsLoaded) {
+                    return basicCarInformationService.basicInfoControllerGetCarBrands().pipe(
+                        catchError((_) => {
+                            sharedFacadeService.showToastMessage(
+                                'filters.errors.get_car_brands',
+                                POPUP_DURATIONS.ERROR,
+                                'warning',
+                            );
+                            return EMPTY;
+                        }),
+                        map((carBrands: CarBrand[]) =>
+                            CarFiltersActions.setCarBrands({ carBrands }),
+                        ),
+                    );
+                }
+                return EMPTY;
+            }),
         ),
     { functional: true },
 );

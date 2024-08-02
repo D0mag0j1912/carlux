@@ -29,3 +29,8 @@ export const setCarFiltersResultCount = createAction(
     '[Car Filters] Set Car Filters Result Count',
     props<{ count: number; selectedCarFiltersQuery: CarFilters }>(),
 );
+
+export const setAreCarBrandsLoaded = createAction(
+    '[Car Filters] Set Are Car Brands Loaded',
+    props<{ areCarBrandsLoaded: boolean }>(),
+);
