@@ -85,7 +85,12 @@ export const routes: Routes = [
     {
         path: 'tabs',
         component: TabsComponent,
-        providers: [SETTINGS_PROVIDERS, PREFERENCES_PROVIDERS, AUTH_ENVIRONMENT_PROVIDERS],
+        providers: [
+            SETTINGS_PROVIDERS,
+            PREFERENCES_PROVIDERS,
+            AUTH_ENVIRONMENT_PROVIDERS,
+            CAR_FILTERS_PROVIDERS,
+        ],
         children: [
             {
                 path: 'auth',
@@ -109,7 +114,6 @@ export const routes: Routes = [
                     import('./tabs/car-filters/car-filters.component').then(
                         (component) => component.CarFiltersComponent,
                     ),
-                providers: [CAR_FILTERS_PROVIDERS],
                 canMatch: [canMatchAuth],
             },
             {
