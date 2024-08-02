@@ -25,3 +25,8 @@ export const selectSelectedCarFilters = createSelector(
     selectCarFiltersState,
     (state: CarFiltersState) => state.selectedCarFilters,
 );
+
+export const selectAreCarBrandsLoaded = createSelector(
+    selectCarFiltersState,
+    (state: CarFiltersState) => state.areCarBrandsLoaded,
+);

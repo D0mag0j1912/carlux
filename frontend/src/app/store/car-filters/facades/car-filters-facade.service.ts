@@ -1,5 +1,6 @@
 import { Injectable, Signal, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AppState } from '../../..';
 import { CarBrandDto as CarBrand } from '../../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../../api/models/car-model-dto';
@@ -28,6 +29,10 @@ export class CarFiltersFacadeService {
     selectSelectedCarFilters(): Signal<CarFilters> {
         return this._store.selectSignal(CarFiltersSelectors.selectSelectedCarFilters);
     }
+
+    selectAreCarBrandsLoaded(): Observable<boolean> {
+        return this._store.select(CarFiltersSelectors.selectAreCarBrandsLoaded);
+    }
     //Selectors END -------------------------
 
     //Actions BEGIN -------------------------
@@ -43,6 +48,10 @@ export class CarFiltersFacadeService {
         this._store.dispatch(
             CarFiltersActions.getCarFiltersResultCount({ selectedCarFiltersQuery }),
         );
+    }
+
+    setAreCarBrandsLoaded(areCarBrandsLoaded: boolean): void {
+        this._store.dispatch(CarFiltersActions.setAreCarBrandsLoaded({ areCarBrandsLoaded }));
     }
     //Actions END -------------------------
 }

@@ -9,7 +9,7 @@
 
 <ion-content *transloco="let t">
     <form [formGroup]="form">
-        <ion-accordion-group>
+        <ion-accordion-group (ionChange)="onAccordionChange($event)">
             <ion-accordion [value]="filtersAccordionGroups.BASIC_INFORMATION">
                 <ion-item slot="header" color="light">
                     <ion-label class="basic-info-title">

@@ -139,14 +139,13 @@ export class CarFiltersComponent implements OnInit {
     });
 
     ngOnInit(): void {
-        this._carFiltersFacadeService.getCarBrands();
-
         this.form.controls.brand.valueChanges
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((carBrands: CarBrand[] | null) => {
                 if (carBrands) {
                     const brandId = carBrands[0].id;
                     this._carFiltersFacadeService.getCarModels(brandId);
+                    this.form.controls.models.patchValue([]);
                 }
             });
 
@@ -200,5 +199,12 @@ export class CarFiltersComponent implements OnInit {
         };
         this._carListFacadeService.getCarList(query);
         await this._navController.navigateForward('tabs/car-list');
+    }
+
+    onAccordionChange(event: Event): void {
+        const value = ((event as CustomEvent).detail as { value: CarFilterAccordionGroups }).value;
+        if (value === CarFilterAccordionGroups.BASIC_INFORMATION) {
+            this._carFiltersFacadeService.getCarBrands();
+        }
     }
 }
