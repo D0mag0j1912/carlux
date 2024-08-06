@@ -40,6 +40,7 @@ export const reducers = createReducer(
                             response.page > 1
                                 ? [...state.carList.carListData.results, ...response.results]
                                 : [...response.results],
+                        count: response.count,
                     },
                     hasNoMoreCarListItems:
                         response.page > 1

@@ -145,7 +145,7 @@ export class CarFiltersComponent implements OnInit {
                 if (carBrands) {
                     const brandId = carBrands[0].id;
                     this._carFiltersFacadeService.getCarModels(brandId);
-                    this.form.controls.models.patchValue([]);
+                    this.form.controls.models.patchValue([], { emitEvent: false });
                 }
             });
 
