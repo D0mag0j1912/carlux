@@ -69,6 +69,10 @@ export class CarListComponent implements OnInit {
         addIcons({ searchSharp });
     }
 
+    ionViewDidEnter(): void {
+        this.page.set(this.INITIAL_PAGE);
+    }
+
     ngOnInit(): void {
         const query: CarFilters = {
             page: this.page(),
