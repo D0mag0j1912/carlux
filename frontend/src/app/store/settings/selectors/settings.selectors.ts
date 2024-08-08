@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { SettingsState } from '../reducers/settings.reducer';
 import { FeatureKeys } from '../../../constants/feature-keys';
+import { SettingsState } from '../reducers/settings.reducer';
 
 export const selectSettingsState = createFeatureSelector<SettingsState>(FeatureKeys.SETTINGS);
 

@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { tap } from 'rxjs';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { addIcons } from 'ionicons';
 import { warning } from 'ionicons/icons';
+import { tap } from 'rxjs';
 import * as SharedActions from '../actions/shared.actions';
 
 @Injectable()

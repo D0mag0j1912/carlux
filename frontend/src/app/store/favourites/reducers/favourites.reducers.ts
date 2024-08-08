@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { FavouritesDto as Favourites } from '../../../api/models/favourites-dto';
-import * as FavouritesActions from '../actions/favourites.actions';
 import { HandleFavouritesActions } from '../../../constants/handle-favourites-actions';
+import * as FavouritesActions from '../actions/favourites.actions';
 
 export interface FavouritesState {
     areFavouritesLoading: boolean;

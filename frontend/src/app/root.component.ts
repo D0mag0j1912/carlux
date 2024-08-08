@@ -1,18 +1,18 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { Platform } from '@ionic/angular';
-import { Platforms } from '@ionic/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { filter, from, take } from 'rxjs';
-import { GetResult, Storage } from '@capacitor/storage';
-import { TranslocoService } from '@ngneat/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { GetResult, Storage } from '@capacitor/storage';
+import { Platform } from '@ionic/angular';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { Platforms } from '@ionic/core';
+import { TranslocoService } from '@ngneat/transloco';
+import { filter, from, take } from 'rxjs';
 import { register } from 'swiper/element/bundle';
-import { PlatformFacadeService } from './store/platform/facades/platform-facade.service';
-import { AuthenticationFacadeService } from './store/auth/facades/auth-facade.service';
-import { PreferencesFacadeService } from './store/preferences/facades/preferences-facade.service';
-import { FeatureKeys } from './constants/feature-keys';
-import { LanguageCodeType } from './tabs/settings/models/language.type';
 import { LoginResponseDto as UserData } from './api/models/login-response-dto';
+import { FeatureKeys } from './constants/feature-keys';
+import { AuthenticationFacadeService } from './store/auth/facades/auth-facade.service';
+import { PlatformFacadeService } from './store/platform/facades/platform-facade.service';
+import { PreferencesFacadeService } from './store/preferences/facades/preferences-facade.service';
+import { LanguageCodeType } from './tabs/settings/models/language.type';
 
 register();
 @Component({

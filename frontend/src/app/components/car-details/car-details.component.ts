@@ -1,5 +1,6 @@
+import { AsyncPipe, DatePipe, LowerCasePipe } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, inject } from '@angular/core';
-import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
     IonBackButton,
     IonButtons,
@@ -12,29 +13,28 @@ import {
     IonToolbar,
     NavController,
 } from '@ionic/angular/standalone';
-import { AsyncPipe, DatePipe, LowerCasePipe } from '@angular/common';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { addIcons } from 'ionicons';
 import {
-    calendarOutline,
-    peopleOutline,
-    barChartOutline,
-    timerOutline,
-    locationOutline,
-    cashOutline,
-    carSportOutline,
-    settingsOutline,
     analyticsOutline,
+    barChartOutline,
+    calendarOutline,
+    carSportOutline,
+    cashOutline,
     colorPaletteOutline,
+    locationOutline,
+    peopleOutline,
+    settingsOutline,
+    timerOutline,
 } from 'ionicons/icons';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
-import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
-import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
-import { WheelDrivesType } from '../../constants/wheel-drive-types';
 import { FourWheelDriveTypes } from '../../constants/four-wheel-drive-type';
+import { KILOMETERS_TRAVELLED } from '../../constants/kilometers-travelled';
+import { MEDIUM_DATE_FORMAT } from '../../constants/medium-date-format';
 import { PremiumBrands } from '../../constants/premium-brands';
-import { HORSE_POWER_TRANSLATION } from '../../helpers/horse-power-translation';
+import { WheelDrivesType } from '../../constants/wheel-drive-types';
 import { FUEL_CONSUMPTION_SUFFIX } from '../../helpers/fuel-consumption-suffix';
+import { HORSE_POWER_TRANSLATION } from '../../helpers/horse-power-translation';
+import { CamelToSnakeCasePipe } from '../../pipes/camel-to-snake-case.pipe';
 import { CarDetailsFacadeService } from '../../store/car-details/facades/car-details-facade.service';
 
 @Component({

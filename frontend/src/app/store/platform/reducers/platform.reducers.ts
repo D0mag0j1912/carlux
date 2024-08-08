@@ -1,5 +1,5 @@
-import { createReducer, on } from '@ngrx/store';
 import { Platforms } from '@ionic/core';
+import { createReducer, on } from '@ngrx/store';
 import * as PlatformActions from '../actions/platform.actions';
 
 export interface PlatformState {

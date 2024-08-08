@@ -9,24 +9,24 @@ import {
     IonContent,
     IonGrid,
     IonHeader,
-    IonInput,
-    IonRow,
-    IonTitle,
-    IonToolbar,
-    IonItem,
     IonIcon,
+    IonInput,
+    IonItem,
     IonLabel,
+    IonRow,
+    IonSkeletonText,
     IonText,
     IonThumbnail,
-    IonSkeletonText,
+    IonTitle,
+    IonToolbar,
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
-import { filter } from 'rxjs';
 import { addIcons } from 'ionicons';
 import { pencil, trash } from 'ionicons/icons';
+import { filter } from 'rxjs';
+import { UserDto as User } from '../../../../api/models/user-dto';
 import { DateTimePickerComponent } from '../../../../components/datetime-picker/datetime-picker.component';
 import { SettingsFacadeService } from '../../../../store/settings/facades/settings-facade.service';
-import { UserDto as User } from '../../../../api/models/user-dto';
 
 @Component({
     standalone: true,

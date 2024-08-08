@@ -1,8 +1,8 @@
 import { Component, Input, ViewChild, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { format } from 'date-fns';
+import { IonButton, IonButtons, IonContent, IonDatetime } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
-import { IonContent, IonDatetime, IonButtons, IonButton } from '@ionic/angular/standalone';
+import { format } from 'date-fns';
 import { DialogRoles } from '../../constants/dialog-roles';
 
 @Component({

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Storage } from '@capacitor/storage';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, catchError, concatMap, finalize, map, switchMap, tap } from 'rxjs';
-import { Storage } from '@capacitor/storage';
-import { Router } from '@angular/router';
-import * as AuthenticationActions from '../actions/auth.actions';
-import { AuthenticationService } from '../../../api/services';
-import { AuthenticationFacadeService } from '../facades/auth-facade.service';
-import { POPUP_DURATIONS } from '../../../constants/popup-durations';
-import { SharedFacadeService } from '../../shared/facades/shared-facade.service';
-import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
-import { AuthenticationEventEmitterService } from '../../../tabs/auth/event-emitter/auth-event-emitter.service';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
+import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
+import { AuthenticationService } from '../../../api/services';
 import { FeatureKeys } from '../../../constants/feature-keys';
+import { POPUP_DURATIONS } from '../../../constants/popup-durations';
+import { AuthenticationEventEmitterService } from '../../../tabs/auth/event-emitter/auth-event-emitter.service';
 import { AuthenticationHelperService } from '../../../tabs/auth/helpers/auth-helper.service';
+import { SharedFacadeService } from '../../shared/facades/shared-facade.service';
+import * as AuthenticationActions from '../actions/auth.actions';
+import { AuthenticationFacadeService } from '../facades/auth-facade.service';
 
 @Injectable()
 export class AuthEffects {

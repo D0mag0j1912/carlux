@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PreferencesState } from '../reducers/preferences.reducers';
-import { FeatureKeys } from '../../../constants/feature-keys';
 import { PreferencesDto as Preferences } from '../../../api/models/preferences-dto';
+import { FeatureKeys } from '../../../constants/feature-keys';
+import { PreferencesState } from '../reducers/preferences.reducers';
 
 export const selectPreferencesState = createFeatureSelector<PreferencesState>(
     FeatureKeys.PREFERENCES,

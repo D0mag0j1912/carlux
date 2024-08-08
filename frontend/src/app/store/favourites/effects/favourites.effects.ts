@@ -1,13 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, catchError, finalize, map, switchMap, tap } from 'rxjs';
+import { FavouritesDto as Favourites } from '../../../api/models/favourites-dto';
+import { FavouritesService } from '../../../api/services/favourites.service';
+import { HandleFavouritesActions } from '../../../constants/handle-favourites-actions';
+import { POPUP_DURATIONS } from '../../../constants/popup-durations';
 import { SharedFacadeService } from '../../shared/facades/shared-facade.service';
 import * as FavouritesActions from '../actions/favourites.actions';
-import { FavouritesService } from '../../../api/services/favourites.service';
-import { POPUP_DURATIONS } from '../../../constants/popup-durations';
-import { FavouritesDto as Favourites } from '../../../api/models/favourites-dto';
 import { FavouritesFacadeService } from '../facades/favourites-facade.service';
-import { HandleFavouritesActions } from '../../../constants/handle-favourites-actions';
 
 @Injectable()
 export class FavouritesEffects {

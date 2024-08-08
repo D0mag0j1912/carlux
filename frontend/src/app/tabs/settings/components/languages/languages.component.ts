@@ -15,8 +15,8 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
 import { filter, take } from 'rxjs';
-import { LanguageCodeType, LanguageTranslationType } from '../../models/language.type';
 import { PreferencesFacadeService } from '../../../../store/preferences/facades/preferences-facade.service';
+import { LanguageCodeType, LanguageTranslationType } from '../../models/language.type';
 
 @Component({
     standalone: true,

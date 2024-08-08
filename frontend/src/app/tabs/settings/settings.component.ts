@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { TranslocoModule } from '@ngneat/transloco';
+import { RouterModule } from '@angular/router';
 import {
+    IonAvatar,
     IonContent,
     IonHeader,
     IonIcon,
@@ -10,11 +11,10 @@ import {
     IonNote,
     IonTitle,
     IonToolbar,
-    IonAvatar,
 } from '@ionic/angular/standalone';
+import { TranslocoModule } from '@ngneat/transloco';
 import { addIcons } from 'ionicons';
 import { languageSharp, personCircleOutline } from 'ionicons/icons';
-import { RouterModule } from '@angular/router';
 import { AuthenticationFacadeService } from '../../store/auth/facades/auth-facade.service';
 
 @Component({

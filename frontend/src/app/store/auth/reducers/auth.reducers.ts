@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import * as AuthenticationActions from '../actions/auth.actions';
-import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
+import { StatusResponseDto as StatusResponse } from '../../../api/models/status-response-dto';
+import * as AuthenticationActions from '../actions/auth.actions';
 
 export interface AuthState {
     isLoading: boolean;
