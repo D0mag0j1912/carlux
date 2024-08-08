@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetResult, Storage } from '@capacitor/storage';
+import { GetResult, Preferences } from '@capacitor/preferences';
 import { Observable, from, map } from 'rxjs';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 import { FeatureKeys } from '../../../constants/feature-keys';
@@ -16,7 +16,7 @@ export class AuthenticationHelperService {
     }
 
     autoLogin(): Observable<boolean> {
-        return from(Storage.get({ key: FeatureKeys.AUTH })).pipe(
+        return from(Preferences.get({ key: FeatureKeys.AUTH })).pipe(
             map((storedData: GetResult) => {
                 if (!storedData || !storedData?.value) {
                     return false;
@@ -46,7 +46,7 @@ export class AuthenticationHelperService {
     }
 
     async clearLocalStorage(): Promise<void> {
-        await Storage.remove({ key: FeatureKeys.AUTH });
+        await Preferences.remove({ key: FeatureKeys.AUTH });
     }
 
     private _tokenTimer: NodeJS.Timeout | undefined;
