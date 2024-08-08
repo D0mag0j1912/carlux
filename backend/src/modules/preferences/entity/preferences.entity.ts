@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { LanguageEntity } from '../../languages/entity/language.entity';
 import { UserEntity } from '../../auth/entity/user.entity';
+import { LanguageEntity } from '../../languages/entity/language.entity';
 
 @Entity({ name: 'Preferences' })
 export class PreferenceEntity {

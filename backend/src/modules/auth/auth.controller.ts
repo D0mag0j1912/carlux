@@ -7,14 +7,14 @@ import {
     ApiOkResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { BASE_URL } from '../../constants/base-url';
+import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { UserDto } from '../profile-details/models/user.dto';
 import { AuthService } from './auth.service';
-import { VerifyCodeDto } from './models/verify-code.dto';
-import { StatusResponseDto } from './models/status-response.dto';
 import { EmailDto } from './models/email.dto';
 import { LoginResponseDto } from './models/login-response.dto';
+import { StatusResponseDto } from './models/status-response.dto';
+import { VerifyCodeDto } from './models/verify-code.dto';
 
 const AUTH_FEATURE_KEY = 'auth';
 

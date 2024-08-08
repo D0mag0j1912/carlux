@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TwilioModule } from 'nestjs-twilio';
-import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TwilioModule } from 'nestjs-twilio';
 import { JwtStrategy } from '../../middleware/jwt.strategy';
 import { LanguageEntity } from '../languages/entity/language.entity';
 import { PreferenceEntity } from '../preferences/entity/preferences.entity';
-import { UserEntity } from './entity/user.entity';
-import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
 import { EXPIRES_IN, JWT_TOKEN } from './constants/jwt.constants';
+import { UserEntity } from './entity/user.entity';
 
 const SERVICES = [AuthService, JwtStrategy];
 

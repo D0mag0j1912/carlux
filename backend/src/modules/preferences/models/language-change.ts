@@ -6,7 +6,7 @@ export class LanguageChangeDto {
     @ApiProperty({
         type: Number,
         required: true,
-        description: 'ID of the user who\'s changing the language',
+        description: "ID of the user who's changing the language",
     })
     @IsNumber()
     @IsNotEmpty()

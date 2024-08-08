@@ -7,7 +7,7 @@ export class FavouritesDto {
     @ApiProperty({
         type: Number,
         required: true,
-        description: 'Car\'s ID',
+        description: "Car's ID",
     })
     id: number;
 
@@ -15,7 +15,7 @@ export class FavouritesDto {
         type: String,
         isArray: true,
         required: true,
-        description: 'Car\'s images',
+        description: "Car's images",
     })
     images: string[];
 

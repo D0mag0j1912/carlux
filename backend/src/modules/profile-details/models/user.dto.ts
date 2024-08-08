@@ -4,42 +4,42 @@ export class UserDto {
     @ApiPropertyOptional({
         type: Number,
         required: false,
-        description: 'User\'s ID',
+        description: "User's ID",
     })
     id?: number;
 
     @ApiProperty({
         type: String,
         required: true,
-        description: 'User\'s first name',
+        description: "User's first name",
     })
     firstName: string;
 
     @ApiProperty({
         type: String,
         required: true,
-        description: 'User\'s last name',
+        description: "User's last name",
     })
     lastName: string;
 
     @ApiPropertyOptional({
         type: String,
         required: false,
-        description: 'User\'s profile picture',
+        description: "User's profile picture",
     })
     avatar?: string;
 
     @ApiProperty({
         type: String,
         required: true,
-        description: 'User\'s birth date',
+        description: "User's birth date",
     })
     birthDate: string;
 
     @ApiProperty({
         type: String,
         required: true,
-        description: 'User\'s email',
+        description: "User's email",
     })
     email: string;
 
