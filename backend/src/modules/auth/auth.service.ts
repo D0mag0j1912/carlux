@@ -1,19 +1,18 @@
 import { HttpStatus, Injectable, InternalServerErrorException } from '@nestjs/common';
 //TODO: Later
-import { TwilioService } from 'nestjs-twilio';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { MOCK_PHONE_VERIFICATION_CODE } from '../../mock/phone-verification-code';
-import { PreferenceEntity } from '../preferences/entity/preferences.entity';
 import { LanguageEntity } from '../languages/entity/language.entity';
+import { PreferenceEntity } from '../preferences/entity/preferences.entity';
 import { UserDto } from '../profile-details/models/user.dto';
-import { StatusResponseDto } from './models/status-response.dto';
-import { UserEntity } from './entity/user.entity';
-import { LoginResponseDto } from './models/login-response.dto';
-import { JwtPayloadDto } from './models/jwt-payload.dto';
-import { EXPIRES_IN } from './constants/jwt.constants';
 import { INITIAL_LANGUAGE } from './constants/initial-language';
+import { EXPIRES_IN } from './constants/jwt.constants';
+import { UserEntity } from './entity/user.entity';
+import { JwtPayloadDto } from './models/jwt-payload.dto';
+import { LoginResponseDto } from './models/login-response.dto';
+import { StatusResponseDto } from './models/status-response.dto';
 
 @Injectable()
 export class AuthService {

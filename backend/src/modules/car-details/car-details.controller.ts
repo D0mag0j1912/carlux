@@ -7,8 +7,8 @@ import {
 } from '@nestjs/swagger';
 import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
-import { CarDetailsDto } from './models/car-details.dto';
 import { CarDetailsService } from './car-details.service';
+import { CarDetailsDto } from './models/car-details.dto';
 
 const CAR_DETAILS_FEATURE_KEY = 'car';
 

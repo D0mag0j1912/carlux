@@ -8,9 +8,9 @@ import {
 import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
 import { GeneralResponseDto } from '../../models/general-response.dto';
+import { HandleFavourites } from './constants/handle-favourites';
 import { FavouritesService } from './favourites.service';
 import { FavouritesDto } from './models/favourites.dto';
-import { HandleFavourites } from './constants/handle-favourites';
 
 const FAVOURITES_LIST_FEATURE_KEY = 'favourites';
 

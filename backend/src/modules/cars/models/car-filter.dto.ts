@@ -19,16 +19,16 @@ export class CarFilterDto {
     @ApiProperty({
         type: Number,
         required: true,
-        description: 'Car\'s per page',
+        description: "Car's per page",
     })
     @Type(() => Number)
     @IsNumber()
     perPage: number;
-    
+
     @ApiPropertyOptional({
         type: Number,
         required: false,
-        description: 'Car\'s brand ID',
+        description: "Car's brand ID",
     })
     @Type(() => Number)
     @IsNumber()
@@ -37,10 +37,10 @@ export class CarFilterDto {
     @ApiPropertyOptional({
         type: [Number],
         required: false,
-        description: 'Car\'s model ID',
+        description: "Car's model ID",
     })
     @Type(() => Number)
-    @Transform(({ value }) => Array.isArray(value) ? value : [value])
+    @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
     @IsArray()
     @IsNumber({}, { each: true })
     modelIds?: number[] | undefined;
@@ -49,9 +49,9 @@ export class CarFilterDto {
         enum: ['Convertible', 'Coupe', 'Sedan', 'SUV', 'Hatchback'],
         required: false,
         isArray: true,
-        description: 'Car\'s body style',
+        description: "Car's body style",
     })
-    @Transform(({ value }) => Array.isArray(value) ? value : [value])
+    @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
     @IsArray()
     bodyStyles?: BodyStyles[] | undefined;
 
@@ -59,9 +59,9 @@ export class CarFilterDto {
         enum: ['Gasoline', 'Diesel'],
         required: false,
         isArray: true,
-        description: 'Car\'s fuel type',
+        description: "Car's fuel type",
     })
-    @Transform(({ value }) => Array.isArray(value) ? value : [value])
+    @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
     @IsArray()
     fuelTypes?: FuelType[] | undefined;
 
@@ -150,7 +150,7 @@ export class CarFilterDto {
         isArray: true,
         description: 'Type of transmission',
     })
-    @Transform(({ value }) => Array.isArray(value) ? value : [value])
+    @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
     @IsArray()
     transmissionTypes?: TransmissionType[] | undefined;
 }

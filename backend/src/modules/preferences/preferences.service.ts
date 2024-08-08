@@ -1,12 +1,12 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { LanguageCode } from '../languages/enums/language-code';
-import { LanguageEntity } from '../languages/entity/language.entity';
 import { INITIAL_LANGUAGE } from '../auth/constants/initial-language';
+import { LanguageEntity } from '../languages/entity/language.entity';
+import { LanguageCode } from '../languages/enums/language-code';
 import { PreferenceEntity } from './entity/preferences.entity';
-import { PreferencesDto } from './models/preferences.dto';
 import { LanguageChangeDto } from './models/language-change';
+import { PreferencesDto } from './models/preferences.dto';
 
 @Injectable()
 export class PreferencesService {

@@ -8,8 +8,8 @@ import {
 } from '@nestjs/swagger';
 import { BASE_URL } from '../../constants/base-url';
 import { RESPONSE_MESSAGE } from '../../helpers/response-message';
-import { ProfileDetailsService } from './profile-details.service';
 import { UserDto } from './models/user.dto';
+import { ProfileDetailsService } from './profile-details.service';
 
 const PROFILE_DETAILS_FEATURE_KEY = 'profile-details';
 
