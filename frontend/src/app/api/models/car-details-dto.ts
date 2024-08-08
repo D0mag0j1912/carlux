@@ -1,154 +1,153 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface CarDetailsDto {
+    /**
+     * Bodykit
+     */
+    bodyKit: string;
 
-  /**
-   * Bodykit
-   */
-  bodyKit: string;
+    /**
+     * Body style
+     */
+    bodyStyle: 'Convertible' | 'Coupe' | 'Sedan' | 'SUV' | 'Hatchback';
 
-  /**
-   * Body style
-   */
-  bodyStyle: 'Convertible' | 'Coupe' | 'Sedan' | 'SUV' | 'Hatchback';
+    /**
+     * Brand
+     */
+    brand: string;
 
-  /**
-   * Brand
-   */
-  brand: string;
+    /**
+     * How many C02 emissions does the car have
+     */
+    co2Emissions: number;
 
-  /**
-   * How many C02 emissions does the car have
-   */
-  co2Emissions: number;
+    /**
+     * Country origin
+     */
+    countryOrigin: string;
 
-  /**
-   * Country origin
-   */
-  countryOrigin: string;
+    /**
+     * Currency code
+     */
+    currencySymbol: string;
 
-  /**
-   * Currency code
-   */
-  currencySymbol: string;
+    /**
+     * Engine code name
+     */
+    engineCodeName: string;
 
-  /**
-   * Engine code name
-   */
-  engineCodeName: string;
+    /**
+     * Exterior color
+     */
+    exteriorColor: string;
 
-  /**
-   * Exterior color
-   */
-  exteriorColor: string;
+    /**
+     * First registration date
+     */
+    firstRegistrationDate: string;
 
-  /**
-   * First registration date
-   */
-  firstRegistrationDate: string;
+    /**
+     * Fuel consumption in the city
+     */
+    fuelConsumptionCity: number;
 
-  /**
-   * Fuel consumption in the city
-   */
-  fuelConsumptionCity: number;
+    /**
+     * Average fuel consumption
+     */
+    fuelConsumptionCombined: number;
 
-  /**
-   * Average fuel consumption
-   */
-  fuelConsumptionCombined: number;
+    /**
+     * Fuel consumption on the highway
+     */
+    fuelConsumptionHighway: number;
 
-  /**
-   * Fuel consumption on the highway
-   */
-  fuelConsumptionHighway: number;
+    /**
+     * Fuel type
+     */
+    fuelType: 'Gasoline' | 'Diesel';
 
-  /**
-   * Fuel type
-   */
-  fuelType: 'Gasoline' | 'Diesel';
+    /**
+     * How many horse power does the car have
+     */
+    horsePower: number;
 
-  /**
-   * How many horse power does the car have
-   */
-  horsePower: number;
+    /**
+     * ID
+     */
+    id: number;
 
-  /**
-   * ID
-   */
-  id: number;
+    /**
+     * Images
+     */
+    images: Array<string>;
 
-  /**
-   * Images
-   */
-  images: Array<string>;
+    /**
+     * Interior color
+     */
+    interiorColor: string;
 
-  /**
-   * Interior color
-   */
-  interiorColor: string;
+    /**
+     * Is car added to the favourites list
+     */
+    isFavourite: boolean;
 
-  /**
-   * Is car added to the favourites list
-   */
-  isFavourite: boolean;
+    /**
+     * How many kilometers travelled
+     */
+    kilometersTravelled: number;
 
-  /**
-   * How many kilometers travelled
-   */
-  kilometersTravelled: number;
+    /**
+     * How many kilowatts does the car have
+     */
+    kilowatts: number;
 
-  /**
-   * How many kilowatts does the car have
-   */
-  kilowatts: number;
+    /**
+     * Model name
+     */
+    modelName: string;
 
-  /**
-   * Model name
-   */
-  modelName: string;
+    /**
+     * Number of previous car owners
+     */
+    noOfPreviousOwners: number;
 
-  /**
-   * Number of previous car owners
-   */
-  noOfPreviousOwners: number;
+    /**
+     * How many cylinders does the car have
+     */
+    numberOfCylinders: number;
 
-  /**
-   * How many cylinders does the car have
-   */
-  numberOfCylinders: number;
+    /**
+     * Price
+     */
+    price: number;
 
-  /**
-   * Price
-   */
-  price: number;
+    /**
+     * Date on which the model has been released to the public
+     */
+    releaseDate: string;
 
-  /**
-   * Date on which the model has been released to the public
-   */
-  releaseDate: string;
+    /**
+     * How much the car rim size is
+     */
+    rimSize: number;
 
-  /**
-   * How much the car rim size is
-   */
-  rimSize: number;
+    /**
+     * Seller type
+     */
+    sellerType: 'Dealer' | 'Private' | 'CompanyVehicle';
 
-  /**
-   * Seller type
-   */
-  sellerType: 'Dealer' | 'Private' | 'CompanyVehicle';
+    /**
+     * Type of transmission
+     */
+    transmission: 'Manual' | 'Automatic';
 
-  /**
-   * Type of transmission
-   */
-  transmission: 'Manual' | 'Automatic';
+    /**
+     * Uploaded date
+     */
+    uploadedDate: string;
 
-  /**
-   * Uploaded date
-   */
-  uploadedDate: string;
-
-  /**
-   * Wheel drive type
-   */
-  wheelDriveType: 'FrontWheel' | 'RearWheel' | 'FourWheel';
+    /**
+     * Wheel drive type
+     */
+    wheelDriveType: 'FrontWheel' | 'RearWheel' | 'FourWheel';
 }

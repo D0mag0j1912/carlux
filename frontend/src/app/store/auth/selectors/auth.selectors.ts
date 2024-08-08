@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AuthState } from '../reducers/auth.reducers';
-import { FeatureKeys } from '../../../constants/feature-keys';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
+import { FeatureKeys } from '../../../constants/feature-keys';
+import { AuthState } from '../reducers/auth.reducers';
 
 export const selectAuthState = createFeatureSelector<AuthState>(FeatureKeys.AUTH);
 

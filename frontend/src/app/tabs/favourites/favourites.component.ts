@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { IonContent, IonSpinner } from '@ionic/angular/standalone';
 import { TranslocoModule } from '@ngneat/transloco';
-import { RouterModule } from '@angular/router';
-import { FavouritesFacadeService } from '../../store/favourites/facades/favourites-facade.service';
 import { HandleFavouritesActions } from '../../constants/handle-favourites-actions';
+import { FavouritesFacadeService } from '../../store/favourites/facades/favourites-facade.service';
 import { FavouriteCarItemComponent } from './favourite-car-item/favourite-car-item.component';
 
 @Component({

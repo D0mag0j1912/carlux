@@ -1,9 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { TranslocoModule } from '@ngneat/transloco';
-import { carSportSharp, settingsSharp, logInSharp, bookmarkSharp } from 'ionicons/icons';
-import { addIcons } from 'ionicons';
+import { Component, OnInit, inject } from '@angular/core';
 import { IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs } from '@ionic/angular/standalone';
+import { TranslocoModule } from '@ngneat/transloco';
+import { addIcons } from 'ionicons';
+import { bookmarkSharp, carSportSharp, logInSharp, settingsSharp } from 'ionicons/icons';
 import { filter, take } from 'rxjs';
 import { AuthenticationFacadeService } from '../store/auth/facades/auth-facade.service';
 import { SettingsFacadeService } from '../store/settings/facades/settings-facade.service';

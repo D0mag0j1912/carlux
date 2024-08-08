@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PlatformState } from '../reducers/platform.reducers';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import {
     ANDROID_MODE,
@@ -7,6 +6,7 @@ import {
     IOS_MODE,
     MOBILE_MODE,
 } from '../../../constants/platform-mode';
+import { PlatformState } from '../reducers/platform.reducers';
 
 export const selectPlatformState = createFeatureSelector<PlatformState>(FeatureKeys.PLATFORM);
 

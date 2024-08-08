@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { GetResult, Storage } from '@capacitor/storage';
 import { Observable, from, map } from 'rxjs';
+import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 import { FeatureKeys } from '../../../constants/feature-keys';
 import { AuthenticationFacadeService } from '../../../store/auth/facades/auth-facade.service';
-import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationHelperService {
