@@ -1,6 +1,6 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { GetResult, Storage } from '@capacitor/storage';
+import { GetResult, Preferences } from '@capacitor/preferences';
 import { Platform } from '@ionic/angular';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { Platforms } from '@ionic/core';
@@ -34,7 +34,7 @@ export class RootComponent implements OnInit {
         const currentPlatforms = this._platform.platforms() as Platforms[];
         this._platformFacadeService.setPlatform(currentPlatforms);
 
-        from(Storage.get({ key: FeatureKeys.AUTH }))
+        from(Preferences.get({ key: FeatureKeys.AUTH }))
             .pipe(take(1))
             .subscribe((storedData: GetResult) => {
                 if (!storedData || !storedData.value) {

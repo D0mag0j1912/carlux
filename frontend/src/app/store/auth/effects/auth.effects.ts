@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, catchError, concatMap, finalize, map, switchMap, tap } from 'rxjs';
 import { LoginResponseDto as UserData } from '../../../api/models/login-response-dto';
@@ -177,7 +177,7 @@ export class AuthEffects {
             ...userData,
             expirationDate,
         };
-        await Storage.set({
+        await Preferences.set({
             key: FeatureKeys.AUTH,
             value: JSON.stringify(userData),
         });
