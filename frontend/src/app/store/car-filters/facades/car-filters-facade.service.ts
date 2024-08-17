@@ -8,18 +8,20 @@ import { FeatureKeys } from '../../../constants/feature-keys';
 import { CarFilters } from '../../../tabs/car-filters/models/car-filters.model';
 import * as CarFiltersActions from '../actions/car-filters.actions';
 import * as CarFiltersSelectors from '../selectors/car-filters.selectors';
+import { CarFiltersStore } from '../signals/car-filter-store';
 
 @Injectable({ providedIn: 'root' })
 export class CarFiltersFacadeService {
     private _store = inject(Store<AppState[FeatureKeys.CAR_FILTERS]>);
+    private _carFiltersStore = inject(CarFiltersStore);
 
     //Selectors BEGIN -------------------------
     selectCarBrands(): Signal<CarBrand[]> {
-        return this._store.selectSignal(CarFiltersSelectors.selectCarBrands);
+        return this._carFiltersStore.carBrands;
     }
 
     selectCarModels(): Signal<CarModel[]> {
-        return this._store.selectSignal(CarFiltersSelectors.selectCarModels);
+        return this._carFiltersStore.carModels;
     }
 
     selectCarFiltersResultCount(): Signal<number | undefined> {
@@ -37,11 +39,11 @@ export class CarFiltersFacadeService {
 
     //Actions BEGIN -------------------------
     getCarBrands(): void {
-        this._store.dispatch(CarFiltersActions.getCarBrands());
+        this._carFiltersStore.getCarBrands();
     }
 
     getCarModels(brandId: number): void {
-        this._store.dispatch(CarFiltersActions.getCarModels({ brandId }));
+        this._carFiltersStore.getCarModels(brandId);
     }
 
     getCarFiltersResultCount(selectedCarFiltersQuery: CarFilters): void {
