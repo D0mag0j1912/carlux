@@ -11,8 +11,6 @@ import { AuthenticationFacadeService } from './store/auth/facades/auth-facade.se
 import * as AuthReducers from './store/auth/reducers/auth.reducers';
 import * as CarDetailsEffects from './store/car-details/effects/car-details.effects';
 import * as CarDetailsReducers from './store/car-details/reducers/car-details.reducers';
-import * as CarFiltersEffects from './store/car-filters/effects/car-filters.effects';
-import * as CarFiltersReducers from './store/car-filters/reducers/car-filters.reducers';
 import * as CarListEffects from './store/car-list/effects/car-list.effects';
 import * as CarsReducers from './store/car-list/reducers/car-list.reducers';
 import { FavouritesEffects } from './store/favourites/effects/favourites.effects';
@@ -66,11 +64,6 @@ const CAR_LIST_PROVIDERS = importProvidersFrom([
     EffectsModule.forFeature(CarListEffects),
 ]);
 
-const CAR_FILTERS_PROVIDERS = importProvidersFrom([
-    StoreModule.forFeature(FeatureKeys.CAR_FILTERS, CarFiltersReducers.reducers),
-    EffectsModule.forFeature(CarFiltersEffects),
-]);
-
 const FAVOURITES_PROVIDERS = importProvidersFrom([
     StoreModule.forFeature(FeatureKeys.FAVOURITES, FavouritesReducers.reducers),
     EffectsModule.forFeature(FavouritesEffects),
@@ -85,12 +78,7 @@ export const routes: Routes = [
     {
         path: 'tabs',
         component: TabsComponent,
-        providers: [
-            SETTINGS_PROVIDERS,
-            PREFERENCES_PROVIDERS,
-            AUTH_ENVIRONMENT_PROVIDERS,
-            CAR_FILTERS_PROVIDERS,
-        ],
+        providers: [SETTINGS_PROVIDERS, PREFERENCES_PROVIDERS, AUTH_ENVIRONMENT_PROVIDERS],
         children: [
             {
                 path: 'auth',
