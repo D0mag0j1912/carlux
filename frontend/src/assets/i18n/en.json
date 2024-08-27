@@ -172,7 +172,8 @@
         "power_to": "Power to",
         "transmission_type": "Transmission",
         "sections": {
-            "basic_information": "Basic information"
+            "basic_information": "Basic information",
+            "equipment": "Equipment"
         },
         "errors": {
             "get_car_brands": "Error while loading car brands. Please try again.",
@@ -195,7 +196,7 @@
             "air_suspension": "Air suspension",
             "alarm_system": "Alarm system",
             "all_season_tyres": "All season tyres",
-            "alloy_wheels": "Allow wheels",
+            "alloy_wheels": "Alloy wheels",
             "ambient_lighting": "Ambient lighting",
             "android_auto": "Android Auto",
             "apple_carplay": "Apple CarPlay",

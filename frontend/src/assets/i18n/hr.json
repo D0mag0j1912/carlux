@@ -172,7 +172,8 @@
         "power_to": "Snaga do",
         "transmission_type": "Tip mijenjača",
         "sections": {
-            "basic_information": "Osnovne informacije"
+            "basic_information": "Osnovne informacije",
+            "equipment": "Oprema"
         },
         "errors": {
             "get_car_brands": "Greška prilikom dohvaćanja marki automobila. Molimo pokušajte ponovno.",
