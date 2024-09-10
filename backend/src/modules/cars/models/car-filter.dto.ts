@@ -19,7 +19,7 @@ export class CarFilterDto {
     @ApiProperty({
         type: Number,
         required: true,
-        description: "Car's per page",
+        description: 'Car\'s per page',
     })
     @Type(() => Number)
     @IsNumber()
@@ -28,7 +28,7 @@ export class CarFilterDto {
     @ApiPropertyOptional({
         type: Number,
         required: false,
-        description: "Car's brand ID",
+        description: 'Car\'s brand ID',
     })
     @Type(() => Number)
     @IsNumber()
@@ -37,7 +37,7 @@ export class CarFilterDto {
     @ApiPropertyOptional({
         type: [Number],
         required: false,
-        description: "Car's model ID",
+        description: 'Car\'s model ID',
     })
     @Type(() => Number)
     @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
@@ -49,7 +49,7 @@ export class CarFilterDto {
         enum: ['Convertible', 'Coupe', 'Sedan', 'SUV', 'Hatchback'],
         required: false,
         isArray: true,
-        description: "Car's body style",
+        description: 'Car\'s body style',
     })
     @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
     @IsArray()
@@ -59,7 +59,7 @@ export class CarFilterDto {
         enum: ['Gasoline', 'Diesel'],
         required: false,
         isArray: true,
-        description: "Car's fuel type",
+        description: 'Car\'s fuel type',
     })
     @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
     @IsArray()
@@ -153,4 +153,15 @@ export class CarFilterDto {
     @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
     @IsArray()
     transmissionTypes?: TransmissionType[] | undefined;
+
+    @ApiPropertyOptional({
+        type: [Number],
+        required: false,
+        description: 'Car\'s equipment options',
+    })
+    @Type(() => Number)
+    @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
+    @IsArray()
+    @IsNumber({}, { each: true })
+    selectedEquipmentOptions?: number[];
 }
