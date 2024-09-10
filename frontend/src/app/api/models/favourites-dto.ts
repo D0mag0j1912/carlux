@@ -1,88 +1,89 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface FavouritesDto {
-    /**
-     * Car brand
-     */
-    brand: string;
 
-    /**
-     * How many C02 emissions does the car have
-     */
-    co2Emissions: number;
+  /**
+   * Car brand
+   */
+  brand: string;
 
-    /**
-     * Country origin
-     */
-    countryOrigin: string;
+  /**
+   * How many C02 emissions does the car have
+   */
+  co2Emissions: number;
 
-    /**
-     * Currency symbol
-     */
-    currencySymbol: string;
+  /**
+   * Country origin
+   */
+  countryOrigin: string;
 
-    /**
-     * First registration date
-     */
-    firstRegistrationDate: string;
+  /**
+   * Currency symbol
+   */
+  currencySymbol: string;
 
-    /**
-     * Average fuel consumption
-     */
-    fuelConsumptionCombined: number;
+  /**
+   * First registration date
+   */
+  firstRegistrationDate: string;
 
-    /**
-     * Fuel type
-     */
-    fuelType: 'Gasoline' | 'Diesel';
+  /**
+   * Average fuel consumption
+   */
+  fuelConsumptionCombined: number;
 
-    /**
-     * How many horse power does the car have
-     */
-    horsePower: number;
+  /**
+   * Fuel type
+   */
+  fuelType: 'Gasoline' | 'Diesel';
 
-    /**
-     * Car's ID
-     */
-    id: number;
+  /**
+   * How many horse power does the car have
+   */
+  horsePower: number;
 
-    /**
-     * Car's images
-     */
-    images: Array<string>;
+  /**
+   * Car's ID
+   */
+  id: number;
 
-    /**
-     * Kilometers travelled since the first registration date
-     */
-    kilometersTravelled: number;
+  /**
+   * Car's images
+   */
+  images: Array<string>;
 
-    /**
-     * How many kilowatts does the car have
-     */
-    kilowatts: number;
+  /**
+   * Kilometers travelled since the first registration date
+   */
+  kilometersTravelled: number;
 
-    /**
-     * Car model name
-     */
-    modelName: string;
+  /**
+   * How many kilowatts does the car have
+   */
+  kilowatts: number;
 
-    /**
-     * Number of previous car owners
-     */
-    noOfPreviousOwners: number;
+  /**
+   * Car model name
+   */
+  modelName: string;
 
-    /**
-     * Car suggested price
-     */
-    price: number;
+  /**
+   * Number of previous car owners
+   */
+  noOfPreviousOwners: number;
 
-    /**
-     * Seller type
-     */
-    sellerType: 'Dealer' | 'Private' | 'CompanyVehicle';
+  /**
+   * Car suggested price
+   */
+  price: number;
 
-    /**
-     * Type of transmission
-     */
-    transmission: 'Manual' | 'Automatic';
+  /**
+   * Seller type
+   */
+  sellerType: 'Dealer' | 'Private' | 'CompanyVehicle';
+
+  /**
+   * Type of transmission
+   */
+  transmission: 'Manual' | 'Automatic';
 }

@@ -645,6 +645,18 @@
                                 "enum": ["Automatic", "Manual"]
                             }
                         }
+                    },
+                    {
+                        "name": "selectedEquipmentOptions",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's equipment options",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -853,6 +865,18 @@
                             "items": {
                                 "type": "string",
                                 "enum": ["Automatic", "Manual"]
+                            }
+                        }
+                    },
+                    {
+                        "name": "selectedEquipmentOptions",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's equipment options",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
                             }
                         }
                     }
@@ -1465,6 +1489,13 @@
                         "items": {
                             "type": "string",
                             "enum": ["Automatic", "Manual"]
+                        }
+                    },
+                    "selectedEquipmentOptions": {
+                        "description": "Car's equipment options",
+                        "type": "array",
+                        "items": {
+                            "type": "number"
                         }
                     }
                 },
