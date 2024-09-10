@@ -1,23 +1,24 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface CarModelDto {
-    /**
-     * Car brand ID
-     */
-    brandId: number;
 
-    /**
-     * Car code
-     */
-    code: string;
+  /**
+   * Car brand ID
+   */
+  brandId: number;
 
-    /**
-     * Car model ID
-     */
-    id: number;
+  /**
+   * Car code
+   */
+  code: string;
 
-    /**
-     * Car model name
-     */
-    title: string;
+  /**
+   * Car model ID
+   */
+  id: number;
+
+  /**
+   * Car model name
+   */
+  title: string;
 }

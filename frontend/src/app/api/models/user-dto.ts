@@ -1,38 +1,39 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface UserDto {
-    /**
-     * User's profile picture
-     */
-    avatar?: string;
 
-    /**
-     * User's birth date
-     */
-    birthDate: string;
+  /**
+   * User's profile picture
+   */
+  avatar?: string;
 
-    /**
-     * Date and time when the user was created
-     */
-    createdAt?: string;
+  /**
+   * User's birth date
+   */
+  birthDate: string;
 
-    /**
-     * User's email
-     */
-    email: string;
+  /**
+   * Date and time when the user was created
+   */
+  createdAt?: string;
 
-    /**
-     * User's first name
-     */
-    firstName: string;
+  /**
+   * User's email
+   */
+  email: string;
 
-    /**
-     * User's ID
-     */
-    id?: number;
+  /**
+   * User's first name
+   */
+  firstName: string;
 
-    /**
-     * User's last name
-     */
-    lastName: string;
+  /**
+   * User's ID
+   */
+  id?: number;
+
+  /**
+   * User's last name
+   */
+  lastName: string;
 }

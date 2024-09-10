@@ -1,63 +1,64 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface CarListDto {
-    /**
-     * Car brand
-     */
-    brand: string;
 
-    /**
-     * Country from which the car originates
-     */
-    countryOrigin: string;
+  /**
+   * Car brand
+   */
+  brand: string;
 
-    /**
-     * Currency symbol
-     */
-    currencySymbol: string;
+  /**
+   * Country from which the car originates
+   */
+  countryOrigin: string;
 
-    /**
-     * Date on which the car is registered for the first time
-     */
-    firstRegistrationDate: string;
+  /**
+   * Currency symbol
+   */
+  currencySymbol: string;
 
-    /**
-     * Car ID
-     */
-    id: number;
+  /**
+   * Date on which the car is registered for the first time
+   */
+  firstRegistrationDate: string;
 
-    /**
-     * Car images
-     */
-    images: Array<string>;
+  /**
+   * Car ID
+   */
+  id: number;
 
-    /**
-     * Is car added to the favourites list
-     */
-    isFavourite: boolean;
+  /**
+   * Car images
+   */
+  images: Array<string>;
 
-    /**
-     * Kilometers travelled since the first registration date
-     */
-    kilometersTravelled: number;
+  /**
+   * Is car added to the favourites list
+   */
+  isFavourite: boolean;
 
-    /**
-     * Car model name
-     */
-    modelName: string;
+  /**
+   * Kilometers travelled since the first registration date
+   */
+  kilometersTravelled: number;
 
-    /**
-     * Number of previous owners
-     */
-    noOfPreviousOwners: number;
+  /**
+   * Car model name
+   */
+  modelName: string;
 
-    /**
-     * Car suggested price
-     */
-    price: number;
+  /**
+   * Number of previous owners
+   */
+  noOfPreviousOwners: number;
 
-    /**
-     * Seller type
-     */
-    sellerType: 'Dealer' | 'Private' | 'CompanyVehicle';
+  /**
+   * Car suggested price
+   */
+  price: number;
+
+  /**
+   * Seller type
+   */
+  sellerType: 'Dealer' | 'Private' | 'CompanyVehicle';
 }
