@@ -3,6 +3,7 @@ import { BodyStyles } from '../../constants/body-style';
 import { FuelType } from '../../constants/fuel-type';
 import { SellerType } from '../../constants/seller-type';
 import { TransmissionType } from '../../constants/transmission-type';
+import { CarsEquipmentEntity } from '../../modules/cars/entity/cars-equipment.entity';
 import { CarBrandEntity } from './car-brand.entity';
 import { CarModelEntity } from './car-model.entity';
 import { CurrencyEntity } from './currency.entity';
@@ -119,4 +120,7 @@ export class CarEntity {
 
     @OneToMany(() => ImageEntity, (image) => image.car)
     images: ImageEntity[];
+
+    @OneToMany(() => CarsEquipmentEntity, (carEquipment) => carEquipment.car)
+    carEquipments: CarsEquipmentEntity[];
 }

@@ -35,6 +35,7 @@ export class CarsService {
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
+        const selectedEquipmentOptions = query.selectedEquipmentOptions;
         const [carListEntities, carListTotalCount] = await this._carsRepository
             .createQueryBuilder('car')
             .select([
@@ -54,10 +55,17 @@ export class CarsService {
             .leftJoin('car.currency', 'currency')
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
+            .leftJoin('car.carEquipments', 'carEquipments')
             .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId: query.brandId })
             .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
                 modelIds: query.modelIds,
             })
+            .andWhere(
+                query.selectedEquipmentOptions?.length
+                    ? 'carEquipments.equipment.Id IN (:...selectedEquipmentOptions)'
+                    : 'TRUE',
+                { selectedEquipmentOptions },
+            )
             .andWhere(query.bodyStyles?.length ? 'car.BodyStyle IN (:...bodyStyles)' : 'TRUE', {
                 bodyStyles: query.bodyStyles,
             })

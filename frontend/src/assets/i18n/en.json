@@ -172,7 +172,8 @@
         "power_to": "Power to",
         "transmission_type": "Transmission",
         "sections": {
-            "basic_information": "Basic information"
+            "basic_information": "Basic information",
+            "equipment": "Equipment"
         },
         "errors": {
             "get_car_brands": "Error while loading car brands. Please try again.",
@@ -184,6 +185,45 @@
             "price": "Price FROM needs to be lower than price TO",
             "kilometers_travelled": "Kilometers FROM needs to be lower than kilometers TO",
             "power": "Power FROM needs to be lower than power TO"
+        },
+        "equipment": {
+            "three_sixty_camera": "360° camera",
+            "four_wheel_drive": "4WD",
+            "abs": "ABS",
+            "adaptive_cruise_control": "Adaptive cruise control",
+            "adaptive_headlights": "Adaptive headlights",
+            "air_conditioning": "Air conditioning",
+            "air_suspension": "Air suspension",
+            "alarm_system": "Alarm system",
+            "all_season_tyres": "All season tyres",
+            "alloy_wheels": "Alloy wheels",
+            "ambient_lighting": "Ambient lighting",
+            "android_auto": "Android Auto",
+            "apple_carplay": "Apple CarPlay",
+            "armrest": "Armrest",
+            "automatic_climate_control": "Automatic climate control",
+            "blind_spot_monitor": "Blind spot monitor",
+            "bluetooth": "Bluetooth",
+            "central_door_lock": "Central door lock",
+            "central_door_lock_remote": "Central door lock with remote control",
+            "daytime_running_lights": "Daytime running lights",
+            "digital_radio": "Digital radio",
+            "distance_warning_system": "Distance warning system",
+            "driver_side_airbag": "Driver side airbag",
+            "electrically_adjustable_seats": "Electrically adjustable seats",
+            "electronic_parking_brake": "Electronic parking brake",
+            "emergency_tyre": "Emergency tyre",
+            "emergency_tyre_repair_kit": "Emergency tyre repair kit",
+            "lane_departure_warning_system": "Lane departure warning system",
+            "led_headlights": "LED Headlights",
+            "lumbar_support": "Lumbar support",
+            "navigation_system": "Navigation system",
+            "panorama_roof": "Panorama roof",
+            "park_assist_system_camera": "Park assist system camera",
+            "rain_sensor": "Rain sensor",
+            "sports_package": "Sports package",
+            "summer_tyres": "Summer tyres",
+            "winter_tyres": "Winter tyres"
         }
     }
 }

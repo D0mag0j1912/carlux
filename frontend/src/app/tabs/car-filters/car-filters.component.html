@@ -316,6 +316,14 @@
                     </ion-row>
                 </ion-grid>
             </ion-accordion>
+            <ion-accordion [value]="filtersAccordionGroups.EQUIPMENT">
+                <ion-item slot="header" color="light">
+                    <ion-label class="basic-info-title">
+                        {{ t('filters.sections.equipment') }}
+                    </ion-label>
+                </ion-item>
+                <ion-grid slot="content"> </ion-grid>
+            </ion-accordion>
         </ion-accordion-group>
     </form>
 </ion-content>

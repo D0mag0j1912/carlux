@@ -8,6 +8,7 @@ import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { BasicCarInformationService } from '../../api/services/basic-car-information.service';
 import { CarListService } from '../../api/services/car-list.service';
+import { FeatureKeys } from '../../constants/feature-keys';
 import { POPUP_DURATIONS } from '../../constants/popup-durations';
 import { CAR_FILTERS_INITIAL_STATE } from '../../tabs/car-filters/constants/car-filters-initial-state';
 import { CarFilters } from '../../tabs/car-filters/models/car-filters.model';
@@ -37,7 +38,7 @@ export const CarFiltersStore = signalStore(
     {
         providedIn: 'root',
     },
-    withDevtools('carFiltersSignals'),
+    withDevtools(FeatureKeys.CAR_FILTERS),
     withState<CarFiltersState>(initialState),
     withMethods(
         (
