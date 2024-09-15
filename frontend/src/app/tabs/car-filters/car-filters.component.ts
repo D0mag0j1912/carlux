@@ -1,5 +1,6 @@
+import { KeyValuePipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
     IonAccordion,
@@ -7,6 +8,7 @@ import {
     IonBackButton,
     IonButton,
     IonButtons,
+    IonCheckbox,
     IonCol,
     IonContent,
     IonGrid,
@@ -21,7 +23,7 @@ import {
     IonToolbar,
     NavController,
 } from '@ionic/angular/standalone';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { filter } from 'rxjs/operators';
 import { CarsControllerGetCars$Params as CarFilters } from '../../api/fn/car-list/cars-controller-get-cars';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
@@ -61,11 +63,18 @@ const IONIC_IMPORTS = [
     IonRow,
     IonCol,
     IonInput,
+    IonCheckbox,
 ];
 
 @Component({
     standalone: true,
-    imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent, ReactiveFormsModule],
+    imports: [
+        ...IONIC_IMPORTS,
+        TranslocoModule,
+        SearchableSelectComponent,
+        ReactiveFormsModule,
+        KeyValuePipe,
+    ],
     selector: 'car-filters',
     templateUrl: './car-filters.component.html',
     styleUrl: './car-filters.component.scss',
@@ -75,10 +84,12 @@ export class CarFiltersComponent implements OnInit {
     private _carListFacadeService = inject(CarListFacadeService);
     private _destroyRef = inject(DestroyRef);
     private _navController = inject(NavController);
+    private _translocoService = inject(TranslocoService);
 
     carBrands = this._carFiltersFacadeService.selectCarBrands();
     carModels = this._carFiltersFacadeService.selectCarModels();
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
+    equipmentOptions = toSignal(this._translocoService.selectTranslateObject('filters.equipment'));
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;

@@ -322,7 +322,17 @@
                         {{ t('filters.sections.equipment') }}
                     </ion-label>
                 </ion-item>
-                <ion-grid slot="content"> </ion-grid>
+                <ion-grid slot="content">
+                    @for (option of equipmentOptions() | keyvalue; track option.key) {
+                        <ion-row>
+                            <ion-col>
+                                <ion-checkbox labelPlacement="end">
+                                    {{ option.value }}
+                                </ion-checkbox>
+                            </ion-col>
+                        </ion-row>
+                    }
+                </ion-grid>
             </ion-accordion>
         </ion-accordion-group>
     </form>
