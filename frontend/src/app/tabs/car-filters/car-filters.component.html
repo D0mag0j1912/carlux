@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content *transloco="let t">
+<ion-content *transloco="let t" class="car-filters-content">
     <form [formGroup]="form">
         <ion-accordion-group (ionChange)="onAccordionChange($event)">
             <ion-accordion [value]="filtersAccordionGroups.BASIC_INFORMATION">
@@ -294,26 +294,6 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
-
-                    <ion-row>
-                        <ion-col class="ion-text-center">
-                            <ion-button color="primary" (click)="searchCars()">
-                                @if (carsFiltersResultsCount() === ZERO_CAR_RESULTS_COUNT) {
-                                    {{ t('common.n_results_plural', { n: carsFiltersResultsCount() }) }}
-                                } @else {
-                                    @if (carsFiltersResultsCount()) {
-                                        @if (carsFiltersResultsCount() === SINGULAR_COUNT_CAR_RESULT) {
-                                            {{ t('common.n_results_singular', { n: carsFiltersResultsCount() }) }}
-                                        } @else {
-                                            {{ t('common.n_results_plural', { n: carsFiltersResultsCount() }) }}
-                                        }
-                                    } @else {
-                                        {{ t('common.actions.search') }}
-                                    }
-                                }
-                            </ion-button>
-                        </ion-col>
-                    </ion-row>
                 </ion-grid>
             </ion-accordion>
             <ion-accordion [value]="filtersAccordionGroups.EQUIPMENT">
@@ -335,5 +315,21 @@
                 </ion-grid>
             </ion-accordion>
         </ion-accordion-group>
+
+        <ion-button color="primary" class="search-btn" (click)="searchCars()">
+            @if (carsFiltersResultsCount() === ZERO_CAR_RESULTS_COUNT) {
+                {{ t('common.n_results_plural', { n: carsFiltersResultsCount() }) }}
+            } @else {
+                @if (carsFiltersResultsCount()) {
+                    @if (carsFiltersResultsCount() === SINGULAR_COUNT_CAR_RESULT) {
+                        {{ t('common.n_results_singular', { n: carsFiltersResultsCount() }) }}
+                    } @else {
+                        {{ t('common.n_results_plural', { n: carsFiltersResultsCount() }) }}
+                    }
+                } @else {
+                    {{ t('common.actions.search') }}
+                }
+            }
+        </ion-button>
     </form>
 </ion-content>

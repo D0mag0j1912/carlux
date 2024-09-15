@@ -1,5 +1,16 @@
 @import '../../../styles/typography';
 
+.car-filters-content {
+    position: relative;
+
+    .search-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
 .basic-info-title {
     @include large;
 }
