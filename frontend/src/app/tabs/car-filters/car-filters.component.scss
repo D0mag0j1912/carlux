@@ -11,6 +11,10 @@
     }
 }
 
+.basic-info-grid {
+    margin-bottom: 10px;
+}
+
 .basic-info-title {
     @include large;
 }
@@ -34,4 +38,8 @@
     @include small;
     margin-left: 20px;
     color: var(--ion-color-danger);
+}
+
+.equipment-grid {
+    margin-top: 10px;
 }

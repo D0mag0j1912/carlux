@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content *transloco="let t" class="car-filters-content">
-    <form [formGroup]="form">
+    <form [formGroup]="basicInformationForm">
         <ion-accordion-group (ionChange)="onAccordionChange($event)">
             <ion-accordion [value]="filtersAccordionGroups.BASIC_INFORMATION">
                 <ion-item slot="header" color="light">
@@ -16,11 +16,11 @@
                         {{ t('filters.sections.basic_information') }}
                     </ion-label>
                 </ion-item>
-                <ion-grid slot="content">
+                <ion-grid slot="content" class="basic-info-grid">
                     <ion-row>
                         <ion-col>
                             <ion-item (click)="carBrandSelect.open()">
-                                <ion-label [class.remove-item]="form.controls.brand.value.length">{{
+                                <ion-label [class.remove-item]="basicInformationForm.controls.brand.value.length">{{
                                     t('filters.search_car_brands')
                                 }}</ion-label>
                                 <car-searchable-select
@@ -39,8 +39,11 @@
 
                     <ion-row>
                         <ion-col>
-                            <ion-item (click)="carModelsSelect.open()" [disabled]="!form.controls.brand.value.length">
-                                <ion-label [class.remove-item]="form.controls.brand.value.length">{{
+                            <ion-item
+                                (click)="carModelsSelect.open()"
+                                [disabled]="!basicInformationForm.controls.brand.value.length"
+                            >
+                                <ion-label [class.remove-item]="basicInformationForm.controls.brand.value.length">{{
                                     t('filters.search_car_models')
                                 }}</ion-label>
                                 <car-searchable-select
@@ -134,7 +137,7 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
-                    @if (form.controls.registrationYear.errors?.registrationYearInvalid) {
+                    @if (basicInformationForm.controls.registrationYear.errors?.registrationYearInvalid) {
                         <div class="registration-year-error">
                             {{ t('filters.validations.registration_year') }}
                         </div>
@@ -180,7 +183,7 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
-                    @if (form.controls.price.errors?.priceInvalid) {
+                    @if (basicInformationForm.controls.price.errors?.priceInvalid) {
                         <div class="price-error">
                             {{ t('filters.validations.price') }}
                         </div>
@@ -226,7 +229,7 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
-                    @if (form.controls.kilometers.errors?.kilometersTravelledInvalid) {
+                    @if (basicInformationForm.controls.kilometers.errors?.kilometersTravelledInvalid) {
                         <div class="kilometers-travelled-error">
                             {{ t('filters.validations.kilometers_travelled') }}
                         </div>
@@ -270,7 +273,7 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
-                    @if (form.controls.power.errors?.powerInvalid) {
+                    @if (basicInformationForm.controls.power.errors?.powerInvalid) {
                         <div class="power-error">
                             {{ t('filters.validations.power') }}
                         </div>
@@ -302,11 +305,11 @@
                         {{ t('filters.sections.equipment') }}
                     </ion-label>
                 </ion-item>
-                <ion-grid slot="content">
+                <ion-grid slot="content" class="equipment-grid">
                     @for (option of equipmentOptions() | keyvalue; track option.key) {
                         <ion-row>
                             <ion-col>
-                                <ion-checkbox labelPlacement="end">
+                                <ion-checkbox labelPlacement="end" (click)="searchCars()">
                                     {{ option.value }}
                                 </ion-checkbox>
                             </ion-col>

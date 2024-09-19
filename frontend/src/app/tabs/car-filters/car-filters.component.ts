@@ -110,7 +110,7 @@ export class CarFiltersComponent implements OnInit {
     readonly prices = generatePrices();
     readonly kilometers = generateKilometers();
 
-    form = new FormGroup({
+    basicInformationForm = new FormGroup({
         brand: new FormControl<CarBrand[]>([], { nonNullable: true }),
         models: new FormControl<CarModel[]>([]),
         bodyStyles: new FormControl<BodyStyles[] | null>(null),
@@ -150,19 +150,19 @@ export class CarFiltersComponent implements OnInit {
     });
 
     ngOnInit(): void {
-        this.form.controls.brand.valueChanges
+        this.basicInformationForm.controls.brand.valueChanges
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((carBrands: CarBrand[] | null) => {
                 if (carBrands) {
                     const brandId = carBrands[0].id;
                     this._carFiltersFacadeService.getCarModels(brandId);
-                    this.form.controls.models.patchValue([], { emitEvent: false });
+                    this.basicInformationForm.controls.models.patchValue([], { emitEvent: false });
                 }
             });
 
-        this.form.valueChanges
+        this.basicInformationForm.valueChanges
             .pipe(
-                filter(() => this.form.valid),
+                filter(() => this.basicInformationForm.valid),
                 takeUntilDestroyed(this._destroyRef),
             )
             .subscribe((value) => {
@@ -192,21 +192,25 @@ export class CarFiltersComponent implements OnInit {
         const query: CarFilters = {
             page: this.INITIAL_PAGE,
             perPage: this.PER_PAGE,
-            brandId: (this.form.value.brand as CarBrand[])[0]?.id ?? undefined,
-            modelIds: this.form.value.models?.map((model: CarModel) => model.id) ?? [],
-            bodyStyles: this.form.value.bodyStyles ?? [],
-            fuelTypes: this.form.value.fuelTypes ?? [],
+            brandId: (this.basicInformationForm.value.brand as CarBrand[])[0]?.id ?? undefined,
+            modelIds:
+                this.basicInformationForm.value.models?.map((model: CarModel) => model.id) ?? [],
+            bodyStyles: this.basicInformationForm.value.bodyStyles ?? [],
+            fuelTypes: this.basicInformationForm.value.fuelTypes ?? [],
             yearRegistrationFrom:
-                this.form.value.registrationYear?.registrationYearFrom ?? undefined,
-            yearRegistrationTo: this.form.value.registrationYear?.registrationYearTo ?? undefined,
-            priceFrom: this.form.value.price?.priceFrom ?? undefined,
-            priceTo: this.form.value.price?.priceTo ?? undefined,
-            kilometersTravelledFrom: this.form.value.kilometers?.kilometersFrom ?? undefined,
-            kilometersTravelledTo: this.form.value.kilometers?.kilometersTo ?? undefined,
-            powerUnit: this.form.value.power?.unit ?? undefined,
-            powerFrom: this.form.value.power?.powerFrom ?? undefined,
-            powerTo: this.form.value.power?.powerTo ?? undefined,
-            transmissionTypes: this.form.value.transmissionTypes ?? [],
+                this.basicInformationForm.value.registrationYear?.registrationYearFrom ?? undefined,
+            yearRegistrationTo:
+                this.basicInformationForm.value.registrationYear?.registrationYearTo ?? undefined,
+            priceFrom: this.basicInformationForm.value.price?.priceFrom ?? undefined,
+            priceTo: this.basicInformationForm.value.price?.priceTo ?? undefined,
+            kilometersTravelledFrom:
+                this.basicInformationForm.value.kilometers?.kilometersFrom ?? undefined,
+            kilometersTravelledTo:
+                this.basicInformationForm.value.kilometers?.kilometersTo ?? undefined,
+            powerUnit: this.basicInformationForm.value.power?.unit ?? undefined,
+            powerFrom: this.basicInformationForm.value.power?.powerFrom ?? undefined,
+            powerTo: this.basicInformationForm.value.power?.powerTo ?? undefined,
+            transmissionTypes: this.basicInformationForm.value.transmissionTypes ?? [],
         };
         this._carListFacadeService.getCarList(query);
         await this._navController.navigateForward('tabs/car-list');
