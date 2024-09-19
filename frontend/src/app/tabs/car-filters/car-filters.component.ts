@@ -1,8 +1,9 @@
 import { KeyValuePipe } from '@angular/common';
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
+    CheckboxChangeEventDetail,
     IonAccordion,
     IonAccordionGroup,
     IonBackButton,
@@ -23,6 +24,7 @@ import {
     IonToolbar,
     NavController,
 } from '@ionic/angular/standalone';
+import { IonCheckboxCustomEvent } from '@ionic/core';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { filter } from 'rxjs/operators';
 import { CarsControllerGetCars$Params as CarFilters } from '../../api/fn/car-list/cars-controller-get-cars';
@@ -90,6 +92,7 @@ export class CarFiltersComponent implements OnInit {
     carModels = this._carFiltersFacadeService.selectCarModels();
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
     equipmentOptions = toSignal(this._translocoService.selectTranslateObject('filters.equipment'));
+    selectedEquipmentOptions = signal<number[]>([]);
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
@@ -165,30 +168,48 @@ export class CarFiltersComponent implements OnInit {
                 filter(() => this.basicInformationForm.valid),
                 takeUntilDestroyed(this._destroyRef),
             )
-            .subscribe((value) => {
-                const query: CarFilters = {
-                    page: this.INITIAL_PAGE,
-                    perPage: this.PER_PAGE,
-                    brandId: (value.brand as CarBrand[])[0]?.id ?? undefined,
-                    modelIds: value.models?.map((model: CarModel) => model.id) ?? [],
-                    bodyStyles: value.bodyStyles ?? [],
-                    fuelTypes: value.fuelTypes ?? [],
-                    yearRegistrationFrom: value.registrationYear?.registrationYearFrom ?? undefined,
-                    yearRegistrationTo: value.registrationYear?.registrationYearTo ?? undefined,
-                    priceFrom: value.price?.priceFrom ?? undefined,
-                    priceTo: value.price?.priceTo ?? undefined,
-                    kilometersTravelledFrom: value.kilometers?.kilometersFrom ?? undefined,
-                    kilometersTravelledTo: value.kilometers?.kilometersTo ?? undefined,
-                    powerUnit: value.power?.unit ?? undefined,
-                    powerFrom: value.power?.powerFrom ?? undefined,
-                    powerTo: value.power?.powerTo ?? undefined,
-                    transmissionTypes: value.transmissionTypes ?? [],
-                };
+            .subscribe(() => {
+                const query = this._constructCarFilterQuery();
                 this._carFiltersFacadeService.getCarFiltersResultCount(query);
             });
     }
 
     async searchCars(): Promise<void> {
+        const query: CarFilters = this._constructCarFilterQuery();
+        this._carListFacadeService.getCarList(query);
+        await this._navController.navigateForward('tabs/car-list');
+    }
+
+    onAccordionChange(event: Event): void {
+        const value = ((event as CustomEvent).detail as { value: CarFilterAccordionGroups }).value;
+        if (value === CarFilterAccordionGroups.BASIC_INFORMATION) {
+            this._carFiltersFacadeService.getCarBrands();
+        }
+    }
+
+    equipmentOptionChanged(
+        checkboxEvent: IonCheckboxCustomEvent<CheckboxChangeEventDetail<string>>,
+        equipmentIndex: number,
+    ): void {
+        const checked = checkboxEvent.detail.checked;
+        const equipmentId = equipmentIndex + 1;
+        if (checked) {
+            this.selectedEquipmentOptions.update((alreadySelectedEquipmentOptions: number[]) => [
+                ...alreadySelectedEquipmentOptions,
+                equipmentId,
+            ]);
+        } else {
+            this.selectedEquipmentOptions.update((alreadySelectedEquipmentOptions: number[]) =>
+                alreadySelectedEquipmentOptions.filter(
+                    (equipmentOption: number) => equipmentOption !== equipmentId,
+                ),
+            );
+        }
+        const query = this._constructCarFilterQuery();
+        this._carFiltersFacadeService.getCarFiltersResultCount(query);
+    }
+
+    private _constructCarFilterQuery(): CarFilters {
         const query: CarFilters = {
             page: this.INITIAL_PAGE,
             perPage: this.PER_PAGE,
@@ -211,15 +232,8 @@ export class CarFiltersComponent implements OnInit {
             powerFrom: this.basicInformationForm.value.power?.powerFrom ?? undefined,
             powerTo: this.basicInformationForm.value.power?.powerTo ?? undefined,
             transmissionTypes: this.basicInformationForm.value.transmissionTypes ?? [],
+            selectedEquipmentOptions: this.selectedEquipmentOptions(),
         };
-        this._carListFacadeService.getCarList(query);
-        await this._navController.navigateForward('tabs/car-list');
-    }
-
-    onAccordionChange(event: Event): void {
-        const value = ((event as CustomEvent).detail as { value: CarFilterAccordionGroups }).value;
-        if (value === CarFilterAccordionGroups.BASIC_INFORMATION) {
-            this._carFiltersFacadeService.getCarBrands();
-        }
+        return query;
     }
 }

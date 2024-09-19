@@ -123,6 +123,8 @@ export const CarFiltersStore = signalStore(
                                 powerFrom: selectedCarFiltersQuery.powerFrom,
                                 powerTo: selectedCarFiltersQuery.powerTo,
                                 transmissionTypes: selectedCarFiltersQuery.transmissionTypes,
+                                selectedEquipmentOptions:
+                                    selectedCarFiltersQuery.selectedEquipmentOptions,
                             })
                             .pipe(
                                 tapResponse({
