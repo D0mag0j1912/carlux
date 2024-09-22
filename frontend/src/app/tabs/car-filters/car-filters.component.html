@@ -306,11 +306,14 @@
                     </ion-label>
                 </ion-item>
                 <ion-grid slot="content" class="equipment-grid">
-                    @for (option of equipmentOptions() | keyvalue; track option.key; let i = $index) {
+                    @for (option of CAR_FILTERS_EQUIPMENT_OPTIONS; track option.key) {
                         <ion-row>
                             <ion-col>
-                                <ion-checkbox labelPlacement="end" (ionChange)="equipmentOptionChanged($event, i)">
-                                    {{ option.value }}
+                                <ion-checkbox
+                                    labelPlacement="end"
+                                    (ionChange)="equipmentOptionChanged($event, option.key)"
+                                >
+                                    {{ t(option.value) }}
                                 </ion-checkbox>
                             </ion-col>
                         </ion-row>

@@ -39,6 +39,7 @@ import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-fil
 import { CarListFacadeService } from '../../store/car-list/facades/car-list-facade.service';
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
+import { CAR_FILTERS_EQUIPMENT_OPTIONS } from './constants/car-filters-equipment-options';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
 import { CAR_FILTERS_POWER_UNITS, PowerUnit } from './constants/car-filters-power-metric';
 import { CAR_FILTERS_TRANSMISSION_TYPES } from './constants/car-filters-transmission-type';
@@ -112,6 +113,7 @@ export class CarFiltersComponent implements OnInit {
     readonly registrationYears = generateCarFiltersRegistrationYears();
     readonly prices = generatePrices();
     readonly kilometers = generateKilometers();
+    readonly CAR_FILTERS_EQUIPMENT_OPTIONS = CAR_FILTERS_EQUIPMENT_OPTIONS;
 
     basicInformationForm = new FormGroup({
         brand: new FormControl<CarBrand[]>([], { nonNullable: true }),
@@ -189,10 +191,9 @@ export class CarFiltersComponent implements OnInit {
 
     equipmentOptionChanged(
         checkboxEvent: IonCheckboxCustomEvent<CheckboxChangeEventDetail<string>>,
-        equipmentIndex: number,
+        equipmentId: number,
     ): void {
         const checked = checkboxEvent.detail.checked;
-        const equipmentId = equipmentIndex + 1;
         if (checked) {
             this.selectedEquipmentOptions.update((alreadySelectedEquipmentOptions: number[]) => [
                 ...alreadySelectedEquipmentOptions,
