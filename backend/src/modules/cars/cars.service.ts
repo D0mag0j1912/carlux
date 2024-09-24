@@ -31,7 +31,7 @@ export class CarsService {
         const priceTo = query.priceTo;
         const kilometersTravelledFrom = query.kilometersTravelledFrom;
         const kilometersTravelledTo = query.kilometersTravelledTo;
-        const powerMetric = query.powerUnit;
+        const powerUnit = query.powerUnit;
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
@@ -56,7 +56,7 @@ export class CarsService {
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
             .leftJoin('car.carEquipments', 'carEquipments')
-            .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId: query.brandId })
+            .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId })
             .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
                 modelIds: query.modelIds,
             })
@@ -102,7 +102,7 @@ export class CarsService {
             )
             .andWhere(
                 powerFrom
-                    ? powerMetric === PowerUnit.PS
+                    ? powerUnit === PowerUnit.PS
                         ? 'car.HorsePower >= :powerFrom'
                         : 'car.Kilowatts >: powerFrom'
                     : 'TRUE',
@@ -110,7 +110,7 @@ export class CarsService {
             )
             .andWhere(
                 powerTo
-                    ? powerMetric === PowerUnit.PS
+                    ? powerUnit === PowerUnit.PS
                         ? 'car.HorsePower <= :powerTo'
                         : 'car.Kilowatts <= powerTo'
                     : 'TRUE',
@@ -161,6 +161,7 @@ export class CarsService {
     }
 
     private async _getCarsFiltersCount(query: CarFilterDto): Promise<number> {
+        const brandId = query.brandId;
         const yearRegistrationFrom = query.yearRegistrationFrom;
         const yearRegistrationTo = query.yearRegistrationTo;
         const priceFrom = query.priceFrom;
@@ -178,7 +179,7 @@ export class CarsService {
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
             .leftJoin('car.carEquipments', 'carEquipments')
-            .where('car.BrandId = :brandId', { brandId: query.brandId })
+            .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId })
             .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
                 modelIds: query.modelIds,
             })
