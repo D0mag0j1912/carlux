@@ -67,94 +67,86 @@ export const CAR_FILTERS_EQUIPMENT_OPTIONS: KeyValue<number, string>[] = [
     },
     {
         key: 17,
-        value: 'filters.equipment.automatic_climate_control',
-    },
-    {
-        key: 18,
-        value: 'filters.equipment.blind_spot_monitor',
-    },
-    {
-        key: 19,
         value: 'filters.equipment.bluetooth',
     },
     {
-        key: 20,
+        key: 18,
         value: 'filters.equipment.central_door_lock',
     },
     {
-        key: 21,
+        key: 19,
         value: 'filters.equipment.central_door_lock_remote',
     },
     {
-        key: 22,
+        key: 20,
         value: 'filters.equipment.daytime_running_lights',
     },
     {
-        key: 23,
+        key: 21,
         value: 'filters.equipment.digital_radio',
     },
     {
-        key: 24,
+        key: 22,
         value: 'filters.equipment.distance_warning_system',
     },
     {
-        key: 25,
+        key: 23,
         value: 'filters.equipment.driver_side_airbag',
     },
     {
-        key: 26,
+        key: 24,
         value: 'filters.equipment.electrically_adjustable_seats',
     },
     {
-        key: 27,
+        key: 25,
         value: 'filters.equipment.electronic_parking_brake',
     },
     {
-        key: 28,
+        key: 26,
         value: 'filters.equipment.emergency_tyre',
     },
     {
-        key: 29,
+        key: 27,
         value: 'filters.equipment.emergency_tyre_repair_kit',
     },
     {
-        key: 30,
+        key: 28,
         value: 'filters.equipment.lane_departure_warning_system',
     },
     {
-        key: 31,
+        key: 29,
         value: 'filters.equipment.led_headlights',
     },
     {
-        key: 32,
+        key: 30,
         value: 'filters.equipment.lumbar_support',
     },
     {
-        key: 33,
+        key: 31,
         value: 'filters.equipment.navigation_system',
     },
     {
-        key: 34,
+        key: 32,
         value: 'filters.equipment.panorama_roof',
     },
     {
-        key: 35,
+        key: 33,
         value: 'filters.equipment.park_assist_system_camera',
     },
     {
-        key: 36,
+        key: 34,
         value: 'filters.equipment.rain_sensor',
     },
     {
-        key: 37,
+        key: 35,
         value: 'filters.equipment.sports_package',
     },
     {
-        key: 38,
+        key: 36,
         value: 'filters.equipment.summer_tyres',
     },
     {
-        key: 39,
+        key: 37,
         value: 'filters.equipment.winter_tyres',
     },
 ];

@@ -172,7 +172,7 @@ export class CarsService {
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
-        const selectedEquipmentOptions = query.selectedEquipmentOptions;
+        const selectedEquipmentOptions = query.selectedEquipmentOptions ?? [];
         const carsCount = await this._carsRepository
             .createQueryBuilder('car')
             .leftJoin('car.currency', 'currency')
@@ -243,6 +243,15 @@ export class CarsService {
                 transmissionTypes?.length ? 'car.Transmission IN (:...transmissionTypes)' : 'TRUE',
                 {
                     transmissionTypes: query.transmissionTypes,
+                },
+            )
+            .groupBy(selectedEquipmentOptions.length ? 'car.Id' : 'TRUE')
+            .having(
+                selectedEquipmentOptions.length
+                    ? 'COUNT(DISTINCT carEquipments.equipment.Id) = :count'
+                    : 'TRUE',
+                {
+                    count: selectedEquipmentOptions.length,
                 },
             )
             .getCount();
