@@ -35,8 +35,8 @@ export class CarsService {
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
-        const selectedEquipmentOptions = query.selectedEquipmentOptions;
-        const [carListEntities, carListTotalCount] = await this._carsRepository
+        const selectedEquipmentOptions = query.selectedEquipmentOptions ?? [];
+        const carFiltersQuery = this._carsRepository
             .createQueryBuilder('car')
             .select([
                 'car.Id',
@@ -124,8 +124,15 @@ export class CarsService {
             )
             .skip((query.page - 1) * query.perPage)
             .take(query.perPage)
-            .orderBy('car.UploadedDate', 'DESC')
-            .getManyAndCount();
+            .orderBy('car.UploadedDate', 'DESC');
+        if (selectedEquipmentOptions.length) {
+            carFiltersQuery
+                .groupBy('car.Id')
+                .having('COUNT(DISTINCT carEquipments.equipment.Id) = :count', {
+                    count: selectedEquipmentOptions.length,
+                });
+        }
+        const [carListEntities, carListTotalCount] = await carFiltersQuery.getManyAndCount();
         const imageEntities = await this._imageRepository.createQueryBuilder('image').getMany();
         const carList: CarListDto[] = carListEntities.map((carEntity: CarEntity) => ({
             id: carEntity.Id,

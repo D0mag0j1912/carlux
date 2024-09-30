@@ -42,6 +42,7 @@ export const getCarList$ = createEffect(
                         powerFrom: action.query.powerFrom,
                         powerTo: action.query.powerTo,
                         transmissionTypes: action.query.transmissionTypes,
+                        selectedEquipmentOptions: action.query.selectedEquipmentOptions,
                     })
                     .pipe(
                         catchError((_) => {
