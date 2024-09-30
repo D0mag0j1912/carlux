@@ -31,12 +31,12 @@ export class CarsService {
         const priceTo = query.priceTo;
         const kilometersTravelledFrom = query.kilometersTravelledFrom;
         const kilometersTravelledTo = query.kilometersTravelledTo;
-        const powerMetric = query.powerUnit;
+        const powerUnit = query.powerUnit;
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
-        const selectedEquipmentOptions = query.selectedEquipmentOptions;
-        const [carListEntities, carListTotalCount] = await this._carsRepository
+        const selectedEquipmentOptions = query.selectedEquipmentOptions ?? [];
+        const carFiltersQuery = this._carsRepository
             .createQueryBuilder('car')
             .select([
                 'car.Id',
@@ -56,7 +56,7 @@ export class CarsService {
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
             .leftJoin('car.carEquipments', 'carEquipments')
-            .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId: query.brandId })
+            .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId })
             .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
                 modelIds: query.modelIds,
             })
@@ -102,7 +102,7 @@ export class CarsService {
             )
             .andWhere(
                 powerFrom
-                    ? powerMetric === PowerUnit.PS
+                    ? powerUnit === PowerUnit.PS
                         ? 'car.HorsePower >= :powerFrom'
                         : 'car.Kilowatts >: powerFrom'
                     : 'TRUE',
@@ -110,7 +110,7 @@ export class CarsService {
             )
             .andWhere(
                 powerTo
-                    ? powerMetric === PowerUnit.PS
+                    ? powerUnit === PowerUnit.PS
                         ? 'car.HorsePower <= :powerTo'
                         : 'car.Kilowatts <= powerTo'
                     : 'TRUE',
@@ -124,8 +124,15 @@ export class CarsService {
             )
             .skip((query.page - 1) * query.perPage)
             .take(query.perPage)
-            .orderBy('car.UploadedDate', 'DESC')
-            .getManyAndCount();
+            .orderBy('car.UploadedDate', 'DESC');
+        if (selectedEquipmentOptions.length) {
+            carFiltersQuery
+                .groupBy('car.Id')
+                .having('COUNT(DISTINCT carEquipments.equipment.Id) = :count', {
+                    count: selectedEquipmentOptions.length,
+                });
+        }
+        const [carListEntities, carListTotalCount] = await carFiltersQuery.getManyAndCount();
         const imageEntities = await this._imageRepository.createQueryBuilder('image').getMany();
         const carList: CarListDto[] = carListEntities.map((carEntity: CarEntity) => ({
             id: carEntity.Id,
@@ -161,6 +168,7 @@ export class CarsService {
     }
 
     private async _getCarsFiltersCount(query: CarFilterDto): Promise<number> {
+        const brandId = query.brandId;
         const yearRegistrationFrom = query.yearRegistrationFrom;
         const yearRegistrationTo = query.yearRegistrationTo;
         const priceFrom = query.priceFrom;
@@ -171,15 +179,23 @@ export class CarsService {
         const powerFrom = query.powerFrom;
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
+        const selectedEquipmentOptions = query.selectedEquipmentOptions ?? [];
         const carsCount = await this._carsRepository
             .createQueryBuilder('car')
             .leftJoin('car.currency', 'currency')
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
-            .where('car.BrandId = :brandId', { brandId: query.brandId })
+            .leftJoin('car.carEquipments', 'carEquipments')
+            .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId })
             .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
                 modelIds: query.modelIds,
             })
+            .andWhere(
+                query.selectedEquipmentOptions?.length
+                    ? 'carEquipments.equipment.Id IN (:...selectedEquipmentOptions)'
+                    : 'TRUE',
+                { selectedEquipmentOptions },
+            )
             .andWhere(query.bodyStyles?.length ? 'car.BodyStyle IN (:...bodyStyles)' : 'TRUE', {
                 bodyStyles: query.bodyStyles,
             })
@@ -234,6 +250,15 @@ export class CarsService {
                 transmissionTypes?.length ? 'car.Transmission IN (:...transmissionTypes)' : 'TRUE',
                 {
                     transmissionTypes: query.transmissionTypes,
+                },
+            )
+            .groupBy(selectedEquipmentOptions.length ? 'car.Id' : 'TRUE')
+            .having(
+                selectedEquipmentOptions.length
+                    ? 'COUNT(DISTINCT carEquipments.equipment.Id) = :count'
+                    : 'TRUE',
+                {
+                    count: selectedEquipmentOptions.length,
                 },
             )
             .getCount();

@@ -1,12 +1,15 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { KeyValuePipe } from '@angular/common';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
+    CheckboxChangeEventDetail,
     IonAccordion,
     IonAccordionGroup,
     IonBackButton,
     IonButton,
     IonButtons,
+    IonCheckbox,
     IonCol,
     IonContent,
     IonGrid,
@@ -21,7 +24,8 @@ import {
     IonToolbar,
     NavController,
 } from '@ionic/angular/standalone';
-import { TranslocoModule } from '@ngneat/transloco';
+import { IonCheckboxCustomEvent } from '@ionic/core';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { filter } from 'rxjs/operators';
 import { CarsControllerGetCars$Params as CarFilters } from '../../api/fn/car-list/cars-controller-get-cars';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
@@ -35,6 +39,7 @@ import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-fil
 import { CarListFacadeService } from '../../store/car-list/facades/car-list-facade.service';
 import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
+import { CAR_FILTERS_EQUIPMENT_OPTIONS } from './constants/car-filters-equipment-options';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
 import { CAR_FILTERS_POWER_UNITS, PowerUnit } from './constants/car-filters-power-metric';
 import { CAR_FILTERS_TRANSMISSION_TYPES } from './constants/car-filters-transmission-type';
@@ -61,11 +66,18 @@ const IONIC_IMPORTS = [
     IonRow,
     IonCol,
     IonInput,
+    IonCheckbox,
 ];
 
 @Component({
     standalone: true,
-    imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent, ReactiveFormsModule],
+    imports: [
+        ...IONIC_IMPORTS,
+        TranslocoModule,
+        SearchableSelectComponent,
+        ReactiveFormsModule,
+        KeyValuePipe,
+    ],
     selector: 'car-filters',
     templateUrl: './car-filters.component.html',
     styleUrl: './car-filters.component.scss',
@@ -75,10 +87,13 @@ export class CarFiltersComponent implements OnInit {
     private _carListFacadeService = inject(CarListFacadeService);
     private _destroyRef = inject(DestroyRef);
     private _navController = inject(NavController);
+    private _translocoService = inject(TranslocoService);
 
     carBrands = this._carFiltersFacadeService.selectCarBrands();
     carModels = this._carFiltersFacadeService.selectCarModels();
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
+    equipmentOptions = toSignal(this._translocoService.selectTranslateObject('filters.equipment'));
+    selectedEquipmentOptions = signal<number[]>([]);
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
@@ -98,8 +113,9 @@ export class CarFiltersComponent implements OnInit {
     readonly registrationYears = generateCarFiltersRegistrationYears();
     readonly prices = generatePrices();
     readonly kilometers = generateKilometers();
+    readonly CAR_FILTERS_EQUIPMENT_OPTIONS = CAR_FILTERS_EQUIPMENT_OPTIONS;
 
-    form = new FormGroup({
+    basicInformationForm = new FormGroup({
         brand: new FormControl<CarBrand[]>([], { nonNullable: true }),
         models: new FormControl<CarModel[]>([]),
         bodyStyles: new FormControl<BodyStyles[] | null>(null),
@@ -139,64 +155,29 @@ export class CarFiltersComponent implements OnInit {
     });
 
     ngOnInit(): void {
-        this.form.controls.brand.valueChanges
+        this.basicInformationForm.controls.brand.valueChanges
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((carBrands: CarBrand[] | null) => {
                 if (carBrands) {
                     const brandId = carBrands[0].id;
                     this._carFiltersFacadeService.getCarModels(brandId);
-                    this.form.controls.models.patchValue([], { emitEvent: false });
+                    this.basicInformationForm.controls.models.patchValue([], { emitEvent: false });
                 }
             });
 
-        this.form.valueChanges
+        this.basicInformationForm.valueChanges
             .pipe(
-                filter(() => this.form.valid),
+                filter(() => this.basicInformationForm.valid),
                 takeUntilDestroyed(this._destroyRef),
             )
-            .subscribe((value) => {
-                const query: CarFilters = {
-                    page: this.INITIAL_PAGE,
-                    perPage: this.PER_PAGE,
-                    brandId: (value.brand as CarBrand[])[0]?.id ?? undefined,
-                    modelIds: value.models?.map((model: CarModel) => model.id) ?? [],
-                    bodyStyles: value.bodyStyles ?? [],
-                    fuelTypes: value.fuelTypes ?? [],
-                    yearRegistrationFrom: value.registrationYear?.registrationYearFrom ?? undefined,
-                    yearRegistrationTo: value.registrationYear?.registrationYearTo ?? undefined,
-                    priceFrom: value.price?.priceFrom ?? undefined,
-                    priceTo: value.price?.priceTo ?? undefined,
-                    kilometersTravelledFrom: value.kilometers?.kilometersFrom ?? undefined,
-                    kilometersTravelledTo: value.kilometers?.kilometersTo ?? undefined,
-                    powerUnit: value.power?.unit ?? undefined,
-                    powerFrom: value.power?.powerFrom ?? undefined,
-                    powerTo: value.power?.powerTo ?? undefined,
-                    transmissionTypes: value.transmissionTypes ?? [],
-                };
+            .subscribe(() => {
+                const query = this._constructCarFilterQuery();
                 this._carFiltersFacadeService.getCarFiltersResultCount(query);
             });
     }
 
     async searchCars(): Promise<void> {
-        const query: CarFilters = {
-            page: this.INITIAL_PAGE,
-            perPage: this.PER_PAGE,
-            brandId: (this.form.value.brand as CarBrand[])[0]?.id ?? undefined,
-            modelIds: this.form.value.models?.map((model: CarModel) => model.id) ?? [],
-            bodyStyles: this.form.value.bodyStyles ?? [],
-            fuelTypes: this.form.value.fuelTypes ?? [],
-            yearRegistrationFrom:
-                this.form.value.registrationYear?.registrationYearFrom ?? undefined,
-            yearRegistrationTo: this.form.value.registrationYear?.registrationYearTo ?? undefined,
-            priceFrom: this.form.value.price?.priceFrom ?? undefined,
-            priceTo: this.form.value.price?.priceTo ?? undefined,
-            kilometersTravelledFrom: this.form.value.kilometers?.kilometersFrom ?? undefined,
-            kilometersTravelledTo: this.form.value.kilometers?.kilometersTo ?? undefined,
-            powerUnit: this.form.value.power?.unit ?? undefined,
-            powerFrom: this.form.value.power?.powerFrom ?? undefined,
-            powerTo: this.form.value.power?.powerTo ?? undefined,
-            transmissionTypes: this.form.value.transmissionTypes ?? [],
-        };
+        const query: CarFilters = this._constructCarFilterQuery();
         this._carListFacadeService.getCarList(query);
         await this._navController.navigateForward('tabs/car-list');
     }
@@ -206,5 +187,54 @@ export class CarFiltersComponent implements OnInit {
         if (value === CarFilterAccordionGroups.BASIC_INFORMATION) {
             this._carFiltersFacadeService.getCarBrands();
         }
+    }
+
+    equipmentOptionChanged(
+        checkboxEvent: IonCheckboxCustomEvent<CheckboxChangeEventDetail<string>>,
+        equipmentId: number,
+    ): void {
+        const checked = checkboxEvent.detail.checked;
+        if (checked) {
+            this.selectedEquipmentOptions.update((alreadySelectedEquipmentOptions: number[]) => [
+                ...alreadySelectedEquipmentOptions,
+                equipmentId,
+            ]);
+        } else {
+            this.selectedEquipmentOptions.update((alreadySelectedEquipmentOptions: number[]) =>
+                alreadySelectedEquipmentOptions.filter(
+                    (equipmentOption: number) => equipmentOption !== equipmentId,
+                ),
+            );
+        }
+        const query = this._constructCarFilterQuery();
+        this._carFiltersFacadeService.getCarFiltersResultCount(query);
+    }
+
+    private _constructCarFilterQuery(): CarFilters {
+        const query: CarFilters = {
+            page: this.INITIAL_PAGE,
+            perPage: this.PER_PAGE,
+            brandId: (this.basicInformationForm.value.brand as CarBrand[])[0]?.id ?? undefined,
+            modelIds:
+                this.basicInformationForm.value.models?.map((model: CarModel) => model.id) ?? [],
+            bodyStyles: this.basicInformationForm.value.bodyStyles ?? [],
+            fuelTypes: this.basicInformationForm.value.fuelTypes ?? [],
+            yearRegistrationFrom:
+                this.basicInformationForm.value.registrationYear?.registrationYearFrom ?? undefined,
+            yearRegistrationTo:
+                this.basicInformationForm.value.registrationYear?.registrationYearTo ?? undefined,
+            priceFrom: this.basicInformationForm.value.price?.priceFrom ?? undefined,
+            priceTo: this.basicInformationForm.value.price?.priceTo ?? undefined,
+            kilometersTravelledFrom:
+                this.basicInformationForm.value.kilometers?.kilometersFrom ?? undefined,
+            kilometersTravelledTo:
+                this.basicInformationForm.value.kilometers?.kilometersTo ?? undefined,
+            powerUnit: this.basicInformationForm.value.power?.unit ?? undefined,
+            powerFrom: this.basicInformationForm.value.power?.powerFrom ?? undefined,
+            powerTo: this.basicInformationForm.value.power?.powerTo ?? undefined,
+            transmissionTypes: this.basicInformationForm.value.transmissionTypes ?? [],
+            selectedEquipmentOptions: this.selectedEquipmentOptions(),
+        };
+        return query;
     }
 }
