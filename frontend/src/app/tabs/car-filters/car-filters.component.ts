@@ -1,5 +1,5 @@
 import { KeyValuePipe } from '@angular/common';
-import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, effect, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -154,6 +154,17 @@ export class CarFiltersComponent implements OnInit {
         transmissionTypes: new FormControl<TransmissionType[] | null>(null),
     });
 
+    carFiltersAccordionGroupElement = viewChild('ionAccordionGroupEl', { read: IonAccordionGroup });
+
+    carFiltersAccordionGroupEffect = effect(() => {
+        if (this.carFiltersAccordionGroupElement()) {
+            const carFiltersAccordionGroupEl =
+                this.carFiltersAccordionGroupElement() as IonAccordionGroup;
+            carFiltersAccordionGroupEl.value = this.filtersAccordionGroups.BASIC_INFORMATION;
+            this._getCarBrands(carFiltersAccordionGroupEl.value as CarFilterAccordionGroups);
+        }
+    });
+
     ngOnInit(): void {
         this.basicInformationForm.controls.brand.valueChanges
             .pipe(takeUntilDestroyed(this._destroyRef))
@@ -184,7 +195,11 @@ export class CarFiltersComponent implements OnInit {
 
     onAccordionChange(event: Event): void {
         const value = ((event as CustomEvent).detail as { value: CarFilterAccordionGroups }).value;
-        if (value === CarFilterAccordionGroups.BASIC_INFORMATION) {
+        this._getCarBrands(value);
+    }
+
+    private _getCarBrands(accordionGroupValue: CarFilterAccordionGroups): void {
+        if (accordionGroupValue === CarFilterAccordionGroups.BASIC_INFORMATION) {
             this._carFiltersFacadeService.getCarBrands();
         }
     }
