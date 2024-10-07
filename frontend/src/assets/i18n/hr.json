@@ -173,7 +173,8 @@
         "transmission_type": "Tip mijenjača",
         "sections": {
             "basic_information": "Osnovne informacije",
-            "equipment": "Oprema"
+            "equipment": "Oprema",
+            "exterior_color": "Boja"
         },
         "errors": {
             "get_car_brands": "Greška prilikom dohvaćanja marki automobila. Molimo pokušajte ponovno.",

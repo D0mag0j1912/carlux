@@ -173,7 +173,8 @@
         "transmission_type": "Transmission",
         "sections": {
             "basic_information": "Basic information",
-            "equipment": "Equipment"
+            "equipment": "Equipment",
+            "exterior_color": "Exterior color"
         },
         "errors": {
             "get_car_brands": "Error while loading car brands. Please try again.",
