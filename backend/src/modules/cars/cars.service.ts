@@ -36,6 +36,7 @@ export class CarsService {
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
         const selectedEquipmentOptions = query.selectedEquipmentOptions ?? [];
+        const selectedExteriorColors = query.selectedExteriorColors ?? [];
         const carFiltersQuery = this._carsRepository
             .createQueryBuilder('car')
             .select([
@@ -122,6 +123,12 @@ export class CarsService {
                     transmissionTypes: query.transmissionTypes,
                 },
             )
+            .andWhere(
+                selectedExteriorColors.length
+                    ? 'car.ExteriorColor IN (:...selectedExteriorColors)'
+                    : 'TRUE',
+                { selectedExteriorColors },
+            )
             .skip((query.page - 1) * query.perPage)
             .take(query.perPage)
             .orderBy('car.UploadedDate', 'DESC');
@@ -180,6 +187,7 @@ export class CarsService {
         const powerTo = query.powerTo;
         const transmissionTypes = query.transmissionTypes;
         const selectedEquipmentOptions = query.selectedEquipmentOptions ?? [];
+        const selectedExteriorColors = query.selectedExteriorColors ?? [];
         const carsCount = await this._carsRepository
             .createQueryBuilder('car')
             .leftJoin('car.currency', 'currency')
@@ -251,6 +259,12 @@ export class CarsService {
                 {
                     transmissionTypes: query.transmissionTypes,
                 },
+            )
+            .andWhere(
+                selectedExteriorColors.length
+                    ? 'car.ExteriorColor IN (:...selectedExteriorColors)'
+                    : 'TRUE',
+                { selectedExteriorColors },
             )
             .groupBy(selectedEquipmentOptions.length ? 'car.Id' : 'TRUE')
             .having(
