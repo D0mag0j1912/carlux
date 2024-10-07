@@ -37,9 +37,10 @@ import { FuelTypes } from '../../models/fuel-types';
 import { TransmissionType } from '../../models/transmission-type';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarListFacadeService } from '../../store/car-list/facades/car-list-facade.service';
-import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
+import { CarFilterAccordionGroups } from './constants/car-filters-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
 import { CAR_FILTERS_EQUIPMENT_OPTIONS } from './constants/car-filters-equipment-options';
+import { CAR_FILTERS_EXTERIOR_COLORS } from './constants/car-filters-exterior-colors';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
 import { CAR_FILTERS_POWER_UNITS, PowerUnit } from './constants/car-filters-power-metric';
 import { CAR_FILTERS_TRANSMISSION_TYPES } from './constants/car-filters-transmission-type';
@@ -114,6 +115,7 @@ export class CarFiltersComponent implements OnInit {
     readonly prices = generatePrices();
     readonly kilometers = generateKilometers();
     readonly CAR_FILTERS_EQUIPMENT_OPTIONS = CAR_FILTERS_EQUIPMENT_OPTIONS;
+    readonly CAR_FILTERS_EXTERIOR_COLORS = CAR_FILTERS_EXTERIOR_COLORS;
 
     basicInformationForm = new FormGroup({
         brand: new FormControl<CarBrand[]>([], { nonNullable: true }),

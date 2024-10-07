@@ -327,7 +327,13 @@
                         {{ t('filters.sections.exterior_color') }}
                     </ion-label>
                 </ion-item>
-                <ion-grid slot="content"> </ion-grid>
+                <ion-grid slot="content">
+                    @for (option of CAR_FILTERS_EXTERIOR_COLORS; track option) {
+                        <ion-checkbox labelPlacement="end">
+                            {{ option }}
+                        </ion-checkbox>
+                    }
+                </ion-grid>
             </ion-accordion>
         </ion-accordion-group>
 
