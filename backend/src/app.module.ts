@@ -7,6 +7,7 @@ import { CarDetailsModule } from './modules/car-details/car-details.module';
 import { CarsModule } from './modules/cars/cars.module';
 import { CarsEquipmentEntity } from './modules/cars/entity/cars-equipment.entity';
 import { EquipmentEntity } from './modules/cars/entity/equipment.entity';
+import { ExteriorColorsEntity } from './modules/cars/entity/exterior-color.entity';
 import { FavouritesModule } from './modules/favourites/favourites.module';
 import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
@@ -56,6 +57,7 @@ const IMPORTS = [
                     CarModelEntity,
                     EquipmentEntity,
                     CarsEquipmentEntity,
+                    ExteriorColorsEntity,
                 ],
             }),
             inject: [ConfigService],
