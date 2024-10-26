@@ -57,6 +57,7 @@ export class CarsService {
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
             .leftJoin('car.carEquipments', 'carEquipments')
+            .leftJoin('car.exteriorColor', 'exteriorColor')
             .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId })
             .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
                 modelIds: query.modelIds,
@@ -66,6 +67,12 @@ export class CarsService {
                     ? 'carEquipments.equipment.Id IN (:...selectedEquipmentOptions)'
                     : 'TRUE',
                 { selectedEquipmentOptions },
+            )
+            .andWhere(
+                query.selectedExteriorColors?.length
+                    ? 'exteriorColor.Hex IN (:...selectedExteriorColors)'
+                    : 'TRUE',
+                { selectedExteriorColors },
             )
             .andWhere(query.bodyStyles?.length ? 'car.BodyStyle IN (:...bodyStyles)' : 'TRUE', {
                 bodyStyles: query.bodyStyles,
@@ -122,12 +129,6 @@ export class CarsService {
                 {
                     transmissionTypes: query.transmissionTypes,
                 },
-            )
-            .andWhere(
-                selectedExteriorColors.length
-                    ? 'car.ExteriorColor IN (:...selectedExteriorColors)'
-                    : 'TRUE',
-                { selectedExteriorColors },
             )
             .skip((query.page - 1) * query.perPage)
             .take(query.perPage)
@@ -194,6 +195,7 @@ export class CarsService {
             .leftJoin('car.carBrand', 'carBrand')
             .leftJoin('car.carModel', 'carModel')
             .leftJoin('car.carEquipments', 'carEquipments')
+            .leftJoin('car.exteriorColor', 'exteriorColor')
             .where(brandId ? 'car.BrandId = :brandId' : 'TRUE', { brandId })
             .andWhere(query.modelIds?.length ? 'car.ModelId IN (:...modelIds)' : 'TRUE', {
                 modelIds: query.modelIds,
@@ -203,6 +205,12 @@ export class CarsService {
                     ? 'carEquipments.equipment.Id IN (:...selectedEquipmentOptions)'
                     : 'TRUE',
                 { selectedEquipmentOptions },
+            )
+            .andWhere(
+                query.selectedExteriorColors?.length
+                    ? 'exteriorColor.Hex IN (:...selectedExteriorColors)'
+                    : 'TRUE',
+                { selectedExteriorColors },
             )
             .andWhere(query.bodyStyles?.length ? 'car.BodyStyle IN (:...bodyStyles)' : 'TRUE', {
                 bodyStyles: query.bodyStyles,
@@ -259,12 +267,6 @@ export class CarsService {
                 {
                     transmissionTypes: query.transmissionTypes,
                 },
-            )
-            .andWhere(
-                selectedExteriorColors.length
-                    ? 'car.ExteriorColor IN (:...selectedExteriorColors)'
-                    : 'TRUE',
-                { selectedExteriorColors },
             )
             .groupBy(selectedEquipmentOptions.length ? 'car.Id' : 'TRUE')
             .having(

@@ -4,6 +4,7 @@ import { FuelType } from '../../constants/fuel-type';
 import { SellerType } from '../../constants/seller-type';
 import { TransmissionType } from '../../constants/transmission-type';
 import { CarsEquipmentEntity } from '../../modules/cars/entity/cars-equipment.entity';
+import { ExteriorColorsEntity } from '../../modules/cars/entity/exterior-color.entity';
 import { CarBrandEntity } from './car-brand.entity';
 import { CarModelEntity } from './car-model.entity';
 import { CurrencyEntity } from './currency.entity';
@@ -99,6 +100,9 @@ export class CarEntity {
     @Column()
     IsFavourite: boolean;
 
+    @Column()
+    ExteriorColorHex: string;
+
     @Column({ nullable: true })
     AddedToFavouritesDate: string;
 
@@ -117,6 +121,10 @@ export class CarEntity {
     @OneToOne(() => CurrencyEntity, (currency) => currency.Code)
     @JoinColumn({ name: 'CurrencyCode' })
     currency: CurrencyEntity;
+
+    @OneToOne(() => ExteriorColorsEntity, (exteriorColor) => exteriorColor.Hex)
+    @JoinColumn({ name: 'ExteriorColorHex' })
+    exteriorColor: ExteriorColorsEntity;
 
     @OneToMany(() => ImageEntity, (image) => image.car)
     images: ImageEntity[];
