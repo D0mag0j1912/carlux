@@ -8,6 +8,7 @@ import { BasicInfoModule } from './modules/car-filters/basic-info/basic-info.mod
 import { CarsEquipmentEntity } from './modules/car-filters/entity/cars-equipment.entity';
 import { EquipmentEntity } from './modules/car-filters/entity/equipment.entity';
 import { ExteriorColorsEntity } from './modules/car-filters/entity/exterior-color.entity';
+import { ExteriorColorsModule } from './modules/car-filters/exterior-colors/exterior-colors.module';
 import { CarsModule } from './modules/cars/cars.module';
 import { FavouritesModule } from './modules/favourites/favourites.module';
 import { LanguageEntity } from './modules/languages/entity/language.entity';
@@ -29,6 +30,7 @@ const IMPORTS = [
     CarDetailsModule,
     BasicInfoModule,
     CarsModule,
+    ExteriorColorsModule,
 ];
 
 @Module({
