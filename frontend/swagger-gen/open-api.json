@@ -657,6 +657,18 @@
                                 "type": "number"
                             }
                         }
+                    },
+                    {
+                        "name": "selectedExteriorColors",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's exterior colors",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -879,6 +891,18 @@
                                 "type": "number"
                             }
                         }
+                    },
+                    {
+                        "name": "selectedExteriorColors",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's exterior colors",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -900,6 +924,34 @@
                     }
                 },
                 "tags": ["Car list"]
+            }
+        },
+        "/api/exterior-colors": {
+            "get": {
+                "operationId": "ExteriorColorsController_getExteriorColors",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ExteriorColorDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Exterior colors"]
             }
         }
     },
@@ -1497,6 +1549,13 @@
                         "items": {
                             "type": "number"
                         }
+                    },
+                    "selectedExteriorColors": {
+                        "description": "Car's exterior colors",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 },
                 "required": ["page", "perPage"]
@@ -1518,6 +1577,20 @@
                     }
                 },
                 "required": ["page", "perPage", "count"]
+            },
+            "ExteriorColorDto": {
+                "type": "object",
+                "properties": {
+                    "hex": {
+                        "type": "string",
+                        "description": "Exterior color hex code"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Exterior color name"
+                    }
+                },
+                "required": ["hex", "name"]
             }
         }
     }
