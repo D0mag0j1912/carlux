@@ -4,16 +4,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserEntity } from './modules/auth/entity/user.entity';
 import { CarDetailsModule } from './modules/car-details/car-details.module';
+import { BasicInfoModule } from './modules/car-filters/basic-info/basic-info.module';
+import { CarsEquipmentEntity } from './modules/car-filters/entity/cars-equipment.entity';
+import { EquipmentEntity } from './modules/car-filters/entity/equipment.entity';
+import { ExteriorColorsEntity } from './modules/car-filters/entity/exterior-color.entity';
+import { ExteriorColorsModule } from './modules/car-filters/exterior-colors/exterior-colors.module';
 import { CarsModule } from './modules/cars/cars.module';
-import { CarsEquipmentEntity } from './modules/cars/entity/cars-equipment.entity';
-import { EquipmentEntity } from './modules/cars/entity/equipment.entity';
-import { ExteriorColorsEntity } from './modules/cars/entity/exterior-color.entity';
 import { FavouritesModule } from './modules/favourites/favourites.module';
 import { LanguageEntity } from './modules/languages/entity/language.entity';
 import { PreferenceEntity } from './modules/preferences/entity/preferences.entity';
 import { PreferencesModule } from './modules/preferences/preferences.module';
 import { ProfileDetailsModule } from './modules/profile-details/profile-details.module';
-import { BasicInfoModule } from './shared/basic-info/basic-info.module';
 import { CarBrandEntity } from './shared/entities/car-brand.entity';
 import { CarModelEntity } from './shared/entities/car-model.entity';
 import { CarEntity } from './shared/entities/car.entity';
@@ -29,6 +30,7 @@ const IMPORTS = [
     CarDetailsModule,
     BasicInfoModule,
     CarsModule,
+    ExteriorColorsModule,
 ];
 
 @Module({
