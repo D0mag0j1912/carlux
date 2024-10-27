@@ -11,6 +11,7 @@ import { FavouritesService } from './services/favourites.service';
 import { CarDetailsService } from './services/car-details.service';
 import { BasicCarInformationService } from './services/basic-car-information.service';
 import { CarListService } from './services/car-list.service';
+import { ExteriorColorsService } from './services/exterior-colors.service';
 
 /**
  * Module that provides all services and configuration.
@@ -27,6 +28,7 @@ import { CarListService } from './services/car-list.service';
     CarDetailsService,
     BasicCarInformationService,
     CarListService,
+    ExteriorColorsService,
     ApiConfiguration
   ],
 })
