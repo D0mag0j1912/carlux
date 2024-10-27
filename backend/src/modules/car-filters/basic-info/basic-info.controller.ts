@@ -5,8 +5,8 @@ import {
     ApiOkResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import { BASE_URL } from '../../constants/base-url';
-import { RESPONSE_MESSAGE } from '../../helpers/response-message';
+import { BASE_URL } from '../../../constants/base-url';
+import { RESPONSE_MESSAGE } from '../../../helpers/response-message';
 import { BasicInfoService } from './basic-info.service';
 import { CarBrandDto } from './models/car-brand.dto';
 import { CarModelDto } from './models/car-model.dto';

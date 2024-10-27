@@ -1,8 +1,8 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CarBrandEntity } from '../entities/car-brand.entity';
-import { CarModelEntity } from '../entities/car-model.entity';
+import { CarBrandEntity } from '../../../shared/entities/car-brand.entity';
+import { CarModelEntity } from '../../../shared/entities/car-model.entity';
 import { CarBrandDto } from './models/car-brand.dto';
 import { CarModelDto } from './models/car-model.dto';
 
