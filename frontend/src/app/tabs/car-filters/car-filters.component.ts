@@ -40,7 +40,6 @@ import { CarListFacadeService } from '../../store/car-list/facades/car-list-faca
 import { CarFilterAccordionGroups } from './constants/car-filters-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
 import { CAR_FILTERS_EQUIPMENT_OPTIONS } from './constants/car-filters-equipment-options';
-import { CAR_FILTERS_EXTERIOR_COLORS } from './constants/car-filters-exterior-colors';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
 import { CAR_FILTERS_POWER_UNITS, PowerUnit } from './constants/car-filters-power-metric';
 import { CAR_FILTERS_TRANSMISSION_TYPES } from './constants/car-filters-transmission-type';
@@ -94,6 +93,7 @@ export class CarFiltersComponent implements OnInit {
     carModels = this._carFiltersFacadeService.selectCarModels();
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
     equipmentOptions = toSignal(this._translocoService.selectTranslateObject('filters.equipment'));
+    exteriorColors = this._carFiltersFacadeService.selectExteriorColors();
     selectedEquipmentOptions = signal<number[]>([]);
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
@@ -115,7 +115,6 @@ export class CarFiltersComponent implements OnInit {
     readonly prices = generatePrices();
     readonly kilometers = generateKilometers();
     readonly CAR_FILTERS_EQUIPMENT_OPTIONS = CAR_FILTERS_EQUIPMENT_OPTIONS;
-    readonly CAR_FILTERS_EXTERIOR_COLORS = CAR_FILTERS_EXTERIOR_COLORS;
 
     basicInformationForm = new FormGroup({
         brand: new FormControl<CarBrand[]>([], { nonNullable: true }),
