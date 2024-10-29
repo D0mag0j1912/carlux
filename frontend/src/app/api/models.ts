@@ -5,6 +5,7 @@ export { CarDetailsDto } from './models/car-details-dto';
 export { CarListDto } from './models/car-list-dto';
 export { CarModelDto } from './models/car-model-dto';
 export { EmailDto } from './models/email-dto';
+export { ExteriorColorDto } from './models/exterior-color-dto';
 export { FavouritesDto } from './models/favourites-dto';
 export { GeneralResponseDto } from './models/general-response-dto';
 export { LanguageChangeDto } from './models/language-change-dto';
