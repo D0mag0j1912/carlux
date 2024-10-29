@@ -6,8 +6,10 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { EMPTY, pipe, switchMap } from 'rxjs';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
+import { ExteriorColorDto as ExteriorColor } from '../../api/models/exterior-color-dto';
 import { BasicCarInformationService } from '../../api/services/basic-car-information.service';
 import { CarListService } from '../../api/services/car-list.service';
+import { ExteriorColorsService } from '../../api/services/exterior-colors.service';
 import { FeatureKeys } from '../../constants/feature-keys';
 import { POPUP_DURATIONS } from '../../constants/popup-durations';
 import { CAR_FILTERS_INITIAL_STATE } from '../../tabs/car-filters/constants/car-filters-initial-state';
@@ -20,6 +22,8 @@ export interface CarFiltersState {
     resultCount: number | undefined;
     selectedCarFilters: CarFilters;
     areCarBrandsLoaded: boolean;
+    exteriorColors: ExteriorColor[];
+    areExteriorColorsLoaded: boolean;
 }
 
 const initialState: CarFiltersState = {
@@ -28,11 +32,14 @@ const initialState: CarFiltersState = {
     resultCount: undefined,
     selectedCarFilters: CAR_FILTERS_INITIAL_STATE,
     areCarBrandsLoaded: false,
+    exteriorColors: [],
+    areExteriorColorsLoaded: false,
 };
 
 const SET_CAR_BRANDS_ACTION = 'Set Car Brands';
 const SET_CAR_MODELS_ACTION = 'Set Car Models';
 const SET_CAR_FILTERS_COUNT = 'Set Car Filters Count';
+const SET_EXTERIOR_COLORS = 'Set Exterior Colors';
 
 export const CarFiltersStore = signalStore(
     {
@@ -46,6 +53,7 @@ export const CarFiltersStore = signalStore(
             basicCarInformationService = inject(BasicCarInformationService),
             sharedFacadeService = inject(SharedFacadeService),
             carListService = inject(CarListService),
+            exteriorColorsService = inject(ExteriorColorsService),
         ) => ({
             getCarBrands: rxMethod<void>(
                 pipe(
@@ -143,6 +151,29 @@ export const CarFiltersStore = signalStore(
                                     },
                                 }),
                             ),
+                    ),
+                ),
+            ),
+            getExteriorColors: rxMethod<void>(
+                pipe(
+                    switchMap(() =>
+                        exteriorColorsService.exteriorColorsControllerGetExteriorColors().pipe(
+                            tapResponse({
+                                next: (exteriorColors: ExteriorColor[]) => {
+                                    updateState(store, SET_EXTERIOR_COLORS, {
+                                        exteriorColors: [...exteriorColors],
+                                        areExteriorColorsLoaded: true,
+                                    });
+                                },
+                                error: () => {
+                                    sharedFacadeService.showToastMessage(
+                                        'filters.errors.get_exterior_colors',
+                                        POPUP_DURATIONS.ERROR,
+                                        'warning',
+                                    );
+                                },
+                            }),
+                        ),
                     ),
                 ),
             ),

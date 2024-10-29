@@ -1,6 +1,7 @@
 import { Injectable, Signal, inject } from '@angular/core';
 import { CarBrandDto as CarBrand } from '../../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../../api/models/car-model-dto';
+import { ExteriorColorDto as ExteriorColor } from '../../../api/models/exterior-color-dto';
 import { CarFilters } from '../../../tabs/car-filters/models/car-filters.model';
 import { CarFiltersStore } from '../car-filter-store';
 
@@ -24,6 +25,10 @@ export class CarFiltersFacadeService {
     selectSelectedCarFilters(): Signal<CarFilters> {
         return this._carFiltersStore.selectedCarFilters;
     }
+
+    selectExteriorColors(): Signal<ExteriorColor[]> {
+        return this._carFiltersStore.exteriorColors;
+    }
     //Selectors END -------------------------
 
     //Actions BEGIN -------------------------
@@ -37,6 +42,10 @@ export class CarFiltersFacadeService {
 
     getCarFiltersResultCount(selectedCarFiltersQuery: CarFilters): void {
         this._carFiltersStore.getCarFiltersResultCount(selectedCarFiltersQuery);
+    }
+
+    getExteriorColors(): void {
+        this._carFiltersStore.getExteriorColors();
     }
     //Actions END -------------------------
 }
