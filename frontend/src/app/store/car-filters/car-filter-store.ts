@@ -156,25 +156,31 @@ export const CarFiltersStore = signalStore(
             ),
             getExteriorColors: rxMethod<void>(
                 pipe(
-                    switchMap(() =>
-                        exteriorColorsService.exteriorColorsControllerGetExteriorColors().pipe(
-                            tapResponse({
-                                next: (exteriorColors: ExteriorColor[]) => {
-                                    updateState(store, SET_EXTERIOR_COLORS, {
-                                        exteriorColors: [...exteriorColors],
-                                        areExteriorColorsLoaded: true,
-                                    });
-                                },
-                                error: () => {
-                                    sharedFacadeService.showToastMessage(
-                                        'filters.errors.get_exterior_colors',
-                                        POPUP_DURATIONS.ERROR,
-                                        'warning',
-                                    );
-                                },
-                            }),
-                        ),
-                    ),
+                    switchMap(() => {
+                        const areExteriorColorsLoaded = store.areExteriorColorsLoaded;
+                        if (!areExteriorColorsLoaded()) {
+                            return exteriorColorsService
+                                .exteriorColorsControllerGetExteriorColors()
+                                .pipe(
+                                    tapResponse({
+                                        next: (exteriorColors: ExteriorColor[]) => {
+                                            updateState(store, SET_EXTERIOR_COLORS, {
+                                                exteriorColors: [...exteriorColors],
+                                                areExteriorColorsLoaded: true,
+                                            });
+                                        },
+                                        error: () => {
+                                            sharedFacadeService.showToastMessage(
+                                                'filters.errors.get_exterior_colors',
+                                                POPUP_DURATIONS.ERROR,
+                                                'warning',
+                                            );
+                                        },
+                                    }),
+                                );
+                        }
+                        return EMPTY;
+                    }),
                 ),
             ),
         }),

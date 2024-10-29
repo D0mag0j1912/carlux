@@ -163,7 +163,7 @@ export class CarFiltersComponent implements OnInit {
             const carFiltersAccordionGroupEl =
                 this.carFiltersAccordionGroupElement() as IonAccordionGroup;
             carFiltersAccordionGroupEl.value = this.filtersAccordionGroups.BASIC_INFORMATION;
-            this._getCarBrands(carFiltersAccordionGroupEl.value as CarFilterAccordionGroups);
+            this._carFiltersFacadeService.getCarBrands();
         }
     });
 
@@ -197,12 +197,12 @@ export class CarFiltersComponent implements OnInit {
 
     onAccordionChange(event: Event): void {
         const value = ((event as CustomEvent).detail as { value: CarFilterAccordionGroups }).value;
-        this._getCarBrands(value);
-    }
-
-    private _getCarBrands(accordionGroupValue: CarFilterAccordionGroups): void {
-        if (accordionGroupValue === CarFilterAccordionGroups.BASIC_INFORMATION) {
-            this._carFiltersFacadeService.getCarBrands();
+        if (value) {
+            if (value === CarFilterAccordionGroups.BASIC_INFORMATION) {
+                this._carFiltersFacadeService.getCarBrands();
+            } else if (value === CarFilterAccordionGroups.EXTERIOR_COLOR) {
+                this._carFiltersFacadeService.getExteriorColors();
+            }
         }
     }
 
