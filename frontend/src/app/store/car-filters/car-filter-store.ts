@@ -24,6 +24,7 @@ export interface CarFiltersState {
     areCarBrandsLoaded: boolean;
     exteriorColors: ExteriorColor[];
     areExteriorColorsLoaded: boolean;
+    areExteriorColorsLoading: boolean;
 }
 
 const initialState: CarFiltersState = {
@@ -34,12 +35,14 @@ const initialState: CarFiltersState = {
     areCarBrandsLoaded: false,
     exteriorColors: [],
     areExteriorColorsLoaded: false,
+    areExteriorColorsLoading: false,
 };
 
 const SET_CAR_BRANDS_ACTION = 'Set Car Brands';
 const SET_CAR_MODELS_ACTION = 'Set Car Models';
 const SET_CAR_FILTERS_COUNT = 'Set Car Filters Count';
 const SET_EXTERIOR_COLORS = 'Set Exterior Colors';
+const SET_EXTERIOR_COLORS_LOADING = 'Set Exterior Colors Loading';
 
 export const CarFiltersStore = signalStore(
     {
@@ -157,6 +160,9 @@ export const CarFiltersStore = signalStore(
             getExteriorColors: rxMethod<void>(
                 pipe(
                     switchMap(() => {
+                        updateState(store, SET_EXTERIOR_COLORS_LOADING, {
+                            areExteriorColorsLoading: true,
+                        });
                         const areExteriorColorsLoaded = store.areExteriorColorsLoaded;
                         if (!areExteriorColorsLoaded()) {
                             return exteriorColorsService
@@ -167,6 +173,7 @@ export const CarFiltersStore = signalStore(
                                             updateState(store, SET_EXTERIOR_COLORS, {
                                                 exteriorColors: [...exteriorColors],
                                                 areExteriorColorsLoaded: true,
+                                                areExteriorColorsLoading: false,
                                             });
                                         },
                                         error: () => {

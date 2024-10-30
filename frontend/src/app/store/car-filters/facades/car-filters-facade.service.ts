@@ -29,6 +29,10 @@ export class CarFiltersFacadeService {
     selectExteriorColors(): Signal<ExteriorColor[]> {
         return this._carFiltersStore.exteriorColors;
     }
+
+    selectAreExteriorColorsLoading(): Signal<boolean> {
+        return this._carFiltersStore.areExteriorColorsLoading;
+    }
     //Selectors END -------------------------
 
     //Actions BEGIN -------------------------

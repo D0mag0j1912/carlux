@@ -20,6 +20,7 @@ import {
     IonRow,
     IonSelect,
     IonSelectOption,
+    IonSpinner,
     IonTitle,
     IonToolbar,
     NavController,
@@ -67,6 +68,7 @@ const IONIC_IMPORTS = [
     IonCol,
     IonInput,
     IonCheckbox,
+    IonSpinner,
 ];
 
 @Component({
@@ -94,6 +96,7 @@ export class CarFiltersComponent implements OnInit {
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
     equipmentOptions = toSignal(this._translocoService.selectTranslateObject('filters.equipment'));
     exteriorColors = this._carFiltersFacadeService.selectExteriorColors();
+    areExteriorColorsLoading = this._carFiltersFacadeService.selectAreExteriorColorsLoading();
     selectedEquipmentOptions = signal<number[]>([]);
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
