@@ -1,5 +1,5 @@
 import { KeyValuePipe } from '@angular/common';
-import { Component, DestroyRef, OnInit, effect, inject, signal, viewChild } from '@angular/core';
+import { Component, DestroyRef, OnInit, effect, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -27,6 +27,7 @@ import {
 } from '@ionic/angular/standalone';
 import { IonCheckboxCustomEvent } from '@ionic/core';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { patchState, signalState } from '@ngrx/signals';
 import { filter } from 'rxjs/operators';
 import { CarsControllerGetCars$Params as CarFilters } from '../../api/fn/car-list/cars-controller-get-cars';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
@@ -72,6 +73,11 @@ const IONIC_IMPORTS = [
     IonSpinner,
 ];
 
+type CarFiltersComponentStateType = {
+    selectedEquipmentOptions: number[];
+    selectedExteriorColors: ExteriorColorHexType[];
+};
+
 @Component({
     standalone: true,
     imports: [
@@ -97,11 +103,14 @@ export class CarFiltersComponent implements OnInit {
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
 
     equipmentOptions = toSignal(this._translocoService.selectTranslateObject('filters.equipment'));
-    selectedEquipmentOptions = signal<number[]>([]);
 
     exteriorColors = this._carFiltersFacadeService.selectExteriorColors();
     areExteriorColorsLoading = this._carFiltersFacadeService.selectAreExteriorColorsLoading();
-    selectedExteriorColors = signal<ExteriorColorHexType[]>([]);
+
+    carFiltersState = signalState<CarFiltersComponentStateType>({
+        selectedEquipmentOptions: [],
+        selectedExteriorColors: [],
+    });
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
@@ -218,16 +227,17 @@ export class CarFiltersComponent implements OnInit {
     ): void {
         const checked = checkboxEvent.detail.checked;
         if (checked) {
-            this.selectedEquipmentOptions.update((alreadySelectedEquipmentOptions: number[]) => [
-                ...alreadySelectedEquipmentOptions,
-                equipmentId,
-            ]);
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedEquipmentOptions: [...state.selectedEquipmentOptions, equipmentId],
+            }));
         } else {
-            this.selectedEquipmentOptions.update((alreadySelectedEquipmentOptions: number[]) =>
-                alreadySelectedEquipmentOptions.filter(
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedEquipmentOptions: state.selectedEquipmentOptions.filter(
                     (equipmentOption: number) => equipmentOption !== equipmentId,
                 ),
-            );
+            }));
         }
         const query = this._constructCarFilterQuery();
         this._carFiltersFacadeService.getCarFiltersResultCount(query);
@@ -239,19 +249,17 @@ export class CarFiltersComponent implements OnInit {
     ): void {
         const isChecked = checkboxEvent.detail.checked;
         if (isChecked) {
-            this.selectedExteriorColors.update(
-                (alreadySelectedExteriorColors: ExteriorColorHexType[]) => [
-                    ...alreadySelectedExteriorColors,
-                    colorHex,
-                ],
-            );
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedExteriorColors: [...state.selectedExteriorColors, colorHex],
+            }));
         } else {
-            this.selectedExteriorColors.update(
-                (alreadySelectedExteriorColors: ExteriorColorHexType[]) =>
-                    alreadySelectedExteriorColors.filter(
-                        (exteriorColor: ExteriorColorHexType) => exteriorColor !== colorHex,
-                    ),
-            );
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedExteriorColors: state.selectedExteriorColors.filter(
+                    (exteriorColor: ExteriorColorHexType) => exteriorColor !== colorHex,
+                ),
+            }));
         }
         const query = this._constructCarFilterQuery();
         this._carFiltersFacadeService.getCarFiltersResultCount(query);
@@ -280,8 +288,8 @@ export class CarFiltersComponent implements OnInit {
             powerFrom: this.basicInformationForm.value.power?.powerFrom ?? undefined,
             powerTo: this.basicInformationForm.value.power?.powerTo ?? undefined,
             transmissionTypes: this.basicInformationForm.value.transmissionTypes ?? [],
-            selectedEquipmentOptions: this.selectedEquipmentOptions(),
-            selectedExteriorColors: this.selectedExteriorColors(),
+            selectedEquipmentOptions: this.carFiltersState.selectedEquipmentOptions(),
+            selectedExteriorColors: this.carFiltersState.selectedExteriorColors(),
         };
         return query;
     }
