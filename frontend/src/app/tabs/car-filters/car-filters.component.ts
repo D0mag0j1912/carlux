@@ -34,6 +34,7 @@ import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
 import { INITIAL_PAGE, PER_PAGE } from '../../constants/initial-paging-values';
 import { BodyStyles } from '../../models/body-styles';
+import { ExteriorColorHexType } from '../../models/exterior-color-hex-type';
 import { FuelTypes } from '../../models/fuel-types';
 import { TransmissionType } from '../../models/transmission-type';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
@@ -94,10 +95,13 @@ export class CarFiltersComponent implements OnInit {
     carBrands = this._carFiltersFacadeService.selectCarBrands();
     carModels = this._carFiltersFacadeService.selectCarModels();
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
+
     equipmentOptions = toSignal(this._translocoService.selectTranslateObject('filters.equipment'));
+    selectedEquipmentOptions = signal<number[]>([]);
+
     exteriorColors = this._carFiltersFacadeService.selectExteriorColors();
     areExteriorColorsLoading = this._carFiltersFacadeService.selectAreExteriorColorsLoading();
-    selectedEquipmentOptions = signal<number[]>([]);
+    selectedExteriorColors = signal<ExteriorColorHexType[]>([]);
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
@@ -229,6 +233,30 @@ export class CarFiltersComponent implements OnInit {
         this._carFiltersFacadeService.getCarFiltersResultCount(query);
     }
 
+    selectExteriorColor(
+        checkboxEvent: IonCheckboxCustomEvent<CheckboxChangeEventDetail<ExteriorColorHexType>>,
+        colorHex: ExteriorColorHexType,
+    ): void {
+        const isChecked = checkboxEvent.detail.checked;
+        if (isChecked) {
+            this.selectedExteriorColors.update(
+                (alreadySelectedExteriorColors: ExteriorColorHexType[]) => [
+                    ...alreadySelectedExteriorColors,
+                    colorHex,
+                ],
+            );
+        } else {
+            this.selectedExteriorColors.update(
+                (alreadySelectedExteriorColors: ExteriorColorHexType[]) =>
+                    alreadySelectedExteriorColors.filter(
+                        (exteriorColor: ExteriorColorHexType) => exteriorColor !== colorHex,
+                    ),
+            );
+        }
+        const query = this._constructCarFilterQuery();
+        this._carFiltersFacadeService.getCarFiltersResultCount(query);
+    }
+
     private _constructCarFilterQuery(): CarFilters {
         const query: CarFilters = {
             page: this.INITIAL_PAGE,
@@ -253,6 +281,7 @@ export class CarFiltersComponent implements OnInit {
             powerTo: this.basicInformationForm.value.power?.powerTo ?? undefined,
             transmissionTypes: this.basicInformationForm.value.transmissionTypes ?? [],
             selectedEquipmentOptions: this.selectedEquipmentOptions(),
+            selectedExteriorColors: this.selectedExteriorColors(),
         };
         return query;
     }

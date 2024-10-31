@@ -136,6 +136,8 @@ export const CarFiltersStore = signalStore(
                                 transmissionTypes: selectedCarFiltersQuery.transmissionTypes,
                                 selectedEquipmentOptions:
                                     selectedCarFiltersQuery.selectedEquipmentOptions,
+                                selectedExteriorColors:
+                                    selectedCarFiltersQuery.selectedExteriorColors,
                             })
                             .pipe(
                                 tapResponse({
