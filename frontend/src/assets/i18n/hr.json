@@ -173,12 +173,14 @@
         "transmission_type": "Tip mijenjača",
         "sections": {
             "basic_information": "Osnovne informacije",
-            "equipment": "Oprema"
+            "equipment": "Oprema",
+            "exterior_color": "Boja"
         },
         "errors": {
             "get_car_brands": "Greška prilikom dohvaćanja marki automobila. Molimo pokušajte ponovno.",
             "get_car_models": "Greška prilikom dohvaćanja modela automobila. Molimo pokušajte ponovno.",
-            "get_car_filters_result_count": "Greška prilikom dohvaćanja broja rezultata. Molimo pokušajte ponovno."
+            "get_car_filters_result_count": "Greška prilikom dohvaćanja broja rezultata. Molimo pokušajte ponovno.",
+            "get_exterior_colors": "Greška prilikom dohvaćanja vanjskih boja. Molimo pokušajte ponovno."
         },
         "validations": {
             "registration_year": "Registracija OD mora biti manja od registracije DO",

@@ -12,7 +12,7 @@
         <ion-accordion-group #ionAccordionGroupEl (ionChange)="onAccordionChange($event)">
             <ion-accordion [value]="filtersAccordionGroups.BASIC_INFORMATION">
                 <ion-item slot="header" color="light">
-                    <ion-label class="basic-info-title">
+                    <ion-label class="accordion-title">
                         {{ t('filters.sections.basic_information') }}
                     </ion-label>
                 </ion-item>
@@ -301,7 +301,7 @@
             </ion-accordion>
             <ion-accordion [value]="filtersAccordionGroups.EQUIPMENT">
                 <ion-item slot="header" color="light">
-                    <ion-label class="basic-info-title">
+                    <ion-label class="accordion-title">
                         {{ t('filters.sections.equipment') }}
                     </ion-label>
                 </ion-item>
@@ -317,6 +317,35 @@
                                 </ion-checkbox>
                             </ion-col>
                         </ion-row>
+                    }
+                </ion-grid>
+            </ion-accordion>
+
+            <ion-accordion [value]="filtersAccordionGroups.EXTERIOR_COLOR">
+                <ion-item slot="header" color="light">
+                    <ion-label class="accordion-title">
+                        {{ t('filters.sections.exterior_color') }}
+                    </ion-label>
+                </ion-item>
+                <ion-grid slot="content" class="exterior-colors-grid">
+                    @if (areExteriorColorsLoading()) {
+                        <div class="spinner-wrapper">
+                            <ion-spinner color="primary"></ion-spinner>
+                        </div>
+                    } @else {
+                        @for (color of exteriorColors(); track color.hex) {
+                            <ion-row>
+                                <ion-col>
+                                    <ion-checkbox
+                                        labelPlacement="end"
+                                        [class]="'exterior-colors--' + color.hex"
+                                        (ionChange)="selectExteriorColor($event, $any(color.hex))"
+                                    >
+                                        {{ color.name }}
+                                    </ion-checkbox>
+                                </ion-col>
+                            </ion-row>
+                        }
                     }
                 </ion-grid>
             </ion-accordion>

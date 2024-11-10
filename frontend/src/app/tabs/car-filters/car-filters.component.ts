@@ -1,5 +1,5 @@
 import { KeyValuePipe } from '@angular/common';
-import { Component, DestroyRef, OnInit, effect, inject, signal, viewChild } from '@angular/core';
+import { Component, DestroyRef, OnInit, effect, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -20,12 +20,14 @@ import {
     IonRow,
     IonSelect,
     IonSelectOption,
+    IonSpinner,
     IonTitle,
     IonToolbar,
     NavController,
 } from '@ionic/angular/standalone';
 import { IonCheckboxCustomEvent } from '@ionic/core';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { patchState, signalState } from '@ngrx/signals';
 import { filter } from 'rxjs/operators';
 import { CarsControllerGetCars$Params as CarFilters } from '../../api/fn/car-list/cars-controller-get-cars';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
@@ -33,11 +35,12 @@ import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { SearchableSelectComponent } from '../../components/searchable-select/searchable-select.component';
 import { INITIAL_PAGE, PER_PAGE } from '../../constants/initial-paging-values';
 import { BodyStyles } from '../../models/body-styles';
+import { ExteriorColorHexType } from '../../models/exterior-color-hex-type';
 import { FuelTypes } from '../../models/fuel-types';
 import { TransmissionType } from '../../models/transmission-type';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarListFacadeService } from '../../store/car-list/facades/car-list-facade.service';
-import { CarFilterAccordionGroups } from './constants/car-filter-accordion-groups';
+import { CarFilterAccordionGroups } from './constants/car-filters-accordion-groups';
 import { CAR_FILTERS_BODY_STYLES } from './constants/car-filters-body-styles';
 import { CAR_FILTERS_EQUIPMENT_OPTIONS } from './constants/car-filters-equipment-options';
 import { CAR_FILTERS_FUEL_TYPES } from './constants/car-filters-fuel-types';
@@ -67,7 +70,13 @@ const IONIC_IMPORTS = [
     IonCol,
     IonInput,
     IonCheckbox,
+    IonSpinner,
 ];
+
+type CarFiltersComponentStateType = {
+    selectedEquipmentOptions: number[];
+    selectedExteriorColors: ExteriorColorHexType[];
+};
 
 @Component({
     standalone: true,
@@ -92,8 +101,16 @@ export class CarFiltersComponent implements OnInit {
     carBrands = this._carFiltersFacadeService.selectCarBrands();
     carModels = this._carFiltersFacadeService.selectCarModels();
     carsFiltersResultsCount = this._carFiltersFacadeService.selectCarFiltersResultCount();
+
     equipmentOptions = toSignal(this._translocoService.selectTranslateObject('filters.equipment'));
-    selectedEquipmentOptions = signal<number[]>([]);
+
+    exteriorColors = this._carFiltersFacadeService.selectExteriorColors();
+    areExteriorColorsLoading = this._carFiltersFacadeService.selectAreExteriorColorsLoading();
+
+    carFiltersState = signalState<CarFiltersComponentStateType>({
+        selectedEquipmentOptions: [],
+        selectedExteriorColors: [],
+    });
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
     readonly filtersAccordionGroups = CarFilterAccordionGroups;
@@ -161,7 +178,7 @@ export class CarFiltersComponent implements OnInit {
             const carFiltersAccordionGroupEl =
                 this.carFiltersAccordionGroupElement() as IonAccordionGroup;
             carFiltersAccordionGroupEl.value = this.filtersAccordionGroups.BASIC_INFORMATION;
-            this._getCarBrands(carFiltersAccordionGroupEl.value as CarFilterAccordionGroups);
+            this._carFiltersFacadeService.getCarBrands();
         }
     });
 
@@ -195,12 +212,12 @@ export class CarFiltersComponent implements OnInit {
 
     onAccordionChange(event: Event): void {
         const value = ((event as CustomEvent).detail as { value: CarFilterAccordionGroups }).value;
-        this._getCarBrands(value);
-    }
-
-    private _getCarBrands(accordionGroupValue: CarFilterAccordionGroups): void {
-        if (accordionGroupValue === CarFilterAccordionGroups.BASIC_INFORMATION) {
-            this._carFiltersFacadeService.getCarBrands();
+        if (value) {
+            if (value === CarFilterAccordionGroups.BASIC_INFORMATION) {
+                this._carFiltersFacadeService.getCarBrands();
+            } else if (value === CarFilterAccordionGroups.EXTERIOR_COLOR) {
+                this._carFiltersFacadeService.getExteriorColors();
+            }
         }
     }
 
@@ -210,16 +227,39 @@ export class CarFiltersComponent implements OnInit {
     ): void {
         const checked = checkboxEvent.detail.checked;
         if (checked) {
-            this.selectedEquipmentOptions.update((alreadySelectedEquipmentOptions: number[]) => [
-                ...alreadySelectedEquipmentOptions,
-                equipmentId,
-            ]);
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedEquipmentOptions: [...state.selectedEquipmentOptions, equipmentId],
+            }));
         } else {
-            this.selectedEquipmentOptions.update((alreadySelectedEquipmentOptions: number[]) =>
-                alreadySelectedEquipmentOptions.filter(
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedEquipmentOptions: state.selectedEquipmentOptions.filter(
                     (equipmentOption: number) => equipmentOption !== equipmentId,
                 ),
-            );
+            }));
+        }
+        const query = this._constructCarFilterQuery();
+        this._carFiltersFacadeService.getCarFiltersResultCount(query);
+    }
+
+    selectExteriorColor(
+        checkboxEvent: IonCheckboxCustomEvent<CheckboxChangeEventDetail<ExteriorColorHexType>>,
+        colorHex: ExteriorColorHexType,
+    ): void {
+        const isChecked = checkboxEvent.detail.checked;
+        if (isChecked) {
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedExteriorColors: [...state.selectedExteriorColors, colorHex],
+            }));
+        } else {
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedExteriorColors: state.selectedExteriorColors.filter(
+                    (exteriorColor: ExteriorColorHexType) => exteriorColor !== colorHex,
+                ),
+            }));
         }
         const query = this._constructCarFilterQuery();
         this._carFiltersFacadeService.getCarFiltersResultCount(query);
@@ -248,7 +288,8 @@ export class CarFiltersComponent implements OnInit {
             powerFrom: this.basicInformationForm.value.power?.powerFrom ?? undefined,
             powerTo: this.basicInformationForm.value.power?.powerTo ?? undefined,
             transmissionTypes: this.basicInformationForm.value.transmissionTypes ?? [],
-            selectedEquipmentOptions: this.selectedEquipmentOptions(),
+            selectedEquipmentOptions: this.carFiltersState.selectedEquipmentOptions(),
+            selectedExteriorColors: this.carFiltersState.selectedExteriorColors(),
         };
         return query;
     }
