@@ -8,6 +8,7 @@ export { EmailDto } from './models/email-dto';
 export { ExteriorColorDto } from './models/exterior-color-dto';
 export { FavouritesDto } from './models/favourites-dto';
 export { GeneralResponseDto } from './models/general-response-dto';
+export { InteriorColorsDto } from './models/interior-colors-dto';
 export { LanguageChangeDto } from './models/language-change-dto';
 export { LoginResponseDto } from './models/login-response-dto';
 export { PaginationDto } from './models/pagination-dto';
