@@ -4,7 +4,7 @@ import { FuelType } from '../../constants/fuel-type';
 import { SellerType } from '../../constants/seller-type';
 import { TransmissionType } from '../../constants/transmission-type';
 import { CarsEquipmentEntity } from '../../modules/car-filters/entity/cars-equipment.entity';
-import { ExteriorColorsEntity } from '../../modules/car-filters/entity/exterior-color.entity';
+import { ExteriorColorEntity } from '../../modules/car-filters/entity/exterior-color.entity';
 import { CarBrandEntity } from './car-brand.entity';
 import { CarModelEntity } from './car-model.entity';
 import { CurrencyEntity } from './currency.entity';
@@ -122,9 +122,9 @@ export class CarEntity {
     @JoinColumn({ name: 'CurrencyCode' })
     currency: CurrencyEntity;
 
-    @OneToOne(() => ExteriorColorsEntity, (exteriorColor) => exteriorColor.Hex)
+    @OneToOne(() => ExteriorColorEntity, (exteriorColor) => exteriorColor.Hex)
     @JoinColumn({ name: 'ExteriorColorHex' })
-    exteriorColor: ExteriorColorsEntity;
+    exteriorColor: ExteriorColorEntity;
 
     @OneToMany(() => ImageEntity, (image) => image.car)
     images: ImageEntity[];

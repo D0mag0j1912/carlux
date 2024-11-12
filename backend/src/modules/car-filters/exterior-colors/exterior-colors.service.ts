@@ -1,14 +1,14 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ExteriorColorsEntity } from '../entity/exterior-color.entity';
+import { ExteriorColorEntity } from '../entity/exterior-color.entity';
 import { ExteriorColorDto } from './models/exterior-colors.dto';
 
 @Injectable()
 export class ExteriorColorsService {
     constructor(
-        @InjectRepository(ExteriorColorsEntity)
-        private _exteriorColorsRepository: Repository<ExteriorColorsEntity>,
+        @InjectRepository(ExteriorColorEntity)
+        private _exteriorColorsRepository: Repository<ExteriorColorEntity>,
     ) {}
 
     async getExteriorColors(): Promise<ExteriorColorDto[]> {

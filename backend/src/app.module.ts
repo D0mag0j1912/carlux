@@ -7,7 +7,7 @@ import { CarDetailsModule } from './modules/car-details/car-details.module';
 import { BasicInfoModule } from './modules/car-filters/basic-info/basic-info.module';
 import { CarsEquipmentEntity } from './modules/car-filters/entity/cars-equipment.entity';
 import { EquipmentEntity } from './modules/car-filters/entity/equipment.entity';
-import { ExteriorColorsEntity } from './modules/car-filters/entity/exterior-color.entity';
+import { ExteriorColorEntity } from './modules/car-filters/entity/exterior-color.entity';
 import { ExteriorColorsModule } from './modules/car-filters/exterior-colors/exterior-colors.module';
 import { CarsModule } from './modules/cars/cars.module';
 import { FavouritesModule } from './modules/favourites/favourites.module';
@@ -59,7 +59,7 @@ const IMPORTS = [
                     CarModelEntity,
                     EquipmentEntity,
                     CarsEquipmentEntity,
-                    ExteriorColorsEntity,
+                    ExteriorColorEntity,
                 ],
             }),
             inject: [ConfigService],
