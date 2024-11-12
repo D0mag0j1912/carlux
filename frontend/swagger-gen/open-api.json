@@ -953,6 +953,34 @@
                 },
                 "tags": ["Exterior colors"]
             }
+        },
+        "/api/interior-colors": {
+            "get": {
+                "operationId": "InteriorColorsController_getExteriorColors",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/InteriorColorsDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request from the client"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "tags": ["Interior colors"]
+            }
         }
     },
     "info": {
@@ -1588,6 +1616,20 @@
                     "name": {
                         "type": "string",
                         "description": "Exterior color name"
+                    }
+                },
+                "required": ["hex", "name"]
+            },
+            "InteriorColorsDto": {
+                "type": "object",
+                "properties": {
+                    "hex": {
+                        "type": "string",
+                        "description": "Interior color hex code"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Interior color name"
                     }
                 },
                 "required": ["hex", "name"]

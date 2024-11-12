@@ -12,6 +12,7 @@ import { CarDetailsService } from './services/car-details.service';
 import { BasicCarInformationService } from './services/basic-car-information.service';
 import { CarListService } from './services/car-list.service';
 import { ExteriorColorsService } from './services/exterior-colors.service';
+import { InteriorColorsService } from './services/interior-colors.service';
 
 /**
  * Module that provides all services and configuration.
@@ -29,6 +30,7 @@ import { ExteriorColorsService } from './services/exterior-colors.service';
     BasicCarInformationService,
     CarListService,
     ExteriorColorsService,
+    InteriorColorsService,
     ApiConfiguration
   ],
 })
