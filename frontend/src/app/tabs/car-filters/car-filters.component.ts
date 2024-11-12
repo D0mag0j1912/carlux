@@ -1,4 +1,3 @@
-import { KeyValuePipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, effect, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -80,13 +79,7 @@ type CarFiltersComponentStateType = {
 
 @Component({
     standalone: true,
-    imports: [
-        ...IONIC_IMPORTS,
-        TranslocoModule,
-        SearchableSelectComponent,
-        ReactiveFormsModule,
-        KeyValuePipe,
-    ],
+    imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent, ReactiveFormsModule],
     selector: 'car-filters',
     templateUrl: './car-filters.component.html',
     styleUrl: './car-filters.component.scss',

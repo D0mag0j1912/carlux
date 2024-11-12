@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity({ name: 'ExteriorColors' })
-export class ExteriorColorEntity {
+@Entity({ name: 'InteriorColors' })
+export class InteriorColorEntity {
     @PrimaryColumn()
     Hex: string;
 
