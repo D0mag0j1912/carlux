@@ -321,10 +321,10 @@
                 </ion-grid>
             </ion-accordion>
 
-            <ion-accordion [value]="filtersAccordionGroups.EXTERIOR_COLOR">
+            <ion-accordion [value]="filtersAccordionGroups.EXTERIOR_COLORS">
                 <ion-item slot="header" color="light">
                     <ion-label class="accordion-title">
-                        {{ t('filters.sections.exterior_color') }}
+                        {{ t('filters.sections.exterior_colors') }}
                     </ion-label>
                 </ion-item>
                 <ion-grid slot="content" class="exterior-colors-grid">
@@ -348,6 +348,15 @@
                         }
                     }
                 </ion-grid>
+            </ion-accordion>
+
+            <ion-accordion [value]="filtersAccordionGroups.INTERIOR_COLORS">
+                <ion-item slot="header" color="light">
+                    <ion-label class="accordion-title">
+                        {{ t('filters.sections.interior_colors') }}
+                    </ion-label>
+                </ion-item>
+                <ion-grid slot="content" class="interior-colors-grid"> </ion-grid>
             </ion-accordion>
         </ion-accordion-group>
 

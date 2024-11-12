@@ -174,7 +174,8 @@
         "sections": {
             "basic_information": "Basic information",
             "equipment": "Equipment",
-            "exterior_color": "Exterior color"
+            "exterior_colors": "Exterior colors",
+            "interior_colors": "Interior colors"
         },
         "errors": {
             "get_car_brands": "Error while loading car brands. Please try again.",

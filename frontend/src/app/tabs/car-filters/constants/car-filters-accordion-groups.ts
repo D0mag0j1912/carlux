@@ -1,5 +1,6 @@
 export enum CarFilterAccordionGroups {
     BASIC_INFORMATION = 'BasicInformation',
     EQUIPMENT = 'Equipment',
-    EXTERIOR_COLOR = 'ExteriorColor',
+    EXTERIOR_COLORS = 'ExteriorColors',
+    INTERIOR_COLORS = 'InteriorColors',
 }

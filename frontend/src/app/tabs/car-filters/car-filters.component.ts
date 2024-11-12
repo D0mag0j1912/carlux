@@ -208,7 +208,7 @@ export class CarFiltersComponent implements OnInit {
         if (value) {
             if (value === CarFilterAccordionGroups.BASIC_INFORMATION) {
                 this._carFiltersFacadeService.getCarBrands();
-            } else if (value === CarFilterAccordionGroups.EXTERIOR_COLOR) {
+            } else if (value === CarFilterAccordionGroups.EXTERIOR_COLORS) {
                 this._carFiltersFacadeService.getExteriorColors();
             }
         }
