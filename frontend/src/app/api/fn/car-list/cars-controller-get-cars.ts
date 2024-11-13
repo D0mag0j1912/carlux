@@ -100,6 +100,11 @@ export interface CarsControllerGetCars$Params {
  * Car's exterior colors
  */
   selectedExteriorColors?: Array<string>;
+
+/**
+ * Car's interior colors
+ */
+  selectedInteriorColors?: Array<string>;
 }
 
 export function carsControllerGetCars(http: HttpClient, rootUrl: string, params: CarsControllerGetCars$Params, context?: HttpContext): Observable<StrictHttpResponse<PaginationDto & {
@@ -128,6 +133,7 @@ export function carsControllerGetCars(http: HttpClient, rootUrl: string, params:
     rb.query('transmissionTypes', params.transmissionTypes, {});
     rb.query('selectedEquipmentOptions', params.selectedEquipmentOptions, {});
     rb.query('selectedExteriorColors', params.selectedExteriorColors, {});
+    rb.query('selectedInteriorColors', params.selectedInteriorColors, {});
   }
 
   return http.request(

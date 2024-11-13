@@ -669,6 +669,18 @@
                                 "type": "string"
                             }
                         }
+                    },
+                    {
+                        "name": "selectedInteriorColors",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's interior colors",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -897,6 +909,18 @@
                         "required": false,
                         "in": "query",
                         "description": "Car's exterior colors",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "selectedInteriorColors",
+                        "required": false,
+                        "in": "query",
+                        "description": "Car's interior colors",
                         "schema": {
                             "type": "array",
                             "items": {
@@ -1580,6 +1604,13 @@
                     },
                     "selectedExteriorColors": {
                         "description": "Car's exterior colors",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "selectedInteriorColors": {
+                        "description": "Car's interior colors",
                         "type": "array",
                         "items": {
                             "type": "string"
