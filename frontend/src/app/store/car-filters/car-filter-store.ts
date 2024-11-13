@@ -173,11 +173,11 @@ export const CarFiltersStore = signalStore(
             getExteriorColors: rxMethod<void>(
                 pipe(
                     switchMap(() => {
-                        updateState(store, SET_EXTERIOR_COLORS_LOADING, {
-                            areExteriorColorsLoading: true,
-                        });
                         const areExteriorColorsLoaded = store.areExteriorColorsLoaded;
                         if (!areExteriorColorsLoaded()) {
+                            updateState(store, SET_EXTERIOR_COLORS_LOADING, {
+                                areExteriorColorsLoading: true,
+                            });
                             return exteriorColorsService
                                 .exteriorColorsControllerGetExteriorColors()
                                 .pipe(
@@ -206,11 +206,11 @@ export const CarFiltersStore = signalStore(
             getInteriorColors: rxMethod<void>(
                 pipe(
                     switchMap(() => {
-                        updateState(store, SET_INTERIOR_COLORS_LOADING, {
-                            areInteriorColorsLoading: true,
-                        });
                         const areInteriorColorsLoaded = store.areInteriorColorsLoaded;
                         if (!areInteriorColorsLoaded()) {
+                            updateState(store, SET_INTERIOR_COLORS_LOADING, {
+                                areInteriorColorsLoading: true,
+                            });
                             return interiorColorsService
                                 .interiorColorsControllerGetExteriorColors()
                                 .pipe(
