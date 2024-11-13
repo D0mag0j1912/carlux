@@ -329,9 +329,7 @@
                 </ion-item>
                 <ion-grid slot="content" class="exterior-colors-grid">
                     @if (areExteriorColorsLoading()) {
-                        <div class="spinner-wrapper">
-                            <ion-spinner color="primary"></ion-spinner>
-                        </div>
+                        <ng-template [ngTemplateOutlet]="loadingSpinner"></ng-template>
                     } @else {
                         @for (color of exteriorColors(); track color.hex) {
                             <ion-row>
@@ -356,7 +354,25 @@
                         {{ t('filters.sections.interior_colors') }}
                     </ion-label>
                 </ion-item>
-                <ion-grid slot="content" class="interior-colors-grid"> </ion-grid>
+                <ion-grid slot="content" class="interior-colors-grid">
+                    @if (areInteriorColorsLoading()) {
+                        <ng-template [ngTemplateOutlet]="loadingSpinner"></ng-template>
+                    } @else {
+                        @for (color of interiorColors(); track color.hex) {
+                            <ion-row>
+                                <ion-col>
+                                    <ion-checkbox
+                                        labelPlacement="end"
+                                        [class]="'interior-colors--' + color.hex"
+                                        (ionChange)="selectInteriorColor()"
+                                    >
+                                        {{ color.name }}
+                                    </ion-checkbox>
+                                </ion-col>
+                            </ion-row>
+                        }
+                    }
+                </ion-grid>
             </ion-accordion>
         </ion-accordion-group>
 
@@ -377,3 +393,9 @@
         </ion-button>
     </form>
 </ion-content>
+
+<ng-template #loadingSpinner>
+    <div class="spinner-wrapper">
+        <ion-spinner color="primary"></ion-spinner>
+    </div>
+</ng-template>

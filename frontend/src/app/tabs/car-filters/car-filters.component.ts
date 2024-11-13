@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, DestroyRef, OnInit, effect, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -79,7 +80,13 @@ type CarFiltersComponentStateType = {
 
 @Component({
     standalone: true,
-    imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent, ReactiveFormsModule],
+    imports: [
+        ...IONIC_IMPORTS,
+        TranslocoModule,
+        SearchableSelectComponent,
+        ReactiveFormsModule,
+        NgTemplateOutlet,
+    ],
     selector: 'car-filters',
     templateUrl: './car-filters.component.html',
     styleUrl: './car-filters.component.scss',
@@ -99,6 +106,9 @@ export class CarFiltersComponent implements OnInit {
 
     exteriorColors = this._carFiltersFacadeService.selectExteriorColors();
     areExteriorColorsLoading = this._carFiltersFacadeService.selectAreExteriorColorsLoading();
+
+    interiorColors = this._carFiltersFacadeService.selectInteriorColors();
+    areInteriorColorsLoading = this._carFiltersFacadeService.selectAreInteriorColorsLoading();
 
     carFiltersState = signalState<CarFiltersComponentStateType>({
         selectedEquipmentOptions: [],
@@ -210,6 +220,8 @@ export class CarFiltersComponent implements OnInit {
                 this._carFiltersFacadeService.getCarBrands();
             } else if (value === CarFilterAccordionGroups.EXTERIOR_COLORS) {
                 this._carFiltersFacadeService.getExteriorColors();
+            } else if (value === CarFilterAccordionGroups.INTERIOR_COLORS) {
+                this._carFiltersFacadeService.getInteriorColors();
             }
         }
     }
@@ -257,6 +269,8 @@ export class CarFiltersComponent implements OnInit {
         const query = this._constructCarFilterQuery();
         this._carFiltersFacadeService.getCarFiltersResultCount(query);
     }
+
+    selectInteriorColor(): void {}
 
     private _constructCarFilterQuery(): CarFilters {
         const query: CarFilters = {
