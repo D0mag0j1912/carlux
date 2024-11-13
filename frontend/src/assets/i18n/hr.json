@@ -174,8 +174,8 @@
         "sections": {
             "basic_information": "Osnovne informacije",
             "equipment": "Oprema",
-            "exterior_colors": "Boja eksterijera",
-            "interior_colors": "Boja interijera"
+            "exterior_colors": "Boje eksterijera",
+            "interior_colors": "Boje interijera"
         },
         "errors": {
             "get_car_brands": "Greška prilikom dohvaćanja marki automobila. Molimo pokušajte ponovno.",
