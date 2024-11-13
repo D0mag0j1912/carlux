@@ -173,4 +173,13 @@ export class CarFilterDto {
     @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
     @IsArray()
     selectedExteriorColors?: string[];
+
+    @ApiPropertyOptional({
+        type: [String],
+        required: false,
+        description: 'Car\'s interior colors',
+    })
+    @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
+    @IsArray()
+    selectedInteriorColors?: string[];
 }
