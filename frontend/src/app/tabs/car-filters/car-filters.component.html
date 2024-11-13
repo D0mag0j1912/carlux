@@ -364,7 +364,7 @@
                                     <ion-checkbox
                                         labelPlacement="end"
                                         [class]="'interior-colors--' + color.hex"
-                                        (ionChange)="selectInteriorColor()"
+                                        (ionChange)="selectInteriorColor($event, $any(color.hex))"
                                     >
                                         {{ color.name }}
                                     </ion-checkbox>

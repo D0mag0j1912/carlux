@@ -37,6 +37,7 @@ import { INITIAL_PAGE, PER_PAGE } from '../../constants/initial-paging-values';
 import { BodyStyles } from '../../models/body-styles';
 import { ExteriorColorHexType } from '../../models/exterior-color-hex-type';
 import { FuelTypes } from '../../models/fuel-types';
+import { InteriorColorHexType } from '../../models/interior-color-hex-type';
 import { TransmissionType } from '../../models/transmission-type';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarListFacadeService } from '../../store/car-list/facades/car-list-facade.service';
@@ -76,6 +77,7 @@ const IONIC_IMPORTS = [
 type CarFiltersComponentStateType = {
     selectedEquipmentOptions: number[];
     selectedExteriorColors: ExteriorColorHexType[];
+    selectedInteriorColors: InteriorColorHexType[];
 };
 
 @Component({
@@ -113,6 +115,7 @@ export class CarFiltersComponent implements OnInit {
     carFiltersState = signalState<CarFiltersComponentStateType>({
         selectedEquipmentOptions: [],
         selectedExteriorColors: [],
+        selectedInteriorColors: [],
     });
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
@@ -270,7 +273,27 @@ export class CarFiltersComponent implements OnInit {
         this._carFiltersFacadeService.getCarFiltersResultCount(query);
     }
 
-    selectInteriorColor(): void {}
+    selectInteriorColor(
+        checkboxEvent: IonCheckboxCustomEvent<CheckboxChangeEventDetail<InteriorColorHexType>>,
+        colorHex: InteriorColorHexType,
+    ): void {
+        const isChecked = checkboxEvent.detail.checked;
+        if (isChecked) {
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedInteriorColors: [...state.selectedInteriorColors, colorHex],
+            }));
+        } else {
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedInteriorColors: state.selectedInteriorColors.filter(
+                    (interiorColor: InteriorColorHexType) => interiorColor !== colorHex,
+                ),
+            }));
+        }
+        const query = this._constructCarFilterQuery();
+        this._carFiltersFacadeService.getCarFiltersResultCount(query);
+    }
 
     private _constructCarFilterQuery(): CarFilters {
         const query: CarFilters = {
@@ -297,6 +320,7 @@ export class CarFiltersComponent implements OnInit {
             transmissionTypes: this.basicInformationForm.value.transmissionTypes ?? [],
             selectedEquipmentOptions: this.carFiltersState.selectedEquipmentOptions(),
             selectedExteriorColors: this.carFiltersState.selectedExteriorColors(),
+            selectedInteriorColors: this.carFiltersState.selectedInteriorColors(),
         };
         return query;
     }
