@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, DestroyRef, OnInit, effect, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +37,7 @@ import { INITIAL_PAGE, PER_PAGE } from '../../constants/initial-paging-values';
 import { BodyStyles } from '../../models/body-styles';
 import { ExteriorColorHexType } from '../../models/exterior-color-hex-type';
 import { FuelTypes } from '../../models/fuel-types';
+import { InteriorColorHexType } from '../../models/interior-color-hex-type';
 import { TransmissionType } from '../../models/transmission-type';
 import { CarFiltersFacadeService } from '../../store/car-filters/facades/car-filters-facade.service';
 import { CarListFacadeService } from '../../store/car-list/facades/car-list-facade.service';
@@ -75,11 +77,18 @@ const IONIC_IMPORTS = [
 type CarFiltersComponentStateType = {
     selectedEquipmentOptions: number[];
     selectedExteriorColors: ExteriorColorHexType[];
+    selectedInteriorColors: InteriorColorHexType[];
 };
 
 @Component({
     standalone: true,
-    imports: [...IONIC_IMPORTS, TranslocoModule, SearchableSelectComponent, ReactiveFormsModule],
+    imports: [
+        ...IONIC_IMPORTS,
+        TranslocoModule,
+        SearchableSelectComponent,
+        ReactiveFormsModule,
+        NgTemplateOutlet,
+    ],
     selector: 'car-filters',
     templateUrl: './car-filters.component.html',
     styleUrl: './car-filters.component.scss',
@@ -100,9 +109,13 @@ export class CarFiltersComponent implements OnInit {
     exteriorColors = this._carFiltersFacadeService.selectExteriorColors();
     areExteriorColorsLoading = this._carFiltersFacadeService.selectAreExteriorColorsLoading();
 
+    interiorColors = this._carFiltersFacadeService.selectInteriorColors();
+    areInteriorColorsLoading = this._carFiltersFacadeService.selectAreInteriorColorsLoading();
+
     carFiltersState = signalState<CarFiltersComponentStateType>({
         selectedEquipmentOptions: [],
         selectedExteriorColors: [],
+        selectedInteriorColors: [],
     });
 
     readonly INITIAL_POWER_UNIT: PowerUnit = 'PS';
@@ -208,8 +221,10 @@ export class CarFiltersComponent implements OnInit {
         if (value) {
             if (value === CarFilterAccordionGroups.BASIC_INFORMATION) {
                 this._carFiltersFacadeService.getCarBrands();
-            } else if (value === CarFilterAccordionGroups.EXTERIOR_COLOR) {
+            } else if (value === CarFilterAccordionGroups.EXTERIOR_COLORS) {
                 this._carFiltersFacadeService.getExteriorColors();
+            } else if (value === CarFilterAccordionGroups.INTERIOR_COLORS) {
+                this._carFiltersFacadeService.getInteriorColors();
             }
         }
     }
@@ -258,6 +273,28 @@ export class CarFiltersComponent implements OnInit {
         this._carFiltersFacadeService.getCarFiltersResultCount(query);
     }
 
+    selectInteriorColor(
+        checkboxEvent: IonCheckboxCustomEvent<CheckboxChangeEventDetail<InteriorColorHexType>>,
+        colorHex: InteriorColorHexType,
+    ): void {
+        const isChecked = checkboxEvent.detail.checked;
+        if (isChecked) {
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedInteriorColors: [...state.selectedInteriorColors, colorHex],
+            }));
+        } else {
+            patchState(this.carFiltersState, (state: CarFiltersComponentStateType) => ({
+                ...state,
+                selectedInteriorColors: state.selectedInteriorColors.filter(
+                    (interiorColor: InteriorColorHexType) => interiorColor !== colorHex,
+                ),
+            }));
+        }
+        const query = this._constructCarFilterQuery();
+        this._carFiltersFacadeService.getCarFiltersResultCount(query);
+    }
+
     private _constructCarFilterQuery(): CarFilters {
         const query: CarFilters = {
             page: this.INITIAL_PAGE,
@@ -283,6 +320,7 @@ export class CarFiltersComponent implements OnInit {
             transmissionTypes: this.basicInformationForm.value.transmissionTypes ?? [],
             selectedEquipmentOptions: this.carFiltersState.selectedEquipmentOptions(),
             selectedExteriorColors: this.carFiltersState.selectedExteriorColors(),
+            selectedInteriorColors: this.carFiltersState.selectedInteriorColors(),
         };
         return query;
     }

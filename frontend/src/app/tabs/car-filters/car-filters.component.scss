@@ -1,5 +1,6 @@
 @import '../../../styles/typography';
 @import '../../../styles/exterior-colors';
+@import '../../../styles/interior-colors';
 
 .car-filters-content {
     position: relative;
@@ -45,6 +46,7 @@
     margin-top: 10px;
 }
 
-.exterior-colors-grid {
+.exterior-colors-grid,
+.interior-colors-grid {
     padding: 15px 30px;
 }

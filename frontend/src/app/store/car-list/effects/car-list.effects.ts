@@ -44,6 +44,7 @@ export const getCarList$ = createEffect(
                         transmissionTypes: action.query.transmissionTypes,
                         selectedEquipmentOptions: action.query.selectedEquipmentOptions,
                         selectedExteriorColors: action.query.selectedExteriorColors,
+                        selectedInteriorColors: action.query.selectedInteriorColors,
                     })
                     .pipe(
                         catchError((_) => {

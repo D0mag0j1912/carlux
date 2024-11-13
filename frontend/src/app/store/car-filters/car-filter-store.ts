@@ -7,9 +7,11 @@ import { EMPTY, pipe, switchMap } from 'rxjs';
 import { CarBrandDto as CarBrand } from '../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../api/models/car-model-dto';
 import { ExteriorColorDto as ExteriorColor } from '../../api/models/exterior-color-dto';
+import { InteriorColorsDto as InteriorColor } from '../../api/models/interior-colors-dto';
 import { BasicCarInformationService } from '../../api/services/basic-car-information.service';
 import { CarListService } from '../../api/services/car-list.service';
 import { ExteriorColorsService } from '../../api/services/exterior-colors.service';
+import { InteriorColorsService } from '../../api/services/interior-colors.service';
 import { FeatureKeys } from '../../constants/feature-keys';
 import { POPUP_DURATIONS } from '../../constants/popup-durations';
 import { CAR_FILTERS_INITIAL_STATE } from '../../tabs/car-filters/constants/car-filters-initial-state';
@@ -25,6 +27,9 @@ export interface CarFiltersState {
     exteriorColors: ExteriorColor[];
     areExteriorColorsLoaded: boolean;
     areExteriorColorsLoading: boolean;
+    interiorColors: InteriorColor[];
+    areInteriorColorsLoaded: boolean;
+    areInteriorColorsLoading: boolean;
 }
 
 const initialState: CarFiltersState = {
@@ -36,6 +41,9 @@ const initialState: CarFiltersState = {
     exteriorColors: [],
     areExteriorColorsLoaded: false,
     areExteriorColorsLoading: false,
+    interiorColors: [],
+    areInteriorColorsLoaded: false,
+    areInteriorColorsLoading: false,
 };
 
 const SET_CAR_BRANDS_ACTION = 'Set Car Brands';
@@ -43,6 +51,8 @@ const SET_CAR_MODELS_ACTION = 'Set Car Models';
 const SET_CAR_FILTERS_COUNT = 'Set Car Filters Count';
 const SET_EXTERIOR_COLORS = 'Set Exterior Colors';
 const SET_EXTERIOR_COLORS_LOADING = 'Set Exterior Colors Loading';
+const SET_INTERIOR_COLORS = 'Set Interior Colors';
+const SET_INTERIOR_COLORS_LOADING = 'Set Interior Colors Loading';
 
 export const CarFiltersStore = signalStore(
     {
@@ -57,6 +67,7 @@ export const CarFiltersStore = signalStore(
             sharedFacadeService = inject(SharedFacadeService),
             carListService = inject(CarListService),
             exteriorColorsService = inject(ExteriorColorsService),
+            interiorColorsService = inject(InteriorColorsService),
         ) => ({
             getCarBrands: rxMethod<void>(
                 pipe(
@@ -138,6 +149,8 @@ export const CarFiltersStore = signalStore(
                                     selectedCarFiltersQuery.selectedEquipmentOptions,
                                 selectedExteriorColors:
                                     selectedCarFiltersQuery.selectedExteriorColors,
+                                selectedInteriorColors:
+                                    selectedCarFiltersQuery.selectedInteriorColors,
                             })
                             .pipe(
                                 tapResponse({
@@ -162,11 +175,11 @@ export const CarFiltersStore = signalStore(
             getExteriorColors: rxMethod<void>(
                 pipe(
                     switchMap(() => {
-                        updateState(store, SET_EXTERIOR_COLORS_LOADING, {
-                            areExteriorColorsLoading: true,
-                        });
                         const areExteriorColorsLoaded = store.areExteriorColorsLoaded;
                         if (!areExteriorColorsLoaded()) {
+                            updateState(store, SET_EXTERIOR_COLORS_LOADING, {
+                                areExteriorColorsLoading: true,
+                            });
                             return exteriorColorsService
                                 .exteriorColorsControllerGetExteriorColors()
                                 .pipe(
@@ -181,6 +194,39 @@ export const CarFiltersStore = signalStore(
                                         error: () => {
                                             sharedFacadeService.showToastMessage(
                                                 'filters.errors.get_exterior_colors',
+                                                POPUP_DURATIONS.ERROR,
+                                                'warning',
+                                            );
+                                        },
+                                    }),
+                                );
+                        }
+                        return EMPTY;
+                    }),
+                ),
+            ),
+            getInteriorColors: rxMethod<void>(
+                pipe(
+                    switchMap(() => {
+                        const areInteriorColorsLoaded = store.areInteriorColorsLoaded;
+                        if (!areInteriorColorsLoaded()) {
+                            updateState(store, SET_INTERIOR_COLORS_LOADING, {
+                                areInteriorColorsLoading: true,
+                            });
+                            return interiorColorsService
+                                .interiorColorsControllerGetExteriorColors()
+                                .pipe(
+                                    tapResponse({
+                                        next: (interiorColors: InteriorColor[]) => {
+                                            updateState(store, SET_INTERIOR_COLORS, {
+                                                interiorColors: [...interiorColors],
+                                                areInteriorColorsLoaded: true,
+                                                areInteriorColorsLoading: false,
+                                            });
+                                        },
+                                        error: () => {
+                                            sharedFacadeService.showToastMessage(
+                                                'filters.errors.get_interior_colors',
                                                 POPUP_DURATIONS.ERROR,
                                                 'warning',
                                             );

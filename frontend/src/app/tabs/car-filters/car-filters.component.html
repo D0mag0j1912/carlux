@@ -321,17 +321,15 @@
                 </ion-grid>
             </ion-accordion>
 
-            <ion-accordion [value]="filtersAccordionGroups.EXTERIOR_COLOR">
+            <ion-accordion [value]="filtersAccordionGroups.EXTERIOR_COLORS">
                 <ion-item slot="header" color="light">
                     <ion-label class="accordion-title">
-                        {{ t('filters.sections.exterior_color') }}
+                        {{ t('filters.sections.exterior_colors') }}
                     </ion-label>
                 </ion-item>
                 <ion-grid slot="content" class="exterior-colors-grid">
                     @if (areExteriorColorsLoading()) {
-                        <div class="spinner-wrapper">
-                            <ion-spinner color="primary"></ion-spinner>
-                        </div>
+                        <ng-template [ngTemplateOutlet]="loadingSpinner"></ng-template>
                     } @else {
                         @for (color of exteriorColors(); track color.hex) {
                             <ion-row>
@@ -340,6 +338,33 @@
                                         labelPlacement="end"
                                         [class]="'exterior-colors--' + color.hex"
                                         (ionChange)="selectExteriorColor($event, $any(color.hex))"
+                                    >
+                                        {{ color.name }}
+                                    </ion-checkbox>
+                                </ion-col>
+                            </ion-row>
+                        }
+                    }
+                </ion-grid>
+            </ion-accordion>
+
+            <ion-accordion [value]="filtersAccordionGroups.INTERIOR_COLORS">
+                <ion-item slot="header" color="light">
+                    <ion-label class="accordion-title">
+                        {{ t('filters.sections.interior_colors') }}
+                    </ion-label>
+                </ion-item>
+                <ion-grid slot="content" class="interior-colors-grid">
+                    @if (areInteriorColorsLoading()) {
+                        <ng-template [ngTemplateOutlet]="loadingSpinner"></ng-template>
+                    } @else {
+                        @for (color of interiorColors(); track color.hex) {
+                            <ion-row>
+                                <ion-col>
+                                    <ion-checkbox
+                                        labelPlacement="end"
+                                        [class]="'interior-colors--' + color.hex"
+                                        (ionChange)="selectInteriorColor($event, $any(color.hex))"
                                     >
                                         {{ color.name }}
                                     </ion-checkbox>
@@ -368,3 +393,9 @@
         </ion-button>
     </form>
 </ion-content>
+
+<ng-template #loadingSpinner>
+    <div class="spinner-wrapper">
+        <ion-spinner color="primary"></ion-spinner>
+    </div>
+</ng-template>

@@ -2,6 +2,7 @@ import { Injectable, Signal, inject } from '@angular/core';
 import { CarBrandDto as CarBrand } from '../../../api/models/car-brand-dto';
 import { CarModelDto as CarModel } from '../../../api/models/car-model-dto';
 import { ExteriorColorDto as ExteriorColor } from '../../../api/models/exterior-color-dto';
+import { InteriorColorsDto as InteriorColor } from '../../../api/models/interior-colors-dto';
 import { CarFilters } from '../../../tabs/car-filters/models/car-filters.model';
 import { CarFiltersStore } from '../car-filter-store';
 
@@ -33,6 +34,14 @@ export class CarFiltersFacadeService {
     selectAreExteriorColorsLoading(): Signal<boolean> {
         return this._carFiltersStore.areExteriorColorsLoading;
     }
+
+    selectInteriorColors(): Signal<InteriorColor[]> {
+        return this._carFiltersStore.interiorColors;
+    }
+
+    selectAreInteriorColorsLoading(): Signal<boolean> {
+        return this._carFiltersStore.areInteriorColorsLoading;
+    }
     //Selectors END -------------------------
 
     //Actions BEGIN -------------------------
@@ -50,6 +59,10 @@ export class CarFiltersFacadeService {
 
     getExteriorColors(): void {
         this._carFiltersStore.getExteriorColors();
+    }
+
+    getInteriorColors(): void {
+        this._carFiltersStore.getInteriorColors();
     }
     //Actions END -------------------------
 }
