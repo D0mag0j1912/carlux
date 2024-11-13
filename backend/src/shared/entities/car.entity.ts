@@ -5,6 +5,7 @@ import { SellerType } from '../../constants/seller-type';
 import { TransmissionType } from '../../constants/transmission-type';
 import { CarsEquipmentEntity } from '../../modules/car-filters/entity/cars-equipment.entity';
 import { ExteriorColorEntity } from '../../modules/car-filters/entity/exterior-color.entity';
+import { InteriorColorEntity } from '../../modules/car-filters/entity/interior-color.entity';
 import { CarBrandEntity } from './car-brand.entity';
 import { CarModelEntity } from './car-model.entity';
 import { CurrencyEntity } from './currency.entity';
@@ -48,12 +49,6 @@ export class CarEntity {
 
     @Column()
     FuelType: FuelType;
-
-    @Column()
-    ExteriorColor: string;
-
-    @Column()
-    InteriorColor: string;
 
     @Column()
     BodyKit: string;
@@ -103,6 +98,9 @@ export class CarEntity {
     @Column()
     ExteriorColorHex: string;
 
+    @Column()
+    InteriorColorHex: string;
+
     @Column({ nullable: true })
     AddedToFavouritesDate: string;
 
@@ -125,6 +123,10 @@ export class CarEntity {
     @OneToOne(() => ExteriorColorEntity, (exteriorColor) => exteriorColor.Hex)
     @JoinColumn({ name: 'ExteriorColorHex' })
     exteriorColor: ExteriorColorEntity;
+
+    @OneToOne(() => InteriorColorEntity, (interiorColor) => interiorColor.Hex)
+    @JoinColumn({ name: 'InteriorColorHex' })
+    interiorColor: InteriorColorEntity;
 
     @OneToMany(() => ImageEntity, (image) => image.car)
     images: ImageEntity[];

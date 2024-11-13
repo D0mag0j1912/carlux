@@ -34,7 +34,6 @@ export class CarDetailsService {
                 'car.Transmission',
                 'car.EngineCodeName',
                 'car.FuelType',
-                'car.InteriorColor',
                 'car.BodyKit',
                 'car.HorsePower',
                 'car.Kilowatts',
@@ -53,12 +52,14 @@ export class CarDetailsService {
                 'carBrand.Title',
                 'carModel.Title',
                 'exteriorColor.Name',
+                'interiorColor.Name',
             ])
             .innerJoin('car.wheelDriveType', 'wdt')
             .innerJoin('car.currency', 'cur')
             .innerJoin('car.carBrand', 'carBrand')
             .innerJoin('car.carModel', 'carModel')
             .innerJoin('car.exteriorColor', 'exteriorColor')
+            .innerJoin('car.interiorColor', 'interiorColor')
             .where('car.Id = :carId', { carId })
             .getOne();
         const imageEntities: ImageEntity[] = await this._imageRepository.find({
@@ -83,7 +84,7 @@ export class CarDetailsService {
             engineCodeName: car.EngineCodeName,
             fuelType: car.FuelType,
             exteriorColor: car.exteriorColor.Name,
-            interiorColor: car.InteriorColor,
+            interiorColor: car.interiorColor.Name,
             bodyKit: car.BodyKit,
             horsePower: car.HorsePower,
             kilowatts: car.Kilowatts,
