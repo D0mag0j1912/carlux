@@ -32,7 +32,7 @@ For that reason, this feature presents car details to the users, so they can be 
 
 | Car details                    |                                     |
 | ------------------------------ | ----------------------------------- |
-| <img src="/frontend/src/assets/images/car_details_1.png" width="400" height="700"> | <img src="/frontend/src/assets/images/car_details_2.png"> |
+| <img src="/frontend/src/assets/images/car_details_1.png"> | <img src="/frontend/src/assets/images/car_details_2.png"> |
 
 ### Searching cars by various filters
 Users may want to filter cars based on their needs and preferences.
@@ -40,14 +40,14 @@ For that reason, this feature allows them to filter cars by brand, particular mo
 
 | Filtering by basic information      | Filtering by equipment              |
 | ----------------------------------- | ----------------------------------- |
-| <img src="/frontend/src/assets/images/basic_info.png" width="400" height="700"> | <img src="/frontend/src/assets/images/equipment.png"> |
+| <img src="/frontend/src/assets/images/basic_info.png"> | <img src="/frontend/src/assets/images/equipment.png"> |
 | Filtering by exterior colors        | Filtering by interior colors        |
 | ----------------------------------- | ----------------------------------- |
-| <img src="/frontend/src/assets/images/exterior_colors.png" width="400" height="700"> | <img src="/frontend/src/assets/images/interior_colors.png"> |
+| <img src="/frontend/src/assets/images/exterior_colors.png"> | <img src="/frontend/src/assets/images/interior_colors.png"> |
 
 ### Adding cars to the favourites list
 Users may want to add cars to their favourites list, so they can organize their search better and ultimately save time because they have quick access to the saved cars.
 
 | Favourites list                |                                     |
 | ------------------------------ | ----------------------------------- |
-| <img src="/frontend/src/assets/images/favourites_list.png" width="400" height="700">
+| <img src="/frontend/src/assets/images/favourites_list.png">
