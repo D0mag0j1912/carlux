@@ -1,5 +1,5 @@
 ## About the project
-<img src="/frontend/src/assets/images/SF90-d63d0e21fdc05f618d55ef306c54af82.jpg" width="200" height="200">
+<img src="/frontend/src/assets/images/SF90-d63d0e21fdc05f618d55ef306c54af82.jpg" width="300" height="200">
 This web application is my side project built for fun and it's purpose was to help me deepen my knowledge about Angular Signals.
 It is the prototype of the AutoScout24 application which is a platform for buying, selling and researching new and used cars. 
 
@@ -24,7 +24,7 @@ List of cars is paginated, meaning only a handful amount of cars is presented to
 
 | Displaying list of cars             |
 | ----------------------------------- |
-| <img src="main-app/frontend/src/assets/images/car-list.png" width="400" height="700">
+| <img src="/frontend/src/assets/images/car-list.png" width="400" height="700">
 
 ### Displaying individual car details
 Users may want to take a closer look at the car details before making a purchasing decision to closely evaluate car's physical status, engine type, performance etc.
@@ -32,7 +32,7 @@ For that reason, this feature presents car details to the users, so they can be 
 
 | Car details                    |                                     |
 | ------------------------------ | ----------------------------------- |
-| <img src="main-app/frontend/src/assets/images/car_details_1.png" width="400" height="700"> | <img src="main-app/frontend/src/assets/images/car_details_2.png"> |
+| <img src="/frontend/src/assets/images/car_details_1.png" width="400" height="700"> | <img src="/frontend/src/assets/images/car_details_2.png"> |
 
 ### Searching cars by various filters
 Users may want to filter cars based on their needs and preferences.
@@ -40,14 +40,14 @@ For that reason, this feature allows them to filter cars by brand, particular mo
 
 | Filtering by basic information      | Filtering by equipment              |
 | ----------------------------------- | ----------------------------------- |
-| <img src="main-app/frontend/src/assets/images/basic_info.png" width="400" height="700"> | <img src="main-app/frontend/src/assets/images/equipment.png"> |
+| <img src="/frontend/src/assets/images/basic_info.png" width="400" height="700"> | <img src="/frontend/src/assets/images/equipment.png"> |
 | Filtering by exterior colors        | Filtering by interior colors        |
 | ----------------------------------- | ----------------------------------- |
-| <img src="main-app/frontend/src/assets/images/exterior_colors.png" width="400" height="700"> | <img src="main-app/frontend/src/assets/images/interior_colors.png"> |
+| <img src="/frontend/src/assets/images/exterior_colors.png" width="400" height="700"> | <img src="/frontend/src/assets/images/interior_colors.png"> |
 
 ### Adding cars to the favourites list
 Users may want to add cars to their favourites list, so they can organize their search better and ultimately save time because they have quick access to the saved cars.
 
 | Favourites list                |                                     |
 | ------------------------------ | ----------------------------------- |
-| <img src="main-app/frontend/src/assets/images/favourites_list.png" width="400" height="700">
+| <img src="/frontend/src/assets/images/favourites_list.png" width="400" height="700">
