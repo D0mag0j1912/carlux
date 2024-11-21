@@ -1,5 +1,4 @@
 ## About the project
-<img src="/frontend/src/assets/images/SF90-d63d0e21fdc05f618d55ef306c54af82.jpg" width="300" height="200">
 This web application is my side project built for fun and it's purpose was to help me deepen my knowledge about Angular Signals.
 It is the prototype of the AutoScout24 application which is a platform for buying, selling and researching new and used cars. 
 
